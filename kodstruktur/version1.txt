@@ -1,46 +1,7 @@
 
 # Version 1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.
-
-
-
-
-
-
-
-
-
-
-
-
 ## Funktionaliteter 
-
-Här är funktioner och annat!
 
 ## Sidor
 
@@ -49,36 +10,3 @@ Här är funktioner och annat!
 ## Globala variabler
 
 ## CSS-filer
-
-Här är lite css filer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.
