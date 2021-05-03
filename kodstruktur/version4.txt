@@ -1,1 +1,12 @@
 
+# Version 4
+
+## Funktionaliteter 
+
+## Sidor
+
+## Funktioner
+
+## Globala variabler
+
+## CSS-filer
