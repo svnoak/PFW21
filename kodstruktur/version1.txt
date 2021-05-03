@@ -2,7 +2,11 @@
 # Version 1
 
 ## Funktionaliteter 
+<<<<<<< HEAD
 
+=======
+Här är funktioner och annat!
+>>>>>>> c258f9457d894fbae1f327440b33c2a6ad7190a1
 
 ## Sidor
 
