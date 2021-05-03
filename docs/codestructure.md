@@ -28,55 +28,30 @@ Footer (at bottom of page)
 
 #### HTML FILES
 
-index.html\
-    &rarr; hero\
-    &rarr; text / introduction\
-    &rarr; countries\
-    &rarr; text / Beslutsångest?\
-    &rarr; ads
-
-search.html\
-    &rarr; searchbar\
-    &rarr; filter + sort button\
-    &rarr; pills with filteroptions\
-    &rarr; result cards
-
-detail.html\
-    &rarr; hero\
-    &rarr; info\
-    &rarr; text / ansök\
-    &rarr; ad\
-    &rarr; review\
-    &rarr; student statistics\
-    &rarr; review summary\
-    &rarr; ad\
-    &rarr; city images + description\
-    &rarr; weather text + statistics\
-    &rarr; text / contact
-
-bookmarks.html\
-    &rarr; text / jämför\
-    &rarr; result cards
-
-compare.html\
-&rarr; text / title\
-&rarr; searchbar\
-&rarr; pills\
-&rarr; navigation button (left/right)\
-&rarr; title\
-&rarr; comparison chart
+#### Inner structures
+| index.html | search.html | detail.html | bookmarks.html | compare.html |
+--- | --- | --- |--- | ---
+| hero | searchbar | hero | text / jämför | text / title
+| text / introduction | filter + sort button | info | result cards | searchbar
+| countries | pills with filteroptions | ad | footer | pills
+| text / comparison | result cards | review | navbar | navigation button (left/right)
+| ad | footer | student statistics | - | title |
+| footer | - | ad | - | comparison chart |
+| navbar | navbar | city images + description | - | footer |
+| | navbar | ad | - | navbar |
+| | | footer |
+| | | navbar |
 
 ### CSS FILES
 
 - style.css
 
 ### JS FILES
+| index.html | search.html | detail.html | bookmarks.html | compare.html |
+--- | --- | --- |--- | ---
+script.js | script.js | script.js | script.js | script.js
+|  | search.js | detail.js | bookmark.js | compare.js
 
-- script.js
-- search.js
-- compare.js
-- detail.js
-- bookmark.js
 
 ## DESIGNCOMPONENTS
 
