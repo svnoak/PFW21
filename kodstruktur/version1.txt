@@ -2,6 +2,7 @@
 # Version 1
 
 ## Funktionaliteter 
+Här är funktioner och annat
 
 ## Sidor
 
