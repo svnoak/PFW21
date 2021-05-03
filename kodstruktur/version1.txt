@@ -1,9 +1,15 @@
 
 # Version 1
 
-## Funktionaliteter 
+## Funktionaliteter
 
 ## Sidor
+
+- Index
+- Söksida
+- Favoritsida
+- Jämförsida
+- Detaljsida
 
 ## Funktioner
 
