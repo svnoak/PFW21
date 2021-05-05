@@ -13,7 +13,10 @@
 
 ## Funktioner
 
+Sök
 - getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
+- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen
+
 - renderSearchResults(programmes[{}]) :: element, appendar alla programmes som sökresultat
 
 ## Globala variabler
@@ -22,9 +25,11 @@ body,
 main,
 navbar,
 footer,
+render(element, parentElement) :: appendar alla element som finns till ett parentElement
 
 ## CSS-filer
 
-style
+style  - innehållsförteckning och rubriker
 navbar
 footer
+variables

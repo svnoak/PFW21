@@ -18,8 +18,10 @@ EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land e
 
 ## Funktioner
 
+Sök
 *- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
 *- renderSearchResults(programmes[{}]) :: element, appendar alla programmes som sökresultat
+- sortSearchResult
 
 ## Globala variabler
 
@@ -30,6 +32,7 @@ EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land e
 
 ## CSS-filer
 
-*style
+*style - innehållsförteckning och rubriker
 *navbar
 *footer
+*variables

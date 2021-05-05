@@ -36,6 +36,9 @@ EDITEDIT*- Randomiserade "Land"-kort på indexsidan. Gör en automatisk sökning
 
 *- Index
 *- Söksida
+*- Jämförsida
+*- Detaljsida
+- Bokmärkessida
 
 ## Funktioner
 
@@ -51,6 +54,7 @@ EDITEDIT*- Randomiserade "Land"-kort på indexsidan. Gör en automatisk sökning
 
 ## CSS-filer
 
-*style
+*style  - innehållsförteckning och rubriker
 *navbar
 *footer
+*variables

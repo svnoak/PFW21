@@ -22,6 +22,8 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 
 *- Index
 *- Söksida
+- Jämförsida
+- Detaljsida
 
 ## Funktioner
 
@@ -37,6 +39,7 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 
 ## CSS-filer
 
-*style
+*style  - innehållsförteckning och rubriker
 *navbar
 *footer
+*variables
