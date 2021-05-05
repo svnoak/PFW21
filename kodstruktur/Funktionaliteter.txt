@@ -1,0 +1,26 @@
+
+
+
+- Söka efter program som innehåller söktermen i sitt programnamn, land eller stad.
+- Möjlighet att filtrera sökning efter:
+    - Nivå
+    - Antagningspoöng
+    - Språk
+    - Visumkrav
+    - Soldagar
+- Möjlighet att sortera sökresultat efter:
+    - Bokstavsordning
+- Möjlighet att spara ett program från sökresultatet i "favoriter".
+
+- En sida som visar alla "favoriter"
+    - Möjlighet att ta bort program från "favoriter".
+
+
+- Jämför-söksida
+    - Sök efter programnamn och lägg till i en lista
+    - Förslag utifrån de program som sparats från söksidan
+    - Valda programs information visas i en tabell
+
+- En detaljsida för ett program när man trycker på "läs mer".
+
+- Randomiserade "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sökfunktionen) när man trycker "visa program".
