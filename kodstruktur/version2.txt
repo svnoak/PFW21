@@ -1,11 +1,35 @@
 # Version 2
 
-## Funktionaliteter 
+## Funktionaliteter
+
+EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land eller stad.
+*- Få upp alla program som sökresultat på söksidan
+
+- Möjlighet att sortera sökresultat i stigande/fallande ordning efter:
+    - Bokstavsordning
+    - Antagningspoöng
+
+- "Land"-kort på indexsidan.
 
 ## Sidor
 
+*- Index
+*- Söksida
+
 ## Funktioner
+
+*- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
+*- renderSearchResults(programmes[{}]) :: element, appendar alla programmes som sökresultat
 
 ## Globala variabler
 
+*body,
+*main,
+*navbar,
+*footer,
+
 ## CSS-filer
+
+*style
+*navbar
+*footer
