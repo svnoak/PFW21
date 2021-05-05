@@ -27,8 +27,20 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 
 ## Funktioner
 
+Global funktion
+- render(element[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+
+EventListener
+*- input för Searchbar :: kallar på getProgrammesByName() vid keyup
+
+Sök
 *- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
-*- renderSearchResults(programmes[{}]) :: element, appendar alla programmes som sökresultat
+*- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen
+*- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
+    sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande)
+
+Index
+*- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
 
 ## Globala variabler
 
