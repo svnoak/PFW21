@@ -43,7 +43,8 @@ Sök ------------------------
 *- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[] 
     matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
 
-*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen (universitet, stad, nivå, termin, "läs mer"-knapp med eventlistener). Rensar element i sökresultaten. Kallar på render(DOM-element, sökresultatslista) i en forEach-loop
+*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen (universitet, stad, nivå, termin, "läs mer"-knapp med eventlistener).
+ Rensar element i sökresultaten. Kallar på render(DOM-element, sökresultatslista) i en forEach-loop
 
 *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
@@ -75,6 +76,12 @@ Index ------------------------
 - saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
 Jämför ------------------------
+
+- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen 
+    matchar programnamn, land och stad. 
+- createProgrammeCompareElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen.
+ Lägger till elementet i en array så man kan ta fram det senare när man byter mellan programmen.
+  Kallar på render(DOM-element, compareInfo-div)
 
 
 Detaljsida ------------------------

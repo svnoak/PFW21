@@ -68,7 +68,7 @@ Funktionsled för söksida------------------------
 (EL)input för Searchbar (keyup) -> 
     getProgrammesBySearchWords (när klar) -> 
         sortSearchResult (när klar) -> 
-            createProgrammeElements (när klar) -> 
+            createProgrammeElements (för varje element) -> 
                 render
 
 Index------------------------
@@ -77,6 +77,14 @@ Index------------------------
 *- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
 Jämför------------------------
+
+*- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen 
+    matchar programnamn, land och stad. 
+*- createProgrammeCompareElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen.
+ Lägger till elementet i en array så man kan ta fram det senare när man byter mellan programmen.
+  Kallar på render(DOM-element, compareInfo-div)
+
+- getProgrammesFromFavorites() :: DOM-Element, hämtar programmen som finns sparade och gör dem till DOM-Element. Skickar till render(DOM-Element, fav-div)
 
 
 Detaljsida ------------------------
