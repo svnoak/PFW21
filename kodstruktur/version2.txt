@@ -22,10 +22,10 @@ Global funktion
 - render(element[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
 
 EventListener
-*- input för Searchbar :: kallar på getProgrammesByName() vid keyup
+*- input för Searchbar, kallar på getProgrammesBySearchWords() vid keyup
 
 Sök
-*- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
+*- getProgrammesBySearchWords(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
 *- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen
 - sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande)

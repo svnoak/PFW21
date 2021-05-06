@@ -29,18 +29,32 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 
 Global funktion
 - render(element[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+- goToLink(url), går till URL
 
 EventListener
-*- input för Searchbar :: kallar på getProgrammesByName() vid keyup
+*- input för Searchbar :: kallar på getProgrammesBySearchWords() vid keyup, vid enter spara sökordet i sökordslistan
+- "visa program"-knapp :: kallar på saveCountrySearchWordtoLS() och goToLink(söksida)
 
 Sök
-*- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
-*- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen
+*- getProgrammesBySearchWords(input.value, searchWords[]) :: programmes[{}], hämtar alla program där söktermen och searchWords 
+    matchar programnamn, land och stad. Kallar på createProgrammeElement(programmes[{}])
+*- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen. Kallar på render(DOM-element, sökresultatslista)
 *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande)
+- saveSearchWord(input.value) :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
+    DOM-elementet skickas till render.
+- removeSearchWord(e.target), tar bort e.target.parentElement, tar bort e.target.previousSiblingElement.textContent från searchWords[]
+
+- getCountrySearchWordfromLS() :: countrySearchWord, tar emot countrySearchWord från URL
+- 
 
 Index
 *- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
+- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
+
+Jämför
+
+Detaljsida
 
 ## Globala variabler
 
@@ -48,6 +62,7 @@ Index
 *main,
 *navbar,
 *footer,
+searchWords[]
 
 ## CSS-filer
 
