@@ -28,15 +28,15 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 ## Funktioner
 
 Global funktion
-- render(elements[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
-- goToLink(url), går till URL
+* - render(elements[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+* - goToLink(url), går till URL
 
 EventListener
 *- input för Searchbar, kallar på getProgrammesBySearchWords(input.value) vid keyup, vid enter kör saveSearchWord(input.value)
 
-- "visa program"-knapp, kallar på saveCountrySearchWordtoLS("landet") och goToLink(söksida)
+*- "visa program"-knapp, kallar på saveCountrySearchWordtoLS("landet") och goToLink(söksida)
 
-- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object)) och goToLink(detaljsida)
+*- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object)) och goToLink(detaljsida)
 
 
 Sök
@@ -48,16 +48,16 @@ Sök
 *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
 
-- saveSearchWord("input.value") :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
+*- saveSearchWord("input.value") :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
     DOM-elementet skickas till render.
 
-- removeSearchWord(e.target), tar bort e.target.parentElement, tar bort e.target.previousSiblingElement.textContent från searchWords[]
+*- removeSearchWord(e.target), tar bort e.target.parentElement, tar bort e.target.previousSiblingElement.textContent från searchWords[]
 
-- getCountrySearchWordfromLS() :: countrySearchWord, tar emot countrySearchWord från URL
+*- getCountrySearchWordfromLS() :: countrySearchWord, tar emot countrySearchWord från URL
 
-- saveProgrammeToURL(event(object))
+*- saveProgrammeToURL(event(object))
 
-- onLoad(countrySearchWord), Körs varje gång sidan laddas så man får upp programmkorten för det sparade sökorden. Kallar på getProgrammesBySearchWords
+*- onLoad(countrySearchWord), Körs varje gång sidan laddas så man får upp programmkorten för det sparade sökorden. Kallar på getProgrammesBySearchWords
 
 - saveBookmarked(event(object)), sparar sparade programm till localStorage
 
@@ -72,7 +72,7 @@ Funktionsled för söksida
 
 Index
 *- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
-- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
+*- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
 Jämför
 
