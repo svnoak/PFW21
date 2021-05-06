@@ -70,3 +70,55 @@ searchWords[]
 *navbar
 *footer
 *variables
+VARIABLE:
+
+var(--font-small): 0.8rem;
+var(--font-default): 1rem;
+var(--font-large): 1.2rem;
+
+var(--space-small): %; 
+var(--space-medium): %;
+var(--space-large): %;
+
+var(--icon-small): var(--space-medium);
+var(--icon-small): calc(  var(--space-medium) +  var(--space-small) );
+
+
+var(--border-round): 50%;
+var(--border-squared): 5%;
+var(--shadow): 0px 0px 2px var(--black);
+
+> colors
+    var(--primary): white;
+    var(--secondary): green;
+    var(--accent): blue;
+    var(--elevated-background):grey-ish;
+    var(--black):black;
+
+
+FONTS:
+.title-hero
+.title-large
+.title-medium
+.title-small
+.title-xsmall
+
+.text-small
+.text-default
+.text-large
+
+.bold
+.light
+
+BUTTONS:
+.button-small
+.button-medium
+.button-large
+.button-solid
+.button-stroke
+.button-square
+.button-round
+.button-cta
+
+
+
