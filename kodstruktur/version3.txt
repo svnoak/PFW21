@@ -110,22 +110,21 @@ searchWords[]
 *footer
 *variables
 VARIABLE:
-
-var(--font-small): 0.8rem;
-var(--font-default): 1rem;
-var(--font-large): 1.2rem;
-
-var(--space-small): %; 
-var(--space-medium): %;
-var(--space-large): %;
-
-var(--icon-small): var(--space-medium);
-var(--icon-small): calc(  var(--space-medium) +  var(--space-small) );
-
-
-var(--border-round): 50%;
-var(--border-squared): 5%;
-var(--shadow): 0px 0px 2px var(--black);
+> text sizes 
+    var(--font-small): 0.8rem;
+    var(--font-default): 1rem;
+    var(--font-large): 1.2rem;
+> margin sizes
+    var(--space-small): 10px; 
+    var(--space-medium): 17.5px;
+    var(--space-large): 35px;
+> iconer
+    var(--icon-small): var(--space-medium);
+    var(--icon-small): calc(  var(--space-medium) +  var(--space-small) );
+> specials
+    var(--border-round): 50%;
+    var(--border-squared): 5%;
+    var(--shadow): 0px 0px 2px var(--black);
 
 > colors
     var(--primary): white;
@@ -136,28 +135,34 @@ var(--shadow): 0px 0px 2px var(--black);
 
 
 FONTS:
-.title-hero
-.title-large
-.title-medium
-.title-small
-.title-xsmall
-
-.text-small
-.text-default
-.text-large
-
-.bold
-.light
+> title size
+    .title-large
+    .title-medium
+    .title-small
+    .title-xsmall
+> paragraph size  
+    .text-small
+    .text-default
+    .text-large
+> weight
+    .bold
+    .light
+> special  
+    .title-hero
 
 BUTTONS:
-.button-small
-.button-medium
-.button-large
-.button-solid
-.button-stroke
-.button-square
-.button-round
-.button-cta
+> size
+    .button-small
+    .button-medium
+    .button-large
+> fill
+    .button-solid
+    .button-stroke
+> shape
+    .button-square
+    .button-round
+> special
+    .button-cta
 
 
 
