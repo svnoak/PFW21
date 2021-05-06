@@ -13,25 +13,25 @@ EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land e
 - Jämför-söksida
     - Sök efter programnamn och lägg till i en lista
     - Valda programs information visas i en tabell
+    - Ta fram sparade program
 
 - En detaljsida för ett program när man trycker på "läs mer".
 
 EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sökfunktionen) när man trycker "visa program".
 
-## Sidor
-
+## Sidor------------------------
 *- Index
 *- Söksida
-- Jämförsida
-- Detaljsida
+*- Jämförsida
+*- Detaljsida
 
-## Funktioner
+## Funktioner------------------------
 
-Global funktion
+Global funktion------------------------
 * - render(elements[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
 * - goToLink(url), går till URL
 
-EventListener
+EventListener------------------------
 *- input för Searchbar, kallar på getProgrammesBySearchWords(input.value) vid keyup, vid enter kör saveSearchWord(input.value)
 
 *- "visa program"-knapp, kallar på saveCountrySearchWordtoLS("landet") och goToLink(söksida)
@@ -39,7 +39,7 @@ EventListener
 *- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object)) och goToLink(detaljsida)
 
 
-Sök
+Sök------------------------
 *- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[] 
     matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
 
@@ -62,7 +62,7 @@ Sök
 - saveBookmarked(event(object)), sparar sparade programm till localStorage
 
 
-Funktionsled för söksida
+Funktionsled för söksida------------------------
 ((onLoad()) ->)
 (EL)input för Searchbar (keyup) -> 
     getProgrammesBySearchWords (när klar) -> 
@@ -70,15 +70,33 @@ Funktionsled för söksida
             createProgrammeElements (när klar) -> 
                 render
 
-Index
-*- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
+Index------------------------
+*- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna. Skickar till render(DOM-Element, country-div). Körs när sidan laddas EDIT: Randomiserade
 *- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
-Jämför
+Jämför------------------------
 
-Detaljsida
 
-## Globala variabler
+Detaljsida ------------------------
+
+ - getProgrammeInfoFromURL(id) :: sparar programme{} i en "sidglobal"-variabel. Körs när sidan laddas
+
+- makeHero(), skapar element av bild, programnamn, universitetsnamn, plats, språk, nivå, termin, visum. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
+
+- makeProgrammeStats(), skapar element av antagningspoäng, programnamn, avslutade studier, localStudents, exchangeStudents. Skickar till render(DOM-Element, statistics-div). Körs när sidan laddas
+
+- makeAds(), skapar olika ads i olika storlekar på olika ställen (för detaljsidan). MÅSTE SKAPA 3ST (PER SIDA)!!  Alla 3 skickas till render(DOM-Element, ad#-div) i en loop. Körs när sidan laddas
+
+- makeReviews(programreview, stadsreview), skapar element av reviews skickas till render(DOM-Element, programmeReviews-div), render(DOM-Element, cityReviews-div).
+ Gör alla korten och skicka med dem i ett större element. Körs när sidan laddas
+
+ - makeCityInfo(), skapar element av bild, landsnamn, landsinfo. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
+
+ makeWeatherInfo(), skapar element av soldagar från andra länder med samma typ av program. Skickar till render(DOM-Element, weather-div). Körs när sidan laddas
+
+
+
+## Globala variabler------------------------
 
 *body,
 *main,
@@ -86,9 +104,66 @@ Detaljsida
 *footer,
 searchWords[]
 
-## CSS-filer
+## CSS-filer------------------------
 
 *style  - innehållsförteckning och rubriker
 *navbar
 *footer
 *variables
+VARIABLE:
+> text sizes 
+    var(--font-small): 0.8rem;
+    var(--font-default): 1rem;
+    var(--font-large): 1.2rem;
+> margin sizes
+    var(--space-small): 10px; 
+    var(--space-medium): 17.5px;
+    var(--space-large): 35px;
+> iconer
+    var(--icon-small): var(--space-medium);
+    var(--icon-small): calc(  var(--space-medium) +  var(--space-small) );
+> specials
+    var(--border-round): 50%;
+    var(--border-squared): 5%;
+    var(--shadow): 0px 0px 2px var(--black);
+
+> colors
+    var(--primary): white;
+    var(--secondary): green;
+    var(--accent): blue;
+    var(--elevated-background):grey-ish;
+    var(--black):black;
+
+
+FONTS:
+> title size
+    .title-large
+    .title-medium
+    .title-small
+    .title-xsmall
+> paragraph size  
+    .text-small
+    .text-default
+    .text-large
+> weight
+    .bold
+    .light
+> special  
+    .title-hero
+
+BUTTONS:
+> size
+    .button-small
+    .button-medium
+    .button-large
+> fill
+    .button-solid
+    .button-stroke
+> shape
+    .button-square
+    .button-round
+> special
+    .button-cta
+
+
+
