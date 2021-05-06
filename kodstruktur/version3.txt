@@ -92,7 +92,7 @@ Detaljsida ------------------------
 
  - makeCityInfo(), skapar element av bild, landsnamn, landsinfo. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
 
- makeWeatherInfo(), skapar element av soldagar från andra länder med samma typ av program. Skickar till render(DOM-Element, weather-div). Körs när sidan laddas
+ -makeWeatherInfo(), skapar element av soldagar från andra länder med samma typ av program. Skickar till render(DOM-Element, weather-div). Körs när sidan laddas
 
 
 ## Globala variabler

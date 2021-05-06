@@ -39,11 +39,12 @@ EventListener------------------------
 *- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object)) och goToLink(detaljsida)
 
 
-Sök------------------------
+Sök ------------------------
 *- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[] 
     matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
 
-*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen. Kallar på render(DOM-elements[], sökresultatslista)
+*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen (universitet, stad, nivå, termin, "läs mer"-knapp med eventlistener).
+ Rensar element i sökresultaten. Kallar på render(DOM-element, sökresultatslista) i en forEach-loop
 
 *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
@@ -72,6 +73,7 @@ Funktionsled för söksida------------------------
 
 Index------------------------
 *- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna. Skickar till render(DOM-Element, country-div). Körs när sidan laddas EDIT: Randomiserade
+
 *- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
 Jämför------------------------
@@ -79,20 +81,20 @@ Jämför------------------------
 
 Detaljsida ------------------------
 
- - getProgrammeInfoFromURL(id) :: sparar programme{} i en "sidglobal"-variabel. Körs när sidan laddas
+*- getProgrammeInfoFromURL(id) :: sparar programme{} i en "sidglobal"-variabel. Körs när sidan laddas
 
-- makeHero(), skapar element av bild, programnamn, universitetsnamn, plats, språk, nivå, termin, visum. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
+*- makeHero(), skapar element av bild, programnamn, universitetsnamn, plats, språk, nivå, termin, visum. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
 
-- makeProgrammeStats(), skapar element av antagningspoäng, programnamn, avslutade studier, localStudents, exchangeStudents. Skickar till render(DOM-Element, statistics-div). Körs när sidan laddas
+*- makeProgrammeStats(), skapar element av antagningspoäng, programnamn, avslutade studier, localStudents, exchangeStudents. Skickar till render(DOM-Element, statistics-div). Körs när sidan laddas
 
-- makeAds(), skapar olika ads i olika storlekar på olika ställen (för detaljsidan). MÅSTE SKAPA 3ST (PER SIDA)!!  Alla 3 skickas till render(DOM-Element, ad#-div) i en loop. Körs när sidan laddas
+*- makeAds(), skapar olika ads i olika storlekar på olika ställen (för detaljsidan). MÅSTE SKAPA 3ST (PER SIDA)!!  Alla 3 skickas till render(DOM-Element, ad#-div) i en loop. Körs när sidan laddas
 
-- makeReviews(programreview, stadsreview), skapar element av reviews skickas till render(DOM-Element, programmeReviews-div), render(DOM-Element, cityReviews-div).
+*- makeReviews(programreview, stadsreview), skapar element av reviews skickas till render(DOM-Element, programmeReviews-div), render(DOM-Element, cityReviews-div).
  Gör alla korten och skicka med dem i ett större element. Körs när sidan laddas
 
- - makeCityInfo(), skapar element av bild, landsnamn, landsinfo. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
+*- makeCityInfo(), skapar element av bild, landsnamn, landsinfo. Skickar till render(DOM-Element, city-div). Körs när sidan laddas
 
- makeWeatherInfo(), skapar element av soldagar från andra länder med samma typ av program. Skickar till render(DOM-Element, weather-div). Körs när sidan laddas
+*- makeWeatherInfo(), skapar element av soldagar från andra länder med samma typ av program. Skickar till render(DOM-Element, weather-div). Körs när sidan laddas
 
 
 
