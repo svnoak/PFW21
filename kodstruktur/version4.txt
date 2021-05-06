@@ -10,40 +10,73 @@ EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land e
     - Bokstavsordning
     - Antagningspoöng
 
-*- Jämför-söksida
-    *- Sök efter programnamn och lägg till i en lista
-    *- Valda programs information visas i en tabell
-    - Förslag utifrån de program som sparats från söksidan
+- Jämför-söksida
+    - Sök efter programnamn och lägg till i en lista
+    - Valda programs information visas i en tabell
 
-*- En detaljsida för ett program när man trycker på "läs mer".
+- En detaljsida för ett program när man trycker på "läs mer".
 
-EDITEDIT*- Randomiserade "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sökfunktionen) när man trycker "visa program".
-
-- Möjlighet att filtrera sökning efter:
-    - Nivå
-    - Antagningspoöng
-    - Språk
-    - Visumkrav
-    - Soldagar
-
-- Möjlighet att spara ett program från sökresultatet i "favoriter".
-
-- En sida som visar alla "favoriter"
-    - Möjlighet att ta bort program från "favoriter".
-
+EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sökfunktionen) när man trycker "visa program".
 
 ## Sidor
 
 *- Index
 *- Söksida
-*- Jämförsida
-*- Detaljsida
-- Bokmärkessida
+- Jämförsida
+- Detaljsida
 
 ## Funktioner
 
-*- getProgrammesByName(string) :: programmes[{}], hämtar alla program där söktermen matchar programnamn
-*- renderSearchResults(programmes[{}]) :: element, appendar alla programmes som sökresultat
+Global funktion
+- render(elements[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+- goToLink(url), går till URL
+
+EventListener
+*- input för Searchbar, kallar på getProgrammesBySearchWords(input.value) vid keyup, vid enter kör saveSearchWord(input.value)
+
+- "visa program"-knapp, kallar på saveCountrySearchWordtoLS("landet") och goToLink(söksida)
+
+- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object)) och goToLink(detaljsida)
+
+
+Sök
+*- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[] 
+    matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
+
+*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen. Kallar på render(DOM-elements[], sökresultatslista)
+
+*- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
+    sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
+
+- saveSearchWord("input.value") :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
+    DOM-elementet skickas till render.
+
+- removeSearchWord(e.target), tar bort e.target.parentElement, tar bort e.target.previousSiblingElement.textContent från searchWords[]
+
+- getCountrySearchWordfromLS() :: countrySearchWord, tar emot countrySearchWord från URL
+
+- saveProgrammeToURL(event(object))
+
+- onLoad(countrySearchWord), Körs varje gång sidan laddas så man får upp programmkorten för det sparade sökorden. Kallar på getProgrammesBySearchWords
+
+- saveBookmarked(event(object)), sparar sparade programm till localStorage
+
+
+Funktionsled för söksida
+((onLoad()) ->)
+(EL)input för Searchbar (keyup) -> 
+    getProgrammesBySearchWords (när klar) -> 
+        sortSearchResult (när klar) -> 
+            createProgrammeElements (när klar) -> 
+                render
+
+Index
+*- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
+- saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
+
+Jämför
+
+Detaljsida
 
 ## Globala variabler
 
@@ -51,6 +84,7 @@ EDITEDIT*- Randomiserade "Land"-kort på indexsidan. Gör en automatisk sökning
 *main,
 *navbar,
 *footer,
+searchWords[]
 
 ## CSS-filer
 

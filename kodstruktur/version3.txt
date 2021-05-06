@@ -27,34 +27,68 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 
 ## Funktioner
 
-Global funktion
-- render(element[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+Global funktion ------------------------
+- render(element, parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
 - goToLink(url), går till URL
 
-EventListener
-*- input för Searchbar :: kallar på getProgrammesBySearchWords() vid keyup, vid enter spara sökordet i sökordslistan
-- "visa program"-knapp :: kallar på saveCountrySearchWordtoLS() och goToLink(söksida)
+EventListener ------------------------
+*- input för Searchbar, kallar på getProgrammesBySearchWords(input.value) vid keyup, vid enter kör saveSearchWord(input.value)
 
-Sök
-*- getProgrammesBySearchWords(input.value, searchWords[]) :: programmes[{}], hämtar alla program där söktermen och searchWords 
-    matchar programnamn, land och stad. Kallar på createProgrammeElement(programmes[{}])
-*- createProgrammeElement(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen. Kallar på render(DOM-element, sökresultatslista)
+- "visa program"-knapp, kallar på saveCountrySearchWordtoLS("landet") och goToLink(söksida)
+
+- "Läs mer"-knapp, kallar på saveProgrammeToURL(event(object){}) och goToLink(detaljsida)
+
+
+Sök ------------------------
+*- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[] 
+    matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
+
+*- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen. Kallar på render(DOM-element, sökresultatslista) i en forEach-loop
+
 *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}], 
-    sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande)
-- saveSearchWord(input.value) :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
+    sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
+
+- saveSearchWord("input.value") :: DOM-element, pushar in input.value i searchWords[] och skapar DOM-element av input. 
     DOM-elementet skickas till render.
+
 - removeSearchWord(e.target), tar bort e.target.parentElement, tar bort e.target.previousSiblingElement.textContent från searchWords[]
 
 - getCountrySearchWordfromLS() :: countrySearchWord, tar emot countrySearchWord från URL
-- 
 
-Index
+- saveProgrammeToURL(event(object))
+
+- onLoad(countrySearchWord), Körs varje gång sidan laddas så man får upp programmkorten för det sparade sökorden. Kallar på getProgrammesBySearchWords
+
+
+
+Funktionsled för söksida ------------------------
+((onLoad()) ->)
+(EL)input för Searchbar (keyup) -> 
+    getProgrammesBySearchWords (när klar) -> 
+        sortSearchResult (när klar) -> 
+            createProgrammeElements (när klar) -> 
+                render
+
+Index ------------------------
 *- createCountryElement(db.COUNTRIES[{}]) :: DOM-element, skapar element för de hämtade länderna
+
 - saveCountrySearchWordtoLS(e.target.countryName), lägger till landets namn i localStorage
 
-Jämför
+Jämför ------------------------
 
-Detaljsida
+Detaljsida ------------------------
+
+ - getProgrammeInfoFromURL(id) :: sparar programme{} i en "sidglobal"-variabel. Körs när sidan laddas
+
+- makeHero(), skapar element av bild, programnamn, universitetsnamn, plats, språk, nivå, termin, visum. Skickar till render(DOM-Element, Hero-div). Körs när sidan laddas
+
+- makeProgrammeStats(), skapar element av antagningspoäng, programnamn, avslutade studier, localStudents, exchangeStudents. Skickar till render(DOM-Element, statistics-div). Körs när sidan laddas
+
+- makeAds(), skapar olika ads i olika storlekar på olika ställen (för detaljsidan). MÅSTE SKAPA 3ST (PER SIDA)!!  Alla 3 skickas till render(DOM-Element, ad#-div) i en loop. Körs när sidan laddas
+
+- makeReviews(), skapar element av reviews
+
+
 
 ## Globala variabler
 
