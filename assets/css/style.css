@@ -10,7 +10,15 @@
 
 /* sökfunktionen */
 
-.searchbar {
+#searchbar {
   height: 50px;
   width: 300px;
+  margin: 20px 0 0 300px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+#search-results {
+  width: 500px;
+  min-height: 500px;
+  border: 1px solid black;
+  margin: 20px 50px 0 300px;
 }
