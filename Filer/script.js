@@ -8,8 +8,6 @@ const RANDOM = {
         return a[this.rInt(a.length)] },
 };
 
-
-
 const nImagesNormalCountries = [6, 6, 2, 6, 6, 4, 6, 4, 4];
 const COUNTRIES = [
     {

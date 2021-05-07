@@ -2,7 +2,7 @@
 
 ## Funktionaliteter
 
-EDIT*- Söka efter program som innehåller söktermen i sitt programnamn, land eller stad.
+EDIT*- Söka efter program som innehåller söktermen i sitt programnamn.
 *- Få upp alla program som sökresultat på söksidan
 
 - Möjlighet att sortera sökresultat i stigande/fallande ordning efter:
