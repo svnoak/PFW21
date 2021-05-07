@@ -142,14 +142,14 @@ const COUNTRIES = [
     text:
       "Storbritannien, formellt F\u00f6renade konungariket Storbritannien och Nordirland med kortform F\u00f6renade kungariket, \u00e4r en suver\u00e4n stat som best\u00e5r av \u00f6ar bel\u00e4gna vid den nordv\u00e4stra kusten av den europeiska kontinenten. Landet omfattar \u00f6n Storbritannien, den nord\u00f6stra delen av \u00f6n Irland och m\u00e5nga mindre \u00f6ar.",
     imagesNormal: [
-      "united kingdom_normal_1.jpg",
-      "united kingdom_normal_2.jpg",
-      "united kingdom_normal_3.jpg",
-      "united kingdom_normal_4.jpg",
-      "united kingdom_normal_5.jpg",
-      "united kingdom_normal_6.jpg",
+      "united_kingdom_normal_1.jpg",
+      "united_kingdom_normal_2.jpg",
+      "united_kingdom_normal_3.jpg",
+      "united_kingdom_normal_4.jpg",
+      "united_kingdom_normal_5.jpg",
+      "united_kingdom_normal_6.jpg",
     ],
-    imagesBig: ["united kingdom_big_1.jpg", "united kingdom_big_2.jpg", "united kingdom_big_3.jpg"],
+    imagesBig: ["united_kingdom_big_1.jpg", "united_kingdom_big_2.jpg", "united_kingdom_big_3.jpg"],
   },
   {
     id: 4,
@@ -484,8 +484,8 @@ const CITIES = [
     sun: 304,
     text:
       "Mexico DF \u00e4r Mexicos huvudstad och har circa 21 miljoner inv\u00e5nare i storstadsomr\u00e5det vilket g\u00f6r staden till en av de folkrikaste i v\u00e4rlden. Huvudstaden \u00e4r det viktigaste ekonomiska, industriella och kulturella centret i landet. Staden ligger i ett omr\u00e5de pr\u00e4glat av 3 000 \u00e5r gammal pre-columbiansk kultur. Sj\u00e4lva stadens historia g\u00e5r dock bara tillbaka till perioden motsvarande europeisk medeltid. P\u00e5 grund av h\u00f6jden \u00f6ver havet har Mexico City ett behagligt subtropiskt h\u00f6glandsklimat. Endast mellan april och juni blir det mycket varmt mitt p\u00e5 dagen, tidvis \u00f6ver 30 \u00b0C, resten av \u00e5ret ligger dagstemperaturen runt 20 \u00b0C, n\u00e5got l\u00e4gre vintertid, n\u00e5got h\u00f6gre sommartid.",
-    imagesNormal: ["mexico city_normal_1.jpg", "mexico city_normal_2.jpg"],
-    imagesBig: ["mexico city_big_1.jpg"],
+    imagesNormal: ["mexico_city_normal_1.jpg", "mexico_city_normal_2.jpg"],
+    imagesBig: ["mexico_city_big_1.jpg"],
   },
   {
     id: 24,
@@ -514,8 +514,8 @@ const CITIES = [
     sun: 160,
     text:
       "San Francisco officiellt City and County of San Francisco \u00e4r en stad i norra Kalifornien i USA. Staden ligger p\u00e5 \u00e4nden av en halv\u00f6 mellan Stilla havet och San Franciscobukten. Det egentliga San Francisco har omkring en miljon inv\u00e5nare, men staden fungerar som nav f\u00f6r omr\u00e5det runt bukten (vilket \u00e4ven innefattar st\u00e4der som San Jose och Oakland) och i omr\u00e5det bor det cirka 8,4 miljoner m\u00e4nniskor.",
-    imagesNormal: ["san francisco_normal_1.jpg", "san francisco_normal_2.jpg"],
-    imagesBig: ["san francisco_big_1.jpg"],
+    imagesNormal: ["san_francisco_normal_1.jpg", "san_francisco_normal_2.jpg"],
+    imagesBig: ["san_francisco_big_1.jpg"],
   },
   {
     id: 27,
@@ -534,8 +534,8 @@ const CITIES = [
     sun: 135,
     text:
       'New York \u00e4r ansedd som en v\u00e4rldsstad med ett starkt globalt inflytande inom ekonomi, massmedia, politik, utbildning, underh\u00e5llning och mode. Det \u00e4r v\u00e4rldens ledande finansiella centrum och huserar \u00e4ven FN:s h\u00f6gkvarter i stadsdelen Manhattan. Inv\u00e5narna kallas "New Yorkers". New Yorks mest k\u00e4nda smeknamn \u00e4r The Big Apple och har \u00e4ven kallats "staden som aldrig sover".',
-    imagesNormal: ["new york_normal_1.jpg", "new york_normal_2.jpg"],
-    imagesBig: ["new york_big_1.jpg"],
+    imagesNormal: ["new_york_normal_1.jpg", "new_york_normal_2.jpg"],
+    imagesBig: ["new_york_big_1.jpg"],
   },
   {
     id: 29,
@@ -564,8 +564,8 @@ const CITIES = [
     sun: 205,
     text:
       'Buenos Aires \u00e4r sedan 1880 huvudstad i republiken Argentina. Staden \u00e4r bel\u00e4gen vid R\u00edo de la Platas s\u00f6dra strand och har cirka 2,9 miljoner inv\u00e5nare samt 12,8 miljoner inv\u00e5nare i storstadsomr\u00e5det. Stadens centrum utg\u00f6rs av ett eget federalt distrikt (egentligen autonom stad, ciudad aut\u00f3noma) som omges av provinsen Buenos Aires, vars huvudort La Plata ligger s\u00f6der om Buenos Aires. Buenos Aires betyder ungef\u00e4r "Den goda luften" eller "De goda vindarna".',
-    imagesNormal: ["buenos aires_normal_1.jpg", "buenos aires_normal_2.jpg"],
-    imagesBig: ["buenos aires_big_1.jpg"],
+    imagesNormal: ["buenos_aires_normal_1.jpg", "buenos_aires_normal_2.jpg"],
+    imagesBig: ["buenos_aires_big_1.jpg"],
   },
   {
     id: 32,
