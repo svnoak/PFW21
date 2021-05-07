@@ -3,14 +3,12 @@
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 
 function getProgrammesBySearchWord() {
-  console.log(this.value);
   document.getElementById("search-results").innerHTML = "";
   if (this.value.length < 2) return;
 
   let programmes = DB.PROGRAMMES.filter((obj) => obj.name.includes(this.value));
 
   sortSearchResult(programmes);
-  console.log(programmes);
 }
 
 function createProgrammeElements(programmes) {
@@ -84,11 +82,6 @@ function sortSearchResult(programmes) {
   createProgrammeElements(programmes);
 }
 
-function render(element, parentElement) {
-  var pelement = parentElement;
-  document.getElementById(pelement).append(element);
-  console.log(parentElement);
-}
 // *- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[]
 //     matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
 
