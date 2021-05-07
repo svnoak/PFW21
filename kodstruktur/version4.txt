@@ -28,7 +28,7 @@ EDIT*- "Land"-kort på indexsidan. Gör en automatisk sökning på landet (i sö
 ## Funktioner------------------------
 
 Global funktion------------------------
-* - render(elements[], parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+* - render(elements, parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
 * - goToLink(url), går till URL
 
 EventListener------------------------
