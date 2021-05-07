@@ -7,3 +7,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* sökfunktionen */
+
+.searchbar {
+  height: 50px;
+  width: 300px;
+}
