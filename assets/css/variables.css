@@ -5,6 +5,7 @@
 :root {
   /* > text sizes  */
 
+  --font-xsmall: 0.6rem;
   --font-small: 0.8rem;
   --font-default: 1rem;
   --font-large: 1.2rem;
@@ -40,10 +41,10 @@
 /*------------*/
 
     /*title size*/
-    .title-large {}
-    .title-medium {}
-    .title-small {}
-    .title-xsmall {}
+    .title-large {font-size: var(--font-large)}
+    .title-medium {font-size: var(--font-default)}
+    .title-small {font-size: var(--font-small)}
+    .title-xsmall {font-size: var(--font-xsmall)}
 
     /*  paragraph size  */
     .text-small {}
