@@ -58,8 +58,8 @@
     .text-large {font-size: var(--font-xsmall);}
 
     /* weight */
-    .bold {}
-    .light {}
+    .bold {font-weight: bold;}
+    .light {font-weight: lighter;}
 
     /* special */
     .title-hero {}
