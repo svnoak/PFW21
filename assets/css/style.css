@@ -13,14 +13,39 @@
 #searchbar {
   height: 30px;
   width: 300px;
-  margin: 20px 0 0 300px;
+  margin: 20px 0 0 200px;
   background-color: rgba(255, 255, 255, 0.3);
 }
 #search-results {
   width: 500px;
   min-height: 500px;
   border: 1px solid black;
-  margin: 20px 50px 0 300px;
+  margin: 20px 50px 0 200px;
+}
+#search-words-pills {
+  margin: 20px 0 0 200px;
+  min-height: 30px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.pill {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  min-width: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+.remove-pill {
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  cursor: pointer;
 }
 .search-result-card {
   width: 100%;

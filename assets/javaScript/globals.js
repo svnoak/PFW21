@@ -1,5 +1,7 @@
 "use strict";
 
+var searchWords = [];
+
 const RANDOM = {
   rInt: (max, min = 0) => Math.floor(min + (max - min) * Math.random()),
   rFloat: (max, min = 0) => min + (max - min) * Math.random(),

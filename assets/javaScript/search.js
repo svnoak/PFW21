@@ -1,17 +1,51 @@
 "use strict";
 
+clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 
-function getProgrammesBySearchWord() {
-  document.getElementById("search-results").innerHTML = "";
-  if (this.value.length < 2) return;
+function clearSearchBar() {
+  document.getElementById("searchbar").value = "";
+}
+function getProgrammesBySearchWord(event) {
+  if (event.keyCode == 13) {
+    clearSearchBar;
+    createPillForSearchWords(this.value);
+  }
+  if (searchWords.length > 0) {
+    let programmes = {};
+    searchWords.forEach((searchWord) => {});
+    sortSearchResult(programmes);
+    return;
+  }
 
-  let programmes = DB.PROGRAMMES.filter((obj) => obj.name.includes(this.value));
-
+  let programmes = DB.PROGRAMMES.filter(
+    (obj) => obj.name.includes(this.value) || getCityFromUniID(obj.universityID).name.includes(this.value)
+  );
   sortSearchResult(programmes);
 }
 
+function createPillForSearchWords(searchWord) {
+  let pill = document.createElement("div");
+  pill.className = "pill";
+
+  let pillSearchWord = document.createElement("p");
+  pillSearchWord.className = "pill-search-word";
+  pillSearchWord.textContent = searchWord;
+
+  let removePillButton = document.createElement("button");
+  removePillButton.className = "remove-pill";
+  removePillButton.textContent = "X";
+  removePillButton.addEventListener("click", (event) => {
+    event.target.parentElement.remove();
+  });
+
+  pill.append(pillSearchWord, removePillButton);
+  searchWords.push(searchWord);
+  render(pill, "#search-words-pills");
+}
+
 function createProgrammeElements(programmes) {
+  document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
     let searchResultCard = document.createElement("div");
     searchResultCard.className = "search-result-card";
@@ -74,7 +108,7 @@ function createProgrammeElements(programmes) {
     // Gå vidare till render
     searchResultCard.append(bookmark, programmeImage, programmeCardInfo);
 
-    render(searchResultCard, "search-results");
+    render(searchResultCard, "#search-results");
   });
 }
 
