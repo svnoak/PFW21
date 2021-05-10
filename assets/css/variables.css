@@ -74,11 +74,29 @@
     .button-large {}
 
     /* button color */
-    .button-solid {
+    .button-solid--green {
         background-color: var(--secondary);
         color: var(--white);
     }
-    .button-stroke {}
+
+    .button-solid--blue {
+        background-color: var(--accent);
+        color: var(--white);
+    }
+
+    .button-stroke--green {
+        background-color: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+    }
+
+    .button-stroke--blue {
+        background-color: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+    }
+
+
 
     /*shape*/
     .button-square {}
