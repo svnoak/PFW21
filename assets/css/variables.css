@@ -3,10 +3,20 @@
 /*------------*/
 
 :root {
+/* title sizes */
+--title-large: 2rem;
+--title-default: 1.8rem;
+--title-small: 1.6rem;
+--title-xsmall: 1.4rem;
+    
+    
+    
+    
+
   /* > text sizes  */
 
   --font-xsmall: 0.6rem;
-  --font-small: 0.8rem;
+  --font-sall: 0.8rem;
   --font-default: 1rem;
   --font-large: 1.2rem;
 
@@ -19,7 +29,7 @@
   /* > iconer */
 
   --icon-small: var(--space-medium);
-  --icon-small: calc(var(--space-medium) + var(--space-small));
+  --icon-medium: calc(var(--space-medium) + var(--space-small));
 
   /* > specials */
 
@@ -42,12 +52,12 @@
 
     /*title size*/
     .title-large {font-size: var(--font-large)}
-    .title-medium {font-size: var(--font-default)}
+    .title-default {font-size: var(--font-default)}
     .title-small {font-size: var(--font-small)}
     .title-xsmall {font-size: var(--font-xsmall)}
 
     /*  paragraph size  */
-    .text-small {}
+    .text-small {font-size: var(--text)}
     .text-default {}
     .text-large {}
 
