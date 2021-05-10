@@ -74,7 +74,10 @@
     .button-large {}
 
     /* button color */
-    .button-solid {}
+    .button-solid {
+        background-color: var(--secondary);
+        color: var(--white);
+    }
     .button-stroke {}
 
     /*shape*/
