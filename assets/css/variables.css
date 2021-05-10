@@ -1,4 +1,6 @@
-/* VARIABLE: */
+/*--------------*/
+/* VARIABLES   */
+/*------------*/
 
 :root {
   /* > text sizes  */
@@ -31,34 +33,46 @@
   --accent: blue;
   --elevated-background: grey;
   --black: black;
-
-  /* FONTS:
-> title size
-    .title-large
-    .title-medium
-    .title-small
-    .title-xsmall
-> paragraph size  
-    .text-small
-    .text-default
-    .text-large
-> weight
-    .bold
-    .light
-> special  
-    .title-hero
-
-BUTTONS:
-> size
-    .button-small
-    .button-medium
-    .button-large
-> fill
-    .button-solid
-    .button-stroke
-> shape
-    .button-square
-    .button-round
-> special
-    .button-cta */
 }
+
+/*--------------*/
+/* FONTS       */
+/*------------*/
+
+    /*title size*/
+    .title-large {}
+    .title-medium {}
+    .title-small {}
+    .title-xsmall {}
+
+    /*  paragraph size  */
+    .text-small {}
+    .text-default {}
+    .text-large {}
+
+    /* weight */
+    .bold {}
+    .light {}
+
+    /* special */
+    .title-hero {}
+
+/*--------------*/
+/* BUTTONS     */
+/*------------*/
+
+    /* button size */
+    .button-small {}
+    .button-medium {}
+    .button-large {}
+
+    /* button color */
+    .button-solid {}
+    .button-stroke {}
+
+    /*shape*/
+    .button-square {}
+    .button-round {}
+
+    /* special */
+    .button-cta {}
