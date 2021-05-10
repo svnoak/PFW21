@@ -73,9 +73,20 @@ BUTTONS
 /*------------*/
 
 /* SIZE */
-.button-small {}
-.button-medium {}
-.button-large {}
+.button-small {
+  height: 2vh; 
+  width: 2vw;
+}
+
+.button-medium {
+  height: 4vh;
+  width: 4vw;
+}
+
+.button-large {
+  height: 5vh;
+  width: 5vw;
+}
 
 /* COLORVARIATIONS */
 .button-solid--green {
