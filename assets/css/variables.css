@@ -9,31 +9,31 @@
     --title-small: 1.6rem;
     --title-xsmall: 1.4rem;
     
-  /* > text sizes  */
+  /* text sizes  */
 
   --font-xsmall: 0.6rem;
   --font-sall: 0.8rem;
   --font-default: 1rem;
   --font-large: 1.2rem;
 
-  /* > margin sizes */
+  /* margin sizes */
 
   --space-small: 10px;
   --space-medium: 17.5px;
   --space-large: 35px;
 
-  /* > iconer */
+  /* iconer */
 
   --icon-small: var(--space-medium);
   --icon-medium: calc(var(--space-medium) + var(--space-small));
 
-  /* > specials */
+  /* specials */
 
   --border-round: 50%;
   --border-squared: 5%;
   --shadow: 0px 0px 2px var(--black);
 
-  /* > colors */
+  /* colors */
 
   --primary: white;
   --secondary: #6D8E6A;
@@ -46,34 +46,34 @@
 /* FONTS       */
 /*------------*/
 
-    /*title size*/
+/* TITLES */
     .title-large {font-size: var(--title-large);}
     .title-default {font-size: var(--title-default);}
     .title-small {font-size: var(--title-small);}
     .title-xsmall {font-size: var(--title-xsmall);}
 
-    /*  paragraph size  */
+/* PARAGRAPHS */
     .text-small {font-size: var(--font-small);}
     .text-default {font-size: var(--font-default);}
     .text-large {font-size: var(--font-xsmall);}
 
-    /* weight */
+/* WEIGHTS */
     .bold {font-weight: bold;}
     .light {font-weight: lighter;}
 
-    /* special */
+/* SPECIAL */
     .title-hero {}
 
 /*--------------*/
 /* BUTTONS     */
 /*------------*/
 
-    /* button size */
+/* SIZE */
     .button-small {}
     .button-medium {}
     .button-large {}
 
-    /* button color */
+/* COLORVARIATIONS */
     .button-solid--green {
         background-color: var(--secondary);
         color: var(--white);
@@ -96,11 +96,9 @@
         border: 2px solid var(--accent);
     }
 
+/* SHAPES */
+    .button-square {border-radius: var(--border-squared);}
+    .button-round {border-radius: var(--border-round);}
 
-
-    /*shape*/
-    .button-square {}
-    .button-round {}
-
-    /* special */
-    .button-cta {}
+/* SPECIAL */
+    .button-cta {background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);}
