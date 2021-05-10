@@ -6,6 +6,8 @@
 /* CONTENT     */
 /*------------*/
 /*
+POSITIONS
+
 FONTS
     -TITLES
     -PARAGRAPHS
@@ -23,6 +25,25 @@ BUTTONS
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/*--------------*/
+/* POSITIONS   */
+/*------------*/
+.column {
+  flex-direction: column;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*--------------*/
