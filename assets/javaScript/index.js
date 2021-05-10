@@ -1,7 +1,9 @@
 "use strict";
 
-createCountryElement(DB.COUNTRIES)
+createCountryElement(DB.COUNTRIES);
 
+
+// Skapar DOM-element för alla länder
 function createCountryElement(countries) {
     countries.forEach(country => {
         let countryElement = document.createElement('div');
@@ -14,7 +16,7 @@ function createCountryElement(countries) {
         let countryInfo = document.createElement('p');
         countryInfo.className = 'text-small';
         countryInfo.textContent = country.text;
-        countryInfo.innerHTML = `${countryInfo.innerHTML.substring(0,70)}...`;
+        countryInfo.innerHTML = `${countryInfo.innerHTML.substring(0,70)}...`; // Begränsar texten till 70 tecken
 
         let countryImg = document.createElement('div');
         countryImg.style.backgroundImage = `url(assets/images/${country.imagesNormal[1]})`;
