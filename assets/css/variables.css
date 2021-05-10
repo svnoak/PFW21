@@ -36,9 +36,9 @@
   /* > colors */
 
   --primary: white;
-  --secondary: green;
-  --accent: blue;
-  --elevated-background: grey;
+  --secondary: #6D8E6A;
+  --accent: #617AB0;
+  --elevated-background: #FAFAF9;
   --black: black;
 }
 
