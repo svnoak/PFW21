@@ -92,11 +92,13 @@ BUTTONS
 .button-solid--green {
     background-color: var(--secondary);
     color: var(--white);
+    border: 0px;
 }
 
 .button-solid--blue {
     background-color: var(--accent);
     color: var(--white);
+    border: 0px;
 }
 
 .button-stroke--green {
@@ -116,7 +118,10 @@ BUTTONS
 .button-round {border-radius: var(--border-round);}
 
 /* SPECIAL */
-.button-cta {background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);}
+.button-cta {
+  background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
+  border: 0px;
+}
 
 
 /* sökfunktionen */
