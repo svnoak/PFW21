@@ -31,5 +31,5 @@ function getCountryFromUniID(universityID) {
 }
 
 function render(parentElement, ...element) {
-  document.querySelector(parentElement).append(element);
+  document.querySelector(parentElement).append(...element);
 }

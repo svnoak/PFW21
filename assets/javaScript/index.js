@@ -1,18 +1,8 @@
 "use strict";
 
-render(createWrapper(), 'body');
+render('body', createHero(), createBrandInfo(), createAdSpace(), createCountryElement(DB.COUNTRIES));
 
-function createWrapper() {
-    let wrapper = document.createElement('div');
-    wrapper.className = 'wrapper';
-
-    wrapper.append(createHero(),
-    createBrandInfo(),
-    createAdSpace(),
-    createCountryElement(DB.COUNTRIES));
-
-    return wrapper;
-}
+console.log(createHero());
 
 // Skapar HERO med innehåll
 function createHero() {
