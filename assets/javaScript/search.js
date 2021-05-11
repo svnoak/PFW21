@@ -13,7 +13,9 @@ function getProgrammesBySearchWord(event) {
   }
   if (searchWords.length > 0) {
     let programmes = {};
-    searchWords.forEach((searchWord) => {});
+    searchWords.forEach((searchWord) => {
+      // Här ska koden in som kollar pillrerna
+    });
     sortSearchResult(programmes);
     return;
   }
