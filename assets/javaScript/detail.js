@@ -82,6 +82,98 @@ function makeProgrammeStats(){
 }
 
 document.body.prepend( makeProgrammeStats() );
+document.body.prepend(makeWeatherInfo());
 document.body.prepend(makeHero());
+
+
+
+
+function makeWeatherInfo(){
+    let wrapper = document.createElement("section");
+    wrapper.className = ``;
+
+    let title = document.createElement("h3");
+    title.textContent = "Väder";
+
+    let paragraph = document.createElement("p");
+    let weather;
+    if(detailedProgramCity.sun < 180){
+        weather = "molnigt"; 
+    } else if (detailedProgramCity.sun < 220){
+        weather = "växlande moligt";
+    } else if( detailedProgramCity.sun < 280){
+        weather = "växlande soligt";
+    } else if (detailedProgramCity.sun < 320){
+        weather = "soligt"
+    } else {
+        weather = "väldigt soligt"
+    }
+    paragraph.textContent = `I ${detailedProgramCity.name} är det ${weather}.`;
+
+    //Figure
+    let figure = document.createElement("figure");
+    let figcaption = document.createElement("figcaption");
+    figcaption.textContent = `Såhär jämför sig vädret i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
+    let diagram = createDiagram();
+    figure.append(figcaption, diagram)
+
+    wrapper.append(title, paragraph, figure)
+
+    return wrapper
+}
+
+
+
+function createDiagram() {
+
+    // find all programs with same name
+    let allSameProgram = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name);
+
+    // create unique array of the cities
+    let programCities = [...new Set( allSameProgram.map( program => getCityFromUniID(program.universityID).name) )]
+
+    //create simplified array
+    programCities = programCities.map( programCity =>{
+        let cityObject = DB.CITIES.find( city => city.name === programCity)
+  
+        return {
+            name: cityObject.name,
+            country: DB.COUNTRIES.find( country => country.id === cityObject.countryID).name,
+            sun: cityObject.sun,
+            programName: detailedProgram.name
+        }
+    } )
+
+    let diagram = document.createElement("div");
+
+    programCities.forEach(city => {
+        let wrapper = document.createElement("div");
+        diagram.append(wrapper);
+
+        let cityName = document.createElement("span");
+        cityName.textContent = city.name;
+
+        let bar = document.createElement("div");
+        bar.style.width = `${city.sun / 356}%`;
+
+        let sunNum = document.createElement("span");
+        sunNum.textContent = city.sun;
+        bar.append(sunNum);
+
+        wrapper.append(cityName, bar)
+
+
+    })
+
+
+
+    return diagram
+}
+
+
+
+
+
+
 
 // render( "body", makeHero() );
