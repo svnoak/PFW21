@@ -4,7 +4,7 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[0].id; // Simulate extraction from URL 
+let pID = DB.PROGRAMMES[59].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -85,9 +85,6 @@ document.body.prepend( makeProgrammeStats() );
 document.body.prepend(makeWeatherInfo());
 document.body.prepend(makeHero());
 
-
-
-
 function makeWeatherInfo(){
     let wrapper = document.createElement("section");
     wrapper.className = ``;
@@ -110,14 +107,8 @@ function makeWeatherInfo(){
     }
     paragraph.textContent = `I ${detailedProgramCity.name} är det ${weather}.`;
 
-    //Figure
-    let figure = document.createElement("figure");
-    let figcaption = document.createElement("figcaption");
-    figcaption.textContent = `Såhär jämför sig vädret i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
-    let diagram = createDiagram();
-    figure.append(figcaption, diagram)
 
-    wrapper.append(title, paragraph, figure)
+    wrapper.append(title, paragraph, createDiagram())
 
     return wrapper
 }
@@ -125,7 +116,6 @@ function makeWeatherInfo(){
 
 
 function createDiagram() {
-
     // find all programs with same name
     let allSameProgram = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name);
 
@@ -144,6 +134,15 @@ function createDiagram() {
         }
     } )
 
+    //DOM Figure
+    let figure = document.createElement("figure");
+    let figcaption = document.createElement("figcaption");
+    if ( programCities.length === 1){
+        figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
+    } else {
+        figcaption.textContent = `Såhär jämför sig vädret i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
+    }
+
     let diagram = document.createElement("div");
 
     programCities.forEach(city => {
@@ -157,23 +156,16 @@ function createDiagram() {
         bar.style.width = `${city.sun / 356}%`;
 
         let sunNum = document.createElement("span");
-        sunNum.textContent = city.sun;
+        sunNum.textContent = `${city.sun} soldagar`;
         bar.append(sunNum);
 
         wrapper.append(cityName, bar)
+    })  
 
+    figure.append(figcaption, diagram)
 
-    })
-
-
-
-    return diagram
+    return figure
 }
-
-
-
-
-
 
 
 // render( "body", makeHero() );
