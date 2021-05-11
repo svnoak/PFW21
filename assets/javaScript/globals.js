@@ -30,6 +30,6 @@ function getCountryFromUniID(universityID) {
   return DB.COUNTRIES.find((obj) => obj.id == countryID);
 }
 
-function render(element, parentElement) {
-  document.getElementById(parentElement).append(element);
+function render(parentElement, ...element) {
+  document.querySelector(parentElement).append(element);
 }
