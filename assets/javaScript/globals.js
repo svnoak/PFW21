@@ -33,3 +33,7 @@ function getCountryFromUniID(universityID) {
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
+
+function setUrlParameter(string) {
+  window.history.replaceState( {} , "Title", `${window.location.href}?${string}` )
+}
