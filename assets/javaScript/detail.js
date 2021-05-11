@@ -40,22 +40,48 @@ function makeHero(){
             [alertIcon, detailedProgramCountry.visa === true ? "Kräver visum" : "Kräver inte visum"]
         ]
 
-    information.forEach(category => {
-        let wrapper = document.createElement("div");
+    information.forEach(info => {
+        let container = document.createElement("div");
 
         let icon = document.createElement("i");
-        icon.innerHTML = category[0];
+        icon.innerHTML = info[0];
         let text = document.createElement("span");
-        text.textContent = category[1];
+        text.textContent = info[1];
         wrapper.append(icon, text);
 
-        studyInfo.append(wrapper);
+        studyInfo.append(container);
     });
 
     
     return wrapper;
 }
 
-document.body.append(makeHero());
+function makeProgrammeStats(){
+    let wrapper = document.createElement("section");
+    wrapper.className = ``;
+
+    const information = [
+        ["Antagningspoäng", detailedProgram.entryGrades[0]],
+        ["Avslutade Studier", detailedProgram.successRate[0] + "%"],
+        ["Ortsboende Studenter", detailedProgram.localStudents],
+        ["Utbytesstudenter", detailedProgram.exchangeStudents]
+    ]
+
+    information.forEach( info => {
+        let container = document.createElement("div");
+        let number = document.createElement("span");
+        number.textContent = info[1];
+        let text = document.createElement("span");
+        text.textContent = info[0];
+        container.append(number, text)
+
+        wrapper.append(container);
+    } )
+
+    return wrapper
+}
+
+document.body.prepend( makeProgrammeStats() );
+document.body.prepend(makeHero());
 
 // render( "body", makeHero() );
