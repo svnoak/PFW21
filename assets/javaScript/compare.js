@@ -1,5 +1,7 @@
 "use strict";
 
+let addedProgrammes = [];
+
 render('body', createHeader());
 
 function createHeader() {
@@ -15,24 +17,27 @@ function createHeader() {
     let searchBar = document.createElement('input');
     searchBar.type = 'list';
     searchBar.placeholder = 'Lägg till program att jämföra';
+    
     searchBar.addEventListener('keyup', () => {
+        let searchInput = searchBar.value.toLowerCase();
+        
         if (document.querySelector('.datalist')) {
             document.querySelector('.datalist').remove();
         }
 
-        let searchInput = searchBar.value.toLowerCase();
-        
         let dataList = document.createElement('div');
         dataList.className = 'datalist'
         searchBar.after(dataList);
         
+        
         getProgrammesBySearchWord(searchInput).forEach(program => {
             let option = document.createElement('div');
+            option.className = 'option';
             option.textContent = program.name;
             dataList.append(option);
 
             option.addEventListener('click', () => {
-                addProgramToList(program.name);
+                addProgramToList(program.id);
             });
         });
     });
@@ -47,6 +52,10 @@ function createHeader() {
 
 
 function getProgrammesBySearchWord(searchInput) {
+    if(searchInput === '') {
+        return
+    }
+
     let programmes = DB.PROGRAMMES.filter((obj) => {
         let name = obj.name.toLowerCase();
         return name.includes(searchInput);
@@ -60,8 +69,11 @@ function sortSearchResult(programmes) {
     return programmes;
 }
 
-let addedProgrammes = [];
-
-function addProgramToList(programName) {
-    addedProgrammes.push(programName);
+function addProgramToList(programID) {
+    if( addedProgrammes.includes(programID)) {
+        return
+    } else {
+        addedProgrammes.push(programID);
+    }
+    console.log(addedProgrammes);
 }
