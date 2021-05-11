@@ -2,8 +2,6 @@
 
 render('body', createHero(), createBrandInfo(), createAdSpace(), createCountryElement(DB.COUNTRIES));
 
-console.log(createHero());
-
 // Skapar HERO med innehåll
 function createHero() {
     let indexHero = document.createElement('div');
@@ -20,7 +18,8 @@ function createHero() {
     textHero.className = 'text-default bold';
     textHero.textContent = 'Här kan du hitta spännande program över hela världen. Vi hjälper dig att hitta rätt!';
 
-    let buttonHero = document.createElement('button');
+    let buttonHero = document.createElement('a');
+    buttonHero.href = 'search.html';
     buttonHero.className = 'button-large button-round button-cta';
     buttonHero.textContent = 'Sök efter program';
 
@@ -73,9 +72,13 @@ function createCountryElement(countries) {
         let countryImg = document.createElement('div');
         countryImg.style.backgroundImage = `url(assets/images/${country.imagesNormal[1]})`;
 
-        let showProgramsButton = document.createElement('button');
+        let showProgramsButton = document.createElement('a');
         showProgramsButton.className = 'button-large button-square text-small'
         showProgramsButton.textContent = 'Visa program';
+        showProgramsButton.href = 'search.html';
+        showProgramsButton.addEventListener('click', () => {
+            sessionStorage.setItem('countryId', country.id);
+        });
         countryImg.append(showProgramsButton);
         
         
