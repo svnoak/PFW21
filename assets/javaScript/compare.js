@@ -28,23 +28,35 @@ function createHeader() {
       document.querySelector(".datalist").remove();
     }
 
-    let dataList = document.createElement("div");
-    dataList.className = "datalist";
-    searchBar.after(dataList);
-
-    getProgrammesBySearchWord(searchInput).forEach((programme) => {
+    let programmeList = document.createElement("div");
+    programmeList.className = "programmelist";
+    searchBar.after(programmeList);
+    
+    getSuggestionsBySearchWord(searchInput).forEach((programme) => {
         let university = getUniversityFromUniID(programme.universityID);
-        
+
         let option = document.createElement("div");
         option.className = "option";
-        option.innerHTML = `
-        <p class="text-default">${programme.name}</p>
-        <p class="text-small">${university.name}</p>
-        `;
-        dataList.append(option);
+        
+        let programmeInfo = document.createElement('div');
+        
+        let programmeName = document.createElement('p');
+        programmeName.className = 'text-default';
+        programmeName.textContent = programme.name;
+        
+        let universityName = document.createElement('p');
+        universityName.className = 'text-small';
+        universityName.textContent = university.name;
+        
+        let addProgramme = document.createElement('i');
+        addProgramme.textContent = '+';
+        
+        programmeInfo.append(programmeName, universityName);
+        option.append(programmeInfo, addProgramme);
+        programmeList.append(option);
 
         option.addEventListener("click", () => {
-            addProgrammeToList(programme.id);
+            addProgrammeToArray(programme.id);
       });
     });
   });
@@ -54,14 +66,14 @@ function createHeader() {
   return header;
 }
 
-function getProgrammesBySearchWord(searchInput) {
-  if (searchInput === "") {
+function getSuggestionsBySearchWord(searchWord) {
+  if (searchWord === "") {
     return;
   }
 
   let programmes = DB.PROGRAMMES.filter((obj) => {
     let name = obj.name.toLowerCase();
-    return name.includes(searchInput);
+    return name.includes(searchWord);
   });
 
   // sortSearchResult(programmes);
@@ -69,32 +81,61 @@ function getProgrammesBySearchWord(searchInput) {
 }
 
 function sortSearchResult(programmes) {
-  return programmes;
+    // programmes.sort()
+    console.log(programmes);
+    return programmes;
 }
 
-function addProgrammeToList(programID) {
-  if (addedProgrammes.includes(programID)) {
-    return;
+function addProgrammeToArray(programmeId) {
+  if (addedProgrammes.includes(programmeId)) {
+    removePillFromArray(programmeId);
   } else {
-    addedProgrammes.push(programID);
+    addedProgrammes.push(programmeId);
   }
 
   document.querySelector('.search-words-pills').innerHTML = '';
 
-  addedProgrammes.forEach( id => {
-    let programme = getProgrammesById(id);
+  if(addedProgrammes.length <= 5) {
 
-    createPillForSearchWords(programme.name, '.search-words-pills');
+  }
+
+  addedProgrammes.forEach( id => {
+    render('.search-words-pills', createPillFromProgrammeId(id));  
   });
   console.log(addedProgrammes);
 }
 
-function removePillFromArray(programmeName) {
-    let programme = getProgrammesByName(programmeName);
+
+
+function createPillFromProgrammeId(id) {
+    let programmeName = getProgrammesById(id).name;
+
+    let pill = document.createElement("div");
+    pill.className = "pill";
+  
+    let pillSearchWord = document.createElement("p");
+    pillSearchWord.className = "pill-search-word";
+    pillSearchWord.textContent = programmeName;
+  
+    let removePillButton = document.createElement("button");
+    removePillButton.className = "remove-pill";
+    removePillButton.textContent = "X";
+    removePillButton.addEventListener("click", (event) => {
+      event.target.parentElement.remove();
+      removePillFromArray(id);
+    });
+  
+    pill.append(pillSearchWord, removePillButton);
+    
+    return pill;
+  }
+
+function removePillFromArray(programmeId) {
 
     for (let i = 0; i < addedProgrammes.length; i++) {
-        if (addedProgrammes[i] === programme.id) {
+        if (addedProgrammes[i] === programmeId) {
             addedProgrammes.splice(i, 1);
         }
     }
+    console.log(addedProgrammes);
 }
