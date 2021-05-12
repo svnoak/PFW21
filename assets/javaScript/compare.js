@@ -98,3 +98,40 @@ function removePillFromArray(programmeName) {
         }
     }
 }
+
+function createComparisonSection(){
+
+  // Kolla om det går att dra ut det på något sätt ur arrayn med id:n från addedProgrammes
+  const titles = ["Program", getUniversityFromUniID(), getCityImgFromUniID(), getCountryFromUniID() ];
+
+  function createTable(comparisonKeys = []) {
+    let table = document.createElement("div");
+    table.className = "table";
+
+    comparisonKeys.forEach( () => { 
+    let category = document.createElement("div");
+    category.className = "bold";
+
+    // FUNKTION SOM LETAR FRAM VARJE VALUE TILL VARJE KEY
+
+    let value = document.createElement("div");
+    value.textContent = "VALUE FROM COMPARISONKEY";
+    table.append(category, value);
+    })
+
+  }
+
+  function createTableList() {
+    let table = document.createElement("div");
+    table.className = "table--list";
+  }
+
+  function createSection (type, titles) {
+    let section = document.createElement("section");
+    let title = document.createElement("h3");
+    title.className = "title-default";
+    title.textContent = "TITLE";
+
+    type ? createTable() : createTableList();
+  }
+}
