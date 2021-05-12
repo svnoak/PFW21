@@ -28,26 +28,6 @@ function filterProgrammesByCountry(array, filterWord) {
   return array.filter((obj) => obj.name.includes(filterWord));
 }
 
-function createPillForSearchWords(searchWord) {
-  let pill = document.createElement("div");
-  pill.className = "pill";
-
-  let pillSearchWord = document.createElement("p");
-  pillSearchWord.className = "pill-search-word";
-  pillSearchWord.textContent = searchWord;
-
-  let removePillButton = document.createElement("button");
-  removePillButton.className = "remove-pill";
-  removePillButton.textContent = "X";
-  removePillButton.addEventListener("click", (event) => {
-    event.target.parentElement.remove();
-  });
-
-  pill.append(pillSearchWord, removePillButton);
-  searchWords.push(searchWord);
-  render("#search-words-pills", pill);
-}
-
 function createProgrammeElements(programmes) {
   document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {

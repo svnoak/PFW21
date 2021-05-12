@@ -2,78 +2,77 @@
 
 let addedProgrammes = [];
 
-render('body', createHeader());
+render("body", createHeader());
 
 function createHeader() {
-    let header = document.createElement('div');
-    header.className = 'header';
+  let header = document.createElement("div");
+  header.className = "header";
 
-    let titleHeader = document.createElement('h1');
-    titleHeader.textContent = 'Jämför program';
+  let titleHeader = document.createElement("h1");
+  titleHeader.textContent = "Jämför program";
 
-    let textHeader = document.createElement('p');
-    textHeader.textContent = 'Här kan du jämföra dina favoriter och bestämma vilket program som är rätt för just dig!';
+  let textHeader = document.createElement("p");
+  textHeader.textContent = "Här kan du jämföra dina favoriter och bestämma vilket program som är rätt för just dig!";
 
-    let searchBar = document.createElement('input');
-    searchBar.type = 'list';
-    searchBar.placeholder = 'Lägg till program att jämföra';
-    
-    searchBar.addEventListener('keyup', () => {
-        let searchInput = searchBar.value.toLowerCase();
-        
-        if (document.querySelector('.datalist')) {
-            document.querySelector('.datalist').remove();
-        }
+  let searchBar = document.createElement("input");
+  searchBar.type = "list";
+  searchBar.placeholder = "Lägg till program att jämföra";
 
-        let dataList = document.createElement('div');
-        dataList.className = 'datalist'
-        searchBar.after(dataList);
-        
-        
-        getProgrammesBySearchWord(searchInput).forEach(program => {
-            let option = document.createElement('div');
-            option.className = 'option';
-            option.textContent = program.name;
-            dataList.append(option);
+  let currentPrograms = document.createElement("div");
+  currentPrograms.className = "pills";
 
-            option.addEventListener('click', () => {
-                addProgramToList(program.id);
-            });
-        });
-    });
+  searchBar.addEventListener("keyup", () => {
+    let searchInput = searchBar.value.toLowerCase();
 
-    let currentPrograms = document.createElement('div');
-
-
-    header.append(titleHeader, textHeader, searchBar, currentPrograms);
-
-    return header;
-}
-
-
-function getProgrammesBySearchWord(searchInput) {
-    if(searchInput === '') {
-        return
+    if (document.querySelector(".datalist")) {
+      document.querySelector(".datalist").remove();
     }
 
-    let programmes = DB.PROGRAMMES.filter((obj) => {
-        let name = obj.name.toLowerCase();
-        return name.includes(searchInput);
-    });
+    let dataList = document.createElement("div");
+    dataList.className = "datalist";
+    searchBar.after(dataList);
 
-    // sortSearchResult(programmes);
-    return programmes;
+    getProgrammesBySearchWord(searchInput).forEach((program) => {
+      let option = document.createElement("div");
+      option.className = "option";
+      option.textContent = program.name;
+      dataList.append(option);
+
+      option.addEventListener("click", () => {
+        addProgramToList(program.id);
+        createPillForSearchWords(program.name, ".pills");
+      });
+    });
+  });
+
+  header.append(titleHeader, textHeader, searchBar, currentPrograms);
+
+  return header;
+}
+
+function getProgrammesBySearchWord(searchInput) {
+  if (searchInput === "") {
+    return;
+  }
+
+  let programmes = DB.PROGRAMMES.filter((obj) => {
+    let name = obj.name.toLowerCase();
+    return name.includes(searchInput);
+  });
+
+  // sortSearchResult(programmes);
+  return programmes;
 }
 
 function sortSearchResult(programmes) {
-    return programmes;
+  return programmes;
 }
 
 function addProgramToList(programID) {
-    if( addedProgrammes.includes(programID)) {
-        return
-    } else {
-        addedProgrammes.push(programID);
-    }
-    console.log(addedProgrammes);
+  if (addedProgrammes.includes(programID)) {
+    return;
+  } else {
+    addedProgrammes.push(programID);
+  }
+  console.log(addedProgrammes);
 }
