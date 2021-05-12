@@ -4,7 +4,7 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[4].id; // Simulate extraction from URL 
+let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -30,15 +30,8 @@ function makeHero(){
     let subtitle =  document.createElement("span");
     subtitle.textContent = detailedProgramUniversity.name;
 
-    let cityImage = document.createElement("div");
-    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[0]} )`;
-    cityImage.className = ``;
-    cityImage.style.position = "absolute";  // lägga in dessa 
-    cityImage.style.width= "100%";          //
-    cityImage.style.height= "100%";         //
-    cityImage.style.zIndex= "-1";           // i css?
 
-    header.append(cityImage, title, subtitle);
+    header.append(cityImage(0), title, subtitle);
 
     // studyInfo content
         const information = [
@@ -174,12 +167,114 @@ function createDiagram() {
 }
 
 function makeCityInfo(){
+    let wrapper = document.createElement("section");
+    wrapper.className = ``;
+
+    let head = document.createElement("div");
+    head.className = ``;
+    
+    // head child
+    let titleWrap = document.createElement("div");
+    titleWrap.style.position = "relative"; // for image position:absolute
+    let paragraph = document.createElement("p");
+    paragraph.textContent = detailedProgramCity.text;
+    head.append(titleWrap, paragraph)
+
+    let title = document.createElement("h2");
+    title.textContent = `Om ${detailedProgramCity.name}`;
+    titleWrap.append(cityImage(1), title)
+
+    let reviews = `reviews`;
+
+    
+
+    //also review cards
+    wrapper.append(head, reviews, makeWeatherInfo())
+
+    return wrapper
 
 }
 
-document.body.prepend( makeProgrammeStats() );
-document.body.prepend(makeWeatherInfo());
-document.body.prepend(makeHero());
+function cityImage(x){
+    let cityImage = document.createElement("div");
+    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
+    cityImage.className = ``;
+    cityImage.style.position = "absolute";  // lägga in dessa 
+    cityImage.style.width= "100%";          //
+    cityImage.style.height= "100%";         //
+    cityImage.style.zIndex= "-1";           // i css?
 
+    return cityImage
+}
+
+function makeSchoolInfo(){
+    let wrapper = document.createElement("section");
+    wrapper.className = ``;
+
+    // outer divs
+    let title = document.createElement("h2");
+    title.textContent = "Om Utbildningen";
+    title.className = ``;
+    let reviews = `reviews`;
+    let otherSchools = document.createElement("section");
+    wrapper.append(title, reviews, createClubSection())
+    
+    let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
+    if (otherUniversities.length > 1){
+        wrapper.append(createOtherSchoolsSection(otherUniversities))
+    }
+
+    //school clubs
+    let schoolTitle
+
+    return wrapper
+}
+
+function createClubSection(){
+    let wrapper = document.createElement("section");
+
+    let title = document.createElement("h3");
+    title.className = ``;
+    title.textContent = `Engagera dig i skolans klubbar`;
+    wrapper.append(title)
+
+    let schoolClubs = DB.CLUBS.filter( club => club.universityID === detailedProgram.universityID);
+
+    schoolClubs.forEach( club => {
+        let container = document.createElement("div");
+        let name = document.createElement("span");
+        name.textContent = club.name ? 
+        club.name : 
+        `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
+        let members = document.createElement("span");
+        members.textContent = `${club.memberCount} medlemmar`
+
+        container.append(name, members)
+        wrapper.append(container)
+
+    })
+
+    return wrapper
+}
+
+function createOtherSchoolsSection(uniArray){
+    let wrapper = document.createElement("section");
+    wrapper.className = ``;
+
+    let title = document.createElement("h3");
+    title.textContent = `Studera ${detailedProgram.name} vid andra universitet `;
+    wrapper.append(title)
+
+    uniArray.forEach(program => {
+        let uni = document.createElement("span");
+        uni.textContent = getUniversityFromUniID(program.universityID).name;
+        wrapper.append(uni)
+    })
+
+    return wrapper
+}
+
+
+document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 
 // render( "body", makeHero() );
