@@ -1,17 +1,55 @@
 "use strict";
 
+clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 
-function getProgrammesBySearchWord() {
-  document.getElementById("search-results").innerHTML = "";
-  if (this.value.length < 2) return;
+function clearSearchBar() {
+  document.getElementById("searchbar").value = "";
+}
+function getProgrammesBySearchWord(event) {
+  if (event.keyCode == 13 && this.value.length > 0) {
+    createPillForSearchWords(this.value);
+    clearSearchBar();
+    let programmes = filterProgrammesByName(DB.PROGRAMMES, searchWords[0]);
+    console.log(programmes);
+    sortSearchResult(programmes);
+  }
+}
+function filterProgrammesByName(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCity(array, filterWord) {
+  return array.filter((obj) => getCityFromUniID(obj.universityID).includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
 
-  let programmes = DB.PROGRAMMES.filter((obj) => obj.name.includes(this.value));
+function createPillForSearchWords(searchWord) {
+  let pill = document.createElement("div");
+  pill.className = "pill";
 
-  sortSearchResult(programmes);
+  let pillSearchWord = document.createElement("p");
+  pillSearchWord.className = "pill-search-word";
+  pillSearchWord.textContent = searchWord;
+
+  let removePillButton = document.createElement("button");
+  removePillButton.className = "remove-pill";
+  removePillButton.textContent = "X";
+  removePillButton.addEventListener("click", (event) => {
+    event.target.parentElement.remove();
+  });
+
+  pill.append(pillSearchWord, removePillButton);
+  searchWords.push(searchWord);
+  render("#search-words-pills", pill);
 }
 
 function createProgrammeElements(programmes) {
+  document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
     let searchResultCard = document.createElement("div");
     searchResultCard.className = "search-result-card";
@@ -74,7 +112,7 @@ function createProgrammeElements(programmes) {
     // Gå vidare till render
     searchResultCard.append(bookmark, programmeImage, programmeCardInfo);
 
-    render(searchResultCard, "search-results");
+    render("#search-results", searchResultCard);
   });
 }
 
