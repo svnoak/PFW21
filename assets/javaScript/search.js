@@ -10,9 +10,22 @@ function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     createPillForSearchWords(this.value);
     clearSearchBar();
-    searchwords.forEach((obj) => {});
+    let programmes = filterProgrammesByName(DB.PROGRAMMES, searchWords[0]);
+    console.log(programmes);
     sortSearchResult(programmes);
   }
+}
+function filterProgrammesByName(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCity(array, filterWord) {
+  return array.filter((obj) => getCityFromUniID(obj.universityID).includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
 }
 
 function createPillForSearchWords(searchWord) {

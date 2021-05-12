@@ -12,7 +12,7 @@ const RANDOM = {
 };
 
 function getUniversityFromUniID(universityID) {
-  return DB.UNIVERSITIES.find((obj) => obj.id === universityID);
+  return DB.UNIVERSITIES.find((obj) => obj.id == universityID);
 }
 function getLevel(levelID) {
   return DB.LEVELS[levelID];
@@ -24,8 +24,8 @@ function getCityImgFromUniID(universityID) {
 }
 
 function getCityFromUniID(universityID) {
-  let cityID = DB.UNIVERSITIES.find((obj) => obj.id === universityID).cityID;
-  return DB.CITIES.find((obj) => obj.id === cityID);
+  let cityID = DB.UNIVERSITIES.find((obj) => obj.id == universityID).cityID;
+  return DB.CITIES.find((obj) => obj.id == cityID);
 }
 function getCountryFromUniID(universityID) {
   let countryID = getCityFromUniID(universityID).countryID;
