@@ -19,13 +19,16 @@ function filterProgrammesByName(array, filterWord) {
   return array.filter((obj) => obj.name.includes(filterWord));
 }
 function filterProgrammesByCity(array, filterWord) {
-  return array.filter((obj) => getCityFromUniID(obj.universityID).includes(filterWord));
+  return array.filter((obj) => getCityFromUniID(obj.universityID).name.includes(filterWord));
 }
 function filterProgrammesByCountry(array, filterWord) {
-  return array.filter((obj) => obj.name.includes(filterWord));
+  return array.filter((obj) => getCountryFromUniID(obj.universityID).name.includes(filterWord));
 }
-function filterProgrammesByCountry(array, filterWord) {
-  return array.filter((obj) => obj.name.includes(filterWord));
+function filterProgrammesByLevel(array, filterWord) {
+  return array.filter((obj) => getLevel(obj.level).includes(filterWord));
+}
+function filterProgrammesBySubject(array, filterWord) {
+  return array.filter((obj) => getLevel(obj.level).includes(filterWord));
 }
 
 function createProgrammeElements(programmes) {
