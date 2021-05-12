@@ -4,6 +4,7 @@ let addedProgrammes = [];
 
 render("body", createHeader());
 
+//Skapar header med sökruta
 function createHeader() {
   let header = document.createElement("div");
   header.className = "header";
@@ -15,14 +16,30 @@ function createHeader() {
   textHeader.textContent = "Här kan du jämföra dina favoriter och bestämma vilket program som är rätt för just dig!";
 
   let searchBar = document.createElement("input");
+  searchBar.className = 'search-bar';
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
   let currentProgrammes = document.createElement("div");
   currentProgrammes.className = "search-words-pills";
 
+  // searchBar.addeventlistner vid click som öppnar programlistan med favoriterna
+
   searchBar.addEventListener("keyup", () => {
-    let searchInput = searchBar.value.toLowerCase();
+    renderProgrammeList(searchBar.value); //skapar listan med program som innehåller sökordet
+  });
+
+  header.append(titleHeader, textHeader, currentProgrammes, searchBar);
+
+  return header;
+}
+
+// function getFavoritesfromLS() {
+    
+// }
+
+function renderProgrammeList(searchWord) {
+    let searchInput = searchWord.toLowerCase();
 
     if (document.querySelector(".datalist")) {
       document.querySelector(".datalist").remove();
@@ -30,7 +47,7 @@ function createHeader() {
 
     let programmeList = document.createElement("div");
     programmeList.className = "programmelist";
-    searchBar.after(programmeList);
+    document.querySelector('.search-bar').after(programmeList);
     
     getSuggestionsBySearchWord(searchInput).forEach((programme) => {
         let university = getUniversityFromUniID(programme.universityID);
@@ -59,11 +76,6 @@ function createHeader() {
             addProgrammeToArray(programme.id);
       });
     });
-  });
-
-  header.append(titleHeader, textHeader, currentProgrammes, searchBar);
-
-  return header;
 }
 
 function getSuggestionsBySearchWord(searchWord) {
