@@ -1,64 +1,74 @@
-/* VARIABLE: */
+/*--------------*/
+/* VARIABLES   */
+/*------------*/
+/*
+COLORS
+TITLE SIZES
+TEXT SIZES
+TITLE SIZES
+MARGINS
+BORDER RADIUS
+SHADOWS
+*/
 
 :root {
-  /* > text sizes  */
+/*--------------*/
+/* COLORS      */
+/*------------*/
 
+  --primary: white;
+  --secondary: #6D8E6A;
+  --accent: #617AB0;
+  --elevated-background: #FAFAF9;
+  --black: black;
+
+
+/*--------------*/
+/* TITLE SIZES */
+/*------------*/
+
+    --title-large: 2rem;
+    --title-default: 1.8rem;
+    --title-small: 1.6rem;
+    --title-xsmall: 1.4rem;
+
+/*--------------*/
+/* TEXT SIZES  */
+/*------------*/
+
+  --font-xsmall: 0.6rem;
   --font-small: 0.8rem;
   --font-default: 1rem;
   --font-large: 1.2rem;
 
-  /* > margin sizes */
+
+/*--------------*/
+/* MARGINS     */
+/*------------*/
 
   --space-small: 10px;
   --space-medium: 17.5px;
   --space-large: 35px;
 
-  /* > iconer */
+  
+/*--------------*/
+/* ICONS       */
+/*------------*/
 
   --icon-small: var(--space-medium);
-  --icon-small: calc(var(--space-medium) + var(--space-small));
+  --icon-medium: calc(var(--space-medium) + var(--space-small));
 
-  /* > specials */
+
+/*--------------*/
+/*BORDER RADIUS*/
+/*------------*/
 
   --border-round: 50%;
   --border-squared: 5%;
+
+
+/*--------------*/
+/* SHADOWS     */
+/*------------*/
   --shadow: 0px 0px 2px var(--black);
-
-  /* > colors */
-
-  --primary: white;
-  --secondary: green;
-  --accent: blue;
-  --elevated-background: grey;
-  --black: black;
-
-  /* FONTS:
-> title size
-    .title-large
-    .title-medium
-    .title-small
-    .title-xsmall
-> paragraph size  
-    .text-small
-    .text-default
-    .text-large
-> weight
-    .bold
-    .light
-> special  
-    .title-hero
-
-BUTTONS:
-> size
-    .button-small
-    .button-medium
-    .button-large
-> fill
-    .button-solid
-    .button-stroke
-> shape
-    .button-square
-    .button-round
-> special
-    .button-cta */
 }
