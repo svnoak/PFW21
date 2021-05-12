@@ -18,8 +18,8 @@ function createHeader() {
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
-  let currentPrograms = document.createElement("div");
-  currentPrograms.className = "pills";
+  let currentProgrammes = document.createElement("div");
+  currentProgrammes.className = "search-words-pills";
 
   searchBar.addEventListener("keyup", () => {
     let searchInput = searchBar.value.toLowerCase();
@@ -32,20 +32,24 @@ function createHeader() {
     dataList.className = "datalist";
     searchBar.after(dataList);
 
-    getProgrammesBySearchWord(searchInput).forEach((program) => {
-      let option = document.createElement("div");
-      option.className = "option";
-      option.textContent = program.name;
-      dataList.append(option);
+    getProgrammesBySearchWord(searchInput).forEach((programme) => {
+        let university = getUniversityFromUniID(programme.universityID);
+        
+        let option = document.createElement("div");
+        option.className = "option";
+        option.innerHTML = `
+        <p class="text-default">${programme.name}</p>
+        <p class="text-small">${university.name}</p>
+        `;
+        dataList.append(option);
 
-      option.addEventListener("click", () => {
-        addProgramToList(program.id);
-        createPillForSearchWords(program.name, ".pills");
+        option.addEventListener("click", () => {
+            addProgrammeToList(programme.id);
       });
     });
   });
 
-  header.append(titleHeader, textHeader, searchBar, currentPrograms);
+  header.append(titleHeader, textHeader, currentProgrammes, searchBar);
 
   return header;
 }
@@ -68,11 +72,29 @@ function sortSearchResult(programmes) {
   return programmes;
 }
 
-function addProgramToList(programID) {
+function addProgrammeToList(programID) {
   if (addedProgrammes.includes(programID)) {
     return;
   } else {
     addedProgrammes.push(programID);
   }
+
+  document.querySelector('.search-words-pills').innerHTML = '';
+
+  addedProgrammes.forEach( id => {
+    let programme = getProgrammesById(id);
+
+    createPillForSearchWords(programme.name, '.search-words-pills');
+  });
   console.log(addedProgrammes);
+}
+
+function removePillFromArray(programmeName) {
+    let programme = getProgrammesByName(programmeName);
+
+    for (let i = 0; i < addedProgrammes.length; i++) {
+        if (addedProgrammes[i] === programme.id) {
+            addedProgrammes.splice(i, 1);
+        }
+    }
 }
