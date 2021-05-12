@@ -223,6 +223,7 @@ function makeSchoolInfo(){
     if (otherUniversities.length > 1){
         wrapper.append(createOtherSchoolsSection(otherUniversities))
     }
+    
     return wrapper
 }
 
