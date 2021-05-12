@@ -32,7 +32,7 @@ function getCountryFromUniID(universityID) {
   return DB.COUNTRIES.find((obj) => obj.id == countryID);
 }
 function getProgrammesField(subjectID) {
-  return DB.FIELDS.find((obj) => obj.id == subjectID).name;
+  return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
 }
 
 function render(parentElement, ...element) {
@@ -55,6 +55,5 @@ function createPillForSearchWords(searchWord, parentElement = "#search-words-pil
   });
 
   pill.append(pillSearchWord, removePillButton);
-  searchWords.push(searchWord);
   render(parentElement, pill);
 }

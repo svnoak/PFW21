@@ -6,33 +6,137 @@ document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySe
 function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
+let programmes = [];
+let fields = [];
+let cities = [];
+let countries = [];
+let levels = [];
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
+    let input = this.value.toLocaleLowerCase();
+    searchWords.push(input);
     createPillForSearchWords(this.value);
     clearSearchBar();
-    let programmes = filterProgrammesByName(DB.PROGRAMMES, searchWords[0]);
-    console.log(programmes);
-    sortSearchResult(programmes);
+
+    let checkArray = DB.PROGRAMMES;
+    document.getElementById("search-results").innerHTML = "";
+
+    if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
+    if (DB.PROGRAMMES.some((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(input)))
+      fields.push(input);
+    if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input)))
+      cities.push(input);
+    if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input)))
+      countries.push(input);
+    if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
+
+    filterProgramme(DB.PROGRAMMES);
+    function pushInArray(array) {
+      array.forEach((obj) => programmes.push(obj));
+    }
   }
 }
+
+function filterProgramme(array) {
+  let passArray = [];
+  console.log("test");
+  if (programmes.length > 0) {
+    programmes.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (obj.name.toLocaleLowerCase().includes(searchWord)) {
+          console.log("test");
+          passArray.push(obj);
+        }
+      });
+    });
+    filterFields(passArray);
+  } else {
+    filterFields(array);
+  }
+}
+function filterFields(array) {
+  let passArray = [];
+  if (fields.length > 0) {
+    fields.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
+    filterCity(passArray);
+  } else {
+    filterCity(array);
+  }
+}
+function filterCity(array) {
+  let passArray = [];
+  if (cities.length > 0) {
+    cities.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
+    filterCountry(passArray);
+  } else {
+    filterCountry(array);
+  }
+}
+function filterCountry(array) {
+  let passArray = [];
+  if (countries.length > 0) {
+    countries.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
+    filterLevels(passArray);
+  } else {
+    filterLevels(array);
+  }
+}
+function filterLevels(array) {
+  let passArray = [];
+  if (levels.length > 0) {
+    levels.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getLevel(obj.level).toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
+    sortSearchResult(passArray);
+  } else {
+    sortSearchResult(array);
+  }
+}
+
 function filterProgrammesByName(array, filterWord) {
-  return array.filter((obj) => obj.name.includes(filterWord));
+  filterWord = filterWord.toLocaleLowerCase();
+  return array.filter((obj) => obj.name.toLocaleLowerCase().includes(filterWord));
 }
 function filterProgrammesByCity(array, filterWord) {
-  return array.filter((obj) => getCityFromUniID(obj.universityID).name.includes(filterWord));
+  filterWord = filterWord.toLocaleLowerCase();
+  return array.filter((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(filterWord));
 }
 function filterProgrammesByCountry(array, filterWord) {
-  return array.filter((obj) => getCountryFromUniID(obj.universityID).name.includes(filterWord));
+  filterWord = filterWord.toLocaleLowerCase();
+  return array.filter((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(filterWord));
 }
 function filterProgrammesByLevel(array, filterWord) {
-  return array.filter((obj) => getLevel(obj.level).includes(filterWord));
+  filterWord = filterWord.toLocaleLowerCase();
+  return array.filter((obj) => getLevel(obj.level).toLocaleLowerCase().includes(filterWord));
 }
-function filterProgrammesBySubject(array, filterWord) {
-  return array.filter((obj) => getLevel(obj.level).includes(filterWord));
+function filterProgrammesByField(array, filterWord) {
+  filterWord = filterWord.toLocaleLowerCase();
+  return array.filter((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(filterWord));
 }
 
 function createProgrammeElements(programmes) {
-  document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
     let searchResultCard = document.createElement("div");
     searchResultCard.className = "search-result-card";
@@ -113,3 +217,53 @@ function sortSearchResult(programmes) {
 //     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
 
 //* - render(elements, parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
+
+// searchWords.forEach((searchWord) => {
+//   if (checkArray.some((obj) => obj.name.toLocaleLowerCase().includes(searchWord))) {
+//     sortSearchResult(DB.PROGRAMMES.filter((obj) => obj.name.toLocaleLowerCase().includes(searchWord)));
+//     pushInArray(DB.PROGRAMMES.filter((obj) => obj.name.toLocaleLowerCase().includes(searchWord)));
+//     // checkArray = filterProgrammesByName(checkArray, searchWord);
+//   }
+// });
+// searchWords.forEach((searchWord) => {
+//   if (programmes.some((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord))) {
+//     document.getElementById("search-results").innerHTML = "";
+
+//     sortSearchResult(
+//       programmes.filter((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord))
+//     );
+//     // pushInArray(filterProgrammesByField(checkArray, searchWord));
+//     // checkArray = filterProgrammesByField(checkArray, searchWord);
+//   }
+
+//   if (programmes.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))) {
+//     document.getElementById("search-results").innerHTML = "";
+
+//     sortSearchResult(
+//       programmes.filter((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))
+//     );
+//     // pushInArray(filterProgrammesByCity(checkArray, searchWord));
+//     // checkArray = filterProgrammesByCity(checkArray, searchWord);
+//   }
+//   if (
+//     programmes.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))
+//   ) {
+//     document.getElementById("search-results").innerHTML = "";
+
+//     sortSearchResult(
+//       programmes.filter((obj) =>
+//         getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)
+//       )
+//     );
+//     // pushInArray(filterProgrammesByCountry(checkArray, searchWord));
+//     // checkArray = filterProgrammesByCountry(checkArray, searchWord);
+//   }
+//   if (programmes.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(searchWord))) {
+//     document.getElementById("search-results").innerHTML = "";
+
+//     sortSearchResult(programmes.filter((obj) => getLevel(obj.level).toLocaleLowerCase().includes(searchWord)));
+//     // pushInArray(filterProgrammesByLevel(checkArray, searchWord));
+//     // checkArray = filterProgrammesByLevel(checkArray, searchWord);
+//   }
+// });
+//sortSearchResult(programmes);
