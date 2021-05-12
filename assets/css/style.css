@@ -220,3 +220,15 @@ BUTTONS
   display: flex;
   justify-content: flex-end;
 }
+
+.table {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ width: 90vw;
+}
+
+.table > div:nth-child(4n),
+.table > div:nth-child(4n-1)
+ {
+  background-color: var(--elevated-background);
+}
