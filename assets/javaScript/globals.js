@@ -11,6 +11,14 @@ const RANDOM = {
   },
 };
 
+function getProgrammesById(id) {
+  return DB.PROGRAMMES.find((obj) => obj.id == id);
+}
+
+function getProgrammesByName(programmeName) {
+  return DB.PROGRAMMES.find((obj) => obj.name == programmeName);
+}
+
 function getUniversityFromUniID(universityID) {
   return DB.UNIVERSITIES.find((obj) => obj.id == universityID);
 }
@@ -49,6 +57,7 @@ function createPillForSearchWords(searchWord, parentElement = "#search-words-pil
   removePillButton.textContent = "X";
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
+    removePillFromArray(searchWord);
   });
 
   pill.append(pillSearchWord, removePillButton);
