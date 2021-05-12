@@ -215,7 +215,7 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = ``;
-    let reviews = `reviews`;
+    let reviews = createReviewCard(DB.COMMENTS_CITY[5]);
     let otherSchools = document.createElement("section");
     wrapper.append(title, reviews, createClubSection())
     
@@ -223,10 +223,6 @@ function makeSchoolInfo(){
     if (otherUniversities.length > 1){
         wrapper.append(createOtherSchoolsSection(otherUniversities))
     }
-
-    //school clubs
-    let schoolTitle
-
     return wrapper
 }
 
@@ -274,6 +270,51 @@ function createOtherSchoolsSection(uniArray){
     return wrapper
 }
 
+
+function createReviewCard(reviewObject){
+    let wrapper = document.createElement("article");
+    wrapper.className = ``;
+
+    let review = document.createElement("section");
+    review.className = ``;
+    let ratings = document.createElement("section");
+    ratings.className = ``;
+    wrapper.append(review, ratings);
+
+    // review content
+    let deco = document.createElement("span");
+    deco.textContent = `"`;
+    deco.className = ``;
+    let comment = document.createElement("p");
+    comment.textContent = reviewObject.text;
+    let whoWhen = document.createElement("div");
+    review.append(deco, comment, whoWhen);
+
+    let name = document.createElement("span");
+    name.textContent = `— ${reviewObject.alias}`;
+    let date = document.createElement("span");
+    date.textContent = `${reviewObject.date.year}-${reviewObject.date.month}-${reviewObject.date.day}`
+    whoWhen.append(name, date);
+
+    // rating content
+    let categories = reviewObject.stars.out ?
+    ["Uteliv", "Mat", "Boende"] :
+    ["Lärare", "Studenter", "Kurser"];
+
+    for (let i = 0; i < categories.length; i++) {
+        let container = document.createElement("div");
+
+        let star = document.createElement("span");
+        star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
+        let category = document.createElement("span");
+        category.textContent = categories[i];
+
+        container.append(star, category);
+        ratings.append(container)      
+    }
+
+    return wrapper
+}
 
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 
