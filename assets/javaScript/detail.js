@@ -4,7 +4,7 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[59].id; // Simulate extraction from URL 
+let pID = DB.PROGRAMMES[4].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -15,18 +15,30 @@ function makeHero(){
     let wrapper = document.createElement("section");
     wrapper.className = ``;
     
+    // css: position: relative!!!
     let header = document.createElement("header");
     header.className = ` `;
+    header.style.position = "relative"; // to position image absolute
+
     let studyInfo = document.createElement("section");
     studyInfo.className = ``;
     wrapper.append(header, studyInfo);
 
-    //header content
+    //header content, css color: white;
     let title = document.createElement("h1");
     title.textContent = detailedProgram.name;
     let subtitle =  document.createElement("span");
     subtitle.textContent = detailedProgramUniversity.name;
-    header.append(title, subtitle);
+
+    let cityImage = document.createElement("div");
+    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[0]} )`;
+    cityImage.className = ``;
+    cityImage.style.position = "absolute";  // lägga in dessa 
+    cityImage.style.width= "100%";          //
+    cityImage.style.height= "100%";         //
+    cityImage.style.zIndex= "-1";           // i css?
+
+    header.append(cityImage, title, subtitle);
 
     // studyInfo content
         const information = [
@@ -81,10 +93,6 @@ function makeProgrammeStats(){
     return wrapper
 }
 
-document.body.prepend( makeProgrammeStats() );
-document.body.prepend(makeWeatherInfo());
-document.body.prepend(makeHero());
-
 function makeWeatherInfo(){
     let wrapper = document.createElement("section");
     wrapper.className = ``;
@@ -113,8 +121,6 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-
-
 function createDiagram() {
     // find all programs with same name
     let allSameProgram = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name);
@@ -136,14 +142,15 @@ function createDiagram() {
 
     //DOM Figure
     let figure = document.createElement("figure");
+
     let figcaption = document.createElement("figcaption");
     if ( programCities.length === 1){
         figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
     } else {
         figcaption.textContent = `Såhär jämför sig vädret i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
     }
-
     let diagram = document.createElement("div");
+    figure.append(figcaption, diagram)
 
     programCities.forEach(city => {
         let wrapper = document.createElement("div");
@@ -162,10 +169,17 @@ function createDiagram() {
         wrapper.append(cityName, bar)
     })  
 
-    figure.append(figcaption, diagram)
 
     return figure
 }
+
+function makeCityInfo(){
+
+}
+
+document.body.prepend( makeProgrammeStats() );
+document.body.prepend(makeWeatherInfo());
+document.body.prepend(makeHero());
 
 
 // render( "body", makeHero() );
