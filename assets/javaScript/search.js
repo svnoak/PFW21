@@ -8,28 +8,11 @@ function clearSearchBar() {
 }
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
-    clearSearchBar;
     createPillForSearchWords(this.value);
-  }
-
-  let programmes = getProgrammesFromSearchWords();
-  programmes = programmes.filter(
-    (obj) => obj.name.includes(this.value) || getCityFromUniID(obj.universityID).name.includes(this.value)
-  );
-  sortSearchResult(programmes);
-}
-
-function getProgrammesFromSearchWords() {
-  if (searchWords.length > 0) {
-    let programmes = DB.PROGRAMMES;
-    searchWords.forEach((searchWord) => {
-      // Här ska koden in som kollar pillrerna
-      programmes.filter((obj) => obj.name.includes(searchWord));
-    });
+    clearSearchBar();
+    searchwords.forEach((obj) => {});
     sortSearchResult(programmes);
-    return programmes;
   }
-  return DB.PROGRAMMES;
 }
 
 function createPillForSearchWords(searchWord) {
