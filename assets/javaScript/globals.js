@@ -65,3 +65,8 @@ function createPillForSearchWords(searchWord, parentElement = "#search-words-pil
   searchWords.push(searchWord);
   render(parentElement, pill);
 }
+
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find( language => language.id == languageID ).name;
+} 

@@ -1,8 +1,8 @@
 "use strict";
 
-let addedProgrammes = [];
+let addedProgrammes = [1,2,3,4];
 
-render("body", createHeader(), createComparisonSection(298));
+render("body", createHeader(), createNav(), createComparisonSection(28));
 
 function createHeader() {
   let header = document.createElement("div");
@@ -54,6 +54,10 @@ function createHeader() {
   return header;
 }
 
+function createNav() {
+  let nav = document.createElement("span");
+}
+
 function getProgrammesBySearchWord(searchInput) {
   if (searchInput === "") {
     return;
@@ -86,7 +90,6 @@ function addProgrammeToList(programID) {
 
     createPillForSearchWords(programme.name, '.search-words-pills');
   });
-  console.log(addedProgrammes);
 }
 
 function removePillFromArray(programmeName) {
@@ -103,7 +106,6 @@ function createComparisonSection(programID){
 
   let comparison = document.createElement("div");
 
-// Kolla om det går att dra ut det på något sätt ur arrayn med id:n från addedProgrammes
   let program = getProgrammesById(programID);
   let programName = program.name;
   let cityName = getCityFromUniID(program.universityID).name;
@@ -119,7 +121,6 @@ function createComparisonSection(programID){
     ];
 
   function createTable(comparisonKey) {
-    console.log(comparisonKey);
     let table = document.createElement("div");
     table.className = "table";
 
@@ -136,19 +137,25 @@ function createComparisonSection(programID){
     return table;
   }
 
-  function createTableList() {
+  function createTableList(comparisonKey) {
     let table = document.createElement("div");
     table.className = "table--list";
 
-    let value = document.createElement("div");
-    value.textContent = "VALUE FROM COMPARISONKEY";
-    table.append(value);
+    let category = document.createElement("div");
+    category.className = "bold";
+    category.textContent = comparisonKey[0];
+    table.append(category);
+
+    getValue(comparisonKey[0]).forEach( club => {
+      let value = document.createElement("div");
+      club.name ? value.textContent = club.name : value.textContent = "Club of the nameless";
+      table.append(value);
+      })
 
     return table;
   }
 
   function createSection(type, sectionTitle, index) {
-    console.log(index);
     let section = document.createElement("section");
     let title = document.createElement("h3");
     title.className = "title-default";
@@ -205,7 +212,15 @@ function createComparisonSection(programID){
         break;
       
       case "Språk som talas":
-      value = getCityFromUniID(program.universityID).language;
+      value = getLanguageFromUniID(program.universityID);
+      break;
+
+      case "Visum":
+      value = getCountryFromUniID(program.universityID).visa ? "Krävs" : "Krävs inte";
+      break;
+
+      case "Klubb":
+      value = getClubsByProgramID(programID);
       break;
 
       default:
@@ -217,4 +232,9 @@ function createComparisonSection(programID){
 
   titles.forEach( title => comparison.append(createSection( titles.indexOf(title) == 2 ? true : false, title, titles.indexOf(title) )));
   return comparison;
+}
+
+function getClubsByProgramID(programID) {
+  let clubs = CLUBS.filter( club => club.universityID == getProgrammesById(programID).universityID );
+  return clubs;
 }
