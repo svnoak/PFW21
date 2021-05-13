@@ -47,6 +47,9 @@ function createHeader() {
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
+  let currentProgrammes = document.createElement("div");
+  currentProgrammes.className = "search-words-pills";
+
   let programmeList = document.createElement("div");
   programmeList.className = "programme-list";
   programmeList.style.display = 'none';
@@ -59,42 +62,41 @@ function createHeader() {
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
 
+  favorites.forEach(favorite => { 
+    let option = createOptionsInList(favorite.programme, favorite.university);
+    titleFavorites.after(option);
+    
+    option.addEventListener('click', () => {
+      addProgrammeToArray(favorite.id);
+    });
+  });
+
   let searchResult = document.createElement('div');
   searchResult.className = 'search-result';
     
   programmeList.append(favoritesContainer, searchResult);
 
-  let currentProgrammes = document.createElement("div");
-  currentProgrammes.className = "search-words-pills";
-
   searchBar.addEventListener('click', () => {
-    programmeList.style.display = 'block';
-
-    favorites.forEach(favorite => { 
-      let option = createOptionsInList(favorite.programme, favorite.university);
-      favoritesContainer.append(option);
-      
-      option.addEventListener('click', () => {
-        addProgrammeToArray(favorite.id);
-      });
-    });
+    programmeList.style.display = 'block'; 
   });
 
   searchBar.addEventListener("keyup", () => {    
     document.querySelector('.search-result').innerHTML = '';
     
-    let programmes = getSuggestionsBySearchWord(searchBar.value);
-    
-    programmes.forEach(programme => {
-      let university = getUniversityFromUniID(programme.universityID);
-      let option = createOptionsInList(programme.name, university.name);
+    if(searchBar.value.length > 0) {
+      let programmes = getSuggestionsBySearchWord(searchBar.value);
 
-      option.addEventListener('click', () => {
-        addProgrammeToArray(programme.id);
+      programmes.forEach(programme => {
+        let university = getUniversityFromUniID(programme.universityID);
+        let option = createOptionsInList(programme.name, university.name);
+  
+        option.addEventListener('click', () => {
+          addProgrammeToArray(programme.id);
+        });
+  
+        searchResult.append(option);
       });
-
-      searchResult.append(option);
-    });
+    }
     
   });
 
@@ -102,21 +104,6 @@ function createHeader() {
 
   return header;
 }
-
-// function renderSearchList(searchedProgrammes) {
-//   render('.programme-list', searchResult);
-
-//   searchedProgrammes.forEach(obj => {
-//     let university = getUniversityFromUniID(obj.universityID);
-    
-//     let option = createOptionsInList(obj.name, university.name);
-//     searchResult.append(option);
-
-//     // option.addEventListener('click', () => {
-//     //   addProgrammeToArray(obj.id);
-//     // });
-//   });
-// };
 
 function createOptionsInList(programmeName, universityName) {
   let option = document.createElement("div");
