@@ -3,6 +3,9 @@
 let addedProgrammes = [1,2,3,4];
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
+document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
+let main = document.querySelector("#comparison");
+
 
 function createHeader() {
   let header = document.createElement("div");
@@ -54,31 +57,45 @@ function createHeader() {
   return header;
 }
 
-function createNav(index) {
+function createNav(index = 0) {
   let navBtn = document.createElement("div");
 
   let program = document.createElement("span");
-  program.textContent = getProgrammesById(addedProgrammes[0]).name;
+  program.textContent = getProgrammesById(addedProgrammes[index]).name;
 
   let iconLeft = document.createElement("i");
   iconLeft.textContent = "< ";
+  iconLeft.className = "switch";
+  iconLeft.id = "prev";
 
   let iconRight = document.createElement("i");
   iconRight.textContent = " >";
+  iconRight.className = "switch";
+  iconRight.id = "next";
 
   navBtn.append(iconLeft, program, iconRight);
-
-  iconLeft.addEventListener( "click", switchProgram("prev") );
-  iconRight.addEventListener( "click", switchProgram("next") );
   return navBtn;
 };
 
-function switchProgram() {
-//  console.log(this.nextSibling);
-//  console.log(this.previousSibling);
+function switchProgram(id) {
+// if (main.style.left == 0 && id == "prev") main.style.left == "-300vw";
+  if (id == "next") {
+    if (main.style.left.split("vw")[0] == -300) {
+      main.style.left = "0vw";
+    }
+      else {
+        main.style.left = `${main.style.left.split("vw")[0]-100}vw`;
+      }
+  }
+  else {
+    if (main.style.left.split("vw")[0] == 0) {
+      main.style.left = "-300vw";
+    }
+      else {
+        main.style.left = parseInt(main.style.left.split("vw")[0]) + 100 + "vw";
+      }
+  }
 }
-
-
 
 function getProgrammesBySearchWord(searchInput) {
   if (searchInput === "") {
@@ -127,6 +144,8 @@ function removePillFromArray(programmeName) {
 function createComparisonSection(programID){
 
   let comparison = document.createElement("div");
+  comparison.id = programID;
+  comparison.className = "program-list"
 
   let program = getProgrammesById(programID);
   let programName = program.name;
@@ -257,7 +276,8 @@ function createComparisonSection(programID){
 }
 
 function createAllSections(programmes) {
-  let section = document.createElement("div");
+  let section = document.createElement("main");
+  section.id = "comparison";
   programmes.forEach( programID => {
     section.append(createComparisonSection(programID));
   });

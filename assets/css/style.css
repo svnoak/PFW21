@@ -232,3 +232,19 @@ BUTTONS
  {
   background-color: var(--elevated-background);
 }
+
+#comparison {
+  display: flex;
+  position: relative;
+  left: 0vw;
+  transition: ease-in-out .5s;
+}
+
+.program-list {
+  width: 100vw;
+  flex-shrink: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
