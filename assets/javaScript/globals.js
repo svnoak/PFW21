@@ -33,3 +33,8 @@ function getCountryFromUniID(universityID) {
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
+
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find( language => language.id == languageID ).name;
+}
