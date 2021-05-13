@@ -2,7 +2,7 @@
 
 let addedProgrammes = [];
 
-render("body", createHeader());
+render("body", createHeader(), createComparisonSection(298));
 
 function createHeader() {
   let header = document.createElement("div");
@@ -99,18 +99,26 @@ function removePillFromArray(programmeName) {
     }
 }
 
-function createComparisonSection(){
+function createComparisonSection(programID){
 
-  // Kolla om det går att dra ut det på något sätt ur arrayn med id:n från addedProgrammes
-  const titles = ["Program", getUniversityFromUniID(), getCityImgFromUniID(), getCountryFromUniID() ];
+  let comparison = document.createElement("div");
 
-  function createTable(comparisonKeys = []) {
+// Kolla om det går att dra ut det på något sätt ur arrayn med id:n från addedProgrammes
+let program = getProgrammesById(programID);
+let programName = program.name;
+let cityName = getCityFromUniID(program.universityID).name;
+let countryName = getCountryFromUniID(program.universityID).name;
+
+const titles = [ "Program", programName, cityName, countryName ];
+
+  function createTable(comparisonKeys = ["Nivå", "Antagningspoäng", "Lärare - Omdöme", "Kurser - Omdöme", "Kursare - Omdöme", "Successrate"]) {
     let table = document.createElement("div");
     table.className = "table";
 
-    comparisonKeys.forEach( () => { 
+    comparisonKeys.forEach( key => {
     let category = document.createElement("div");
     category.className = "bold";
+    category.textContent = key;
 
     // FUNKTION SOM LETAR FRAM VARJE VALUE TILL VARJE KEY
 
@@ -119,19 +127,32 @@ function createComparisonSection(){
     table.append(category, value);
     })
 
+    return table;
   }
 
   function createTableList() {
     let table = document.createElement("div");
     table.className = "table--list";
+
+    let value = document.createElement("div");
+    value.textContent = "VALUE FROM COMPARISONKEY";
+    table.append(value);
+
+    return table;
   }
 
-  function createSection (type, titles) {
+  function createSection(type, sectionTitle) {
     let section = document.createElement("section");
     let title = document.createElement("h3");
     title.className = "title-default";
-    title.textContent = "TITLE";
+    title.textContent = sectionTitle;
+    let table =  type ? createTableList() : createTable();
+    section.append(title, table);
 
-    type ? createTable() : createTableList();
+    return section;
   }
+
+
+  titles.forEach( title =>  comparison.append(createSection( titles.indexOf(title) == 1 ? true : false, title )));
+  return comparison;
 }

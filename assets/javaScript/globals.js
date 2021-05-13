@@ -35,6 +35,7 @@ function getCityFromUniID(universityID) {
   let cityID = DB.UNIVERSITIES.find((obj) => obj.id == universityID).cityID;
   return DB.CITIES.find((obj) => obj.id == cityID);
 }
+
 function getCountryFromUniID(universityID) {
   let countryID = getCityFromUniID(universityID).countryID;
   return DB.COUNTRIES.find((obj) => obj.id == countryID);
