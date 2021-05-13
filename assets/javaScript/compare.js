@@ -225,6 +225,20 @@ function createComparisonSection(programID){
     return section;
   }
 
+  function getMedianReview(database, id, key){
+    let comments;
+    let databaseKey;
+    database === "program" ? databaseKey = "programmeID" : databaseKey = "cityID";
+    database === "program" ? id = id : id = getCityFromUniID(getProgrammesById(id).universityID).id;
+    comments = database == "program" ? database = COMMENTS_PROGRAMME : database = COMMENTS_CITY;
+    let reviews = comments.filter( comment => comment[databaseKey] == id );
+    reviews = reviews.map( review => review.stars[key]);
+    let sum;
+    if (reviews.length > 0) sum = reviews.reduce((a,b) => a + b );
+    let median = sum / reviews.length;
+    return median.toFixed(1);
+  }
+
   function getValue(key) {
     let value;
     switch (key) {
@@ -237,15 +251,15 @@ function createComparisonSection(programID){
         break;
     
       case "Lärare - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("program", programID, "teachers")} / 5`;
         break;
 
       case "Kurser - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("program", programID, "courses")} / 5`;
         break;
 
       case "Kursare - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("program", programID, "students")} / 5`;
         break;
 
       case "Successrate":
@@ -253,15 +267,15 @@ function createComparisonSection(programID){
         break;
 
       case "Mat - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("city", "", "food")} / 5`;
         break;
 
       case "Uteliv - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("city", "", "out")} / 5`;
         break;
 
       case "Boende - Omdöme":
-        value = "Omdöme placeholder";
+        value = `${getMedianReview("city", "", "accomodation")} / 5`;
         break;
       
       case "Soldagar / år":
