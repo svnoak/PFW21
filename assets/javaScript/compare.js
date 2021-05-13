@@ -1,6 +1,6 @@
 "use strict";
 
-let addedProgrammes = [1,280,3,4];
+let addedProgrammes = [];
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
