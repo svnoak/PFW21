@@ -2,6 +2,33 @@
 
 let addedProgrammes = [];
 
+// function getFavoritesfromLS() {
+    
+// }
+// exempel-data för att testa funktionen för favoriter
+let favorites = [
+  {
+    programme: "Engineering and Sustainability",
+    university: "Escuela de Estudios Superiores de Cordoba",
+    id: 1,
+  },
+  {
+    programme: "Engineering and Sustainability",
+    university: "Escuela de Estudios Superiores de Cordoba",
+    id: 4
+  },
+  {
+    programme: "Engineering and Sustainability",
+    university:"Escuela de Estudios Superiores de Cordoba",
+    id: 3,
+  },
+  {
+    programme: "Engineering and Sustainability",
+    university: "Escuela de Estudios Superiores de Cordoba",
+    id: 2,
+  }
+];
+
 render("body", createHeader());
 
 //Skapar header med sökruta
@@ -20,83 +47,115 @@ function createHeader() {
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
+  let programmeList = document.createElement("div");
+  programmeList.className = "programme-list";
+  programmeList.style.display = 'none';
+
+  let favoritesContainer = document.createElement('div');
+  favoritesContainer.className = 'favorites';
+
+  let titleFavorites = document.createElement('p');
+  titleFavorites.className = 'text-default, bold';
+  titleFavorites.textContent = 'Favoriter';
+  favoritesContainer.append(titleFavorites);
+
+  let searchResult = document.createElement('div');
+  searchResult.className = 'search-result';
+    
+  programmeList.append(favoritesContainer, searchResult);
+
   let currentProgrammes = document.createElement("div");
   currentProgrammes.className = "search-words-pills";
 
-  // searchBar.addeventlistner vid click som öppnar programlistan med favoriterna
+  searchBar.addEventListener('click', () => {
+    programmeList.style.display = 'block';
 
-  searchBar.addEventListener("keyup", () => {
-    renderProgrammeList(searchBar.value); //skapar listan med program som innehåller sökordet
+    favorites.forEach(favorite => { 
+      let option = createOptionsInList(favorite.programme, favorite.university);
+      favoritesContainer.append(option);
+      
+      option.addEventListener('click', () => {
+        addProgrammeToArray(favorite.id);
+      });
+    });
   });
 
-  header.append(titleHeader, textHeader, currentProgrammes, searchBar);
+  searchBar.addEventListener("keyup", () => {    
+    document.querySelector('.search-result').innerHTML = '';
+    
+    let programmes = getSuggestionsBySearchWord(searchBar.value);
+    
+    programmes.forEach(programme => {
+      let university = getUniversityFromUniID(programme.universityID);
+      let option = createOptionsInList(programme.name, university.name);
+
+      option.addEventListener('click', () => {
+        addProgrammeToArray(programme.id);
+      });
+
+      searchResult.append(option);
+    });
+    
+  });
+
+  header.append(titleHeader, textHeader, currentProgrammes, searchBar, programmeList);
 
   return header;
 }
 
-// function getFavoritesfromLS() {
+// function renderSearchList(searchedProgrammes) {
+//   render('.programme-list', searchResult);
+
+//   searchedProgrammes.forEach(obj => {
+//     let university = getUniversityFromUniID(obj.universityID);
     
-// }
+//     let option = createOptionsInList(obj.name, university.name);
+//     searchResult.append(option);
 
-function renderProgrammeList(searchWord) {
-    let searchInput = searchWord.toLowerCase();
+//     // option.addEventListener('click', () => {
+//     //   addProgrammeToArray(obj.id);
+//     // });
+//   });
+// };
 
-    if (document.querySelector(".datalist")) {
-      document.querySelector(".datalist").remove();
-    }
-
-    let programmeList = document.createElement("div");
-    programmeList.className = "programmelist";
-    document.querySelector('.search-bar').after(programmeList);
-    
-    getSuggestionsBySearchWord(searchInput).forEach((programme) => {
-        let university = getUniversityFromUniID(programme.universityID);
-
-        let option = document.createElement("div");
-        option.className = "option";
-        
-        let programmeInfo = document.createElement('div');
-        
-        let programmeName = document.createElement('p');
-        programmeName.className = 'text-default';
-        programmeName.textContent = programme.name;
-        
-        let universityName = document.createElement('p');
-        universityName.className = 'text-small';
-        universityName.textContent = university.name;
-        
-        let addProgramme = document.createElement('i');
-        addProgramme.textContent = '+';
-        
-        programmeInfo.append(programmeName, universityName);
-        option.append(programmeInfo, addProgramme);
-        programmeList.append(option);
-
-        option.addEventListener("click", () => {
-            addProgrammeToArray(programme.id);
-      });
-    });
+function createOptionsInList(programmeName, universityName) {
+  let option = document.createElement("div");
+  option.className = "option";
+  
+  let programmeInfo = document.createElement('div');
+  
+  let programme = document.createElement('p');
+  programme.className = 'text-default';
+  programme.textContent = programmeName;
+  
+  let university = document.createElement('p');
+  university.className = 'text-small';
+  university.textContent = universityName;
+  
+  let addProgramme = document.createElement('i');
+  addProgramme.textContent = '+';
+  
+  programmeInfo.append(programme, university);
+  option.append(programmeInfo, addProgramme);
+  
+  return option;
 }
 
 function getSuggestionsBySearchWord(searchWord) {
-  if (searchWord === "") {
-    return;
-  }
-
   let programmes = DB.PROGRAMMES.filter((obj) => {
     let name = obj.name.toLowerCase();
-    return name.includes(searchWord);
+    return name.includes(searchWord.toLowerCase());
   });
 
-  // sortSearchResult(programmes);
+  console.log(programmes);
+
   return programmes;
 }
 
-function sortSearchResult(programmes) {
-    // programmes.sort()
-    console.log(programmes);
-    return programmes;
-}
+// // function sortSearchResult(programmes) {
+// //     programmes.sort( (obj1, obj2) => obj1.name < obj2.name ? -1 : 1 );
+// //     return programmes;
+// // }
 
 function addProgrammeToArray(programmeId) {
   if (addedProgrammes.includes(programmeId)) {
@@ -116,8 +175,6 @@ function addProgrammeToArray(programmeId) {
   });
   console.log(addedProgrammes);
 }
-
-
 
 function createPillFromProgrammeId(id) {
     let programmeName = getProgrammesById(id).name;
