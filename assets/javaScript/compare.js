@@ -104,28 +104,34 @@ function createComparisonSection(programID){
   let comparison = document.createElement("div");
 
 // Kolla om det går att dra ut det på något sätt ur arrayn med id:n från addedProgrammes
-let program = getProgrammesById(programID);
-let programName = program.name;
-let cityName = getCityFromUniID(program.universityID).name;
-let countryName = getCountryFromUniID(program.universityID).name;
+  let program = getProgrammesById(programID);
+  let programName = program.name;
+  let cityName = getCityFromUniID(program.universityID).name;
+  let countryName = getCountryFromUniID(program.universityID).name;
 
-const titles = [ "Program", programName, cityName, countryName ];
+  const titles = [ "Program", programName, cityName, countryName ];
+  const comparisonKeys = 
+    [
+    ["Nivå", "Antagningspoäng", "Lärare - Omdöme", "Kurser - Omdöme", "Kursare - Omdöme", "Successrate"],
+    ["Mat - Omdöme", "Uteliv - Omdöme", "Boende - Omdöme", "Soldagar / år"],
+    ["Klubb"],
+    ["Språk som talas", "Visum"]
+    ];
 
-  function createTable(comparisonKeys = ["Nivå", "Antagningspoäng", "Lärare - Omdöme", "Kurser - Omdöme", "Kursare - Omdöme", "Successrate"]) {
+  function createTable(comparisonKey) {
+    console.log(comparisonKey);
     let table = document.createElement("div");
     table.className = "table";
 
-    comparisonKeys.forEach( key => {
-    let category = document.createElement("div");
-    category.className = "bold";
-    category.textContent = key;
+    comparisonKey.forEach( key => {
+      let category = document.createElement("div");
+      category.className = "bold";
+      category.textContent = key;
 
-    // FUNKTION SOM LETAR FRAM VARJE VALUE TILL VARJE KEY
-
-    let value = document.createElement("div");
-    value.textContent = "VALUE FROM COMPARISONKEY";
-    table.append(category, value);
-    })
+      let value = document.createElement("div");
+      value.textContent = getValue(key);
+      table.append(category, value);
+    });
 
     return table;
   }
@@ -141,18 +147,74 @@ const titles = [ "Program", programName, cityName, countryName ];
     return table;
   }
 
-  function createSection(type, sectionTitle) {
+  function createSection(type, sectionTitle, index) {
+    console.log(index);
     let section = document.createElement("section");
     let title = document.createElement("h3");
     title.className = "title-default";
     title.textContent = sectionTitle;
-    let table =  type ? createTableList() : createTable();
-    section.append(title, table);
+    section.append(title);
+    type ?
+    section.append(createTableList(comparisonKeys[index])) : 
+    section.append(createTable(comparisonKeys[index]));
 
     return section;
   }
 
+  function getValue(key) {
+    let value;
+    switch (key) {
+      case "Nivå":
+        value = getLevel(program.level);
+        break;
+      
+      case "Antagningspoäng":
+        value = program.entryGrades[0];
+        break;
+    
+      case "Lärare - Omdöme":
+        value = "Omdöme placeholder";
+        break;
 
-  titles.forEach( title =>  comparison.append(createSection( titles.indexOf(title) == 1 ? true : false, title )));
+      case "Kurser - Omdöme":
+        value = "Omdöme placeholder";
+        break;
+
+      case "Kursare - Omdöme":
+        value = "Omdöme placeholder";
+        break;
+
+      case "Successrate":
+        value = program.successRate[0];
+        break;
+
+      case "Mat - Omdöme":
+        value = "Omdöme placeholder";
+        break;
+
+      case "Uteliv - Omdöme":
+        value = "Omdöme placeholder";
+        break;
+
+      case "Boende - Omdöme":
+        value = "Omdöme placeholder";
+        break;
+      
+      case "Soldagar / år":
+        value = getCityFromUniID(program.universityID).sun;
+        break;
+      
+      case "Språk som talas":
+      value = getCityFromUniID(program.universityID).language;
+      break;
+
+      default:
+        break;
+    }
+    return value;
+  }
+
+
+  titles.forEach( title => comparison.append(createSection( titles.indexOf(title) == 2 ? true : false, title, titles.indexOf(title) )));
   return comparison;
 }
