@@ -62,7 +62,9 @@ function createNav(index = 0) {
 
   let program = document.createElement("span");
   program.id = index;
-  program.textContent = getProgrammesById(addedProgrammes[index]).name;
+  addedProgrammes.length ?
+  program.textContent = getProgrammesById(addedProgrammes[index]).name :
+  program.textContent = "Program";
 
   let iconLeft = document.createElement("i");
   iconLeft.textContent = "< ";
@@ -78,38 +80,65 @@ function createNav(index = 0) {
   return navBtn;
 };
 
-function changeNavName(index, trigger){
+function changeNavName(trigger){
+  let index = 0;
   let programNameContainer = document.querySelector("#menu > span");
-  
-  addedProgrammes.forEach( id => {
-    getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : false;
-  })
-  trigger == "next" ? index = index + 1 : index = index - 1;
+  if(addedProgrammes.length > 0) {
+    addedProgrammes.forEach( id => {
+      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : false;
+    })
+    console.log("trigger", trigger);
+    console.log("index", index);
+    switch (trigger) {
+      case "next":
+        index = index + 1
+        break;
 
-  if (index < 0) index = addedProgrammes.length-1;
-  if (index >= addedProgrammes.length) index = 0;
-  programNameContainer.textContent = getProgrammesById(addedProgrammes[index]).name;
-  programNameContainer.id = index;
+      case "prev":
+        index = index - 1;
+        break;
 
+      case "target":
+        index = index;
+        console.log("index",index);
+        break;
+    
+      default:
+        index = 0;
+        break;
+    }
+
+    if (index < 0) index = addedProgrammes.length-1;
+    if (index >= addedProgrammes.length) index = 0;
+    programNameContainer.textContent = getProgrammesById(addedProgrammes[index]).name;
+    programNameContainer.id = index;
+  }
+  else { programNameContainer.textContent = "Program" };
 }
 
 function switchProgram(id) {
-  changeNavName(0, id)
-  if (id == "next") {
-    if (main.style.left.split("vw")[0] == -300) {
-      main.style.left = "0vw";
-    }
-      else {
-        main.style.left = `${main.style.left.split("vw")[0]-100}vw`;
+  if (addedProgrammes.length) {
+    changeNavName(id);
+    if(addedProgrammes.length > 1) {
+      let min = addedProgrammes.length-1;
+      if (id == "next") {
+        min == 0 ? min = "0vw" : min = parseInt(`-${min}00`);
+        if (main.style.left.split("vw")[0] == min) {
+          main.style.left = "0vw";
+        }
+          else {
+            main.style.left = `${main.style.left.split("vw")[0]-100}vw`;
+          }
       }
-  }
-  else {
-    if (main.style.left.split("vw")[0] == 0) {
-      main.style.left = "-300vw";
-    }
       else {
-        main.style.left = parseInt(main.style.left.split("vw")[0]) + 100 + "vw";
+        if (main.style.left.split("vw")[0] == 0) {
+          main.style.left = `-${addedProgrammes.length-1}00vw`;
+        }
+          else {
+            main.style.left = parseInt(main.style.left.split("vw")[0]) + 100 + "vw";
+          }
       }
+    }
   }
 }
 
@@ -139,11 +168,12 @@ function addProgrammeToList(programID) {
   }
 
   document.querySelector('.search-words-pills').innerHTML = '';
-
+  
   addedProgrammes.forEach( id => {
     let programme = getProgrammesById(id);
 
     createPillForSearchWords(programme.name, '.search-words-pills');
+    updateComparison();
   });
 }
 
@@ -155,6 +185,15 @@ function removePillFromArray(programmeName) {
             addedProgrammes.splice(i, 1);
         }
     }
+    updateComparison();
+
+}
+
+/* NEED TO UPDATE THAT CURRENT TARGET IS ACTUALLY IN VIEW */
+function updateComparison() {
+  main.innerHTML = "";
+  render("main", createAllSections(addedProgrammes));
+  addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
 }
 
 function createComparisonSection(programID){
@@ -308,10 +347,13 @@ function createComparisonSection(programID){
 function createAllSections(programmes) {
   let section = document.createElement("main");
   section.id = "comparison";
-  programmes.forEach( programID => {
-    section.append(createComparisonSection(programID));
-  });
+  if (addedProgrammes.length > 0) {
+    programmes.forEach( programID => {
+      section.append(createComparisonSection(programID));
+    });
+  }
   return section;
+  
 }
 
 function getClubsByProgramID(programID) {
