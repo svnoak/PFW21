@@ -1,11 +1,10 @@
 "use strict";
 
-let addedProgrammes = [1,2,3,4];
+let addedProgrammes = [1,280,3,4];
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
 let main = document.querySelector("#comparison");
-
 
 function createHeader() {
   let header = document.createElement("div");
@@ -59,8 +58,10 @@ function createHeader() {
 
 function createNav(index = 0) {
   let navBtn = document.createElement("div");
+  navBtn.id = "menu";
 
   let program = document.createElement("span");
+  program.id = index;
   program.textContent = getProgrammesById(addedProgrammes[index]).name;
 
   let iconLeft = document.createElement("i");
@@ -77,8 +78,23 @@ function createNav(index = 0) {
   return navBtn;
 };
 
+function changeNavName(index, trigger){
+  let programNameContainer = document.querySelector("#menu > span");
+  
+  addedProgrammes.forEach( id => {
+    getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : false;
+  })
+  trigger == "next" ? index = index + 1 : index = index - 1;
+
+  if (index < 0) index = addedProgrammes.length-1;
+  if (index >= addedProgrammes.length) index = 0;
+  programNameContainer.textContent = getProgrammesById(addedProgrammes[index]).name;
+  programNameContainer.id = index;
+
+}
+
 function switchProgram(id) {
-// if (main.style.left == 0 && id == "prev") main.style.left == "-300vw";
+  changeNavName(0, id)
   if (id == "next") {
     if (main.style.left.split("vw")[0] == -300) {
       main.style.left = "0vw";
