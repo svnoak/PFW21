@@ -2,7 +2,7 @@
 
 let addedProgrammes = [1,2,3,4];
 
-render("body", createHeader(), createNav(), createComparisonSection(28));
+render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
 
 function createHeader() {
   let header = document.createElement("div");
@@ -54,9 +54,31 @@ function createHeader() {
   return header;
 }
 
-function createNav() {
-  let nav = document.createElement("span");
+function createNav(index) {
+  let navBtn = document.createElement("div");
+
+  let program = document.createElement("span");
+  program.textContent = getProgrammesById(addedProgrammes[0]).name;
+
+  let iconLeft = document.createElement("i");
+  iconLeft.textContent = "< ";
+
+  let iconRight = document.createElement("i");
+  iconRight.textContent = " >";
+
+  navBtn.append(iconLeft, program, iconRight);
+
+  iconLeft.addEventListener( "click", switchProgram("prev") );
+  iconRight.addEventListener( "click", switchProgram("next") );
+  return navBtn;
+};
+
+function switchProgram() {
+//  console.log(this.nextSibling);
+//  console.log(this.previousSibling);
 }
+
+
 
 function getProgrammesBySearchWord(searchInput) {
   if (searchInput === "") {
@@ -232,6 +254,14 @@ function createComparisonSection(programID){
 
   titles.forEach( title => comparison.append(createSection( titles.indexOf(title) == 2 ? true : false, title, titles.indexOf(title) )));
   return comparison;
+}
+
+function createAllSections(programmes) {
+  let section = document.createElement("div");
+  programmes.forEach( programID => {
+    section.append(createComparisonSection(programID));
+  });
+  return section;
 }
 
 function getClubsByProgramID(programID) {
