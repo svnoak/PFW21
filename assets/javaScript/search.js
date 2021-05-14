@@ -8,7 +8,6 @@ function clearSearchBar() {
 }
 
 let programmes = [];
-// let fields = [];
 let cities = [];
 let countries = [];
 let levels = [];
@@ -21,8 +20,6 @@ function getProgrammesBySearchWord(event) {
     clearSearchBar();
 
     if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
-    // if (DB.PROGRAMMES.some((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(input)))
-    //   fields.push(input);
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
     }
@@ -55,22 +52,6 @@ function filterProgramme(array) {
     filterCity(array);
   }
 }
-// function filterFields(array) {
-//   let passArray = [];
-//   if (fields.length > 0) {
-//     fields.forEach((searchWord) => {
-//       array.forEach((obj) => {
-//         if (getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord)) {
-//           passArray.push(obj);
-//         }
-//       });
-//     });
-//     filterCity(passArray);
-//   } else {
-//     console.log(array);
-//     filterCity(array);
-//   }
-// }
 function filterCity(array) {
   let passArray = [];
   if (cities.length > 0) {
