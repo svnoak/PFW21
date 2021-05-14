@@ -220,3 +220,31 @@ BUTTONS
   display: flex;
   justify-content: flex-end;
 }
+
+.table {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ width: 90vw;
+}
+
+.table > div:nth-child(4n),
+.table > div:nth-child(4n-1)
+ {
+  background-color: var(--elevated-background);
+}
+
+#comparison {
+  display: flex;
+  position: relative;
+  left: 0vw;
+  transition: ease-in-out .5s;
+}
+
+.program-list {
+  width: 100vw;
+  flex-shrink: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
