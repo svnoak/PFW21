@@ -56,6 +56,7 @@ function createHeader() {
   return header;
 }
 
+//Creates the nav with the name and arrows of each program
 function createNav(index = 0) {
   let navBtn = document.createElement("div");
   navBtn.id = "menu";
@@ -80,6 +81,8 @@ function createNav(index = 0) {
   return navBtn;
 };
 
+
+//Changes the name of the nav depending on what action is taken
 function changeNavName(trigger){
   let index = 0;
   let programNameContainer = document.querySelector("#menu > span");
@@ -87,7 +90,6 @@ function changeNavName(trigger){
     addedProgrammes.forEach( id => {
       getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;
     });
-    console.log(trigger);
     switch (trigger) {
       case "next":
         index = index + 1;
@@ -100,9 +102,7 @@ function changeNavName(trigger){
         break;
 
       case "target":
-        console.log(index);
         index = setIndex("target", index);
-        console.log(index);
         break;
     
       case "default":
@@ -229,15 +229,16 @@ function createComparisonSection(programID){
 
   let program = getProgrammesById(programID);
   let programName = program.name;
+  let uniName = getUniversityFromUniID(program.universityID).name;
   let cityName = getCityFromUniID(program.universityID).name;
   let countryName = getCountryFromUniID(program.universityID).name;
 
-  const titles = [ "Program", programName, cityName, countryName ];
+  const titles = [ programName, cityName, uniName, countryName ];
   const comparisonKeys = 
     [
     ["Nivå", "Antagningspoäng", "Lärare - Omdöme", "Kurser - Omdöme", "Kursare - Omdöme", "Successrate"],
     ["Mat - Omdöme", "Uteliv - Omdöme", "Boende - Omdöme", "Soldagar / år"],
-    ["Klubb"],
+    ["Klubbar"],
     ["Språk som talas", "Visum"]
     ];
 
@@ -354,7 +355,7 @@ function createComparisonSection(programID){
       value = getCountryFromUniID(program.universityID).visa ? "Krävs" : "Krävs inte";
       break;
 
-      case "Klubb":
+      case "Klubbar":
       value = getClubsByProgramID(programID);
       break;
 
