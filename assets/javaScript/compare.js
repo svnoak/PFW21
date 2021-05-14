@@ -222,6 +222,20 @@ function switchProgram(id) {
     }
   }
 }
+
+// Tar fram de program som matchar med sökorden
+function getSuggestionsBySearchWord(searchWord) {
+  let programmes = DB.PROGRAMMES.filter((obj) => {
+    let name = obj.name.toLowerCase();
+    return name.includes(searchWord.toLowerCase());
+  });
+
+  programmes.sort( (obj1, obj2) => obj1.name < obj2.name ? -1 : 1 );
+
+  return programmes;
+}
+
+// Skapar sökalternativen i programlistan
 function createOptionsInList(programmeName, universityName) {
   let option = document.createElement("div");
   option.className = "option";
@@ -245,17 +259,7 @@ function createOptionsInList(programmeName, universityName) {
   return option;
 }
 
-function getSuggestionsBySearchWord(searchWord) {
-  let programmes = DB.PROGRAMMES.filter((obj) => {
-    let name = obj.name.toLowerCase();
-    return name.includes(searchWord.toLowerCase());
-  });
-
-  programmes.sort( (obj1, obj2) => obj1.name < obj2.name ? -1 : 1 );
-
-  return programmes;
-}
-
+// Lägger till valda program-id i en array
 function addProgrammeToArray(programmeId) {
   if (addedProgrammes.includes(programmeId)) {
     removePillFromArray(programmeId);
@@ -274,6 +278,7 @@ function addProgrammeToArray(programmeId) {
   });
 }
 
+// Skapar pillrerna med sökorden
 function createPillFromProgrammeId(id) {
     let programmeName = getProgrammesById(id).name;
 
@@ -297,6 +302,7 @@ function createPillFromProgrammeId(id) {
     return pill;
 }
 
+// Tar bort pillrerna
 function removePillFromArray(programmeId) {
 
     for (let i = 0; i < addedProgrammes.length; i++) {
