@@ -48,6 +48,10 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
 
+function setUrlParameter(string) {
+  window.history.replaceState( {} , "Title", `${window.location.href}?${string}` )
+}
+
 function createPillForSearchWords(searchWord, parentElement = "#search-words-pills") {
   let pill = document.createElement("div");
   pill.className = "pill";
