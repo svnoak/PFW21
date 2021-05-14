@@ -109,7 +109,7 @@ function createProgrammeElements(programmes) {
     bookmark.innerHTML = bookmarkIcon;
 
     let programmeImage = document.createElement("div");
-    programmeImage.style.backgroundImage = `url(../assets/images/${getCityImgFromUniID(obj.universityID)})`;
+    programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
     programmeImage.className = "programme-image";
 
     let programmeCardInfo = document.createElement("div");
