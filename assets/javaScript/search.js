@@ -28,7 +28,6 @@ function getProgrammesBySearchWord(event) {
     }
     if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
-      console.log(country);
       let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
       citiesInCountry.forEach((obj) => {
         cities.push(obj.name.toLocaleLowerCase());
@@ -42,7 +41,6 @@ function getProgrammesBySearchWord(event) {
 
 function filterProgramme(array) {
   let passArray = [];
-  console.log("test");
   if (programmes.length > 0) {
     programmes.forEach((searchWord) => {
       array.forEach((obj) => {
@@ -52,7 +50,6 @@ function filterProgramme(array) {
         }
       });
     });
-    console.log(passArray);
     filterCity(passArray);
   } else {
     filterCity(array);
