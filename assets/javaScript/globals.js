@@ -123,27 +123,6 @@ function setUrlParameter(string) {
   window.history.replaceState( {} , "Title", `${window.location.href}?${string}` )
 }
 
-function createPillForSearchWords(searchWord, parentElement = "#search-words-pills") {
-  let pill = document.createElement("div");
-  pill.className = "pill";
-
-  let pillSearchWord = document.createElement("p");
-  pillSearchWord.className = "pill-search-word";
-  pillSearchWord.textContent = searchWord;
-
-  let removePillButton = document.createElement("button");
-  removePillButton.className = "remove-pill";
-  removePillButton.textContent = "X";
-  removePillButton.addEventListener("click", (event) => {
-    event.target.parentElement.remove();
-    removePillFromArray(searchWord);
-  });
-
-  pill.append(pillSearchWord, removePillButton);
-  searchWords.push(searchWord);
-  render(parentElement, pill);
-}
-
 function getLanguageFromUniID(universityID) {
   let languageID = getCountryFromUniID(universityID).languageID;
   return LANGUAGES.find( language => language.id == languageID ).name;
