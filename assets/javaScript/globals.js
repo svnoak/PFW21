@@ -40,14 +40,15 @@ function getCountryFromUniID(universityID) {
   let countryID = getCityFromUniID(universityID).countryID;
   return DB.COUNTRIES.find((obj) => obj.id == countryID);
 }
+
 function getProgrammesField(subjectID) {
+  return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
   return DB.FIELDS.find((obj) => obj.id == subjectID).name;
 }
 
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
-
 
 // Menu
 function DOMnav () {
