@@ -1,17 +1,35 @@
 "use strict";
 
+clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 
-function getProgrammesBySearchWord() {
-  document.getElementById("search-results").innerHTML = "";
-  if (this.value.length < 2) return;
-
-  let programmes = DB.PROGRAMMES.filter((obj) => obj.name.includes(this.value));
-
-  sortSearchResult(programmes);
+function clearSearchBar() {
+  document.getElementById("searchbar").value = "";
+}
+function getProgrammesBySearchWord(event) {
+  if (event.keyCode == 13 && this.value.length > 0) {
+    createPillForSearchWords(this.value);
+    clearSearchBar();
+    let programmes = filterProgrammesByName(DB.PROGRAMMES, searchWords[0]);
+    console.log(programmes);
+    sortSearchResult(programmes);
+  }
+}
+function filterProgrammesByName(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCity(array, filterWord) {
+  return array.filter((obj) => getCityFromUniID(obj.universityID).includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
+}
+function filterProgrammesByCountry(array, filterWord) {
+  return array.filter((obj) => obj.name.includes(filterWord));
 }
 
 function createProgrammeElements(programmes) {
+  document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
     let searchResultCard = document.createElement("div");
     searchResultCard.className = "search-result-card";
@@ -74,7 +92,7 @@ function createProgrammeElements(programmes) {
     // Gå vidare till render
     searchResultCard.append(bookmark, programmeImage, programmeCardInfo);
 
-    render(searchResultCard, "search-results");
+    render("#search-results", searchResultCard);
   });
 }
 
