@@ -2,9 +2,6 @@
 
 let addedProgrammes = [];
 
-// function getFavoritesfromLS() {
-    
-// }
 // exempel-data för att testa funktionen för favoriter
 let favorites = [
   {
@@ -54,6 +51,12 @@ function createHeader() {
   programmeList.className = "programme-list";
   programmeList.style.display = 'none';
 
+  let closeProgrammeList = document.createElement('button');
+  closeProgrammeList.textContent = 'X';
+  closeProgrammeList.addEventListener('click', () => {
+    programmeList.style.display = 'none';
+  })
+
   let favoritesContainer = document.createElement('div');
   favoritesContainer.className = 'favorites';
 
@@ -74,7 +77,7 @@ function createHeader() {
   let searchResult = document.createElement('div');
   searchResult.className = 'search-result';
     
-  programmeList.append(favoritesContainer, searchResult);
+  programmeList.append(closeProgrammeList, favoritesContainer, searchResult);
 
   searchBar.addEventListener('click', () => {
     programmeList.style.display = 'block'; 
@@ -179,7 +182,7 @@ function createPillFromProgrammeId(id) {
     pill.append(pillSearchWord, removePillButton);
     
     return pill;
-  }
+}
 
 function removePillFromArray(programmeId) {
 
