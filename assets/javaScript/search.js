@@ -12,7 +12,7 @@ let programmes = [];
 let cities = [];
 let countries = [];
 let levels = [];
-let allFilterWords = [programmes, cities, countries, levels];
+let allFilterWords = [programmes, cities, levels];
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
@@ -23,13 +23,13 @@ function getProgrammesBySearchWord(event) {
     if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
     // if (DB.PROGRAMMES.some((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(input)))
     //   fields.push(input);
-    if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input)))
+    if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
+    }
     if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-      let country = DB.PROGRAMMES.find((obj) =>
-        getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input)
-      );
-      let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID == country.id);
+      let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
+      console.log(country);
+      let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
       citiesInCountry.forEach((obj) => {
         cities.push(obj.name.toLocaleLowerCase());
       });
@@ -243,11 +243,6 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
               filterProgramme(DB.PROGRAMMES);
               break;
             case 2:
-              index = countries.findIndex((word) => word == removeWord);
-              countries.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
-              break;
-            case 3:
               index = levels.findIndex((word) => word == removeWord);
               levels.splice(index, 1);
               filterProgramme(DB.PROGRAMMES);
