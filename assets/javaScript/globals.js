@@ -48,6 +48,67 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
 
+
+// Menu
+function DOMnav () {
+  let navItems = [
+    {
+      title: "Startsida",
+      href: "index.html",
+      icon: homeIcon,
+    },
+    {
+      title: "Sök",
+      href: "search.html",
+      icon: searchIcon,
+    },
+    {
+      title: "Jämför",
+      href: "compare.html",
+      icon: arrowsIcon,
+    },
+    {
+      title: "Bokmärken",
+      href: "favorites.html",
+      icon: bookmarkIcon,
+    },
+    
+  ]
+
+  let wrapper = document.createElement("nav");
+
+  navItems.forEach( item => {
+    let link = document.createElement("a");
+
+    let icon = document.createElement("i");
+    icon.innerHTML = item.icon;
+    let text = document.createElement("span");
+    text.textContent = item.title;
+    link.append(icon, text)
+
+    if (window.location.href.includes(item.href)){
+      link.className = `active`;
+    } else {
+      link.setAttribute("href", item.href);
+    }
+    wrapper.append(link)
+  })
+
+  return wrapper
+}
+
+document.body.append(DOMnav())
+
+// footer
+function DOMfoot(){
+  let wrapper = document.createElement("footer");
+  let text = document.createElement("span");
+  text.textContent = `[brand] © 2021`;
+  wrapper.append(text)
+
+  return wrapper
+}
+
 function getLanguageFromUniID(universityID) {
   let languageID = getCountryFromUniID(universityID).languageID;
   return LANGUAGES.find( language => language.id == languageID ).name;
