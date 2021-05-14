@@ -48,6 +48,11 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
 
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find( language => language.id == languageID ).name;
+}
+
 function resetUrlParameter() {
   let url = window.location.href.split("?")[0];
   window.history.replaceState( {} , "Title", `${url}` )
