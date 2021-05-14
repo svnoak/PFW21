@@ -239,6 +239,9 @@ BUTTONS
   top: 0;
   left: 85%;
 }
+.filled > svg {
+  background-color: red;
+}
 svg {
   pointer-events: none;
 }
