@@ -182,14 +182,12 @@ function makeCityInfo(){
 
     let title = document.createElement("h2");
     title.textContent = `Om ${detailedProgramCity.name}`;
-    titleWrap.append(cityImage(1), title)
-
-    let reviews = `reviews`;
-
+    titleWrap.append(cityImage(1), title)   
     
+    let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
 
     //also review cards
-    wrapper.append(head, reviews, makeWeatherInfo())
+    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
 
     return wrapper
 
@@ -215,9 +213,10 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = ``;
-    let reviews = createReviewCard(DB.COMMENTS_CITY[5]);
+    let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
+    console.log(reviews)
     let otherSchools = document.createElement("section");
-    wrapper.append(title, reviews, createClubSection())
+    wrapper.append(title, cardCarousell(reviews), createClubSection())
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -274,21 +273,22 @@ function createOtherSchoolsSection(uniArray){
 
 function createReviewCard(reviewObject){
     let wrapper = document.createElement("article");
-    wrapper.className = ``;
+    wrapper.className = `card`;
 
     let review = document.createElement("section");
-    review.className = ``;
+    review.className = `card-review`;
     let ratings = document.createElement("section");
-    ratings.className = ``;
+    ratings.className = `card-rating`;
     wrapper.append(review, ratings);
 
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = ``;
+    deco.className = `card-deco`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
+    whoWhen.className = "card-alias";
     review.append(deco, comment, whoWhen);
 
     let name = document.createElement("span");
@@ -317,6 +317,50 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
+function cardCarousell(array){
+    let wrapper = document.createElement("section");
+    wrapper.className= `card-carousell`;
+
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = `card-wrapper`;
+    let blobWrapper = document.createElement("div");
+    blobWrapper.className = `blob-wrapper`;
+
+    wrapper.append(cardWrapper, blobWrapper)
+
+    array.forEach(object =>{
+        let card = createReviewCard(object);
+        card.className = `card`;
+
+        let blob = document.createElement("div");
+        blob.className = `blob`;
+
+        cardWrapper.append(card);
+        blobWrapper.append(blob);
+
+        let location = card.getBoundingClientRect();
+
+        // test func
+        card.addEventListener("click", () => {
+            location = card.getBoundingClientRect();
+            console.log(location.left)
+        })
+
+        function checkActive(){
+            location = card.getBoundingClientRect();
+
+            if(location.left > 1 && location.left < 50 ){
+                document.querySelector(".active").classList.remove("active");
+                blob.classList.add(`active`);
+            }
+        }
+
+        cardWrapper.addEventListener("scroll", checkActive)
+    })
+
+    return wrapper
+}
+
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 
-// render( "body", makeHero() );
+document.querySelector(".blob").classList.add("active");
