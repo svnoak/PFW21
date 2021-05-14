@@ -85,35 +85,58 @@ function changeNavName(trigger){
   let programNameContainer = document.querySelector("#menu > span");
   if(addedProgrammes.length > 0) {
     addedProgrammes.forEach( id => {
-      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : false;
-    })
-    console.log("trigger", trigger);
-    console.log("index", index);
+      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;
+    });
+    console.log(trigger);
     switch (trigger) {
       case "next":
-        index = index + 1
+        index = index + 1;
+        if (index >= addedProgrammes.length) index = 0;
         break;
 
       case "prev":
         index = index - 1;
+        if (index < 0) index = setIndex("prev", index);
         break;
 
       case "target":
-        index = index;
-        console.log("index",index);
+        console.log(index);
+        index = setIndex("target", index);
+        console.log(index);
         break;
     
-      default:
+      case "default":
         index = 0;
         break;
     }
 
-    if (index < 0) index = addedProgrammes.length-1;
-    if (index >= addedProgrammes.length) index = 0;
     programNameContainer.textContent = getProgrammesById(addedProgrammes[index]).name;
     programNameContainer.id = index;
   }
   else { programNameContainer.textContent = "Program" };
+}
+
+function setIndex(key, index) {
+  switch (key) {
+    case "reset":
+      index = 0;
+      break;
+
+    case "prev":
+      index = index -1;
+      index < 0 ? index = addedProgrammes.length-1 : index;
+      break;
+
+    case "next":
+      index >= addedProgrammes.length ? index = 0 : index;
+      break;
+
+    case "target":
+      main.style.left ? index = parseInt(main.style.left.split("vw")[0])/-100 : index = index;
+      if (index >= addedProgrammes.length) index = addedProgrammes.length-1;
+      break;
+  }
+  return index;
 }
 
 function switchProgram(id) {
@@ -189,13 +212,11 @@ function removePillFromArray(programmeName) {
 
 }
 
-/* NEED TO UPDATE THAT CURRENT TARGET IS ACTUALLY IN VIEW */
 function updateComparison() {
   main.innerHTML = "";
   render("main", createAllSections(addedProgrammes));
   addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
   if ( main.style.left.split("vw")[0] < parseInt(`-${addedProgrammes.length-1}00`) ) {
-    console.log("SMALLER!"); 
     main.style.left = `-${addedProgrammes.length-1}00vw`;
   }
 }
