@@ -87,6 +87,7 @@ function createHeader() {
     document.querySelector('.search-result').innerHTML = '';
     
     if(searchBar.value.length > 0) {
+      favoritesContainer.style.display = 'none';
       let programmes = getSuggestionsBySearchWord(searchBar.value);
 
       programmes.forEach(programme => {
@@ -99,6 +100,8 @@ function createHeader() {
   
         searchResult.append(option);
       });
+    } else {
+      favoritesContainer.style.display = 'block';
     }
 
   });
