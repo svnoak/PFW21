@@ -98,27 +98,6 @@ function filterLevels(array) {
   }
 }
 
-// function filterProgrammesByName(array, filterWord) {
-//   filterWord = filterWord.toLocaleLowerCase();
-//   return array.filter((obj) => obj.name.toLocaleLowerCase().includes(filterWord));
-// }
-// function filterProgrammesByCity(array, filterWord) {
-//   filterWord = filterWord.toLocaleLowerCase();
-//   return array.filter((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(filterWord));
-// }
-// function filterProgrammesByCountry(array, filterWord) {
-//   filterWord = filterWord.toLocaleLowerCase();
-//   return array.filter((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(filterWord));
-// }
-// function filterProgrammesByLevel(array, filterWord) {
-//   filterWord = filterWord.toLocaleLowerCase();
-//   return array.filter((obj) => getLevel(obj.level).toLocaleLowerCase().includes(filterWord));
-// }
-// function filterProgrammesByField(array, filterWord) {
-//   filterWord = filterWord.toLocaleLowerCase();
-//   return array.filter((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(filterWord));
-// }
-
 function createProgrammeElements(programmes) {
   document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
@@ -236,64 +215,3 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   pill.append(pillSearchWord, removePillButton);
   render(parentElement, pill);
 }
-
-// *- getProgrammesBySearchWords(input.value) :: programmes[{}], hämtar alla program där söktermen och searchWords[]
-//     matchar programnamn, land och stad. Kallar på sortSearchResult(programmes[{}])
-
-// *- createProgrammeElements(programmes[{}]) :: DOM-elements, skapar element för de hämtade programmen (universitet, stad, nivå, termin, "läs mer"-knapp med eventlistener).
-//  Rensar element i sökresultaten. Kallar på render(DOM-element, sökresultatslista) i en forEach-loop
-
-// *- sortSearchResult(programmes[{}], sortKey = Bokstavsordning, sortOrder = stigande) :: programmes[{}],
-//     sorterar programmes efter sortKey(Bokstavsordning/Antagningspoöng) i sortOrder(stigande/fallande). Kallar på createProgrammeElements(programmes[{}])
-
-//* - render(elements, parentElement) :: appendar alla element (sökresultat/bokmärkeskort/land-kort) i parentElement
-
-// searchWords.forEach((searchWord) => {
-//   if (checkArray.some((obj) => obj.name.toLocaleLowerCase().includes(searchWord))) {
-//     sortSearchResult(DB.PROGRAMMES.filter((obj) => obj.name.toLocaleLowerCase().includes(searchWord)));
-//     pushInArray(DB.PROGRAMMES.filter((obj) => obj.name.toLocaleLowerCase().includes(searchWord)));
-//     // checkArray = filterProgrammesByName(checkArray, searchWord);
-//   }
-// });
-// searchWords.forEach((searchWord) => {
-//   if (programmes.some((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord))) {
-//     document.getElementById("search-results").innerHTML = "";
-
-//     sortSearchResult(
-//       programmes.filter((obj) => getProgrammesField(obj.subjectID).toLocaleLowerCase().includes(searchWord))
-//     );
-//     // pushInArray(filterProgrammesByField(checkArray, searchWord));
-//     // checkArray = filterProgrammesByField(checkArray, searchWord);
-//   }
-
-//   if (programmes.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))) {
-//     document.getElementById("search-results").innerHTML = "";
-
-//     sortSearchResult(
-//       programmes.filter((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))
-//     );
-//     // pushInArray(filterProgrammesByCity(checkArray, searchWord));
-//     // checkArray = filterProgrammesByCity(checkArray, searchWord);
-//   }
-//   if (
-//     programmes.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord))
-//   ) {
-//     document.getElementById("search-results").innerHTML = "";
-
-//     sortSearchResult(
-//       programmes.filter((obj) =>
-//         getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)
-//       )
-//     );
-//     // pushInArray(filterProgrammesByCountry(checkArray, searchWord));
-//     // checkArray = filterProgrammesByCountry(checkArray, searchWord);
-//   }
-//   if (programmes.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(searchWord))) {
-//     document.getElementById("search-results").innerHTML = "";
-
-//     sortSearchResult(programmes.filter((obj) => getLevel(obj.level).toLocaleLowerCase().includes(searchWord)));
-//     // pushInArray(filterProgrammesByLevel(checkArray, searchWord));
-//     // checkArray = filterProgrammesByLevel(checkArray, searchWord);
-//   }
-// });
-//sortSearchResult(programmes);
