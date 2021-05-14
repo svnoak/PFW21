@@ -3,6 +3,7 @@
 let addedProgrammes = [];
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
+
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
 let main = document.querySelector("#comparison");
 
