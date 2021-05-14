@@ -38,7 +38,6 @@ function getProgrammesField(subjectID) {
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
-
 function createPillForSearchWords(searchWord, parentElement = "#search-words-pills") {
   let pill = document.createElement("div");
   pill.className = "pill";
@@ -53,7 +52,6 @@ function createPillForSearchWords(searchWord, parentElement = "#search-words-pil
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
   });
-
   pill.append(pillSearchWord, removePillButton);
   render(parentElement, pill);
 }
