@@ -97,7 +97,7 @@ function createHeader() {
         searchResult.append(option);
       });
     }
-    
+
   });
 
   header.append(titleHeader, textHeader, currentProgrammes, searchBar, programmeList);
@@ -134,15 +134,10 @@ function getSuggestionsBySearchWord(searchWord) {
     return name.includes(searchWord.toLowerCase());
   });
 
-  console.log(programmes);
+  programmes.sort( (obj1, obj2) => obj1.name < obj2.name ? -1 : 1 );
 
   return programmes;
 }
-
-// // function sortSearchResult(programmes) {
-// //     programmes.sort( (obj1, obj2) => obj1.name < obj2.name ? -1 : 1 );
-// //     return programmes;
-// // }
 
 function addProgrammeToArray(programmeId) {
   if (addedProgrammes.includes(programmeId)) {
