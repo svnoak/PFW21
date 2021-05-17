@@ -90,7 +90,13 @@ function createCard(country) {
     
     wrapper.append(header, countryImg); 
     
-    return countryElement;
     return wrapper;
 }
+
+function createBackground() {
+    let background = document.createElement('div');
+    background.className = 'background';
+    background.innerHTML = backgroundCircle;
+
+    return background;
 }

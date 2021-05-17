@@ -86,3 +86,10 @@ const bookmarkIcon = `<svg width="25" height="34" viewBox="0 0 25 34" fill="none
                     </linearGradient>
                 </defs>
             </svg>`;
+
+
+const backgroundCircle = `<svg width="375" height="391" viewBox="0 0 375 391" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="152.5" cy="123.5" r="267.5" fill="#738671"/>
+                        </svg>`;
+
+
