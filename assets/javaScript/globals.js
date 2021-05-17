@@ -59,7 +59,8 @@ function cardCarousell(array){
   let first = true;
 
   array.forEach(object =>{
-      let card = createCard(object);
+      let card = document.createElement('section');
+      card.append(createCard(object));
       card.className = `card`;
       cardWrapper.append(card);
 
