@@ -13,25 +13,24 @@ const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
 function makeHero(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-hero`;
     
-    // css: position: relative!!!
     let header = document.createElement("header");
-    header.className = ` `;
-    header.style.position = "relative"; // to position image absolute
-
     let studyInfo = document.createElement("section");
-    studyInfo.className = ``;
     wrapper.append(header, studyInfo);
 
-    //header content, css color: white;
+    let textWrapper = document.createElement("div");
+    textWrapper.className = `title-wrapper`;
+
     let title = document.createElement("h1");
     title.textContent = detailedProgram.name;
+    title.className = `title-large`;
     let subtitle =  document.createElement("span");
+    subtitle.className = `text-default`;
     subtitle.textContent = detailedProgramUniversity.name;
 
-
-    header.append(cityImage(0), title, subtitle);
+    textWrapper.append(title, subtitle)
+    header.append(cityImage(0), textWrapper);
 
     // studyInfo content
         const information = [
@@ -49,10 +48,12 @@ function makeHero(){
         let container = document.createElement("div");
 
         let icon = document.createElement("i");
+        icon.className = `icon`;
         icon.innerHTML = info[0];
         let text = document.createElement("span");
         text.textContent = info[1];
-        wrapper.append(icon, text);
+        text.className = `text-default`;
+        container.append(icon, text);
 
         studyInfo.append(container);
     });
@@ -196,11 +197,7 @@ function makeCityInfo(){
 function cityImage(x){
     let cityImage = document.createElement("div");
     cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
-    cityImage.className = ``;
-    cityImage.style.position = "absolute";  // lägga in dessa 
-    cityImage.style.width= "100%";          //
-    cityImage.style.height= "100%";         //
-    cityImage.style.zIndex= "-1";           // i css?
+    cityImage.className = `bg-image`;
 
     return cityImage
 }

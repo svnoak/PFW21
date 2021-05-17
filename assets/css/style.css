@@ -68,6 +68,7 @@ BUTTONS
 /* SPECIAL */
 /* .title-hero {} */
 
+
 /*--------------*/
 /* BUTTONS     */
 /*------------*/
@@ -199,8 +200,62 @@ BUTTONS
 
 
 
+/* DETAIL PAGE */
+.detail-hero{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 20%;
 
+}
 
+.detail-hero header{
+  /* för att positionera bild */
+  position: relative;
+}
+
+.detail-hero .title-wrapper{
+  padding: var(--space-medium);
+  background-color: var(--overlay);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%; 
+  color: white;
+}
+
+.detail-hero span{
+  padding: var(--space-small) 0px;
+}
+
+.detail-hero .bg-image{
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.detail-hero section{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  margin: var(--space-medium);
+}
+
+.detail-hero section > div{
+  display: flex;
+}
+
+.icon{
+  display: grid;
+  place-content: center;
+}
+
+.icon svg{
+  height: 16px;
+  width: 16px;
+}
 
 /* REVIEW CAROUSELL */
 .card-carousell{
