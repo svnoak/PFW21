@@ -1,5 +1,12 @@
 "use strict";
 
+// google-fonts
+let fontStyle = document.createElement('link');
+fontStyle.rel = 'stylesheet';
+fontStyle.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap';
+
+document.head.append(fontStyle);
+
 const RANDOM = {
   rInt: (max, min = 0) => Math.floor(min + (max - min) * Math.random()),
   rFloat: (max, min = 0) => min + (max - min) * Math.random(),
