@@ -363,4 +363,7 @@ BUTTONS
 
   padding: var(--space-small);
   box-sizing: border-box;
+
+  background-size: cover;
+  background-position: center;
 }
