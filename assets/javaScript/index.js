@@ -1,6 +1,6 @@
 "use strict";
 
-render('body', createHero(), createBrandInfo(), createAdSpace(), createCountryElement(DB.COUNTRIES));
+render('body', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES));
 
 // Skapar HERO med innehåll
 function createHero() {
@@ -52,39 +52,33 @@ function createAdSpace() {
 }
 
 // Skapar DOM-element för alla länder
-function createCountryElement(countries) {
-    let countryCardsContainer = document.createElement('div');
-    countryCardsContainer.className = 'country-cards-container';
+function createCard(country) {
+    let countryElement = document.createElement('div');
+    countryElement.className = 'countryElement';
 
-    countries.forEach(country => {
-        let countryElement = document.createElement('div');
-        countryElement.className = 'countryElement';
+    let countryName = document.createElement('h3');
+    countryName.className = 'title-default';
+    countryName.textContent = country.name;
 
-        let countryName = document.createElement('h3');
-        countryName.className = 'title-default';
-        countryName.textContent = country.name;
+    let countryInfo = document.createElement('p');
+    countryInfo.className = 'text-small';
+    countryInfo.textContent = country.text;
+    countryInfo.innerHTML = `${countryInfo.innerHTML.substring(0,70)}...`; // Begränsar texten till 70 tecken
 
-        let countryInfo = document.createElement('p');
-        countryInfo.className = 'text-small';
-        countryInfo.textContent = country.text;
-        countryInfo.innerHTML = `${countryInfo.innerHTML.substring(0,70)}...`; // Begränsar texten till 70 tecken
+    let countryImg = document.createElement('div');
+    countryImg.style.backgroundImage = `url(assets/images/${country.imagesNormal[1]})`;
 
-        let countryImg = document.createElement('div');
-        countryImg.style.backgroundImage = `url(assets/images/${country.imagesNormal[1]})`;
-
-        let showProgramsButton = document.createElement('a');
-        showProgramsButton.className = 'button-large button-square text-small'
-        showProgramsButton.textContent = 'Visa program';
-        showProgramsButton.href = 'search.html';
-        showProgramsButton.addEventListener('click', () => {
-            sessionStorage.setItem('countryId', country.id);
-        });
-        countryImg.append(showProgramsButton);
-        
-        
-        countryElement.append(countryName, countryInfo, countryImg); 
-        countryCardsContainer.append(countryElement);
+    let showProgramsButton = document.createElement('a');
+    showProgramsButton.className = 'button-large button-square text-small'
+    showProgramsButton.textContent = 'Visa program';
+    showProgramsButton.href = 'search.html';
+    showProgramsButton.addEventListener('click', () => {
+        sessionStorage.setItem('countryId', country.id);
     });
-
-    return countryCardsContainer;
+    countryImg.append(showProgramsButton);
+    
+    
+    countryElement.append(countryName, countryInfo, countryImg); 
+    
+    return countryElement;
 }
