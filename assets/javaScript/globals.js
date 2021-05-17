@@ -119,6 +119,6 @@ function resetUrlParameter() {
   window.history.replaceState({}, "Title", `${url}`);
 }
 
-function setUrlParameter(string) {
-  window.history.replaceState({}, "Title", `${window.location.href}?${string}`);
+function setUrlParameter(string, key) {
+  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
 }
