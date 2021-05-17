@@ -62,8 +62,10 @@ BUTTONS
 .text-large {font-size: var(--font-xsmall); font-family: var(--text-font);}
 
 /* WEIGHTS */
-.bold {font-weight: bold;}
-.light {font-weight: lighter;}
+.bold {font-weight: 700;}
+.semi-bold { font-weight: 600;}
+.regular {font-weight: 400;}
+.light {font-weight: 300;}
 
 /* SPECIAL */
 .title-hero {}
