@@ -151,6 +151,10 @@ function createProgrammeElements(programmes) {
     cardButton.href = 'detail.html';
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
+    cardButton.addEventListener('click', () => {
+      localStorage.setItem('programmeID', obj.id);
+    });
+
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
 
