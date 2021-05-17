@@ -57,9 +57,9 @@ BUTTONS
 .title-xsmall {font-size: var(--title-xsmall); font-family: var(--title-font);}
 
 /* PARAGRAPHS */
-.text-small {font-size: var(--font-small);}
-.text-default {font-size: var(--font-default);}
-.text-large {font-size: var(--font-xsmall);}
+.text-small {font-size: var(--font-small); font-family: var(--text-font);}
+.text-default {font-size: var(--font-default); font-family: var(--text-font);}
+.text-large {font-size: var(--font-xsmall); font-family: var(--text-font);}
 
 /* WEIGHTS */
 .bold {font-weight: bold;}
