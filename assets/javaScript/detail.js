@@ -328,39 +328,38 @@ function cardCarousell(array){
 
     wrapper.append(cardWrapper, blobWrapper)
 
+    let first = true;
+
     array.forEach(object =>{
         let card = createReviewCard(object);
         card.className = `card`;
+        cardWrapper.append(card);
 
         let blob = document.createElement("div");
         blob.className = `blob`;
-
-        cardWrapper.append(card);
         blobWrapper.append(blob);
 
-        let location = card.getBoundingClientRect();
+        if(first){
+            blob.classList.add("active");
+        }
 
-        // test func
-        card.addEventListener("click", () => {
-            location = card.getBoundingClientRect();
-            console.log(location.left)
-        })
+        // let location = card.getBoundingClientRect();
+        cardWrapper.addEventListener("scroll", checkActive)
 
         function checkActive(){
-            location = card.getBoundingClientRect();
+            let location = card.getBoundingClientRect();
 
-            if(location.left > 1 && location.left < 50 ){
+            if(location.left > 1 && location.left < 250 ){
                 document.querySelector(".active").classList.remove("active");
                 blob.classList.add(`active`);
             }
         }
 
-        cardWrapper.addEventListener("scroll", checkActive)
+        first = false;
+        
     })
 
     return wrapper
 }
 
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
-
-document.querySelector(".blob").classList.add("active");
