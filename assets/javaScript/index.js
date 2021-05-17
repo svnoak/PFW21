@@ -8,7 +8,7 @@ function createHero() {
     indexHero.className = 'hero';
 
     let titleHero = document.createElement('h1');
-    titleHero.className = 'title-hero';
+    titleHero.className = 'title-large', 'bold';
     titleHero.textContent = 'Upptäck världen som student.'
 
     let globeRender = document.createElement('div');

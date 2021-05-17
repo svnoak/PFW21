@@ -286,3 +286,13 @@ BUTTONS
   background-color: var(--accent);
 
 }
+
+/* INDEX */
+
+.hero {
+  margin: var(--space-medium);
+  padding: var(--space-medium);
+  background-color: var(--elevated-background);
+  border-radius: 1rem;
+  border: 1px solid black;
+}
