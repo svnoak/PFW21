@@ -147,7 +147,8 @@ function createProgrammeElements(programmes) {
     programmeCardLevelAndDate.append(levelDiv);
 
     let cardButtonDiv = document.createElement("div");
-    let cardButton = document.createElement("button");
+    let cardButton = document.createElement("a");
+    cardButton.href = 'detail.html';
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
     cardButtonDiv.append(cardButton);
