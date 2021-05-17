@@ -5,7 +5,6 @@ if(window.location.search === "") {
     localStorage.removeItem("programmeID");
 }
 
-
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const pID = parseInt(urlParams.get("programmeID"));
