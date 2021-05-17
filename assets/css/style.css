@@ -68,7 +68,12 @@ BUTTONS
 .light {font-weight: 300;}
 
 /* SPECIAL */
-/* .title-hero {} */
+.title-hero {
+  font-size: var(--title-large); 
+  font-family: var(--title-font);
+  color: var(--secondary);
+  z-index: 10;
+}
 
 /*--------------*/
 /* BUTTONS     */
@@ -291,10 +296,71 @@ BUTTONS
 
 /* INDEX */
 
+.background {
+  position: absolute;
+  z-index: -10;
+  top: 0;
+}
+
+.pin-header {
+  position: absolute;
+  top: -2rem;
+  left: -1rem;
+}
+
 .hero {
+  position: relative;
+
   margin: var(--space-medium);
   padding: var(--space-medium);
   background-color: var(--elevated-background);
   border-radius: 1rem;
-  border: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.globe-render {
+  background-color: var(--accent);
+  width: calc(90vw - calc( (var(--space-large)) * 2) );
+  height: calc(90vw - calc( (var(--space-large)) * 2) );
+  border-radius: var(--border-round);
+}
+
+.brand-info {
+  margin: var(--space-medium);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  justify-content: center;
+  align-items: center;
+
+  color: var(--secondary);
+}
+
+.countryElement {
+  height: 333px;
+  display: flex;
+  flex-direction: column;
+}
+
+.country-info {
+  margin: var(--space-small);
+  flex-basis: 33%;
+}
+
+.country-img {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: var(--space-small);
+  box-sizing: border-box;
 }
