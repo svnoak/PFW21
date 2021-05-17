@@ -93,3 +93,18 @@ const backgroundCircle = `<svg width="375" height="391" viewBox="0 0 375 391" fi
                         </svg>`;
 
 
+const headerPin = `<svg width="124" height="144" viewBox="0 0 124 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+            <path d="M95.9157 54.4537C101.847 90.1307 60.3203 128.46 60.3203 128.46C60.3203 128.46 8.62618 105.628 2.69506 69.9511C0.672593 57.7855 3.64367 45.3018 10.9547 35.2463C18.2657 25.1907 29.3178 18.3871 41.6796 16.332C54.0415 14.2769 66.7004 17.1387 76.8716 24.2879C87.0428 31.4371 93.8932 42.2881 95.9157 54.4537Z" fill="url(#paint0_linear)"/>
+            <path d="M53.4081 86.8813C67.2264 84.5841 76.5715 71.5526 74.281 57.7747C71.9905 43.9968 58.9318 34.6899 45.1135 36.9871C31.2951 39.2843 21.95 52.3158 24.2405 66.0937C26.531 79.8716 39.5898 89.1785 53.4081 86.8813Z" fill="#FAFAF9"/>
+            </g>
+            <defs>
+            <linearGradient id="paint0_linear" x1="41.6796" y1="16.332" x2="60.3203" y2="128.46" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6078AF"/>
+            <stop offset="1" stop-color="#9ADCEE"/>
+            </linearGradient>
+            <clipPath id="clip0">
+            <rect width="126" height="124" fill="white" transform="translate(-21.3147 21.5669) rotate(-9.4388)"/>
+            </clipPath>
+            </defs>
+            </svg>`;
