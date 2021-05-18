@@ -1,5 +1,7 @@
 "use strict";
 
+var searchWords = [];
+
 const RANDOM = {
   rInt: (max, min = 0) => Math.floor(min + (max - min) * Math.random()),
   rFloat: (max, min = 0) => min + (max - min) * Math.random(),
@@ -9,8 +11,16 @@ const RANDOM = {
   },
 };
 
+function getProgrammesById(id) {
+  return DB.PROGRAMMES.find((obj) => obj.id == id);
+}
+
+function getProgrammesByName(programmeName) {
+  return DB.PROGRAMMES.find((obj) => obj.name == programmeName);
+}
+
 function getUniversityFromUniID(universityID) {
-  return DB.UNIVERSITIES.find((obj) => obj.id === universityID);
+  return DB.UNIVERSITIES.find((obj) => obj.id == universityID);
 }
 function getLevel(levelID) {
   return DB.LEVELS[levelID];
@@ -22,17 +32,93 @@ function getCityImgFromUniID(universityID) {
 }
 
 function getCityFromUniID(universityID) {
-  let cityID = DB.UNIVERSITIES.find((obj) => obj.id === universityID).cityID;
-  return DB.CITIES.find((obj) => obj.id === cityID);
+  let cityID = DB.UNIVERSITIES.find((obj) => obj.id == universityID).cityID;
+  return DB.CITIES.find((obj) => obj.id == cityID);
 }
+
 function getCountryFromUniID(universityID) {
   let countryID = getCityFromUniID(universityID).countryID;
   return DB.COUNTRIES.find((obj) => obj.id == countryID);
 }
+
 function getProgrammesField(subjectID) {
+  return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
   return DB.FIELDS.find((obj) => obj.id == subjectID).name;
 }
 
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
+}
+
+// Menu
+function DOMnav() {
+  let navItems = [
+    {
+      title: "Startsida",
+      href: "index.html",
+      icon: homeIcon,
+    },
+    {
+      title: "Sök",
+      href: "search.html",
+      icon: searchIcon,
+    },
+    {
+      title: "Jämför",
+      href: "compare.html",
+      icon: arrowsIcon,
+    },
+    {
+      title: "Bokmärken",
+      href: "favorites.html",
+      icon: bookmarkIcon,
+    },
+  ];
+
+  let wrapper = document.createElement("nav");
+
+  navItems.forEach((item) => {
+    let link = document.createElement("a");
+
+    let icon = document.createElement("i");
+    icon.innerHTML = item.icon;
+    let text = document.createElement("span");
+    text.textContent = item.title;
+    link.append(icon, text);
+
+    if (window.location.href.includes(item.href)) {
+      link.className = `active`;
+    } else {
+      link.setAttribute("href", item.href);
+    }
+    wrapper.append(link);
+  });
+
+  return wrapper;
+}
+
+document.body.append(DOMnav());
+
+// footer
+function DOMfoot() {
+  let wrapper = document.createElement("footer");
+  let text = document.createElement("span");
+  text.textContent = `[brand] © 2021`;
+  wrapper.append(text);
+
+  return wrapper;
+}
+
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find((language) => language.id == languageID).name;
+}
+
+function resetUrlParameter() {
+  let url = window.location.href.split("?")[0];
+  window.history.replaceState({}, "Title", `${url}`);
+}
+
+function setUrlParameter(string, key) {
+  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
 }

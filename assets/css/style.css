@@ -51,22 +51,45 @@ BUTTONS
 /*------------*/
 
 /* TITLES */
-.title-large {font-size: var(--title-large);}
-.title-default {font-size: var(--title-default);}
-.title-small {font-size: var(--title-small);}
-.title-xsmall {font-size: var(--title-xsmall);}
+.title-large {
+  font-size: var(--title-large);
+}
+.title-default {
+  font-size: var(--title-default);
+}
+.title-small {
+  font-size: var(--title-small);
+}
+.title-xsmall {
+  font-size: var(--title-xsmall);
+}
 
 /* PARAGRAPHS */
-.text-small {font-size: var(--font-small);}
-.text-default {font-size: var(--font-default);}
-.text-large {font-size: var(--font-xsmall);}
+.text-small {
+  font-size: var(--font-small);
+}
+.text-default {
+  font-size: var(--font-default);
+}
+.text-large {
+  font-size: var(--font-xsmall);
+}
 
 /* WEIGHTS */
-.bold {font-weight: bold;}
-.light {font-weight: lighter;}
+.bold {
+  font-weight: bold;
+}
+.light {
+  font-weight: lighter;
+}
 
 /* SPECIAL */
+
 /* .title-hero {} */
+.title-hero {
+  color: black;
+}
+
 
 /*--------------*/
 /* BUTTONS     */
@@ -74,7 +97,7 @@ BUTTONS
 
 /* SIZE */
 .button-small {
-  height: 2vh; 
+  height: 2vh;
   width: 2vw;
 }
 
@@ -90,53 +113,81 @@ BUTTONS
 
 /* COLORVARIATIONS */
 .button-solid--green {
-    background-color: var(--secondary);
-    color: var(--white);
-    border: 0px;
-}
-
-.button-solid--blue {
-    background-color: var(--accent);
-    color: var(--white);
-    border: 0px;
-}
-
-.button-stroke--green {
-    background-color: transparent;
-    color: var(--secondary);
-    border: 2px solid var(--secondary);
-}
-
-.button-stroke--blue {
-    background-color: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-}
-
-/* SHAPES */
-.button-square {border-radius: var(--border-squared);}
-.button-round {border-radius: var(--border-round);}
-
-/* SPECIAL */
-.button-cta {
-  background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
+  background-color: var(--secondary);
+  color: var(--white);
   border: 0px;
 }
 
+.button-solid--blue {
+  background-color: var(--accent);
+  color: var(--white);
+  border: 0px;
+}
+
+.button-stroke--green {
+  background-color: transparent;
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+}
+
+.button-stroke--blue {
+  background-color: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+/* SHAPES */
+.button-square {
+  border-radius: var(--border-squared);
+}
+.button-round {
+  border-radius: var(--border-round);
+}
+
+/* SPECIAL */
+.button-cta {
+  background: linear-gradient(90deg, #6d8d6a 14.87%, #a5c7a2 102.56%);
+  border: 0px;
+}
 
 /* sökfunktionen */
 
 #searchbar {
   height: 30px;
   width: 300px;
-  margin: 20px 0 0 300px;
+  margin: 20px 0 0 200px;
   background-color: rgba(255, 255, 255, 0.3);
 }
 #search-results {
   width: 500px;
   min-height: 500px;
   border: 1px solid black;
-  margin: 20px 50px 0 300px;
+  margin: 20px 50px 0 200px;
+}
+#search-words-pills {
+  margin: 20px 0 0 200px;
+  min-height: 30px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.pill {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  min-width: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+.remove-pill {
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  cursor: pointer;
 }
 .search-result-card {
   width: 100%;
@@ -192,15 +243,18 @@ BUTTONS
   left: 85%;
 }
 
+.filled > svg {
+  background-color: red;
+}
+
+svg {
+  pointer-events: none;
+}
+
 .card-button-div {
   display: flex;
   justify-content: flex-end;
 }
-
-
-
-
-
 
 /* REVIEW CAROUSELL */
 .card-carousell{
@@ -285,4 +339,31 @@ BUTTONS
 .blob-wrapper .active{
   background-color: var(--accent);
 
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 90vw;
+}
+
+.table > div:nth-child(4n),
+.table > div:nth-child(4n-1) {
+  background-color: var(--elevated-background);
+}
+
+#comparison {
+  display: flex;
+  position: relative;
+  left: 0vw;
+  transition: ease-in-out 0.5s;
+}
+
+.program-list {
+  width: 100vw;
+  flex-shrink: 0;
+}
+
+body {
+  overflow-x: hidden;
 }

@@ -1,4 +1,14 @@
 "use strict";
+
+if(window.location.search === "") {
+    setUrlParameter(localStorage.programmeID, "programmeID");
+    localStorage.removeItem("programmeID");
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const pID = parseInt(urlParams.get("programmeID"));
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
@@ -189,6 +199,13 @@ function makeCityInfo(){
     //also review cards
     wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
 
+    titleWrap.append(cityImage(1), title)
+
+    let reviews = `reviews`;
+
+    //also review cards
+    wrapper.append(head, reviews, makeWeatherInfo())
+
     return wrapper
 
 }
@@ -213,10 +230,15 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = ``;
+
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
     let otherSchools = document.createElement("section");
     wrapper.append(title, cardCarousell(reviews), createClubSection())
+
+    let reviews = createReviewCard(DB.COMMENTS_CITY[5]);
+    let otherSchools = document.createElement("section");
+    wrapper.append(title, reviews, createClubSection())
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -279,6 +301,14 @@ function createReviewCard(reviewObject){
     review.className = `card-review`;
     let ratings = document.createElement("section");
     ratings.className = `card-rating`;
+
+    wrapper.className = ``;
+
+    let review = document.createElement("section");
+    review.className = ``;
+    let ratings = document.createElement("section");
+    ratings.className = ``;
+
     wrapper.append(review, ratings);
 
     // review content
@@ -289,6 +319,10 @@ function createReviewCard(reviewObject){
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
     whoWhen.className = "card-alias";
+    deco.className = ``;
+    let comment = document.createElement("p");
+    comment.textContent = reviewObject.text;
+    let whoWhen = document.createElement("div");
     review.append(deco, comment, whoWhen);
 
     let name = document.createElement("span");
@@ -363,3 +397,6 @@ function cardCarousell(array){
 }
 
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+
+// render( "body", makeHero() );
