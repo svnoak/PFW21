@@ -11,7 +11,109 @@ let programmes = [];
 let cities = [];
 let countries = [];
 let levels = [];
-let allFilterWords = [programmes, cities, levels];
+let points = 0;
+let languages = [];
+let allFilterWords = [programmes, cities, levels, points, languages];
+
+document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
+
+function createFilterOptions() {
+  let filter = document.createElement("div");
+  filter.setAttribute("id", "filters");
+
+  let closeButton = document.createElement("button");
+  closeButton.setAttribute("id", "close");
+  closeButton.textContent = "X";
+  closeButton.addEventListener("click", (event) => {
+    event.target.parentElement.remove();
+  });
+
+  let filterOptions = document.createElement("div");
+  filterOptions.setAttribute("id", "filter-options");
+
+  let levelOptions = document.createElement("div");
+  levelOptions.setAttribute("id", "level-options");
+  let bachelorBtn = document.createElement("div");
+  bachelorBtn.setAttribute("id", "Bachelor");
+  bachelorBtn.textContent = "Bachelor";
+  let masterBtn = document.createElement("div");
+  masterBtn.setAttribute("id", "Master");
+  masterBtn.textContent = "Master";
+  let doctorateBtn = document.createElement("div");
+  doctorateBtn.setAttribute("id", "Doctorate");
+  doctorateBtn.textContent = "Doctorate";
+
+  levelOptions.append(bachelorBtn, masterBtn, doctorateBtn);
+
+  let pointsOption = document.createElement("div");
+  pointsOption.setAttribute("id", "points-option");
+  pointsOption.innerHTML = `<h4 id="points-title">Antagningspoäng</h4>`;
+  let pointsSliderDiv = document.createElement("div");
+  pointsSliderDiv.setAttribute("id", "points-slider-div");
+  pointsSliderDiv.innerHTML = `<p id="points-text">10</p>`;
+  let pointsSlider = document.createElement("input");
+  pointsSlider.setAttribute("id", "points-slider");
+  pointsSlider.setAttribute("type", "range");
+  pointsSlider.setAttribute("min", "0");
+  pointsSlider.setAttribute("max", "10");
+  pointsSliderDiv.prepend(pointsSlider);
+  pointsOption.append(pointsSliderDiv);
+
+  let languagesDiv = document.createElement("div");
+  languagesDiv.setAttribute("id", "language-options");
+  let englishDiv = document.createElement("div");
+  englishDiv.setAttribute("id", "english");
+  englishDiv.textContent = "Engelska";
+  let spanishDiv = document.createElement("div");
+  spanishDiv.setAttribute("id", "spanish");
+  spanishDiv.textContent = "Spanska";
+  let frenchDiv = document.createElement("div");
+  frenchDiv.setAttribute("id", "french");
+  frenchDiv.textContent = "Franska";
+  let swedishDiv = document.createElement("div");
+  swedishDiv.setAttribute("id", "swedish");
+  swedishDiv.textContent = "Svenska";
+  languagesDiv.append(englishDiv, spanishDiv, frenchDiv, swedishDiv);
+
+  let visumOption = document.createElement("div");
+  visumOption.setAttribute("id", "visum-options");
+  visumOption.innerHTML = `
+                  <div id="visum-text">Visa bara utbildningar som inte kräver Visum</div>`;
+  let visumInput = document.createElement("input");
+  visumInput.setAttribute("type", "checkbox");
+  visumInput.setAttribute("id", "visum-checkbox");
+  visumOption.prepend(visumInput);
+
+  let sundays = document.createElement("div");
+  sundays.setAttribute("id", "sundays-options");
+  sundays.innerHTML = `
+                <p id="points-text">10</p>`;
+  let sundaysSlider = document.createElement("input");
+  sundaysSlider.setAttribute("id", "sundays-slider");
+  sundaysSlider.setAttribute("type", "range");
+  sundaysSlider.setAttribute("min", "0");
+  sundaysSlider.setAttribute("max", "365");
+  sundays.prepend(sundaysSlider);
+
+  let resetBtnDiv = document.createElement("div");
+  resetBtnDiv.setAttribute("id", "reset-option");
+  let resetBtn = document.createElement("button");
+  resetBtn.setAttribute("id", "reset");
+  resetBtn.textContent = "Återställ Filter";
+  resetBtnDiv.append(resetBtn);
+
+  let showResultsBtnDiv = document.createElement("div");
+  showResultsBtnDiv.setAttribute("id", "show-results");
+  let showResultsBtn = document.createElement("button");
+  showResultsBtn.setAttribute("id", "show-results-btn");
+  showResultsBtn.textContent = "Visda resultat";
+  showResultsBtnDiv.append(showResultsBtn);
+
+  filterOptions.append(levelOptions, pointsOption, languagesDiv, visumOption, sundays, resetBtnDiv, showResultsBtnDiv);
+  filter.append(closeButton, filterOptions);
+  document.body.prepend(filter);
+}
+
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
@@ -148,11 +250,11 @@ function createProgrammeElements(programmes) {
 
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
-    cardButton.href = 'detail.html';
+    cardButton.href = "detail.html";
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    cardButton.addEventListener('mouseup', () => {
-      localStorage.setItem('programmeID', obj.id);
+    cardButton.addEventListener("mouseup", () => {
+      localStorage.setItem("programmeID", obj.id);
     });
 
     cardButtonDiv.append(cardButton);
