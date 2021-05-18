@@ -59,7 +59,7 @@ BUTTONS
 /* PARAGRAPHS */
 .text-small {font-size: var(--font-small);}
 .text-default {font-size: var(--font-default);}
-.text-large {font-size: var(--font-xsmall);}
+.text-large {font-size: var(--font-large);}
 
 /* WEIGHTS */
 .bold {font-weight: bold;}
@@ -235,26 +235,49 @@ BUTTONS
   z-index: -1;
 }
 
+/* quick info with icon section */
 .detail-hero section{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
 
   margin: var(--space-medium);
 }
 
 .detail-hero section > div{
+  flex-basis: 50%;
   display: flex;
+  align-items: center;
 }
 
-.icon{
+.detail-hero .icon{
   display: grid;
   place-content: center;
+  margin-right: var(--space-small);
 }
 
-.icon svg{
+.detail-hero .icon svg{
   height: 16px;
   width: 16px;
+}
+
+.detail-stats{
+  background-color: var(--accent);
+  padding: var(--space-medium);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-medium);
+}
+
+.detail-stats > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: white;
+}
+/* big number */
+.detail-stats > div > span:first-child{
+  padding-bottom: var(--space-small);
 }
 
 /* REVIEW CAROUSELL */
