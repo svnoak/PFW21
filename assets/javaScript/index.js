@@ -38,11 +38,11 @@ function createBrandInfo() {
     brandInfo.className = 'brand-info';
 
     let title = document.createElement('h2');
-    title.className = 'title-default regular';
+    title.className = 'title-xsmall regular';
     title.textContent = 'VILKA ÄR [BRAND]?';
 
     let text = document.createElement('p');
-    text.className = 'text-small';
+    text.className = 'text-small light';
     text.textContent = '[Brand] erbjuder en lättanvänd sökmotor för dig som vill eller funderar på att studera utomlands. Filtrera utefter dina behov och jämför dina favoriter.';
 
     brandInfo.append(title, text);
@@ -65,7 +65,7 @@ function createCard(country) {
     header.className = 'country-info';
 
     let countryName = document.createElement('h3');
-    countryName.className = 'title-default';
+    countryName.className = 'title-xsmall regular';
     countryName.textContent = country.name;
 
     let countryInfo = document.createElement('p');
@@ -79,7 +79,7 @@ function createCard(country) {
     countryImg.className = 'country-img';
 
     let showProgramsButton = document.createElement('a');
-    showProgramsButton.className = 'text-small'
+    showProgramsButton.className = 'text-default semi-bold'
     showProgramsButton.textContent = 'Visa program';
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
