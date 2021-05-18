@@ -14,6 +14,8 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
+let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
+
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
 const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
@@ -190,11 +192,16 @@ function makeCityInfo(){
 
     let title = document.createElement("h2");
     title.textContent = `Om ${detailedProgramCity.name}`;
+    titleWrap.append(cityImage(1), title)   
+    
+    let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
+
+    //also review cards
+    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
+
     titleWrap.append(cityImage(1), title)
 
     let reviews = `reviews`;
-
-    
 
     //also review cards
     wrapper.append(head, reviews, makeWeatherInfo())
@@ -223,6 +230,12 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = ``;
+
+    let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
+    console.log(reviews)
+    let otherSchools = document.createElement("section");
+    wrapper.append(title, cardCarousell(reviews), createClubSection())
+
     let reviews = createReviewCard(DB.COMMENTS_CITY[5]);
     let otherSchools = document.createElement("section");
     wrapper.append(title, reviews, createClubSection())
@@ -282,17 +295,30 @@ function createOtherSchoolsSection(uniArray){
 
 function createReviewCard(reviewObject){
     let wrapper = document.createElement("article");
+    wrapper.className = `card`;
+
+    let review = document.createElement("section");
+    review.className = `card-review`;
+    let ratings = document.createElement("section");
+    ratings.className = `card-rating`;
+
     wrapper.className = ``;
 
     let review = document.createElement("section");
     review.className = ``;
     let ratings = document.createElement("section");
     ratings.className = ``;
+
     wrapper.append(review, ratings);
 
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
+    deco.className = `card-deco`;
+    let comment = document.createElement("p");
+    comment.textContent = reviewObject.text;
+    let whoWhen = document.createElement("div");
+    whoWhen.className = "card-alias";
     deco.className = ``;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
@@ -325,6 +351,52 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
+function cardCarousell(array){
+    let wrapper = document.createElement("section");
+    wrapper.className= `card-carousell`;
+
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = `card-wrapper`;
+    let blobWrapper = document.createElement("div");
+    blobWrapper.className = `blob-wrapper`;
+
+    wrapper.append(cardWrapper, blobWrapper)
+
+    let first = true;
+
+    array.forEach(object =>{
+        let card = createReviewCard(object);
+        card.className = `card`;
+        cardWrapper.append(card);
+
+        let blob = document.createElement("div");
+        blob.className = `blob`;
+        blobWrapper.append(blob);
+
+        if(first){
+            blob.classList.add("active");
+        }
+
+        // let location = card.getBoundingClientRect();
+        cardWrapper.addEventListener("scroll", checkActive)
+
+        function checkActive(){
+            let location = card.getBoundingClientRect();
+
+            if(location.left > 1 && location.left < 250 ){
+                document.querySelector(".active").classList.remove("active");
+                blob.classList.add(`active`);
+            }
+        }
+
+        first = false;
+        
+    })
+
+    return wrapper
+}
+
+document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 
 // render( "body", makeHero() );
