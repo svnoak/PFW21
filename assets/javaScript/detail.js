@@ -382,6 +382,3 @@ function cardCarousell(array){
 }
 
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
-document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
-
-// render( "body", makeHero() );
