@@ -64,7 +64,7 @@ function makeHero(){
 
 function makeProgrammeStats(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-stats`;
 
     const information = [
         ["Antagningspoäng", detailedProgram.entryGrades[0]],
@@ -77,6 +77,7 @@ function makeProgrammeStats(){
         let container = document.createElement("div");
         let number = document.createElement("span");
         number.textContent = info[1];
+        number.className = `text-large`;
         let text = document.createElement("span");
         text.textContent = info[0];
         container.append(number, text)
