@@ -151,7 +151,7 @@ function createProgrammeElements(programmes) {
     cardButton.href = 'detail.html';
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    cardButton.addEventListener('click', () => {
+    cardButton.addEventListener('mouseup', () => {
       localStorage.setItem('programmeID', obj.id);
     });
 
