@@ -105,8 +105,10 @@ function createProgrammeElements(programmes) {
     searchResultCard.className = "search-result-card";
 
     let bookmark = document.createElement("div");
-    bookmark.className = "bookmark";
+    bookmark.className = `bookmark`;
+    bookmark.setAttribute("programmeID", obj.id);
     bookmark.innerHTML = bookmarkIcon;
+    bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
     programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
@@ -159,12 +161,26 @@ function createProgrammeElements(programmes) {
       cardButtonDiv
     );
 
-    searchResultCard.append(bookmark, programmeImage, programmeCardInfo);
+    searchResultCard.append(programmeImage, bookmark, programmeCardInfo);
 
     render("#search-results", searchResultCard);
   });
 }
-
+function saveBookmarked(event) {
+  console.log(event.target.attributes[1].nodeValue);
+  let target = event.target;
+  target.classList.toggle("filled");
+  addBookmarksToLS();
+}
+function addBookmarksToLS() {
+  let bookmarks = document.querySelectorAll(".filled");
+  let bookmarkIDs = [];
+  bookmarks.forEach((obj) => {
+    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
+  });
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
+  console.log(bookmarkIDs);
+}
 function sortSearchResult(programmes) {
   createProgrammeElements(programmes);
 }

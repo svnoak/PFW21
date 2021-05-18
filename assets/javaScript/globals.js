@@ -51,7 +51,7 @@ function render(parentElement, ...element) {
 }
 
 // Menu
-function DOMnav () {
+function DOMnav() {
   let navItems = [
     {
       title: "Startsida",
@@ -73,58 +73,52 @@ function DOMnav () {
       href: "favorites.html",
       icon: bookmarkIcon,
     },
-    
-  ]
+  ];
 
   let wrapper = document.createElement("nav");
 
-  navItems.forEach( item => {
+  navItems.forEach((item) => {
     let link = document.createElement("a");
 
     let icon = document.createElement("i");
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.textContent = item.title;
-    link.append(icon, text)
+    link.append(icon, text);
 
-    if (window.location.href.includes(item.href)){
+    if (window.location.href.includes(item.href)) {
       link.className = `active`;
     } else {
       link.setAttribute("href", item.href);
     }
-    wrapper.append(link)
-  })
+    wrapper.append(link);
+  });
 
-  return wrapper
+  return wrapper;
 }
 
-document.body.append(DOMnav())
+document.body.append(DOMnav());
 
 // footer
-function DOMfoot(){
+function DOMfoot() {
   let wrapper = document.createElement("footer");
   let text = document.createElement("span");
   text.textContent = `[brand] © 2021`;
-  wrapper.append(text)
+  wrapper.append(text);
 
-  return wrapper
+  return wrapper;
 }
 
 function getLanguageFromUniID(universityID) {
   let languageID = getCountryFromUniID(universityID).languageID;
-  return LANGUAGES.find( language => language.id == languageID ).name;
+  return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
 function resetUrlParameter() {
   let url = window.location.href.split("?")[0];
-  window.history.replaceState( {} , "Title", `${url}` )
-};
-
-function setUrlParameter(string) {
-  window.history.replaceState( {} , "Title", `${window.location.href}?${string}` )
+  window.history.replaceState({}, "Title", `${url}`);
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
-  return LANGUAGES.find( language => language.id == languageID ).name;
-} 
+function setUrlParameter(string) {
+  window.history.replaceState({}, "Title", `${window.location.href}?${string}`);
+}
