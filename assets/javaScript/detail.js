@@ -14,7 +14,7 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
+//let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -201,7 +201,7 @@ function makeCityInfo(){
 
     titleWrap.append(cityImage(1), title)
 
-    let reviews = `reviews`;
+    //let reviews = `reviews`;
 
     //also review cards
     wrapper.append(head, reviews, makeWeatherInfo())
@@ -235,10 +235,6 @@ function makeSchoolInfo(){
     console.log(reviews)
     let otherSchools = document.createElement("section");
     wrapper.append(title, cardCarousell(reviews), createClubSection())
-
-    let reviews = createReviewCard(DB.COMMENTS_CITY[5]);
-    let otherSchools = document.createElement("section");
-    wrapper.append(title, reviews, createClubSection())
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -302,13 +298,6 @@ function createReviewCard(reviewObject){
     let ratings = document.createElement("section");
     ratings.className = `card-rating`;
 
-    wrapper.className = ``;
-
-    let review = document.createElement("section");
-    review.className = ``;
-    let ratings = document.createElement("section");
-    ratings.className = ``;
-
     wrapper.append(review, ratings);
 
     // review content
@@ -319,10 +308,6 @@ function createReviewCard(reviewObject){
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
     whoWhen.className = "card-alias";
-    deco.className = ``;
-    let comment = document.createElement("p");
-    comment.textContent = reviewObject.text;
-    let whoWhen = document.createElement("div");
     review.append(deco, comment, whoWhen);
 
     let name = document.createElement("span");
