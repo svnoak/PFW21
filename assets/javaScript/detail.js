@@ -1,10 +1,18 @@
 "use strict";
+
+if(window.location.search === "") {
+    setUrlParameter(localStorage.programmeID, "programmeID");
+    localStorage.removeItem("programmeID");
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const pID = parseInt(urlParams.get("programmeID"));
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
-
-let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
