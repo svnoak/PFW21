@@ -195,6 +195,7 @@ function createProgrammeElements(id ,programmes) {
 
     render(`#${id}`, searchResultCard);
   });
+}
 
 function saveBookmarked(event) {
   console.log(event.target.attributes[1].nodeValue);
