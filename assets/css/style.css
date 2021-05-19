@@ -275,22 +275,56 @@ BUTTONS
 
   color: white;
 }
+
 /* big number */
 .detail-stats > div > span:first-child{
-  padding-bottom: var(--space-small);
+  padding-bottom: var(--space-medium);
+  font-size: var(--title-default);
+}
+
+
+.detail-title {
+  padding-top: var(--space-large);
+}
+.detail-sub {
+  padding-top: var(--space-small);
+}
+.detail-body{
+  margin: 0 var(--space-medium);
+}
+
+.bg-image{
+  width: 100%;
+  height: 100%;
+}
+
+.detail-weather-city{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.detail-weather-city > *:first-child{
+  flex-basis: 85px;
+}
+.detail-weather-city > *:last-child{
+  flex-grow: 1;
+}
+
+
+.detail-weather-bar > *{
+  background-color: var(--secondary);
+  text-align: right;
+  padding: 5px var(--space-small) 5px 5px;
+  color: white;
 }
 
 /* REVIEW CAROUSELL */
-.card-carousell{
-  padding-left: var(--space-medium);
-  padding-right: var(--space-medium);
-}
-
 .card-wrapper{
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
   margin-bottom: var(--space-small);
+  padding: 0px var(--space-medium);
 }
 
 .card-wrapper::webkit-scrollbar{
@@ -309,6 +343,10 @@ BUTTONS
   overflow: hidden;
 
   scrollbar-width: none;  /* Firefox */
+}
+
+.card:last-child{
+  margin-right: 50px;
 }
 
 .card-alias{
