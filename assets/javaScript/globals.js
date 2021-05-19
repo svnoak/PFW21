@@ -43,7 +43,6 @@ function getCountryFromUniID(universityID) {
 
 function getProgrammesField(subjectID) {
   return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
-  return DB.FIELDS.find((obj) => obj.id == subjectID).name;
 }
 
 function render(parentElement, ...element) {
@@ -195,20 +194,37 @@ function createProgrammeElements(id ,programmes) {
 
     render(`#${id}`, searchResultCard);
   });
-
-function saveBookmarked(event) {
-  console.log(event.target.attributes[1].nodeValue);
-  let target = event.target;
-  target.classList.toggle("filled");
-  addBookmarksToLS();
 }
 
-function addBookmarksToLS() {
-  let bookmarks = document.querySelectorAll(".filled");
-  let bookmarkIDs = [];
-  bookmarks.forEach((obj) => {
-    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
-  });
-  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
-  console.log(bookmarkIDs);
+function parseFavoritesFromLS(type /*"id" or "object"*/) {
+  let programmes = [];
+  let programmIDs = localStorage.favoriteProgrammes.length > 0 ? JSON.parse(localStorage.favoriteProgrammes) : [];
+  switch (type) {
+    case "object":
+      programmIDs.forEach( id => programmes.push(getProgrammesById(id)));
+      break;
+  
+    default:
+      programmIDs.forEach( id => programmes.push(id));
+      break;
+  }
+  return programmes;
+}
+
+function saveBookmarked(event) {
+  let id = parseInt(event.target.attributes[1].nodeValue);
+  let target = event.target;
+  let bookmarkIDs = parseFavoritesFromLS();
+  target.classList.toggle("filled");
+  !parseFavoritesFromLS().find(fav => fav == id ) ? addBookmarksToLS(bookmarkIDs, id) : removeBookmarkFromLS(bookmarkIDs, id);
+}
+
+function addBookmarksToLS(bookmarks, id) {
+  bookmarks.push(parseInt(id));
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+}
+
+function removeBookmarkFromLS(bookmarks, id) {
+  bookmarks = bookmarks.filter( mark => mark != id );
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
