@@ -11,9 +11,12 @@ let programmes = [];
 let cities = [];
 let countries = [];
 let levels = [];
+let filteredLevels = [];
 let points = 0;
-let languages = [];
-let allFilterWords = [programmes, cities, levels, points, languages];
+let sundaysNumber = 0;
+let visa = false;
+let filteredLanguages = [];
+let allFilterWords = [programmes, cities, levels, points, filteredLanguages];
 
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
 
@@ -34,14 +37,26 @@ function createFilterOptions() {
   let levelOptions = document.createElement("div");
   levelOptions.setAttribute("id", "level-options");
   let bachelorBtn = document.createElement("div");
-  bachelorBtn.setAttribute("id", "Bachelor");
+  bachelorBtn.setAttribute("id", "bachelor");
   bachelorBtn.textContent = "Bachelor";
+  if (filteredLevels.includes("bachelor")) {
+    bachelorBtn.classList.add("selected");
+  }
+  bachelorBtn.addEventListener("click", addLevelsToFilter);
   let masterBtn = document.createElement("div");
-  masterBtn.setAttribute("id", "Master");
+  masterBtn.setAttribute("id", "master");
   masterBtn.textContent = "Master";
+  if (filteredLevels.includes("master")) {
+    masterBtn.classList.add("selected");
+  }
+  masterBtn.addEventListener("click", addLevelsToFilter);
   let doctorateBtn = document.createElement("div");
-  doctorateBtn.setAttribute("id", "Doctorate");
+  doctorateBtn.setAttribute("id", "doctorate");
   doctorateBtn.textContent = "Doctorate";
+  if (filteredLevels.includes("doctorate")) {
+    doctorateBtn.classList.add("selected");
+  }
+  doctorateBtn.addEventListener("click", addLevelsToFilter);
 
   levelOptions.append(bachelorBtn, masterBtn, doctorateBtn);
 
@@ -50,12 +65,18 @@ function createFilterOptions() {
   pointsOption.innerHTML = `<h4 id="points-title">Antagningspoäng</h4>`;
   let pointsSliderDiv = document.createElement("div");
   pointsSliderDiv.setAttribute("id", "points-slider-div");
-  pointsSliderDiv.innerHTML = `<p id="points-text">10</p>`;
+  pointsSliderDiv.innerHTML = `<p id="points-text">${points}</p>`;
   let pointsSlider = document.createElement("input");
   pointsSlider.setAttribute("id", "points-slider");
   pointsSlider.setAttribute("type", "range");
   pointsSlider.setAttribute("min", "0");
   pointsSlider.setAttribute("max", "10");
+  pointsSlider.value = points;
+  pointsSlider.addEventListener("change", () => {
+    console.log(document.getElementById("points-slider").value);
+    points = document.getElementById("points-slider").value;
+    document.getElementById("points-text").textContent = points;
+  });
   pointsSliderDiv.prepend(pointsSlider);
   pointsOption.append(pointsSliderDiv);
 
@@ -64,15 +85,19 @@ function createFilterOptions() {
   let englishDiv = document.createElement("div");
   englishDiv.setAttribute("id", "english");
   englishDiv.textContent = "Engelska";
+  englishDiv.addEventListener("click", addLanguagesToFilter);
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
+  spanishDiv.addEventListener("click", addLanguagesToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
   frenchDiv.textContent = "Franska";
+  frenchDiv.addEventListener("click", addLanguagesToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
   swedishDiv.textContent = "Svenska";
+  swedishDiv.addEventListener("click", addLanguagesToFilter);
   languagesDiv.append(englishDiv, spanishDiv, frenchDiv, swedishDiv);
 
   let visumOption = document.createElement("div");
@@ -82,18 +107,31 @@ function createFilterOptions() {
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
+  if (visa) {
+    visumInput.checked = true;
+  }
+  visumInput.addEventListener("change", () => {
+    visa ? (visa = false) : (visa = true);
+  });
   visumOption.prepend(visumInput);
 
   let sundays = document.createElement("div");
   sundays.setAttribute("id", "sundays-options");
-  sundays.innerHTML = `
-                <p id="points-text">10</p>`;
+  sundays.innerHTML = `<h4 id="points-title">Soldagar</h4>`;
+  let sundaysDiv = document.createElement("div");
   let sundaysSlider = document.createElement("input");
   sundaysSlider.setAttribute("id", "sundays-slider");
   sundaysSlider.setAttribute("type", "range");
   sundaysSlider.setAttribute("min", "0");
   sundaysSlider.setAttribute("max", "365");
-  sundays.prepend(sundaysSlider);
+  sundaysSlider.value = sundaysNumber;
+  sundaysSlider.addEventListener("change", () => {
+    console.log(document.getElementById("sundays-slider").value);
+  });
+  sundaysDiv.append(sundaysSlider);
+  sundaysDiv.innerHTML += `
+  <p id="sundays-text">${sundaysNumber}</p>`;
+  sundays.append(sundaysDiv);
 
   let resetBtnDiv = document.createElement("div");
   resetBtnDiv.setAttribute("id", "reset-option");
@@ -112,6 +150,29 @@ function createFilterOptions() {
   filterOptions.append(levelOptions, pointsOption, languagesDiv, visumOption, sundays, resetBtnDiv, showResultsBtnDiv);
   filter.append(closeButton, filterOptions);
   document.body.prepend(filter);
+}
+
+function addLevelsToFilter(event) {
+  let targetLevel = event.target.innerHTML;
+  console.log(targetLevel);
+  event.target.classList.toggle("selected");
+  let selectedLevels = document.querySelectorAll("#level-options > .selected");
+  console.log(selectedLevels);
+  filteredLevels = [];
+  for (let i = 0; i < selectedLevels.length; i++) {
+    filteredLevels.push(selectedLevels[i].textContent.toLocaleLowerCase());
+  }
+}
+function addLanguagesToFilter(event) {
+  let targetLaguage = event.target.innerHTML;
+  console.log(targetLaguage);
+  event.target.classList.toggle("selected");
+  let selectedLanguage = document.querySelectorAll("#language-options > .selected");
+  console.log(selectedLanguage);
+  filteredLanguages = [];
+  for (let i = 0; i < selectedLanguage.length; i++) {
+    filteredLanguages.push(selectedLanguage[i].textContent.toLocaleLowerCase());
+  }
 }
 
 function getProgrammesBySearchWord(event) {
