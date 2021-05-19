@@ -217,18 +217,28 @@ function saveBookmarked(event) {
   let id = parseInt(event.target.attributes[1].nodeValue);
   let target = event.target;
   let bookmarkIDs = parseFavoritesFromLS();
-  target.classList.toggle("filled");
-  parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ? 
-  removeBookmarkFromLS(bookmarkIDs, id) : 
-  addBookmarksToLS(bookmarkIDs, id);
+  parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ?
+  removeBookmarkFromLS(bookmarkIDs, id, target) :
+  addBookmarksToLS(bookmarkIDs, id, target); 
 }
 
-function addBookmarksToLS(bookmarks, id) {
+function addBookmarksToLS(bookmarks, id, target) {
+  target.classList.toggle("filled");
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
 
-function removeBookmarkFromLS(bookmarks, id) {
-  bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
-  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+function removeBookmarkFromLS(bookmarks, id, target) {
+  if ( removeBookmarkWarning() ){
+    target.classList.toggle("filled");
+    console.log(bookmarks);
+    bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
+    console.log(bookmarks);
+    localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+  }
+  return;
+}
+
+function removeBookmarkWarning() {
+  return window.confirm("Vill du ta bort denna favoriten?");
 }
