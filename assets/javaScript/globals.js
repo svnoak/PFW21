@@ -76,18 +76,21 @@ function DOMnav() {
   ];
 
   let wrapper = document.createElement("nav");
+  wrapper.className = `space-between`;
 
   navItems.forEach((item) => {
     let link = document.createElement("a");
+    link.className = `column centered`;
 
     let icon = document.createElement("i");
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
+    text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
 
     if (window.location.href.includes(item.href)) {
-      link.className = `active`;
+      link.classList.add('active');
     } else {
       link.setAttribute("href", item.href);
     }
