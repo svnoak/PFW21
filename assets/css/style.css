@@ -313,7 +313,7 @@ BUTTONS
 }
 
 .first-circle { position: relative; top: -10rem; right: 5rem;}
-.second-circle { position: relative; top: 10rem; right: 5rem;}
+.second-circle { position: relative; top: 16rem; right: 5rem;}
 
 .pin-header {
   position: absolute;
@@ -352,7 +352,7 @@ BUTTONS
 }
 
 .countryElement {
-  height: 333px;
+  height: 60vh;
   display: flex;
   flex-direction: column;
 }
