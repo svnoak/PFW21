@@ -81,7 +81,7 @@ function createCard(country) {
 
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-default semi-bold space-between button-solid--cream button-square';
-    showProgramsButton.innerHTML = `<p>Visa program</p> <i id="trailing-icon">${trailingIcon}</i>`;
+    showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIcon}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
         sessionStorage.setItem('countryId', country.id);
@@ -111,7 +111,7 @@ function createCompareInfo(){
     let button = document.createElement('a');
     button.href = 'comapare.html';
     button.className = 'text-default light space-between button-solid--cream button-square';
-    button.innerHTML = `<p>Jämför program</p><i>${trailingIcon}</i>`;
+    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIcon}</i>`;
     buttonContainer.append(button);
 
     wrapper.append(title, text, buttonContainer)
