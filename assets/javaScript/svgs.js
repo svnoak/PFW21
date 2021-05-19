@@ -87,23 +87,10 @@ const bookmarkIcon = `<svg width="25" height="34" viewBox="0 0 25 34" fill="none
                 </defs>
             </svg>`;
 
-const searchIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20.9999 21L16.6499 16.65" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            `;
-            
-const arrowsIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 1L21 5L17 9" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3 11V9C3 7.93913 3.42143 6.92172 4.17157 6.17157C4.92172 5.42143 5.93913 5 7 5H21" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M7 23L3 19L7 15" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M21 13V15C21 16.0609 20.5786 17.0783 19.8284 17.8284C19.0783 18.5786 18.0609 19 17 19H3" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            `;
 
-const backgroundCircle = `<svg width="535" height="536" viewBox="0 0 535 536" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="267.5" cy="268" rx="267.5" ry="268" fill="#738671"/>
-            </svg>`;
+const backgroundCircle = `<svg width="375" height="391" viewBox="0 0 375 391" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="152.5" cy="123.5" r="267.5" fill="#738671"/>
+                        </svg>`;
 
 
 const headerPin = `<svg width="124" height="144" viewBox="0 0 124 144" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,8 +107,4 @@ const headerPin = `<svg width="124" height="144" viewBox="0 0 124 144" fill="non
             <rect width="126" height="124" fill="white" transform="translate(-21.3147 21.5669) rotate(-9.4388)"/>
             </clipPath>
             </defs>
-            </svg>`;
-
-const trailingIcon = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.75 13.501L11.25 9.00098L6.75 4.50098" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>`;
