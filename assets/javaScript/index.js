@@ -22,6 +22,7 @@ function createHero() {
     let buttonHero = document.createElement('a');
     buttonHero.href = 'search.html';
     buttonHero.className = 'text-large semi-bold space-between button-round button-cta';
+    buttonHero.innerHTML = `<i id="white-icon">${searchIcon}</i> Sök efter program`;
 
     let pin = document.createElement('div');
     pin.classList = 'pin-header';
@@ -80,6 +81,7 @@ function createCard(country) {
 
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-default semi-bold space-between'
+    showProgramsButton.innerHTML = `<p>Visa program</p> <i id="trailing-icon">${trailingIcon}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
         sessionStorage.setItem('countryId', country.id);
