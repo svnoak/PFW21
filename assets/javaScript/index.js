@@ -1,7 +1,7 @@
 "use strict";
 
 render('body', createBackground());
-render('.wrapper', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES), createCompareInfo());
+render('.index-wrapper', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES), createCompareInfo());
 
 // Skapar HERO med innehåll
 function createHero() {
@@ -80,7 +80,7 @@ function createCard(country) {
     countryImg.className = 'country-img';
 
     let showProgramsButton = document.createElement('a');
-    showProgramsButton.className = 'text-default semi-bold space-between'
+    showProgramsButton.className = 'text-default semi-bold space-between button-solid--cream button-square';
     showProgramsButton.innerHTML = `<p>Visa program</p> <i id="trailing-icon">${trailingIcon}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
@@ -110,7 +110,7 @@ function createCompareInfo(){
     buttonContainer.className = 'c-button-container';
     let button = document.createElement('a');
     button.href = 'comapare.html';
-    button.className = 'text-default light space-between';
+    button.className = 'text-default light space-between button-solid--cream button-square';
     button.innerHTML = `<p>Jämför program</p><i>${trailingIcon}</i>`;
     buttonContainer.append(button);
 
@@ -118,6 +118,8 @@ function createCompareInfo(){
 
     return wrapper;
 }
+
+
 
 function createBackground() {
     let background = document.createElement('section');
