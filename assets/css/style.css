@@ -128,8 +128,8 @@ BUTTONS
 }
 
 /* SHAPES */
-.button-square {border-radius: var(--border-squared);}
-.button-round {border-radius: var(--border-round);}
+.button-square {border-radius: var(--border-squared); padding: var(--space-small);}
+.button-round {border-radius: var(--border-round); padding: var(--space-small);}
 
 /* SPECIAL */
 .button-cta {
