@@ -98,6 +98,11 @@ BUTTONS
 }
 
 /* COLORVARIATIONS */
+.button-solid--cream {
+  background-color: var(--elevated-background);
+  border: 0px;
+}
+
 .button-solid--green {
     background-color: var(--secondary);
     color: var(--white);
