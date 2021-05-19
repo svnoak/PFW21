@@ -58,9 +58,10 @@ BUTTONS
 .title-xsmall {font-size: var(--title-xsmall); font-family: var(--title-font);}
 
 /* PARAGRAPHS */
-.text-small {font-size: var(--font-small); font-family: var(--text-font);}
+.text-large {font-size: var(--font-large); font-family: var(--text-font);}
 .text-default {font-size: var(--font-default); font-family: var(--text-font);}
-.text-large {font-size: var(--font-xsmall); font-family: var(--text-font);}
+.text-small {font-size: var(--font-small); font-family: var(--text-font);}
+.text-xsmall {font-size: var(--font-xsmall); font-family: var(--text-font);}
 
 /* WEIGHTS */
 .bold {font-weight: 700;}
@@ -127,6 +128,7 @@ BUTTONS
 
 /* SPECIAL */
 .button-cta {
+  color: var(--primary);
   background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
   border: 0px;
 }
@@ -298,10 +300,15 @@ BUTTONS
 /* INDEX */
 
 .background {
+  width: 100vw;
+
   position: absolute;
   z-index: -10;
   top: 0;
 }
+
+.first-circle { position: relative; top: -10rem; right: 5rem;}
+.second-circle { position: relative; top: 10rem; right: 5rem;}
 
 .pin-header {
   position: absolute;
@@ -317,11 +324,8 @@ BUTTONS
   background-color: var(--elevated-background);
   border-radius: 1rem;
 
-  display: flex;
   flex-direction: column;
   gap: var(--space-small);
-  justify-content: center;
-  align-items: center;
 
   text-align: center;
 }
@@ -335,13 +339,11 @@ BUTTONS
 
 .brand-info {
   margin: var(--space-medium);
-  display: flex;
   flex-direction: column;
   gap: var(--space-small);
-  justify-content: center;
-  align-items: center;
 
   color: var(--secondary);
+  text-align: center;
 }
 
 .countryElement {
@@ -370,4 +372,27 @@ BUTTONS
 
   background-size: cover;
   background-position: center;
+}
+
+#white-icon > svg > path {
+  stroke: var(--primary);
+}
+
+.compare-info-section {
+  padding: var(--space-medium);
+
+  flex-direction: column;
+  gap: var(--space-small);
+  
+  color: var(--primary);
+}
+.compare-info-section > h2 {
+  width: 100%;
+}
+
+.c-button-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: end;
 }
