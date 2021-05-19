@@ -111,7 +111,7 @@ function makeSchoolInfo(){
 
 function createClubSection(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
+    wrapper.className = `detail-body detail-clubs`;
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -139,7 +139,7 @@ function createClubSection(){
 
 function createOtherSchoolsSection(uniArray){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
+    wrapper.className = `detail-body detail-schools`;
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -168,7 +168,7 @@ function createReviewCard(reviewObject){
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = `card-deco`;
+    deco.className = `card-deco title-large`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
@@ -190,8 +190,10 @@ function createReviewCard(reviewObject){
         let container = document.createElement("div");
 
         let star = document.createElement("span");
+        star.className = `title-small`;
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
+        category.className = `font-small`;
         category.textContent = categories[i];
 
         container.append(star, category);
