@@ -195,4 +195,20 @@ function createProgrammeElements(id ,programmes) {
 
     render(`#${id}`, searchResultCard);
   });
+
+function saveBookmarked(event) {
+  console.log(event.target.attributes[1].nodeValue);
+  let target = event.target;
+  target.classList.toggle("filled");
+  addBookmarksToLS();
+}
+
+function addBookmarksToLS() {
+  let bookmarks = document.querySelectorAll(".filled");
+  let bookmarkIDs = [];
+  bookmarks.forEach((obj) => {
+    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
+  });
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
+  console.log(bookmarkIDs);
 }
