@@ -134,20 +134,3 @@ function createBackgroundCircle() {
 
     return circleContainer;
 }
-
-// function createBackground() {
-//     let background = document.createElement('section');
-//     background.className = 'background';
-
-//     let firstCircle = document.createElement('div');
-//     firstCircle.className = 'first-circle';
-//     firstCircle.innerHTML = backgroundCircle;
-
-//     let secondCircle = document.createElement('div');
-//     secondCircle.className = 'second-circle';
-//     secondCircle.innerHTML = backgroundCircle;
-
-//     background.append(firstCircle, secondCircle);
-
-//     return background;
-// }
