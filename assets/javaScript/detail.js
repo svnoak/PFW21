@@ -98,12 +98,15 @@ function makeSchoolInfo(){
     title.className = `detail-title title-default detail-body`;
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
-    let otherSchools = document.createElement("section");
-    wrapper.append(title, cardCarousell(reviews), createClubSection())
+    let schoolInfo = document.createElement("section");
+    schoolInfo.className = `detail-body detail-school`;
+    schoolInfo.append(createClubSection())
+
+    wrapper.append(title, cardCarousell(reviews), schoolInfo)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
-        wrapper.append(createOtherSchoolsSection(otherUniversities))
+        schoolInfo.append(createOtherSchoolsSection(otherUniversities))
     }
     
     return wrapper
@@ -111,7 +114,6 @@ function makeSchoolInfo(){
 
 function createClubSection(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -122,12 +124,14 @@ function createClubSection(){
 
     schoolClubs.forEach( club => {
         let container = document.createElement("div");
-        let name = document.createElement("span");
+        let name = document.createElement("div");
+        name.className = `bold`;
         name.textContent = club.name ? 
         club.name : 
         `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
+
         let members = document.createElement("span");
-        members.textContent = `${club.memberCount} medlemmar`
+        members.textContent = `${club.memberCount} medlemmar`;
 
         container.append(name, members)
         wrapper.append(container)
@@ -139,7 +143,6 @@ function createClubSection(){
 
 function createOtherSchoolsSection(uniArray){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -147,7 +150,7 @@ function createOtherSchoolsSection(uniArray){
     wrapper.append(title)
 
     uniArray.forEach(program => {
-        let uni = document.createElement("span");
+        let uni = document.createElement("div");
         uni.textContent = getUniversityFromUniID(program.universityID).name;
         wrapper.append(uni)
     })
@@ -192,6 +195,7 @@ function createReviewCard(reviewObject){
         let star = document.createElement("span");
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
+        category.className = `light`;
         category.textContent = categories[i];
 
         container.append(star, category);
@@ -248,13 +252,13 @@ function cardCarousell(array){
 
 function makeCityInfo(){
     let wrapper = document.createElement("section");
+    wrapper.className = `detail-city`;
 
     let head = document.createElement("div");
-    head.className = ``;
+    head.className = `intro`;
     
     // head child
     let titleWrap = document.createElement("div");
-    titleWrap.style.position = "relative"; // for image position:absolute
     let paragraph = document.createElement("p");
     paragraph.className = `detail-body`;
     paragraph.textContent = detailedProgramCity.text;

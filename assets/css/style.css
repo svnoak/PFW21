@@ -227,7 +227,7 @@ BUTTONS
   padding: var(--space-small) 0px;
 }
 
-.detail-hero .bg-image{
+.detail-hero .bg-image, .detail-city .bg-image{
   background-size: cover;
   position: absolute;
   width: 100%;
@@ -276,9 +276,16 @@ BUTTONS
   color: white;
 }
 
+.detail-section-title {
+  padding-top: var(--space-large);
+}
+.detail-section-sub {
+  padding-top: var(--space-medium);
+}
+
 /* big number */
 .detail-stats > div > span:first-child{
-  padding-bottom: var(--space-medium);
+  padding-bottom: var(--space-small);
   font-size: var(--title-default);
 }
 
@@ -290,12 +297,40 @@ BUTTONS
   padding-top: var(--space-small);
 }
 .detail-body{
-  margin: 0 var(--space-medium);
+  padding-left: var(--space-medium);
+  padding-right: var(--space-medium);
 }
-
 .bg-image{
   width: 100%;
   height: 100%;
+}
+
+.detail-school > section {
+  padding: var(--space-medium) 0px 0px;
+} 
+.detail-school > section > div{
+  margin-bottom: 5px;
+} 
+.detail-city{
+  padding: var(--space-large) 0px;
+}
+
+.detail-city .intro{
+  padding-bottom: var(--space-large);
+}
+
+/* header img with title wrapper */
+.detail-city .intro > div{
+  position: relative;
+  height: 35vh;
+  margin-bottom: var(--space-medium);
+}
+
+.detail-city h2{
+  color: var(--primary);
+  height: 100%;
+  width: 100%;
+  background-color: var(--overlay);
 }
 
 .detail-weather-city{
@@ -323,30 +358,28 @@ BUTTONS
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
-  margin-bottom: var(--space-small);
-  padding: 0px var(--space-medium);
-}
-
-.card-wrapper::webkit-scrollbar{
-  display: none;
+  padding-bottom: var(--space-medium);
 }
 
 .card{
   scroll-snap-align: center;
 
-  min-width: 85vw;
+  min-width: calc( 100vw - ( var(--space-medium) * 2 ) );
   background-color:#FAFAF9;
-  margin-left: var(--space-small);
-  margin-right: var(--space-small);
+  margin-left: var(--space-medium);
   display: grid;
   border-radius: var(--border-squared);
   overflow: hidden;
+}
 
-  scrollbar-width: none;  /* Firefox */
+.card-deco{
+  color: var(--secondary);
+  font-size: var(--title-large);
 }
 
 .card:last-child{
-  margin-right: 50px;
+  margin-right: var(--space-medium);
+  /* border-right: var(--space-medium) solid black; */
 }
 
 .card-alias{
@@ -387,13 +420,14 @@ BUTTONS
 
 .blob-wrapper{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .blob{
   height: 10px;
   width: 10px;
-  margin: 0px 2px;
+  margin: 0px 3px;
   border-radius: var(--border-round);
   background-color: var(--gray);
 }
