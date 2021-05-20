@@ -248,7 +248,26 @@ async function removeBookmarkFromLS(bookmarks, id, target) {
 
 function removeBookmark() {
   return new Promise( confirm => {
-    swal("Click on either the button or outside the modal.")
+    swal({
+      title: "Vill du radera favoriten?",
+      icon: "warning",
+      buttons: {
+          cancel: {
+            text: "Nej",
+            value: false,
+            visible: true,
+            className: "",
+            closeModal: true,
+          },
+          confirm: {
+            text: "Ja",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+          }
+      }
+    })
     .then((value) => {
       confirm(value);
 });
