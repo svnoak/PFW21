@@ -84,10 +84,7 @@ function createCard(country) {
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
     showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIcon}</i>`;
-    showProgramsButton.href = 'search.html';
-    showProgramsButton.addEventListener('click', () => {
-        sessionStorage.setItem('countryId', country.id);
-    });
+    showProgramsButton.href = `search.html?${country.id}`;
     countryImg.append(showProgramsButton);
     
     
