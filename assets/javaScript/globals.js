@@ -228,17 +228,29 @@ function addBookmarksToLS(bookmarks, id, target) {
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
 
-function removeBookmarkFromLS(bookmarks, id, target) {
-  if ( removeBookmarkWarning() ){
+async function removeBookmarkFromLS(bookmarks, id, target) {
+  if ( window.location.href.includes("favorite") ){
+    if ( await removeBookmark() ){
+      remove(bookmarks, id, target);
+      target.parentElement.remove();
+    }
+}
+  else {
+    remove(bookmarks, id, target);  
+  }
+
+  function remove(bookmarks, id, target) {
     target.classList.toggle("filled");
-    console.log(bookmarks);
     bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
-    console.log(bookmarks);
     localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
   }
-  return;
 }
 
-function removeBookmarkWarning() {
-  return window.confirm("Vill du ta bort denna favoriten?");
+function removeBookmark() {
+  return new Promise( confirm => {
+    swal("Click on either the button or outside the modal.")
+    .then((value) => {
+      confirm(value);
+});
+  })
 }
