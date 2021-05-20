@@ -330,3 +330,14 @@ function removeBookmark() {
 });
   })
 }
+
+function createBackgroundCircle() {
+  let circleContainer = document.createElement('div');
+  let circle = document.createElement('div');
+  circle.className = 'circle';
+  circleContainer.append(circle);
+  circle.style.height = '140vw';
+  circle.style.width = '140vw';
+
+  return circleContainer;
+}
