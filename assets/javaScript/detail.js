@@ -336,6 +336,8 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
+document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+
 function cardCarousell(array){
     let wrapper = document.createElement("section");
     wrapper.className= `card-carousell`;
@@ -380,5 +382,3 @@ function cardCarousell(array){
 
     return wrapper
 }
-
-document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());

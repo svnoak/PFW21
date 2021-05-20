@@ -1,5 +1,12 @@
 "use strict";
 
+// google-fonts
+let fontStyle = document.createElement('link');
+fontStyle.rel = 'stylesheet';
+fontStyle.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap';
+
+document.head.append(fontStyle);
+
 var searchWords = [];
 
 const RANDOM = {
@@ -48,6 +55,54 @@ function getProgrammesField(subjectID) {
 
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
+}
+
+
+// Skapar karusell
+function cardCarousell(array){
+  let wrapper = document.createElement("section");
+  wrapper.className= `card-carousell`;
+
+  let cardWrapper = document.createElement("div");
+  cardWrapper.className = `card-wrapper`;
+  let blobWrapper = document.createElement("div");
+  blobWrapper.className = `blob-wrapper`;
+
+  wrapper.append(cardWrapper, blobWrapper)
+
+  let first = true;
+
+  array.forEach(object =>{
+      let card = document.createElement('section');
+      card.append(createCard(object));
+      card.className = `card`;
+      cardWrapper.append(card);
+
+      let blob = document.createElement("div");
+      blob.className = `blob`;
+      blobWrapper.append(blob);
+
+      if(first){
+          blob.classList.add("active");
+      }
+
+      // let location = card.getBoundingClientRect();
+      cardWrapper.addEventListener("scroll", checkActive)
+
+      function checkActive(){
+          let location = card.getBoundingClientRect();
+
+          if(location.left > 1 && location.left < 250 ){
+              document.querySelector(".active").classList.remove("active");
+              blob.classList.add(`active`);
+          }
+      }
+
+      first = false;
+      
+  })
+
+  return wrapper
 }
 
 // Menu

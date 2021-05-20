@@ -25,6 +25,7 @@ BUTTONS
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 /*--------------*/
@@ -51,45 +52,30 @@ BUTTONS
 /*------------*/
 
 /* TITLES */
-.title-large {
-  font-size: var(--title-large);
-}
-.title-default {
-  font-size: var(--title-default);
-}
-.title-small {
-  font-size: var(--title-small);
-}
-.title-xsmall {
-  font-size: var(--title-xsmall);
-}
+.title-large {font-size: var(--title-large); font-family: var(--title-font);}
+.title-default {font-size: var(--title-default); font-family: var(--title-font);}
+.title-small {font-size: var(--title-small); font-family: var(--title-font);}
+.title-xsmall {font-size: var(--title-xsmall); font-family: var(--title-font);}
 
 /* PARAGRAPHS */
-.text-small {
-  font-size: var(--font-small);
-}
-.text-default {
-  font-size: var(--font-default);
-}
-.text-large {
-  font-size: var(--font-xsmall);
-}
+.text-large {font-size: var(--font-large); font-family: var(--text-font);}
+.text-default {font-size: var(--font-default); font-family: var(--text-font);}
+.text-small {font-size: var(--font-small); font-family: var(--text-font);}
+.text-xsmall {font-size: var(--font-xsmall); font-family: var(--text-font);}
 
 /* WEIGHTS */
-.bold {
-  font-weight: bold;
-}
-.light {
-  font-weight: lighter;
-}
+.bold {font-weight: 700;}
+.semi-bold { font-weight: 600;}
+.regular {font-weight: 400;}
+.light {font-weight: 300;}
 
 /* SPECIAL */
-
-/* .title-hero {} */
 .title-hero {
-  color: black;
+  font-size: var(--title-large); 
+  font-family: var(--title-font);
+  color: var(--secondary);
+  z-index: 10;
 }
-
 
 /*--------------*/
 /* BUTTONS     */
@@ -112,6 +98,11 @@ BUTTONS
 }
 
 /* COLORVARIATIONS */
+.button-solid--cream {
+  background-color: var(--elevated-background);
+  border: 0px;
+}
+
 .button-solid--green {
   background-color: var(--secondary);
   color: var(--white);
@@ -137,16 +128,13 @@ BUTTONS
 }
 
 /* SHAPES */
-.button-square {
-  border-radius: var(--border-squared);
-}
-.button-round {
-  border-radius: var(--border-round);
-}
+.button-square {border-radius: var(--border-squared); padding: var(--space-small);}
+.button-round {border-radius: var(--border-round); padding: var(--space-small);}
 
 /* SPECIAL */
 .button-cta {
-  background: linear-gradient(90deg, #6d8d6a 14.87%, #a5c7a2 102.56%);
+  color: var(--primary);
+  background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
   border: 0px;
 }
 
@@ -339,6 +327,107 @@ svg {
 .blob-wrapper .active{
   background-color: var(--accent);
 
+}
+
+/* INDEX */
+
+.background {
+  width: 100vw;
+
+  position: absolute;
+  z-index: -10;
+  top: 0;
+}
+
+.first-circle { position: relative; top: -40vw; overflow-x: hidden;}
+.second-circle { position: relative; top: 40vw; overflow-x: hidden;}
+.first-circle > svg, .second-circle > svg { width: 140vw; height: 140vw;}
+
+.pin-header {
+  position: absolute;
+  top: -2em;
+  left: -1em;
+}
+
+.hero {
+  position: relative;
+
+  margin: var(--space-medium);
+  padding: var(--space-medium);
+  background-color: var(--elevated-background);
+  border-radius: 1rem;
+
+  flex-direction: column;
+  gap: var(--space-small);
+
+  text-align: center;
+}
+
+.globe-render {
+  background-color: var(--accent);
+  width: calc(90vw - calc( (var(--space-large)) * 2) );
+  height: calc(90vw - calc( (var(--space-large)) * 2) );
+  border-radius: var(--border-round);
+}
+
+.brand-info {
+  margin: var(--space-medium);
+  flex-direction: column;
+  gap: var(--space-small);
+
+  color: var(--secondary);
+  text-align: center;
+}
+
+.countryElement {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.country-info {
+  margin: var(--space-medium);
+  flex-basis: 25%;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+}
+
+.country-img {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: var(--space-small);
+
+  background-size: cover;
+  background-position: center;
+}
+
+#white-icon > svg > path {
+  stroke: var(--primary);
+}
+
+.compare-info-section {
+  padding: var(--space-medium);
+
+  flex-direction: column;
+  gap: var(--space-small);
+  
+  color: var(--primary);
+}
+.compare-info-section > h2 {
+  width: 100%;
+}
+
+.c-button-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: end;
 }
 
 .table {
