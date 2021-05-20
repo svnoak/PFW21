@@ -1,9 +1,8 @@
-const homeIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
-                        stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M9 22V12H15V22" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>`;
+const homeIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 22V12H15V22" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
 
 const pinIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -54,3 +53,54 @@ const bookmarkIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
 <path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `;
+
+const bookmarkIcon = `<svg width="25" height="34" viewBox="0 0 25 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M23.5834 32.75L12.5 24L1.41669 32.75V4.75C1.41669 3.82174 1.75032 2.9315 2.34418 2.27513C2.93805 1.61875 3.7435 1.25 4.58335 1.25H20.4167C21.2565 1.25 22.062 1.61875 22.6559 2.27513C23.2497 2.9315 23.5834 3.82174 23.5834 4.75V32.75Z"
+                    fill="#FAFAF9" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <defs>
+                    <linearGradient id="paint0_linear" x1="12.5" y1="1.25" x2="12.5" y2="32.75" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#6078AF" />
+                        <stop offset="1" stop-color="#9ADCEE" />
+                    </linearGradient>
+                </defs>
+            </svg>`;
+
+const searchIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.9999 21L16.6499 16.65" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            `;
+            
+const arrowsIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 1L21 5L17 9" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 11V9C3 7.93913 3.42143 6.92172 4.17157 6.17157C4.92172 5.42143 5.93913 5 7 5H21" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 23L3 19L7 15" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 13V15C21 16.0609 20.5786 17.0783 19.8284 17.8284C19.0783 18.5786 18.0609 19 17 19H3" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            `;
+
+const backgroundCircle = `<svg viewBox="220 0 240 536" fill="none">
+            <ellipse cx="267.5" cy="268" rx="267.5" ry="268" fill="#738671"/>
+            </svg>`;
+
+
+const headerPin = `<svg width="124" height="144" viewBox="0 0 124 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+            <path d="M95.9157 54.4537C101.847 90.1307 60.3203 128.46 60.3203 128.46C60.3203 128.46 8.62618 105.628 2.69506 69.9511C0.672593 57.7855 3.64367 45.3018 10.9547 35.2463C18.2657 25.1907 29.3178 18.3871 41.6796 16.332C54.0415 14.2769 66.7004 17.1387 76.8716 24.2879C87.0428 31.4371 93.8932 42.2881 95.9157 54.4537Z" fill="url(#paint0_linear)"/>
+            <path d="M53.4081 86.8813C67.2264 84.5841 76.5715 71.5526 74.281 57.7747C71.9905 43.9968 58.9318 34.6899 45.1135 36.9871C31.2951 39.2843 21.95 52.3158 24.2405 66.0937C26.531 79.8716 39.5898 89.1785 53.4081 86.8813Z" fill="#FAFAF9"/>
+            </g>
+            <defs>
+            <linearGradient id="paint0_linear" x1="41.6796" y1="16.332" x2="60.3203" y2="128.46" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6078AF"/>
+            <stop offset="1" stop-color="#9ADCEE"/>
+            </linearGradient>
+            <clipPath id="clip0">
+            <rect width="126" height="124" fill="white" transform="translate(-21.3147 21.5669) rotate(-9.4388)"/>
+            </clipPath>
+            </defs>
+            </svg>`;
+
+const trailingIcon = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 13.501L11.25 9.00098L6.75 4.50098" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;

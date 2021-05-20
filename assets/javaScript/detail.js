@@ -1,10 +1,20 @@
 "use strict";
+
+if(window.location.search === "") {
+    setUrlParameter(localStorage.programmeID, "programmeID");
+    localStorage.removeItem("programmeID");
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const pID = parseInt(urlParams.get("programmeID"));
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
+//let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -96,6 +106,7 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = `detail-title title-default detail-body`;
+  
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
     let schoolInfo = document.createElement("section");
@@ -166,6 +177,7 @@ function createReviewCard(reviewObject){
     review.className = `card-review`;
     let ratings = document.createElement("section");
     ratings.className = `card-rating`;
+
     wrapper.append(review, ratings);
 
     // review content

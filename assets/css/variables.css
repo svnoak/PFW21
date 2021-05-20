@@ -35,6 +35,14 @@ SHADOWS
     --title-small: 1.6rem;
     --title-xsmall: 1.4rem;
 
+
+/*--------------*/
+/* TEXT FONTS */
+/*------------*/
+
+    --title-font: 'Raleway';
+    --text-font: 'Open Sans';
+
 /*--------------*/
 /* TEXT SIZES  */
 /*------------*/
@@ -67,7 +75,7 @@ SHADOWS
 /*------------*/
 
   --border-round: 50%;
-  --border-squared: 5%;
+  --border-squared: 1rem;
 
 
 /*--------------*/
