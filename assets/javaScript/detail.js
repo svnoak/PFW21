@@ -1,10 +1,20 @@
 "use strict";
+
+if(window.location.search === "") {
+    setUrlParameter(localStorage.programmeID, "programmeID");
+    localStorage.removeItem("programmeID");
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const pID = parseInt(urlParams.get("programmeID"));
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
+//let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
 
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
@@ -189,6 +199,13 @@ function makeCityInfo(){
     //also review cards
     wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
 
+    titleWrap.append(cityImage(1), title)
+
+    //let reviews = `reviews`;
+
+    //also review cards
+    wrapper.append(head, reviews, makeWeatherInfo())
+
     return wrapper
 
 }
@@ -213,6 +230,7 @@ function makeSchoolInfo(){
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
     title.className = ``;
+
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
     let otherSchools = document.createElement("section");
@@ -279,6 +297,7 @@ function createReviewCard(reviewObject){
     review.className = `card-review`;
     let ratings = document.createElement("section");
     ratings.className = `card-rating`;
+
     wrapper.append(review, ratings);
 
     // review content
@@ -318,3 +337,48 @@ function createReviewCard(reviewObject){
 }
 
 document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+
+function cardCarousell(array){
+    let wrapper = document.createElement("section");
+    wrapper.className= `card-carousell`;
+
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = `card-wrapper`;
+    let blobWrapper = document.createElement("div");
+    blobWrapper.className = `blob-wrapper`;
+
+    wrapper.append(cardWrapper, blobWrapper)
+
+    let first = true;
+
+    array.forEach(object =>{
+        let card = createReviewCard(object);
+        card.className = `card`;
+        cardWrapper.append(card);
+
+        let blob = document.createElement("div");
+        blob.className = `blob`;
+        blobWrapper.append(blob);
+
+        if(first){
+            blob.classList.add("active");
+        }
+
+        // let location = card.getBoundingClientRect();
+        cardWrapper.addEventListener("scroll", checkActive)
+
+        function checkActive(){
+            let location = card.getBoundingClientRect();
+
+            if(location.left > 1 && location.left < 250 ){
+                document.querySelector(".active").classList.remove("active");
+                blob.classList.add(`active`);
+            }
+        }
+
+        first = false;
+        
+    })
+
+    return wrapper
+}

@@ -83,7 +83,7 @@ BUTTONS
 
 /* SIZE */
 .button-small {
-  height: 2vh; 
+  height: 2vh;
   width: 2vw;
 }
 
@@ -104,27 +104,27 @@ BUTTONS
 }
 
 .button-solid--green {
-    background-color: var(--secondary);
-    color: var(--white);
-    border: 0px;
+  background-color: var(--secondary);
+  color: var(--white);
+  border: 0px;
 }
 
 .button-solid--blue {
-    background-color: var(--accent);
-    color: var(--white);
-    border: 0px;
+  background-color: var(--accent);
+  color: var(--white);
+  border: 0px;
 }
 
 .button-stroke--green {
-    background-color: transparent;
-    color: var(--secondary);
-    border: 2px solid var(--secondary);
+  background-color: transparent;
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
 }
 
 .button-stroke--blue {
-    background-color: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
+  background-color: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
 }
 
 /* SHAPES */
@@ -138,20 +138,44 @@ BUTTONS
   border: 0px;
 }
 
-
 /* sökfunktionen */
 
 #searchbar {
   height: 30px;
   width: 300px;
-  margin: 20px 0 0 300px;
+  margin: 20px 0 0 200px;
   background-color: rgba(255, 255, 255, 0.3);
 }
 #search-results {
   width: 500px;
   min-height: 500px;
   border: 1px solid black;
-  margin: 20px 50px 0 300px;
+  margin: 20px 50px 0 200px;
+}
+#search-words-pills {
+  margin: 20px 0 0 200px;
+  min-height: 30px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.pill {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  min-width: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+.remove-pill {
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  cursor: pointer;
 }
 .search-result-card {
   width: 100%;
@@ -207,15 +231,18 @@ BUTTONS
   left: 85%;
 }
 
+.filled > svg {
+  background-color: red;
+}
+
+svg {
+  pointer-events: none;
+}
+
 .card-button-div {
   display: flex;
   justify-content: flex-end;
 }
-
-
-
-
-
 
 /* REVIEW CAROUSELL */
 .card-carousell{
@@ -401,4 +428,31 @@ BUTTONS
 
   display: flex;
   justify-content: end;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 90vw;
+}
+
+.table > div:nth-child(4n),
+.table > div:nth-child(4n-1) {
+  background-color: var(--elevated-background);
+}
+
+#comparison {
+  display: flex;
+  position: relative;
+  left: 0vw;
+  transition: ease-in-out 0.5s;
+}
+
+.program-list {
+  width: 100vw;
+  flex-shrink: 0;
+}
+
+body {
+  overflow-x: hidden;
 }
