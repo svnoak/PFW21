@@ -24,16 +24,18 @@ let main = document.querySelector("#comparison");
 //Skapar header med sökruta
 function createHeader() {
   let header = document.createElement("div");
-  header.className = "header";
+  header.className = "compare-header centered column";
 
   let titleHeader = document.createElement("h1");
+  titleHeader.className = 'title-default regular';
   titleHeader.textContent = "Jämför program";
 
   let textHeader = document.createElement("p");
+  textHeader.className = 'text-default light'
   textHeader.textContent = "Här kan du jämföra dina favoriter och bestämma vilket program som är rätt för just dig!";
 
   let searchBar = document.createElement("input");
-  searchBar.className = 'search-bar';
+  searchBar.className = 'search-bar text-default';
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
@@ -54,7 +56,7 @@ function createHeader() {
   favoritesContainer.className = 'favorites';
 
   let titleFavorites = document.createElement('p');
-  titleFavorites.className = 'text-default, bold';
+  titleFavorites.className = 'title-favorites text-default bold';
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
 
@@ -108,6 +110,7 @@ function createHeader() {
 function createNav(index = 0) {
   let navBtn = document.createElement("div");
   navBtn.id = "menu";
+  navBtn.className = "title-small regular space-between";
 
   let program = document.createElement("span");
   program.id = index;
@@ -228,7 +231,7 @@ function getSuggestionsBySearchWord(searchWord) {
 // Skapar sökalternativen i programlistan
 function createOptionsInList(programmeName, universityName) {
   let option = document.createElement("div");
-  option.className = "option";
+  option.className = "option space-between";
   
   let programmeInfo = document.createElement('div');
   

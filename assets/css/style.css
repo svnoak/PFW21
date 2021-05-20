@@ -619,6 +619,53 @@ figcaption{
   background-color: var(--elevated-background);
 }
 
+/* COMPARE */
+
+.compare-header {
+  color: var(--black);
+  gap: var(--space-small);
+  padding: var(--space-medium);
+}
+.compare-header > h1, .compare-header > p {
+  text-align: center;
+}
+
+.search-bar {
+  width: 90%;
+  height: 7vh;
+  
+  border: 2px solid black;
+  border-radius: var(--border-rounded);
+  padding: var(--space-small);
+}
+
+.programme-list {
+  border: 1px solid black;
+  width: 90%;
+  max-height: 50vh;
+  overflow-y: scroll;
+  padding: var(--space-small);
+}
+
+.title-favorites {
+  background-color: var(--elevated-background);
+}
+
+.option {
+  border-bottom: 1px solid var(--gray);
+  cursor: pointer;
+}
+.option:last-child { border-bottom: none;}
+
+#menu {
+  color: var(--primary);
+  background-color: var(--accent);
+
+  border-radius: var(--border-rounded);
+  margin: 0 var(--space-medium);
+  padding: var(--space-small);
+}
+
 #comparison {
   display: flex;
   position: relative;
