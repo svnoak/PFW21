@@ -11,12 +11,14 @@ let programmes = [];
 let cities = [];
 let countries = [];
 let levels = [];
-let filteredLevels = [];
 let points = 0;
 let sundaysNumber = 0;
 let visa = false;
 let filteredLanguages = [];
-let allFilterWords = [programmes, cities, levels, points, filteredLanguages];
+let allFilterWords = [programmes, cities, levels, filteredLanguages];
+function updateAllFilterWords() {
+  allFilterWords = [programmes, cities, levels, filteredLanguages];
+}
 
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
 
@@ -29,6 +31,7 @@ function createFilterOptions() {
   closeButton.textContent = "X";
   closeButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
+    showResults(event);
   });
 
   let filterOptions = document.createElement("div");
@@ -39,21 +42,21 @@ function createFilterOptions() {
   let bachelorBtn = document.createElement("div");
   bachelorBtn.setAttribute("id", "bachelor");
   bachelorBtn.textContent = "Bachelor";
-  if (filteredLevels.includes("bachelor")) {
+  if (levels.includes("bachelor")) {
     bachelorBtn.classList.add("selected");
   }
   bachelorBtn.addEventListener("click", addLevelsToFilter);
   let masterBtn = document.createElement("div");
   masterBtn.setAttribute("id", "master");
   masterBtn.textContent = "Master";
-  if (filteredLevels.includes("master")) {
+  if (levels.includes("master")) {
     masterBtn.classList.add("selected");
   }
   masterBtn.addEventListener("click", addLevelsToFilter);
   let doctorateBtn = document.createElement("div");
   doctorateBtn.setAttribute("id", "doctorate");
   doctorateBtn.textContent = "Doctorate";
-  if (filteredLevels.includes("doctorate")) {
+  if (levels.includes("doctorate")) {
     doctorateBtn.classList.add("selected");
   }
   doctorateBtn.addEventListener("click", addLevelsToFilter);
@@ -85,18 +88,30 @@ function createFilterOptions() {
   let englishDiv = document.createElement("div");
   englishDiv.setAttribute("id", "english");
   englishDiv.textContent = "Engelska";
+  if (filteredLanguages.includes("engelska")) {
+    englishDiv.classList.add("selected");
+  }
   englishDiv.addEventListener("click", addLanguagesToFilter);
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
+  if (filteredLanguages.includes("spanska")) {
+    spanishDiv.classList.add("selected");
+  }
   spanishDiv.addEventListener("click", addLanguagesToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
   frenchDiv.textContent = "Franska";
+  if (filteredLanguages.includes("franska")) {
+    frenchDiv.classList.add("selected");
+  }
   frenchDiv.addEventListener("click", addLanguagesToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
   swedishDiv.textContent = "Svenska";
+  if (filteredLanguages.includes("svenska")) {
+    swedishDiv.classList.add("selected");
+  }
   swedishDiv.addEventListener("click", addLanguagesToFilter);
   languagesDiv.append(englishDiv, spanishDiv, frenchDiv, swedishDiv);
 
@@ -116,9 +131,11 @@ function createFilterOptions() {
   visumOption.prepend(visumInput);
 
   let sundays = document.createElement("div");
-  sundays.setAttribute("id", "sundays-options");
-  sundays.innerHTML = `<h4 id="points-title">Soldagar</h4>`;
+  sundays.setAttribute("id", "sundays-option");
+  sundays.innerHTML = `<h4 id="sundays-title">Antagningspoäng</h4>`;
   let sundaysDiv = document.createElement("div");
+  sundaysDiv.setAttribute("id", "points-slider-div");
+  sundaysDiv.innerHTML = `<p id="sundays-text">${sundaysNumber}</p>`;
   let sundaysSlider = document.createElement("input");
   sundaysSlider.setAttribute("id", "sundays-slider");
   sundaysSlider.setAttribute("type", "range");
@@ -127,10 +144,10 @@ function createFilterOptions() {
   sundaysSlider.value = sundaysNumber;
   sundaysSlider.addEventListener("change", () => {
     console.log(document.getElementById("sundays-slider").value);
+    sundaysNumber = document.getElementById("sundays-slider").value;
+    document.getElementById("sundays-text").textContent = sundaysNumber;
   });
-  sundaysDiv.append(sundaysSlider);
-  sundaysDiv.innerHTML += `
-  <p id="sundays-text">${sundaysNumber}</p>`;
+  sundaysDiv.prepend(sundaysSlider);
   sundays.append(sundaysDiv);
 
   let resetBtnDiv = document.createElement("div");
@@ -138,13 +155,34 @@ function createFilterOptions() {
   let resetBtn = document.createElement("button");
   resetBtn.setAttribute("id", "reset");
   resetBtn.textContent = "Återställ Filter";
+  resetBtn.addEventListener("click", () => {
+    let resetAllSelected = document.querySelectorAll(".selected");
+    filteredLevels = [];
+    filteredLanguages = [];
+    console.log(resetAllSelected);
+    resetAllSelected.forEach((obj) => {
+      obj.classList.remove("selected");
+    });
+    visumInput.checked = false;
+    visa = false;
+    pointsSlider.value = 0;
+    points = 0;
+    document.getElementById("points-text").textContent = points;
+    sundaysSlider.value = 0;
+    sundaysNumber = 0;
+    document.getElementById("sundays-text").textContent = sundaysNumber;
+  });
   resetBtnDiv.append(resetBtn);
 
   let showResultsBtnDiv = document.createElement("div");
   showResultsBtnDiv.setAttribute("id", "show-results");
   let showResultsBtn = document.createElement("button");
   showResultsBtn.setAttribute("id", "show-results-btn");
-  showResultsBtn.textContent = "Visda resultat";
+  showResultsBtn.textContent = "Visa resultat";
+  showResultsBtn.addEventListener("click", (event) => {
+    document.getElementById("filters").remove();
+    showResults(event);
+  });
   showResultsBtnDiv.append(showResultsBtn);
 
   filterOptions.append(levelOptions, pointsOption, languagesDiv, visumOption, sundays, resetBtnDiv, showResultsBtnDiv);
@@ -158,9 +196,9 @@ function addLevelsToFilter(event) {
   event.target.classList.toggle("selected");
   let selectedLevels = document.querySelectorAll("#level-options > .selected");
   console.log(selectedLevels);
-  filteredLevels = [];
+  levels = [];
   for (let i = 0; i < selectedLevels.length; i++) {
-    filteredLevels.push(selectedLevels[i].textContent.toLocaleLowerCase());
+    levels.push(selectedLevels[i].textContent.toLocaleLowerCase());
   }
 }
 function addLanguagesToFilter(event) {
@@ -188,6 +226,7 @@ function getProgrammesBySearchWord(event) {
     }
     if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
+      countries.push(country.name);
       let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
       citiesInCountry.forEach((obj) => {
         cities.push(obj.name.toLocaleLowerCase());
@@ -225,26 +264,12 @@ function filterCity(array) {
         }
       });
     });
-    filterCountry(passArray);
-  } else {
-    filterCountry(array);
-  }
-}
-function filterCountry(array) {
-  let passArray = [];
-  if (countries.length > 0) {
-    countries.forEach((searchWord) => {
-      array.forEach((obj) => {
-        if (getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)) {
-          passArray.push(obj);
-        }
-      });
-    });
     filterLevels(passArray);
   } else {
     filterLevels(array);
   }
 }
+
 function filterLevels(array) {
   let passArray = [];
   if (levels.length > 0) {
@@ -351,6 +376,24 @@ function addBookmarksToLS() {
 }
 function sortSearchResult(programmes) {
   createProgrammeElements(programmes);
+}
+
+function showResults() {
+  updateAllFilterWords();
+  document.getElementById("search-words-pills").innerHTML = "";
+  allFilterWords.forEach((filters) => {
+    console.log("test");
+    if (filters.length > 0) {
+      filters.forEach((str) => {
+        createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(str));
+      });
+    }
+  });
+  if (sundaysNumber > 0) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
+  if (points > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
+  if (visa) createPillForSearchWordsOnSearchSite(`Kräver visa`);
+
+  filterProgramme(DB.PROGRAMMES);
 }
 
 function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#search-words-pills") {

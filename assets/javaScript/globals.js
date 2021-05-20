@@ -122,3 +122,7 @@ function resetUrlParameter() {
 function setUrlParameter(string, key) {
   window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
 }
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

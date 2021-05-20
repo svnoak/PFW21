@@ -263,6 +263,7 @@ svg {
   height: 100vh;
   width: 100vw;
   background-color: white;
+  z-index: 100;
 }
 #close {
   position: absolute;
