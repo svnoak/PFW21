@@ -312,13 +312,14 @@ BUTTONS
   top: 0;
 }
 
-.first-circle { position: relative; top: -10rem; right: 5rem;}
-.second-circle { position: relative; top: 16rem; right: 5rem;}
+.first-circle { position: relative; top: -40vw; overflow-x: hidden;}
+.second-circle { position: relative; top: 40vw; overflow-x: hidden;}
+.first-circle > svg, .second-circle > svg { width: 140vw; height: 140vw;}
 
 .pin-header {
   position: absolute;
-  top: -2rem;
-  left: -1rem;
+  top: -2em;
+  left: -1em;
 }
 
 .hero {

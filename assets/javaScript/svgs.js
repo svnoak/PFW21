@@ -101,7 +101,7 @@ const arrowsIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
             </svg>
             `;
 
-const backgroundCircle = `<svg width="535" height="536" viewBox="0 0 535 536" fill="none" xmlns="http://www.w3.org/2000/svg">
+const backgroundCircle = `<svg viewBox="220 0 240 536" fill="none">
             <ellipse cx="267.5" cy="268" rx="267.5" ry="268" fill="#738671"/>
             </svg>`;
 
