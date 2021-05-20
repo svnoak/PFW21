@@ -23,25 +23,24 @@ const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
 function makeHero(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-hero`;
     
-    // css: position: relative!!!
     let header = document.createElement("header");
-    header.className = ` `;
-    header.style.position = "relative"; // to position image absolute
-
     let studyInfo = document.createElement("section");
-    studyInfo.className = ``;
     wrapper.append(header, studyInfo);
 
-    //header content, css color: white;
+    let textWrapper = document.createElement("div");
+    textWrapper.className = `title-wrapper`;
+
     let title = document.createElement("h1");
     title.textContent = detailedProgram.name;
+    title.className = `title-large`;
     let subtitle =  document.createElement("span");
+    subtitle.className = `text-default`;
     subtitle.textContent = detailedProgramUniversity.name;
 
-
-    header.append(cityImage(0), title, subtitle);
+    textWrapper.append(title, subtitle)
+    header.append(cityImage(0), textWrapper);
 
     // studyInfo content
         const information = [
@@ -59,10 +58,12 @@ function makeHero(){
         let container = document.createElement("div");
 
         let icon = document.createElement("i");
+        icon.className = `icon`;
         icon.innerHTML = info[0];
         let text = document.createElement("span");
         text.textContent = info[1];
-        wrapper.append(icon, text);
+        text.className = `text-default`;
+        container.append(icon, text);
 
         studyInfo.append(container);
     });
@@ -73,7 +74,7 @@ function makeHero(){
 
 function makeProgrammeStats(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-stats`;
 
     const information = [
         ["Antagningspoäng", detailedProgram.entryGrades[0]],
@@ -86,6 +87,7 @@ function makeProgrammeStats(){
         let container = document.createElement("div");
         let number = document.createElement("span");
         number.textContent = info[1];
+        number.className = `text-large`;
         let text = document.createElement("span");
         text.textContent = info[0];
         container.append(number, text)
@@ -96,132 +98,6 @@ function makeProgrammeStats(){
     return wrapper
 }
 
-function makeWeatherInfo(){
-    let wrapper = document.createElement("section");
-    wrapper.className = ``;
-
-    let title = document.createElement("h3");
-    title.textContent = "Väder";
-
-    let paragraph = document.createElement("p");
-    let weather;
-    if(detailedProgramCity.sun < 180){
-        weather = "molnigt"; 
-    } else if (detailedProgramCity.sun < 220){
-        weather = "växlande moligt";
-    } else if( detailedProgramCity.sun < 280){
-        weather = "växlande soligt";
-    } else if (detailedProgramCity.sun < 320){
-        weather = "soligt"
-    } else {
-        weather = "väldigt soligt"
-    }
-    paragraph.textContent = `I ${detailedProgramCity.name} är det ${weather}.`;
-
-
-    wrapper.append(title, paragraph, createDiagram())
-
-    return wrapper
-}
-
-function createDiagram() {
-    // find all programs with same name
-    let allSameProgram = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name);
-
-    // create unique array of the cities
-    let programCities = [...new Set( allSameProgram.map( program => getCityFromUniID(program.universityID).name) )]
-
-    //create simplified array
-    programCities = programCities.map( programCity =>{
-        let cityObject = DB.CITIES.find( city => city.name === programCity)
-  
-        return {
-            name: cityObject.name,
-            country: DB.COUNTRIES.find( country => country.id === cityObject.countryID).name,
-            sun: cityObject.sun,
-            programName: detailedProgram.name
-        }
-    } )
-
-    //DOM Figure
-    let figure = document.createElement("figure");
-
-    let figcaption = document.createElement("figcaption");
-    if ( programCities.length === 1){
-        figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
-    } else {
-        figcaption.textContent = `Såhär jämför sig vädret i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
-    }
-    let diagram = document.createElement("div");
-    figure.append(figcaption, diagram)
-
-    programCities.forEach(city => {
-        let wrapper = document.createElement("div");
-        diagram.append(wrapper);
-
-        let cityName = document.createElement("span");
-        cityName.textContent = city.name;
-
-        let bar = document.createElement("div");
-        bar.style.width = `${city.sun / 356}%`;
-
-        let sunNum = document.createElement("span");
-        sunNum.textContent = `${city.sun} soldagar`;
-        bar.append(sunNum);
-
-        wrapper.append(cityName, bar)
-    })  
-
-
-    return figure
-}
-
-function makeCityInfo(){
-    let wrapper = document.createElement("section");
-    wrapper.className = ``;
-
-    let head = document.createElement("div");
-    head.className = ``;
-    
-    // head child
-    let titleWrap = document.createElement("div");
-    titleWrap.style.position = "relative"; // for image position:absolute
-    let paragraph = document.createElement("p");
-    paragraph.textContent = detailedProgramCity.text;
-    head.append(titleWrap, paragraph)
-
-    let title = document.createElement("h2");
-    title.textContent = `Om ${detailedProgramCity.name}`;
-    titleWrap.append(cityImage(1), title)   
-    
-    let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
-
-    //also review cards
-    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
-
-    titleWrap.append(cityImage(1), title)
-
-    //let reviews = `reviews`;
-
-    //also review cards
-    wrapper.append(head, reviews, makeWeatherInfo())
-
-    return wrapper
-
-}
-
-function cityImage(x){
-    let cityImage = document.createElement("div");
-    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
-    cityImage.className = ``;
-    cityImage.style.position = "absolute";  // lägga in dessa 
-    cityImage.style.width= "100%";          //
-    cityImage.style.height= "100%";         //
-    cityImage.style.zIndex= "-1";           // i css?
-
-    return cityImage
-}
-
 function makeSchoolInfo(){
     let wrapper = document.createElement("section");
     wrapper.className = ``;
@@ -229,16 +105,19 @@ function makeSchoolInfo(){
     // outer divs
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
-    title.className = ``;
-
+    title.className = `detail-title title-default detail-body`;
+  
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
-    let otherSchools = document.createElement("section");
-    wrapper.append(title, cardCarousell(reviews), createClubSection())
+    let schoolInfo = document.createElement("section");
+    schoolInfo.className = `detail-body detail-school`;
+    schoolInfo.append(createClubSection())
+
+    wrapper.append(title, cardCarousell(reviews), schoolInfo)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
-        wrapper.append(createOtherSchoolsSection(otherUniversities))
+        schoolInfo.append(createOtherSchoolsSection(otherUniversities))
     }
     
     return wrapper
@@ -248,7 +127,7 @@ function createClubSection(){
     let wrapper = document.createElement("section");
 
     let title = document.createElement("h3");
-    title.className = ``;
+    title.className = `detail-sub title-small`;
     title.textContent = `Engagera dig i skolans klubbar`;
     wrapper.append(title)
 
@@ -256,12 +135,14 @@ function createClubSection(){
 
     schoolClubs.forEach( club => {
         let container = document.createElement("div");
-        let name = document.createElement("span");
+        let name = document.createElement("div");
+        name.className = `bold`;
         name.textContent = club.name ? 
         club.name : 
         `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
+
         let members = document.createElement("span");
-        members.textContent = `${club.memberCount} medlemmar`
+        members.textContent = `${club.memberCount} medlemmar`;
 
         container.append(name, members)
         wrapper.append(container)
@@ -273,21 +154,20 @@ function createClubSection(){
 
 function createOtherSchoolsSection(uniArray){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
 
     let title = document.createElement("h3");
+    title.className = `detail-sub title-small`;
     title.textContent = `Studera ${detailedProgram.name} vid andra universitet `;
     wrapper.append(title)
 
     uniArray.forEach(program => {
-        let uni = document.createElement("span");
+        let uni = document.createElement("div");
         uni.textContent = getUniversityFromUniID(program.universityID).name;
         wrapper.append(uni)
     })
 
     return wrapper
 }
-
 
 function createReviewCard(reviewObject){
     let wrapper = document.createElement("article");
@@ -303,7 +183,7 @@ function createReviewCard(reviewObject){
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = `card-deco`;
+    deco.className = `card-deco title-large`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
@@ -325,8 +205,10 @@ function createReviewCard(reviewObject){
         let container = document.createElement("div");
 
         let star = document.createElement("span");
+        star.className = `title-small`;
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
+        category.className = `light`;
         category.textContent = categories[i];
 
         container.append(star, category);
@@ -335,8 +217,6 @@ function createReviewCard(reviewObject){
 
     return wrapper
 }
-
-document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
 
 function cardCarousell(array){
     let wrapper = document.createElement("section");
@@ -382,3 +262,127 @@ function cardCarousell(array){
 
     return wrapper
 }
+
+function makeCityInfo(){
+    let wrapper = document.createElement("section");
+    wrapper.className = `detail-city`;
+
+    let head = document.createElement("div");
+    head.className = `intro`;
+    
+    // head child
+    let titleWrap = document.createElement("div");
+    let paragraph = document.createElement("p");
+    paragraph.className = `detail-body`;
+    paragraph.textContent = detailedProgramCity.text;
+    head.append(titleWrap, paragraph)
+
+    let title = document.createElement("h2");
+    title.className = `detail-title title-default detail-body`;    
+    title.textContent = `Om ${detailedProgramCity.name}`;
+    titleWrap.append(cityImage(1), title)   
+    
+    let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
+
+    //also review cards
+    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
+
+    return wrapper
+
+}
+
+function cityImage(x){
+    let cityImage = document.createElement("div");
+    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
+    cityImage.className = `bg-image`;
+
+    return cityImage
+}
+
+function createDiagram() {
+    // find all programs with same name
+    let allSameProgram = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name);
+
+    // create unique array of the cities
+    let programCities = [...new Set( allSameProgram.map( program => getCityFromUniID(program.universityID).name) )]
+
+    //create simplified array
+    programCities = programCities.map( programCity =>{
+        let cityObject = DB.CITIES.find( city => city.name === programCity)
+  
+        return {
+            name: cityObject.name,
+            country: DB.COUNTRIES.find( country => country.id === cityObject.countryID).name,
+            sun: cityObject.sun,
+            programName: detailedProgram.name
+        }
+    } )
+
+    //DOM Figure
+    let figure = document.createElement("figure");
+
+    let figcaption = document.createElement("figcaption");
+    if ( programCities.length === 1){
+        figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
+    } else {
+        figcaption.textContent = `Såhär jämför sig soldagarna i ${detailedProgramCity.name} med alla städer där du också kan studera ${detailedProgram.name}`;
+    }
+    let diagram = document.createElement("div");
+    figure.append(figcaption, diagram)
+
+    programCities.forEach(city => {
+        let wrapper = document.createElement("div");
+        wrapper.className = `detail-weather-city`;
+        diagram.append(wrapper);
+
+        let cityName = document.createElement("span");
+        cityName.textContent = city.name;
+
+        let barWrapper = document.createElement("div");
+        barWrapper.className = `detail-weather-bar`;
+
+        let bar = document.createElement("div");
+        bar.style.width = `${(city.sun / 365) * 100}%`;
+
+        let sunNum = document.createElement("span");
+        sunNum.textContent = `${city.sun}`;
+        bar.append(sunNum);
+        barWrapper.append(bar)
+
+        wrapper.append(cityName, barWrapper)
+    })  
+
+
+    return figure
+}
+
+function makeWeatherInfo(){
+    let wrapper = document.createElement("section");
+    wrapper.className = `detail-body`;
+
+    let title = document.createElement("h3");
+    title.className = `detail-sub title-small`;
+    title.textContent = "Väder";
+
+    let paragraph = document.createElement("p");
+    let weather;
+    if(detailedProgramCity.sun < 180){
+        weather = "molnigt"; 
+    } else if (detailedProgramCity.sun < 220){
+        weather = "växlande moligt";
+    } else if( detailedProgramCity.sun < 280){
+        weather = "växlande soligt";
+    } else if (detailedProgramCity.sun < 320){
+        weather = "soligt"
+    } else {
+        weather = "väldigt soligt"
+    }
+    paragraph.textContent = `I ${detailedProgramCity.name} är det ${weather}.`;
+
+
+    wrapper.append(title, paragraph, createDiagram())
+
+    return wrapper
+}
+
+document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());

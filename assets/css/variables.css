@@ -23,6 +23,7 @@ SHADOWS
   --black: black;
 
   --gray:rgb(161, 161, 161);
+  --overlay: rgba(0, 0, 0, 0.5);
 
 
 /*--------------*/

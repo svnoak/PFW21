@@ -77,6 +77,7 @@ BUTTONS
   z-index: 10;
 }
 
+
 /*--------------*/
 /* BUTTONS     */
 /*------------*/
@@ -244,35 +245,196 @@ svg {
   justify-content: flex-end;
 }
 
+/* DETAIL PAGE */
+.detail-hero{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 20%;
+}
+
+.detail-hero header{
+  /* för att positionera bild */
+  position: relative;
+}
+
+.detail-hero .title-wrapper{
+  padding: var(--space-medium);
+  background-color: var(--overlay);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%; 
+  color: white;
+}
+
+.detail-hero span{
+  padding: var(--space-small) 0px;
+}
+
+.detail-hero .bg-image, .detail-city .bg-image{
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* quick info with icon section */
+.detail-hero section{
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: var(--space-medium);
+}
+
+.detail-hero section > div{
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.detail-hero .icon{
+  display: grid;
+  place-content: center;
+  margin-right: var(--space-small);
+}
+
+.detail-hero .icon svg{
+  height: 16px;
+  width: 16px;
+}
+
+.detail-stats{
+  background-color: var(--accent);
+  padding: var(--space-medium) 0 var(--space-large);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-medium);
+}
+
+.detail-stats > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.detail-section-title {
+  padding-top: var(--space-large);
+}
+.detail-section-sub {
+  padding-top: var(--space-medium);
+}
+
+/* big number */
+.detail-stats > div > span:first-child{
+  padding-bottom: var(--space-small);
+  font-size: var(--title-default);
+}
+
+
+.detail-title {
+  padding-top: var(--space-large);
+  padding-bottom: var(--space-medium);
+}
+.detail-sub {
+  padding-top: var(--space-small);
+  padding-bottom: var(--space-small);
+}
+
 /* REVIEW CAROUSELL */
 .card-carousell{
   padding-left: var(--space-medium);
   padding-right: var(--space-medium);
 }
+.bg-image{
+  width: 100%;
+  height: 100%;
+}
+
+.detail-school > section {
+  padding: var(--space-medium) 0px 0px;
+} 
+.detail-school > section > div{
+  margin-bottom: 5px;
+} 
+.detail-city{
+  padding: var(--space-large) 0px;
+}
+
+.detail-city .intro{
+  padding-bottom: var(--space-large);
+}
+
+/* header img with title wrapper */
+.detail-city .intro > div{
+  position: relative;
+  height: 35vh;
+  margin-bottom: var(--space-medium);
+}
+
+.detail-city h2{
+  color: var(--primary);
+  height: 100%;
+  width: 100%;
+  background-color: var(--overlay);
+}
+
+.detail-weather-city{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detail-weather-city > *:first-child{
+  flex-basis: 85px;
+}
+.detail-weather-city > *:last-child{
+  flex-grow: 1;
+}
+
+.detail-weather-bar > *{
+  background-color: var(--secondary);
+  text-align: right;
+  padding: 5px var(--space-small) 5px 5px;
+  color: white;
+}
+
+figcaption{
+  font-size: var(--font-small);
+  font-style: italic;
+}
+
+/* REVIEW CAROUSELL */
 
 .card-wrapper{
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
-  margin-bottom: var(--space-small);
-}
-
-.card-wrapper::webkit-scrollbar{
-  display: none;
+  padding-bottom: var(--space-medium);
+  padding-top: 5px;
 }
 
 .card{
   scroll-snap-align: center;
 
-  min-width: 85vw;
+  min-width: calc( 100vw - ( var(--space-medium) * 2 ) );
   background-color:#FAFAF9;
-  margin-left: var(--space-small);
-  margin-right: var(--space-small);
+  margin-left: var(--space-medium);
   display: grid;
   border-radius: var(--border-squared);
   overflow: hidden;
+  box-shadow: var(--shadow);
+}
 
-  scrollbar-width: none;  /* Firefox */
+.card-deco{
+  color: var(--secondary);
+  font-size: var(--title-large);
+}
+
+.card:last-child{
+  margin-right: var(--space-medium);
+  /* border-right: var(--space-medium) solid black; */
 }
 
 .card-alias{
@@ -313,13 +475,14 @@ svg {
 
 .blob-wrapper{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .blob{
   height: 10px;
   width: 10px;
-  margin: 0px 2px;
+  margin: 0px 3px;
   border-radius: var(--border-round);
   background-color: var(--gray);
 }

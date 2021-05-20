@@ -4,21 +4,11 @@ const homeIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xm
 </svg>
 `;
 
-const pinIcon = `<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0)">
-                        <path
-                            d="M14 7.16666C14 11.8333 8 15.8333 8 15.8333C8 15.8333 2 11.8333 2 7.16666C2 5.57536 2.63214 4.04923 3.75736 2.92402C4.88258 1.7988 6.4087 1.16666 8 1.16666C9.5913 1.16666 11.1174 1.7988 12.2426 2.92402C13.3679 4.04923 14 5.57536 14 7.16666Z"
-                            stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M8 9.16666C9.10457 9.16666 10 8.27123 10 7.16666C10 6.06209 9.10457 5.16666 8 5.16666C6.89543 5.16666 6 6.06209 6 7.16666C6 8.27123 6.89543 9.16666 8 9.16666Z"
-                            stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0">
-                            <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
-                        </clipPath>
-                    </defs>
-                </svg>`;
+const pinIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
 
 const bookIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -45,23 +35,13 @@ const alertIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" x
 </svg>
 `;
 
-const calendarIcon = `<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0)">
-                        <path
-                            d="M12.6667 3.16666H3.33333C2.59695 3.16666 2 3.76361 2 4.49999V13.8333C2 14.5697 2.59695 15.1667 3.33333 15.1667H12.6667C13.403 15.1667 14 14.5697 14 13.8333V4.49999C14 3.76361 13.403 3.16666 12.6667 3.16666Z"
-                            stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10.6666 1.83334V4.50001" stroke="#111111" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M5.33337 1.83334V4.50001" stroke="#111111" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M2 7.16666H14" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0">
-                            <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
-                        </clipPath>
-                    </defs>
-                </svg>`;
+const calendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 2V6" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 2V6" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 10H21" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
 
 const bookmarkIconFilled = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" fill="black" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,10 +49,10 @@ const bookmarkIconFilled = `<svg width="24" height="24" viewBox="0 0 24 24" fill
 
 `;
 
-/*const bookmarkIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+const bookmarkIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-`;*/
+`;
 
 const bookmarkIcon = `<svg width="25" height="34" viewBox="0 0 25 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
