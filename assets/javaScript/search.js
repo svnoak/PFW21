@@ -132,7 +132,7 @@ function createFilterOptions() {
 
   let sundays = document.createElement("div");
   sundays.setAttribute("id", "sundays-option");
-  sundays.innerHTML = `<h4 id="sundays-title">Antagningspoäng</h4>`;
+  sundays.innerHTML = `<h4 id="sundays-title">Antal Soldagar</h4>`;
   let sundaysDiv = document.createElement("div");
   sundaysDiv.setAttribute("id", "points-slider-div");
   sundaysDiv.innerHTML = `<p id="sundays-text">${sundaysNumber}</p>`;
@@ -157,7 +157,7 @@ function createFilterOptions() {
   resetBtn.textContent = "Återställ Filter";
   resetBtn.addEventListener("click", () => {
     let resetAllSelected = document.querySelectorAll(".selected");
-    filteredLevels = [];
+    levels = [];
     filteredLanguages = [];
     console.log(resetAllSelected);
     resetAllSelected.forEach((obj) => {
@@ -264,6 +264,20 @@ function filterCity(array) {
         }
       });
     });
+    filterVisa(passArray);
+  } else {
+    filterVisa(array);
+  }
+}
+function filterVisa(array) {
+  let passArray = [];
+  if (!visa) {
+    array.forEach((obj) => {
+      if (!getCountryFromUniID(obj.universityID).visa) {
+        passArray.push(obj);
+      }
+    });
+    console.log(visa);
     filterLevels(passArray);
   } else {
     filterLevels(array);
@@ -296,6 +310,12 @@ function createProgrammeElements(programmes) {
     bookmark.className = `bookmark`;
     bookmark.setAttribute("programmeID", obj.id);
     bookmark.innerHTML = bookmarkIcon;
+    let savedBookmarks = JSON.parse(localStorage.getItem("favoriteProgrammes"));
+    if (savedBookmarks.length > 0) {
+      if (savedBookmarks.includes(obj.id)) {
+        bookmark.classList.add("filled");
+      }
+    }
     bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
@@ -391,7 +411,7 @@ function showResults() {
   });
   if (sundaysNumber > 0) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
   if (points > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
-  if (visa) createPillForSearchWordsOnSearchSite(`Kräver visa`);
+  if (visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
 
   filterProgramme(DB.PROGRAMMES);
 }
