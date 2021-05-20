@@ -1,6 +1,6 @@
 "use strict";
 
-render('body', createBackground());
+// render('body', createBackground());
 render('.index-wrapper', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES), createCompareInfo());
 
 // Skapar HERO med innehåll
@@ -28,8 +28,10 @@ function createHero() {
     pin.classList = 'pin-header';
     pin.innerHTML = headerPin;
 
+    let circleContainer = createBackgroundCircle();
+    circleContainer.className = 'c-container top';
 
-    indexHero.append(pin, titleHero, globeRender, textHero, buttonHero);
+    indexHero.append(circleContainer, pin, titleHero, globeRender, textHero, buttonHero);
     
     return indexHero;
 }
@@ -114,26 +116,38 @@ function createCompareInfo(){
     button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIcon}</i>`;
     buttonContainer.append(button);
 
-    wrapper.append(title, text, buttonContainer)
+    let circleContainer = createBackgroundCircle();
+    circleContainer.className = 'c-container bottom';
+
+    wrapper.append(title, text, buttonContainer, circleContainer)
 
     return wrapper;
 }
 
+function createBackgroundCircle() {
+    let circleContainer = document.createElement('div');
+    let circle = document.createElement('div');
+    circle.className = 'circle';
+    circleContainer.append(circle);
+    circle.style.height = '140vw';
+    circle.style.width = '140vw';
 
-
-function createBackground() {
-    let background = document.createElement('section');
-    background.className = 'background';
-
-    let firstCircle = document.createElement('div');
-    firstCircle.className = 'first-circle';
-    firstCircle.innerHTML = backgroundCircle;
-
-    let secondCircle = document.createElement('div');
-    secondCircle.className = 'second-circle';
-    secondCircle.innerHTML = backgroundCircle;
-
-    background.append(firstCircle, secondCircle);
-
-    return background;
+    return circleContainer;
 }
+
+// function createBackground() {
+//     let background = document.createElement('section');
+//     background.className = 'background';
+
+//     let firstCircle = document.createElement('div');
+//     firstCircle.className = 'first-circle';
+//     firstCircle.innerHTML = backgroundCircle;
+
+//     let secondCircle = document.createElement('div');
+//     secondCircle.className = 'second-circle';
+//     secondCircle.innerHTML = backgroundCircle;
+
+//     background.append(firstCircle, secondCircle);
+
+//     return background;
+// }

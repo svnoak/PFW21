@@ -304,17 +304,23 @@ BUTTONS
 
 /* INDEX */
 
-.background {
+.c-container {
   width: 100vw;
+  overflow-x: hidden;
 
   position: absolute;
-  z-index: -10;
-  top: 0;
+  z-index: -1;
+  top: -7em;
 }
-
-.first-circle { position: relative; top: -40vw; overflow-x: hidden;}
-.second-circle { position: relative; top: 40vw; overflow-x: hidden;}
-.first-circle > svg, .second-circle > svg { width: 140vw; height: 140vw;}
+.circle {
+  position: relative;
+  right: 4em;
+  background-color: var(--secondary);
+  border-radius: var(--border-round);
+}
+.c-container.bottom {
+  top: -20em;
+}
 
 .pin-header {
   position: absolute;
@@ -344,10 +350,11 @@ BUTTONS
 }
 
 .brand-info {
-  margin: var(--space-medium);
+  padding: var(--space-medium);
   flex-direction: column;
   gap: var(--space-small);
 
+  background-color: var(--primary);
   color: var(--secondary);
   text-align: center;
 }
@@ -385,6 +392,8 @@ BUTTONS
 }
 
 .compare-info-section {
+  position: relative;
+
   padding: var(--space-medium);
 
   flex-direction: column;

@@ -101,11 +101,6 @@ const arrowsIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
             </svg>
             `;
 
-const backgroundCircle = `<svg viewBox="220 0 240 536" fill="none">
-            <ellipse cx="267.5" cy="268" rx="267.5" ry="268" fill="#738671"/>
-            </svg>`;
-
-
 const headerPin = `<svg width="124" height="144" viewBox="0 0 124 144" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
             <path d="M95.9157 54.4537C101.847 90.1307 60.3203 128.46 60.3203 128.46C60.3203 128.46 8.62618 105.628 2.69506 69.9511C0.672593 57.7855 3.64367 45.3018 10.9547 35.2463C18.2657 25.1907 29.3178 18.3871 41.6796 16.332C54.0415 14.2769 66.7004 17.1387 76.8716 24.2879C87.0428 31.4371 93.8932 42.2881 95.9157 54.4537Z" fill="url(#paint0_linear)"/>
