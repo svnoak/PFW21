@@ -75,7 +75,8 @@ SHADOWS
 /*------------*/
 
   --border-round: 50%;
-  --border-squared: 1rem;
+  --border-squared: 1em;
+  --border-rounded: 2em;
 
 
 /*--------------*/
