@@ -215,6 +215,7 @@ BUTTONS
 
 .detail-hero .title-wrapper{
   padding: var(--space-medium);
+  border-radius: 0px 0px var(--border-squared) var(--border-squared);
   background-color: var(--overlay);
   display: flex;
   flex-direction: column;
@@ -262,7 +263,7 @@ BUTTONS
 
 .detail-stats{
   background-color: var(--accent);
-  padding: var(--space-medium);
+  padding: var(--space-medium) 0 var(--space-large);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-medium);
@@ -272,7 +273,6 @@ BUTTONS
   display: flex;
   flex-direction: column;
   align-items: center;
-
   color: white;
 }
 
@@ -292,9 +292,11 @@ BUTTONS
 
 .detail-title {
   padding-top: var(--space-large);
+  padding-bottom: var(--space-medium);
 }
 .detail-sub {
   padding-top: var(--space-small);
+  padding-bottom: var(--space-small);
 }
 .detail-body{
   padding-left: var(--space-medium);
@@ -338,13 +340,13 @@ BUTTONS
   align-items: center;
   margin-bottom: 5px;
 }
+
 .detail-weather-city > *:first-child{
   flex-basis: 85px;
 }
 .detail-weather-city > *:last-child{
   flex-grow: 1;
 }
-
 
 .detail-weather-bar > *{
   background-color: var(--secondary);
@@ -353,7 +355,13 @@ BUTTONS
   color: white;
 }
 
+figcaption{
+  font-size: var(--font-small);
+  font-style: italic;
+}
+
 /* REVIEW CAROUSELL */
+
 .card-wrapper{
   display: flex;
   overflow-x: scroll;
@@ -370,6 +378,7 @@ BUTTONS
   display: grid;
   border-radius: var(--border-squared);
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
 .card-deco{

@@ -171,7 +171,7 @@ function createReviewCard(reviewObject){
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = `card-deco`;
+    deco.className = `card-deco title-large`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
@@ -193,6 +193,7 @@ function createReviewCard(reviewObject){
         let container = document.createElement("div");
 
         let star = document.createElement("span");
+        star.className = `title-small`;
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
         category.className = `light`;
