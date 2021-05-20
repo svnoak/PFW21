@@ -125,8 +125,8 @@ function setUrlParameter(string, key) {
 function createProgrammeElements(id ,programmes) {
   document.getElementById(id).innerHTML = "";
   programmes.forEach((obj) => {
-    let searchResultCard = document.createElement("div");
-    searchResultCard.className = "search-result-card";
+    let ResultCard = document.createElement("div");
+    ResultCard.className = "search-result-card";
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
@@ -192,9 +192,8 @@ function createProgrammeElements(id ,programmes) {
       cardButtonDiv
     );
 
-    searchResultCard.append(programmeImage, bookmark, programmeCardInfo);
-
-    render(`#${id}`, searchResultCard);
+    ResultCard.append(programmeImage, bookmark, programmeCardInfo);
+    render(`#${id}`, ResultCard);
   });
 }
 

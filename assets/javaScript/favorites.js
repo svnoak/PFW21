@@ -1,6 +1,6 @@
 "use strict";
 
-render("body", createCompareInfo());
+render("header", createCompareInfo());
 
 createProgrammeElements("favourites", parseFavoritesFromLS("object"));
 
@@ -14,14 +14,14 @@ function createCompareInfo(){
 
   let title = document.createElement('h2');
   title.className = 'title-default regular'
-  title.textContent = 'Beslutsångest?';
+  title.textContent = 'Favoriter';
 
   let text = document.createElement('p');
   text.className = 'text-default regular';
-  text.textContent = 'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.';
+  text.textContent = 'Här kan du se de program du sparat som favoriter. Om du vill jämföra några av programmen kan du gå vidare med knappen nedanför:';
 
   let buttonContainer = document.createElement('div');
-  buttonContainer.className = 'c-button-container';
+  buttonContainer.className = 'c-button-container centered';
   let button = document.createElement('a');
   button.href = 'comapare.html';
   button.className = 'text-default light space-between button-solid--cream button-square';
