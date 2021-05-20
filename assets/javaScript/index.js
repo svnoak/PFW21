@@ -21,7 +21,7 @@ function createHero() {
 
     let buttonHero = document.createElement('a');
     buttonHero.href = 'search.html';
-    buttonHero.className = 'text-large semi-bold space-between button-round button-cta';
+    buttonHero.className = 'text-large regular space-between button-round button-cta';
     buttonHero.innerHTML = `<i id="white-icon">${searchIcon}</i> Sök efter program`;
 
     let pin = document.createElement('div');
@@ -82,7 +82,7 @@ function createCard(country) {
     countryImg.className = 'country-img';
 
     let showProgramsButton = document.createElement('a');
-    showProgramsButton.className = 'text-default semi-bold space-between button-solid--cream button-square';
+    showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
     showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIcon}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
@@ -112,7 +112,7 @@ function createCompareInfo(){
     buttonContainer.className = 'c-button-container';
     let button = document.createElement('a');
     button.href = 'comapare.html';
-    button.className = 'text-default light space-between button-solid--cream button-square';
+    button.className = 'text-large light space-between button-solid--cream button-square';
     button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIcon}</i>`;
     buttonContainer.append(button);
 

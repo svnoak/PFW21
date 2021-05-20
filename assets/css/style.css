@@ -71,7 +71,7 @@ BUTTONS
 
 /* SPECIAL */
 .title-hero {
-  font-size: var(--title-large); 
+  font-size: 2rem; 
   font-family: var(--title-font);
   color: var(--secondary);
   z-index: 10;
@@ -577,6 +577,9 @@ figcaption{
   background-size: cover;
   background-position: center;
 }
+.country-img > a {
+  color: var(--black);
+}
 
 #white-icon > svg > path {
   stroke: var(--primary);
@@ -602,6 +605,8 @@ figcaption{
   display: flex;
   justify-content: end;
 }
+.c-button-container > a { color: var(--secondary); }
+.c-button-container svg path { stroke: var(--secondary);}
 
 .table {
   display: grid;
