@@ -215,7 +215,6 @@ BUTTONS
 
 .detail-hero .title-wrapper{
   padding: var(--space-medium);
-  border-radius: 0px 0px var(--border-squared) var(--border-squared);
   background-color: var(--overlay);
   display: flex;
   flex-direction: column;
@@ -367,6 +366,7 @@ figcaption{
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
   padding-bottom: var(--space-medium);
+  padding-top: 5px;
 }
 
 .card{
