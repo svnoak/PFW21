@@ -686,11 +686,15 @@ figcaption{
   padding: var(--space-small);
 }
 
+#menu i svg path {stroke: var(--primary);}
+
 #comparison {
   display: flex;
   position: relative;
   left: 0vw;
   transition: ease-in-out 0.5s;
+
+  margin: var(--space-medium);
 }
 
 .program-list {

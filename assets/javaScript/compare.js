@@ -129,12 +129,12 @@ function createNav(index = 0) {
   program.textContent = "Program";
 
   let iconLeft = document.createElement("i");
-  iconLeft.textContent = "< ";
+  iconLeft.innerHTML = trailingIconLeft;
   iconLeft.className = "switch";
   iconLeft.id = "prev";
 
   let iconRight = document.createElement("i");
-  iconRight.textContent = " >";
+  iconRight.innerHTML = trailingIconRight;
   iconRight.className = "switch";
   iconRight.id = "next";
 
