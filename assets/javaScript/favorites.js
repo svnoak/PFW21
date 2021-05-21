@@ -23,7 +23,7 @@ function createCompareInfo(){
   let buttonContainer = document.createElement('div');
   buttonContainer.className = 'c-button-container centered';
   let button = document.createElement('a');
-  button.href = 'comapare.html';
+  button.href = 'compare.html';
   button.className = 'text-default light space-between button-solid--cream button-square';
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
   buttonContainer.append(button);
