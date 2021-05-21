@@ -56,6 +56,11 @@ function getProgrammesField(subjectID) {
   return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
 }
 
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find((language) => language.id == languageID).name;
+}
+
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
@@ -194,7 +199,6 @@ function setUrlParameter(params) {
     }
   }
   })
-
 }
 
 function showNoProgrammesMessage() {
