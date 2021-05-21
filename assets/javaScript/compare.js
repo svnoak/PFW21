@@ -1,9 +1,6 @@
 "use strict";
 
 let addedProgrammes = [];
-
-localStorage.favoriteProgrammes = "[308,309,310]";
-
 let programmeIDs = JSON.parse(localStorage.favoriteProgrammes);
 let programmes = [];
 programmeIDs.forEach( id => programmes.push(getProgrammesById(id)));

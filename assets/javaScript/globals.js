@@ -1,5 +1,9 @@
 "use strict";
 
+if ( !localStorage.favoriteProgrammes ) localStorage.favoriteProgrammes = "[]";
+
+
+
 // google-fonts
 let fontStyle = document.createElement('link');
 fontStyle.rel = 'stylesheet';
