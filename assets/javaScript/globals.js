@@ -154,11 +154,12 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav());
+document.body.append(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {
   let wrapper = document.createElement("footer");
+  wrapper.className = `centered`;
   let text = document.createElement("span");
   text.textContent = `[brand] © 2021`;
   wrapper.append(text);
