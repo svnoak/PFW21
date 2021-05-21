@@ -179,8 +179,6 @@ function DOMfoot() {
 }
 
 function getLanguageFromLangID(languageID) {
-  console.log(languageID);
-  console.log(LANGUAGES.find((language) => language.id == languageID).name);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -191,12 +189,18 @@ function resetUrlParameter() {
 
 function setUrlParameter(params) {
   params.forEach( param => {
-    if (param.array.length > 0) {
+    let condition = false;
+    if (typeof(param.value) == "object")  {
+      condition = param.value.length > 0;
+    } else {
+        condition = param.value != null;
+      }
+    if ( condition ) {
     if ( window.location.search.includes("?") ) {
-      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.value}`);
     }
     else {
-      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.value}`);
     }
   }
   })
