@@ -26,6 +26,10 @@ function getProgrammesByName(programmeName) {
   return DB.PROGRAMMES.find((obj) => obj.name == programmeName);
 }
 
+function getCountryFromCountryId(countryID) {
+  return DB.CITIES.find((obj) => obj.id == countryID);
+}
+
 function getUniversityFromUniID(universityID) {
   return DB.UNIVERSITIES.find((obj) => obj.id == universityID);
 }
@@ -176,8 +180,8 @@ function resetUrlParameter() {
   window.history.replaceState({}, "Title", `${url}`);
 }
 
-function setUrlParameter(string, key) {
-  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
+function setUrlParameter(array, key) {
+  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${array}`);
 }
 
 function createProgrammeElements(id ,programmes) {
