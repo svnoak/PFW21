@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
         })
       }
   }
+  filterProgramme(DB.PROGRAMMES);
 })
 
 let programmes = [];
