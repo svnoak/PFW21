@@ -10,22 +10,22 @@ function clearSearchBar() {
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
-  for( let i = 0; i < urlParameters.length; i++ ) {
-      let x = i+1;
-      key = urlParameters[i];
-      if ( params.find( param => param.id == key ) ) {
-        params.forEach( param => {
-          if (param.id == key) {
-            urlParameters[x].split(",").forEach( p => {
-              param.array.push(p) 
-              createPillForSearchWordsOnSearchSite(p);
-            })
-          }
-        })
-      }
+  for (let i = 0; i < urlParameters.length; i++) {
+    let x = i + 1;
+    key = urlParameters[i];
+    if (params.find((param) => param.id == key)) {
+      params.forEach((param) => {
+        if (param.id == key) {
+          urlParameters[x].split(",").forEach((p) => {
+            param.array.push(p);
+            createPillForSearchWordsOnSearchSite(p);
+          });
+        }
+      });
+    }
   }
   filterProgramme(DB.PROGRAMMES);
-})
+});
 
 let programmes = [];
 let cities = [];
@@ -235,29 +235,28 @@ function addLanguagesToFilter(event) {
 }
 
 let params = [
-    {
-      id: "ciID",
-      array: cities
-    },
-    {
-      id: "coID",
-      array: countries
-    },
-    {
-      id: "liID",
-      array: levels
-    },
-    {
-      id: "piID",
-      array: programmes
-    }
-  ]
+  {
+    id: "ciID",
+    array: cities,
+  },
+  {
+    id: "coID",
+    array: countries,
+  },
+  {
+    id: "liID",
+    array: levels,
+  },
+  {
+    id: "piID",
+    array: programmes,
+  },
+];
 
-  function reloadUrlParams() {
-    resetUrlParameter();
-    setUrlParameter(params);
-  }
-
+function reloadUrlParams() {
+  resetUrlParameter();
+  setUrlParameter(params);
+}
 
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
@@ -267,22 +266,24 @@ function getProgrammesBySearchWord(event) {
     clearSearchBar();
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
-    } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
+    } else if (
+      DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))
+    ) {
       let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
       countries.push(country.name);
       let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
-    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
-      levels.push(input); 
+    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) {
+      levels.push(input);
     }
     if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
     if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
     else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
       programmes.push(input);
 
-    filterProgramme(DB.PROGRAMMES);
-    reloadUrlParams();
+      filterProgramme(DB.PROGRAMMES);
+      reloadUrlParams();
+    }
   }
-}
 }
 function filterProgramme(array) {
   let passArray = [];
@@ -406,11 +407,12 @@ function createProgrammeElements(programmes) {
 
     let programmeCardTitle = document.createElement("h3");
     programmeCardTitle.innerHTML = obj.name;
+    programmeCardTitle.className = "text-default bold";
 
     let programmeCardSchool = document.createElement("div");
     programmeCardSchool.className = "programme-card-school";
     let cardSchool = document.createElement("p");
-    cardSchool.className = "card-school";
+    cardSchool.className = "card-school text-small light";
     cardSchool.innerHTML = getUniversityFromUniID(obj.universityID).name;
     programmeCardSchool.innerHTML = homeIcon;
     programmeCardSchool.append(cardSchool);
@@ -418,7 +420,7 @@ function createProgrammeElements(programmes) {
     let programmeCardCity = document.createElement("div");
     programmeCardCity.className = "programme-card-city";
     let cardCity = document.createElement("p");
-    cardCity.className = "card-city";
+    cardCity.className = "card-city text-small light";
     cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
     programmeCardCity.innerHTML = pinIcon;
     programmeCardCity.append(cardCity);
@@ -427,14 +429,14 @@ function createProgrammeElements(programmes) {
     let levelDiv = document.createElement("div");
     levelDiv.className = "flex-row";
     let cardLevel = document.createElement("p");
-    cardLevel.className = "card-level";
+    cardLevel.className = "card-level text-small light";
     cardLevel.innerHTML = getLevel(obj.level);
     levelDiv.innerHTML = bookIcon;
     levelDiv.append(cardLevel);
     let pointsDiv = document.createElement("div");
     pointsDiv.className = "flex-row";
     let cardPoints = document.createElement("p");
-    cardPoints.className = "card-level";
+    cardPoints.className = "card-level text-small light";
     cardPoints.innerHTML = `Antagningspoäng ${obj.entryGrades[0]}`;
     pointsDiv.innerHTML = bookIcon;
     pointsDiv.append(cardPoints);
@@ -443,8 +445,8 @@ function createProgrammeElements(programmes) {
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
     cardButton.href = "detail.html";
-    cardButton.innerHTML = "Läs mer";
-    cardButton.className = "card-button";
+    cardButton.innerHTML = "Läs mer >";
+    cardButton.className = "card-button text-default light";
     cardButton.addEventListener("mouseup", () => {
       localStorage.setItem("programmeID", obj.id);
     });

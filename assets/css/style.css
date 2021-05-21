@@ -180,11 +180,10 @@ BUTTONS
 /* sökfunktionen */
 
 #search-results {
-  width: 500px;
+  width: 100vw;
   min-height: 500px;
-  border: 1px solid black;
-  margin: 20px 50px 0 200px;
 }
+
 #search-words-pills {
   display: flex;
   flex-wrap: wrap;
@@ -210,17 +209,22 @@ BUTTONS
   cursor: pointer;
 }
 .search-result-card {
-  width: 100%;
+  width: 90%;
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   position: relative;
+  border-radius: 10px;
+  background: #fafaf9;
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.15);
 }
 .programme-image {
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 200px;
+  height: 175px;
   width: 30%;
+  border-radius: 10px 0 0 10px;
 }
 .programme-card-info {
   width: 100%;
@@ -234,10 +238,7 @@ BUTTONS
   flex-direction: row;
   align-items: center;
 }
-.programme-card-info > div > p {
-  font-size: 15px;
-  margin-left: 5px;
-}
+
 .programme-card-level-and-date {
   display: flex;
   flex-direction: row;
@@ -245,6 +246,7 @@ BUTTONS
 }
 .card-button {
   width: 30%;
+  color: linear-gradient(180deg, #6078af 0%, #9adcee 100%);
 }
 .card-title {
   max-width: 50%;
@@ -267,11 +269,10 @@ BUTTONS
   background-color: red;
 }
 .sort-and-filter {
-  margin: 20px 0 0 200px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 60vw;
+  width: 100vw;
 }
 svg {
   pointer-events: none;
@@ -295,7 +296,6 @@ svg {
   right: 5px;
 }
 #filter-options > div {
-  margin: 30px 0 0 150px;
 }
 #level-options {
   display: flex;
@@ -366,6 +366,11 @@ svg {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+#filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* DETAIL PAGE */
