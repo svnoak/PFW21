@@ -7,6 +7,13 @@ function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
 
+function updateView() {
+  reloadUrlParams();
+  window.location.search.length > 0 ?
+  filterProgramme(DB.PROGRAMMES) :
+  showNoProgrammesMessage();
+}
+
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
@@ -24,7 +31,7 @@ window.addEventListener("load", () => {
         })
       }
   }
-  filterProgramme(DB.PROGRAMMES);
+  updateView()
 })
 
 let programmes = [];
@@ -32,13 +39,13 @@ let cities = [];
 let citiesFromCountries = [];
 let countries = [];
 let levels = [];
+let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 let points = 0;
 let sundaysNumber = 0;
 let visa = false;
 let filteredLanguages = [];
-let allFilterWords = [programmes, cities, levels, filteredLanguages];
 function updateAllFilterWords() {
-  allFilterWords = [programmes, cities, levels, filteredLanguages];
+  allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 }
 
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
@@ -266,24 +273,19 @@ function getProgrammesBySearchWord(event) {
     createPillForSearchWordsOnSearchSite(this.value);
     clearSearchBar();
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-      cities.push(input);
+        cities.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-      let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
-      countries.push(country.name);
-      let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
+        countries.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
-      levels.push(input); 
+        levels.push(input); 
+    } else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+        programmes.push(input);
     }
-    if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
-    if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
-    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
-      programmes.push(input);
-
-    filterProgramme(DB.PROGRAMMES);
     reloadUrlParams();
+    updateView();
+    }
   }
-}
-}
+
 function filterProgramme(array) {
   let passArray = [];
   if (programmes.length > 0) {
@@ -556,19 +558,23 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
             case 0:
               index = programmes.findIndex((word) => word == removeWord);
               programmes.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
             case 1:
               index = cities.findIndex((word) => word == removeWord);
               cities.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
             case 2:
               index = levels.findIndex((word) => word == removeWord);
               levels.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
-
+            case 3:
+              index = countries.findIndex((word) => word == removeWord);
+              countries.splice(index, 1);
+              updateView();
+              break;
             default:
               break;
           }

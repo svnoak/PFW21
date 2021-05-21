@@ -197,6 +197,33 @@ function setUrlParameter(params) {
 
 }
 
+function showNoProgrammesMessage() {
+  let site = window.location.href.split("/").pop().split(".").slice(0,1)[0];
+  let div = document.createElement("div");
+  div.id = "nothing-here"
+
+  let messageContent; // Vilket meddelande som ska visas
+  let htmlElement; // Vilket element som ska användas för att appenda elementet ange samma som i en querySelector
+  
+  switch (site) {
+    case "search":
+      messageContent = "Du får söka för att få resultat ;)";
+      htmlElement = "#search-results";
+      break;
+  
+    case "favorites":
+      messageContent = "Du har inte laggt till några favoriter :(";
+      htmlElement = "#favorites";
+      break;
+
+    case "compare":
+      messageContent = "Sök på de program du vill jämföra."
+      htmlElement = "#comparison";
+  }
+  div.textContent = messageContent;
+  document.querySelector(htmlElement).innerHTML = "";
+  render( htmlElement, div );
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
