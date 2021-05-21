@@ -134,7 +134,7 @@ function DOMnav() {
     {
       title: "Bokmärken",
       href: "favorites.html",
-      icon: bookmarkIcon,
+      icon: bookmarkIconNav,
     },
   ];
 
@@ -241,10 +241,10 @@ function createProgrammeElements(id ,programmes) {
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
-    if (parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0) bookmark.classList.add("filled");
-
-    bookmark.setAttribute("programmeID", obj.id);
+    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
+    bookmark.innerHTML = bookmarkIconFilled :
     bookmark.innerHTML = bookmarkIcon;
+    bookmark.setAttribute("programmeID", obj.id);
     bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
@@ -270,7 +270,7 @@ function createProgrammeElements(id ,programmes) {
     let cardCity = document.createElement("p");
     cardCity.className = "card-city";
     cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
-    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.innerHTML = locationIcon;
     programmeCardCity.append(cardCity);
 
     let programmeCardLevelAndDate = document.createElement("div");
@@ -279,7 +279,7 @@ function createProgrammeElements(id ,programmes) {
     let cardLevel = document.createElement("p");
     cardLevel.className = "card-level";
     cardLevel.innerHTML = getLevel(obj.level);
-    levelDiv.innerHTML = bookIcon;
+    levelDiv.innerHTML = lvlIcon;
     levelDiv.append(cardLevel);
     programmeCardLevelAndDate.append(levelDiv);
 
@@ -288,10 +288,6 @@ function createProgrammeElements(id ,programmes) {
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    /*cardButton.addEventListener('mouseup', () => {
-      localStorage.setItem('programmeID', obj.id);
-    });*/
-
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
 
@@ -333,7 +329,7 @@ function saveBookmarked(event) {
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
-  target.classList.toggle("filled");
+  target.innerHTML = bookmarkIconFilled;
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
@@ -350,7 +346,7 @@ async function removeBookmarkFromLS(bookmarks, id, target) {
   }
 
   function remove(bookmarks, id, target) {
-    target.classList.toggle("filled");
+    target.innerHTML = bookmarkIcon;
     bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
     localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
   }
