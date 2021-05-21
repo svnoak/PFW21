@@ -124,7 +124,7 @@ function DOMnav() {
     {
       title: "Jämför",
       href: "compare.html",
-      icon: arrowsIcon,
+      icon: compareIcon,
     },
     {
       title: "Bokmärken",
@@ -141,6 +141,7 @@ function DOMnav() {
     link.className = `column centered`;
 
     let icon = document.createElement("i");
+    icon.className = `centered`;
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.className = `text-small`;

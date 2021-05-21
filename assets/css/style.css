@@ -405,8 +405,8 @@ svg {
 }
 
 .detail-hero .icon svg{
-  height: 16px;
-  width: 16px;
+  height: 24px;
+  width: 24px;
 }
 
 .detail-stats{
@@ -690,8 +690,8 @@ figcaption{
   color: var(--black);
 }
 
-#white-icon > svg > path {
-  stroke: var(--primary);
+#white-icon > svg  {
+  fill: var(--primary);
 }
 
 .compare-info-section {
@@ -875,8 +875,8 @@ nav{
 }
 
 nav a {
-  flex-basis: 1;
-  height: var(--nav-height);
+
+  flex-basis: 0px;
   flex-grow: 1;
   color: var(--black);
   text-decoration: none;
@@ -889,11 +889,11 @@ nav .active{
 }
 
 nav i{
-  height: var(--space-medium);
   margin-bottom: 5px;
 }
 
 nav i svg{
-  height: 100%;
-  width: 100%;
+  height: 24px;
+  width: 24px;
 }
+

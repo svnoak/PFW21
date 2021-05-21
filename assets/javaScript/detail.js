@@ -40,13 +40,13 @@ function makeHero(){
     // studyInfo content
         const information = [
             //location
-            [pinIcon, detailedProgramCity.name + ", " + detailedProgramCountry.name],
+            [locationIcon, detailedProgramCity.name + ", " + detailedProgramCountry.name],
             //langauge
-            [bookIcon, DB.LANGUAGES.find( language => language.id === detailedProgram.language).name],
+            [langIcon, DB.LANGUAGES.find( language => language.id === detailedProgram.language).name],
             // level
-            [bookOpenIcon, DB.LEVELS[detailedProgram.level] ],
+            [lvlIcon, DB.LEVELS[detailedProgram.level] ],
             // visa
-            [alertIcon, detailedProgramCountry.visa === true ? "Kräver visum" : "Kräver inte visum"]
+            [visaIcon, detailedProgramCountry.visa === true ? "Kräver visum" : "Kräver inte visum"]
         ]
 
     information.forEach(info => {
