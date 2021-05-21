@@ -608,17 +608,6 @@ figcaption{
 .c-button-container > a { color: var(--secondary); }
 .c-button-container svg path { stroke: var(--secondary);}
 
-.table {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 90vw;
-}
-
-.table > div:nth-child(4n),
-.table > div:nth-child(4n-1) {
-  background-color: var(--elevated-background);
-}
-
 /* COMPARE */
 
 .compare-header {
@@ -684,18 +673,17 @@ figcaption{
   border-radius: var(--border-rounded);
   margin: 0 var(--space-medium);
   padding: var(--space-small);
-
-  white-space: nowrap;
 }
 
-#menu i { display: flex; cursor: pointer;}
-#menu i svg path {stroke: var(--primary);}
+#menu i { display: flex; cursor: pointer; }
+#menu i svg path { stroke: var(--primary); }
 
-#menu > .programme-name {
+#menu > span {
   flex-grow: 1;
   inline-size: 0;
   overflow: clip;
   text-align: center;
+  white-space: nowrap;
 }
 
 #comparison {
@@ -703,13 +691,22 @@ figcaption{
   position: relative;
   left: 0vw;
   transition: ease-in-out 0.5s;
-
-  margin: var(--space-medium);
 }
 
 .program-list {
   width: 100vw;
   flex-shrink: 0;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 90vw;
+}
+
+.table > div:nth-child(4n),
+.table > div:nth-child(4n-1) {
+  background-color: var(--elevated-background);
 }
 
 body {

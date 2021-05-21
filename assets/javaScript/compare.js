@@ -120,10 +120,9 @@ function createHeader() {
 function createNav(index = 0) {
   let navBtn = document.createElement("div");
   navBtn.id = "menu";
-  navBtn.className = "title-small regular space-between";
+  navBtn.className = "scroll-left title-small regular space-between";
 
   let program = document.createElement("span");
-  program.className = "programme-name";
   program.id = index;
   addedProgrammes.length ?
   program.textContent = getProgrammesById(addedProgrammes[index]).name :
