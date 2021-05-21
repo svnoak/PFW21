@@ -12,6 +12,25 @@ let cities = [];
 let countries = [];
 let levels = [];
 let allFilterWords = [programmes, cities, levels];
+let params = [
+    {
+      id: "ciID",
+      array: cities
+    },
+    {
+      id: "coID",
+      array: countries
+    },
+    {
+      id: "liID",
+      array: levels
+    },
+    {
+      id: "piID",
+      array: programmes
+    }
+  ]
+
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
