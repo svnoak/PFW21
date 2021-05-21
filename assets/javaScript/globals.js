@@ -304,6 +304,32 @@ function createProgrammeElements(id ,programmes) {
   });
 }
 
+function createCompareInfo(title, text, centered = false){
+  let wrapper = document.createElement('section');
+  wrapper.className = 'compare-info-section centered';
+
+  let titleEl = document.createElement('h2');
+  titleEl.className = 'title-default regular'
+  titleEl.textContent = title;
+
+  let textEl = document.createElement('p');
+  textEl.className = 'text-default regular';
+  textEl.textContent = text;
+
+  let buttonContainer = document.createElement('div');
+  buttonContainer.className = 'c-button-container';
+  if (centered) buttonContainer.classList.add("centered");
+  let button = document.createElement('a');
+  button.href = 'compare.html';
+  button.className = 'text-default light space-between button-solid--cream button-square';
+  button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
+  buttonContainer.append(button);
+
+  wrapper.append(titleEl, textEl, buttonContainer)
+
+  return wrapper;
+}
+
 function parseFavoritesFromLS(type /*"id" or "object"*/) {
   let programmes = [];
   let programmIDs = localStorage.favoriteProgrammes.length > 0 ? JSON.parse(localStorage.favoriteProgrammes) : [];
