@@ -280,9 +280,10 @@ function addLevelsToFilter(event) {
   }
 }
 function addLanguagesToFilter(event) {
-  let targetLanguage = event.target.innerHTML;
+  let targetLanguage = event.target.innerHTML.toLocaleLowerCase();
   filteredLanguages.push(targetLanguage);
   event.target.classList.toggle("selected");
+  updateView();
   /*let selectedLanguage = document.querySelectorAll("#language-options > .selected");
   filteredLanguages = [];
   for (let i = 0; i < selectedLanguage.length; i++) {
@@ -508,6 +509,8 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
               break;
             case 4:
             index = filteredLanguages.findIndex((word) => word == removeWord);
+            console.log(index);
+            console.log(removeWord);
             filteredLanguages.splice(index, 1);
             updateView();
             break;
