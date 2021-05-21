@@ -205,20 +205,21 @@ function showNoProgrammesMessage() {
   switch (site) {
     case "search":
       messageContent = "Du får söka för att få resultat ;)";
-      id = "#search-results";
+      htmlElement = "#search-results";
       break;
   
     case "favorites":
       messageContent = "Du har inte laggt till några favoriter :(";
-      id = "#favorites";
+      htmlElement = "#favorites";
       break;
 
     case "compare":
       messageContent = "Sök på de program du vill jämföra."
-      id = "#comparison";
+      htmlElement = "#comparison";
   }
-  div.textContent = message;
-  render( `#${id}`, div );
+  div.textContent = messageContent;
+  document.querySelector(htmlElement).innerHTML = "";
+  render( htmlElement, div );
 }
 
 function createProgrammeElements(id ,programmes) {
