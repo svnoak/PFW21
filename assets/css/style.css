@@ -153,7 +153,7 @@ BUTTONS
 
 #searchbar {
   height: 30px;
-  width: 300px;
+  width: 60vw;
   margin: 20px 0 0 200px;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -249,6 +249,8 @@ BUTTONS
   margin: 20px 0 0 200px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 60vw;
 }
 svg {
   pointer-events: none;

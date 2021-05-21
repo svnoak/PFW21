@@ -9,6 +9,7 @@ function clearSearchBar() {
 
 let programmes = [];
 let cities = [];
+let citiesFromCountries = [];
 let countries = [];
 let levels = [];
 let points = 0;
@@ -220,7 +221,6 @@ function getProgrammesBySearchWord(event) {
     createPillForSearchWordsOnSearchSite(this.value);
     clearSearchBar();
 
-    if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
     }
@@ -233,6 +233,7 @@ function getProgrammesBySearchWord(event) {
       });
     }
     if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
+    if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
 
     filterProgramme(DB.PROGRAMMES);
   }
@@ -278,12 +279,45 @@ function filterVisa(array) {
       }
     });
     console.log(visa);
-    filterLevels(passArray);
+    filterLanguages(passArray);
   } else {
-    filterLevels(array);
+    filterLanguages(array);
   }
 }
 
+function filterLanguages(array) {
+  let passArray = [];
+  if (filteredLanguages.length > 0) {
+    filteredLanguages.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getLanguageFromID(obj.id).toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
+    filterPoints(passArray);
+  } else {
+    filterPoints(array);
+  }
+}
+function filterPoints(array) {
+  let passArray = [];
+  array.forEach((obj) => {
+    if (obj.entryGrades[0] > points) {
+      passArray.push(obj);
+    }
+  });
+  filterSundays(passArray);
+}
+function filterSundays(array) {
+  let passArray = [];
+  array.forEach((obj) => {
+    if (getCityFromUniID(obj.universityID).sun >= sundaysNumber) {
+      passArray.push(obj);
+    }
+  });
+  filterLevels(passArray);
+}
 function filterLevels(array) {
   let passArray = [];
   if (levels.length > 0) {
@@ -344,7 +378,7 @@ function createProgrammeElements(programmes) {
     programmeCardCity.innerHTML = pinIcon;
     programmeCardCity.append(cardCity);
 
-    let programmeCardLevelAndDate = document.createElement("div");
+    let programmeCardLevelAndpoints = document.createElement("div");
     let levelDiv = document.createElement("div");
     levelDiv.className = "flex-row";
     let cardLevel = document.createElement("p");
@@ -352,7 +386,14 @@ function createProgrammeElements(programmes) {
     cardLevel.innerHTML = getLevel(obj.level);
     levelDiv.innerHTML = bookIcon;
     levelDiv.append(cardLevel);
-    programmeCardLevelAndDate.append(levelDiv);
+    let pointsDiv = document.createElement("div");
+    pointsDiv.className = "flex-row";
+    let cardPoints = document.createElement("p");
+    cardPoints.className = "card-level";
+    cardPoints.innerHTML = `Antagningspoäng ${obj.entryGrades[0]}`;
+    pointsDiv.innerHTML = bookIcon;
+    pointsDiv.append(cardPoints);
+    programmeCardLevelAndpoints.append(levelDiv, pointsDiv);
 
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
@@ -370,7 +411,7 @@ function createProgrammeElements(programmes) {
       programmeCardTitle,
       programmeCardSchool,
       programmeCardCity,
-      programmeCardLevelAndDate,
+      programmeCardLevelAndpoints,
       cardButtonDiv
     );
 
@@ -395,8 +436,30 @@ function addBookmarksToLS() {
   console.log(bookmarkIDs);
 }
 function sortSearchResult(programmes) {
+  let sortBy = document.getElementById("sort-by").value;
+  let order = document.getElementById("order").value;
+  console.log(sortBy);
+  console.log(order);
+  if (sortBy == "letters" && order == "fall") {
+    programmes.sort((a, b) => (a.name > b.name ? -1 : 1));
+  }
+  if (sortBy == "letters" && order == "rise") {
+    programmes.sort((a, b) => (a.name < b.name ? -1 : 1));
+  }
+  if (sortBy == "points" && order == "rise") {
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
+  }
+  if (sortBy == "points" && order == "fall") {
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
+  }
   createProgrammeElements(programmes);
 }
+document.getElementById("sort-by").addEventListener("change", () => {
+  filterProgramme(DB.PROGRAMMES);
+});
+document.getElementById("order").addEventListener("change", () => {
+  filterProgramme(DB.PROGRAMMES);
+});
 
 function showResults() {
   updateAllFilterWords();
@@ -430,6 +493,15 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
     let removeWord = event.target.previousSibling.innerHTML.toLocaleLowerCase();
+    console.log(removeWord);
+    if (removeWord.includes("antagningspoäng")) {
+      points = 0;
+      filterProgramme(DB.PROGRAMMES);
+    }
+    if (removeWord.includes("soldagar")) {
+      sundaysNumber = 0;
+      filterProgramme(DB.PROGRAMMES);
+    }
     for (let i = 0; i < allFilterWords.length; i++) {
       allFilterWords[i].forEach((obj) => {
         if (obj.includes(removeWord)) {

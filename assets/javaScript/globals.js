@@ -43,7 +43,6 @@ function getCountryFromUniID(universityID) {
 
 function getProgrammesField(subjectID) {
   return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
-  return DB.FIELDS.find((obj) => obj.id == subjectID).name;
 }
 
 function render(parentElement, ...element) {
@@ -109,8 +108,8 @@ function DOMfoot() {
   return wrapper;
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
+function getLanguageFromLangID(languageID) {
+  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
