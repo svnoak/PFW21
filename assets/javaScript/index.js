@@ -83,7 +83,7 @@ function createCard(country) {
 
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
-    showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIcon}</i>`;
+    showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIconRight}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
         sessionStorage.setItem('countryId', country.id);
@@ -113,7 +113,7 @@ function createCompareInfo(){
     let button = document.createElement('a');
     button.href = 'comapare.html';
     button.className = 'text-large light space-between button-solid--cream button-square';
-    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIcon}</i>`;
+    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
     buttonContainer.append(button);
 
     let circleContainer = createBackgroundCircle();
