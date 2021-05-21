@@ -1,9 +1,9 @@
 "use strict";
-
+/*
 if(window.location.search === "") {
     setUrlParameter(localStorage.programmeID, "programmeID");
     localStorage.removeItem("programmeID");
-}
+}*/
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);

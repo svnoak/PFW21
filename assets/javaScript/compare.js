@@ -305,7 +305,7 @@ function removePillFromArray(programmeId) {
 
 function updateComparison() {
   main.innerHTML = "";
-  render("main", createAllSections(addedProgrammes));
+  render("body", createAllSections(addedProgrammes));
   addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
   if ( main.style.left.split("vw")[0] < parseInt(`-${addedProgrammes.length-1}00`) ) {
     main.style.left = `-${addedProgrammes.length-1}00vw`;
