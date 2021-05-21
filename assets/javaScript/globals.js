@@ -196,26 +196,29 @@ function setUrlParameter(params) {
 
 function showNoProgrammesMessage() {
   let site = window.location.href.split("/").pop().split(".").slice(0,1)[0];
-  let message;
   let div = document.createElement("div");
-  
-  console.log("TRIGGER");
+  div.id = "nothing-here"
 
-  console.log(site == "search");
+  let messageContent; // Vilket meddelande som ska visas
+  let htmlElement; // Vilket element som ska användas för att appenda elementet ange samma som i en querySelector
+  
   switch (site) {
     case "search":
-      message = "Du får söka för att få resultat ;)";
-      document.querySelector("#search-results").innerHTML = "";
-      div.textContent = message;
-      render( "#search-results",  div)
+      messageContent = "Du får söka för att få resultat ;)";
+      id = "#search-results";
       break;
   
     case "favorites":
-      message = "Du har inte laggt till några favoriter :(";
-      div.textContent = message;
-      render("#favorites", div);
+      messageContent = "Du har inte laggt till några favoriter :(";
+      id = "#favorites";
       break;
+
+    case "compare":
+      messageContent = "Sök på de program du vill jämföra."
+      id = "#comparison";
   }
+  div.textContent = message;
+  render( `#${id}`, div );
 }
 
 function createProgrammeElements(id ,programmes) {
