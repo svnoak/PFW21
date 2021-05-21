@@ -400,6 +400,7 @@ function filterLevels(array) {
   }
 }
 
+/*
 function createProgrammeElements(programmes) {
   document.getElementById("search-results").innerHTML = "";
   programmes.forEach((obj) => {
@@ -497,7 +498,7 @@ function addBookmarksToLS() {
   });
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
   console.log(bookmarkIDs);
-}
+}*/
 function sortSearchResult(programmes) {
   let sortBy = document.getElementById("sort-by").value;
   let order = document.getElementById("order").value;
@@ -515,7 +516,7 @@ function sortSearchResult(programmes) {
   if (sortBy == "points" && order == "fall") {
     programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
   }
-  createProgrammeElements(programmes);
+  createProgrammeElements("search-results", programmes);
 }
 document.getElementById("sort-by").addEventListener("change", () => {
   filterProgramme(DB.PROGRAMMES);
