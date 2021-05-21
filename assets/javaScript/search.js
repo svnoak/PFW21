@@ -269,7 +269,6 @@ let params = [
     setUrlParameter(params);
   }
 
-
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
