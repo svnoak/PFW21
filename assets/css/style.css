@@ -151,12 +151,6 @@ BUTTONS
 
 /* sökfunktionen */
 
-#searchbar {
-  height: 30px;
-  width: 60vw;
-  margin: 20px 0 0 200px;
-  background-color: rgba(255, 255, 255, 0.3);
-}
 #search-results {
   width: 500px;
   min-height: 500px;
