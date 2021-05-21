@@ -124,7 +124,7 @@ function DOMnav() {
     {
       title: "Jämför",
       href: "compare.html",
-      icon: arrowsIcon,
+      icon: compareIcon,
     },
     {
       title: "Bokmärken",
@@ -141,6 +141,7 @@ function DOMnav() {
     link.className = `column centered`;
 
     let icon = document.createElement("i");
+    icon.className = `centered`;
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.className = `text-small`;
@@ -158,20 +159,22 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav());
+document.body.append(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {
   let wrapper = document.createElement("footer");
+  wrapper.className = `centered`;
   let text = document.createElement("span");
+  text.className = `text-small`;
   text.textContent = `[brand] © 2021`;
   wrapper.append(text);
 
   return wrapper;
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
+function getLanguageFromLangID(languageID) {
+  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -220,6 +223,9 @@ function showNoProgrammesMessage() {
   div.textContent = messageContent;
   document.querySelector(htmlElement).innerHTML = "";
   render( htmlElement, div );
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function createProgrammeElements(id ,programmes) {

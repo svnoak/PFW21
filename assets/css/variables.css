@@ -47,8 +47,8 @@ SHADOWS
 /* TEXT SIZES  */
 /*------------*/
 
-  --font-xsmall: 0.4rem;
-  --font-small: 0.6rem;
+  --font-xsmall: 0.6rem;
+  --font-small: 0.7rem;
   --font-default: 0.8rem;
   --font-large: 1rem;
 
@@ -61,6 +61,7 @@ SHADOWS
   --space-medium: 17.5px;
   --space-large: 35px;
 
+  --nav-height: 60px;
   
 /*--------------*/
 /* ICONS       */
@@ -75,7 +76,7 @@ SHADOWS
 /*------------*/
 
   --border-round: 50%;
-  --border-squared: 1em;
+  --border-squared: 5px;
   --border-rounded: 2em;
 
 
