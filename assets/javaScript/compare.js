@@ -17,9 +17,9 @@ let favorites = programmes.map( programme => {
 });
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
+let main = document.getElementById("comparison");
 
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
-let main = document.querySelector("#comparison");
 
 //Skapar header med sökruta
 function createHeader() {
@@ -202,6 +202,7 @@ function setIndex(key, index) {
 }
 
 function switchProgram(id) {
+  main = document.getElementById("comparison");
   if (addedProgrammes.length) {
     changeNavName(id);
     if(addedProgrammes.length > 1) {
