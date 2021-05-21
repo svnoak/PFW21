@@ -7,6 +7,18 @@ function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
 
+window.addEventListener("load", e => {
+  let urlParameters = window.location.search.split(/\?..ID=|\&..ID=/).slice(1)
+  urlParameters.forEach( array => {
+    params.forEach( param => {
+      array.split(",").forEach( p => {
+        param.array.push(p);
+      } )
+    } )
+    
+  } )
+})
+
 let programmes = [];
 let cities = [];
 let countries = [];
@@ -53,7 +65,7 @@ function getProgrammesBySearchWord(event) {
 
     filterProgramme(DB.PROGRAMMES);
     resetUrlParameter();
-    setUrlParameter(allFilterWords,"");
+    setUrlParameter(params);
   }
 }
 

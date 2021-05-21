@@ -180,8 +180,17 @@ function resetUrlParameter() {
   window.history.replaceState({}, "Title", `${url}`);
 }
 
-function setUrlParameter(array, key) {
-  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${array}`);
+function setUrlParameter(params) {
+  params.forEach( param => {
+    if ( window.location.search.includes("?") ) {
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+    }
+    else {
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+    }
+    
+  })
+
 }
 
 function createProgrammeElements(id ,programmes) {
