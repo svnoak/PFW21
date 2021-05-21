@@ -9,9 +9,9 @@ function clearSearchBar() {
 
 function updateView() {
   reloadUrlParams();
-  window.location.search.length > 0 ? 
-  filterProgramme(DB.PROGRAMMES) : 
-  showNoProgrammesMessage("search");
+  window.location.search.length > 0 ?
+  filterProgramme(DB.PROGRAMMES) :
+  showNoProgrammesMessage();
 }
 
 window.addEventListener("load", () => {
@@ -69,7 +69,6 @@ function getProgrammesBySearchWord(event) {
     searchWords.push(input);
     createPillForSearchWordsOnSearchSite(this.value);
     clearSearchBar();
-
     
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
         cities.push(input);
