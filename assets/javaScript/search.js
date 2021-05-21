@@ -273,22 +273,15 @@ function createFilterOptions() {
 function addLevelsToFilter(event) {
   let targetLevel = event.target.innerHTML;
   event.target.classList.toggle("selected");
-  let selectedLevels = document.querySelectorAll("#level-options > .selected");
-  levels = [];
-  for (let i = 0; i < selectedLevels.length; i++) {
-    levels.push(selectedLevels[i].textContent.toLocaleLowerCase());
-  }
+  levels.push(targetLevel);
+  updateView();
 }
+
 function addLanguagesToFilter(event) {
   let targetLanguage = event.target.innerHTML.toLocaleLowerCase();
   filteredLanguages.push(targetLanguage);
   event.target.classList.toggle("selected");
   updateView();
-  /*let selectedLanguage = document.querySelectorAll("#language-options > .selected");
-  filteredLanguages = [];
-  for (let i = 0; i < selectedLanguage.length; i++) {
-    filteredLanguages.push(selectedLanguage[i].textContent.toLocaleLowerCase());
-  }*/
 }
 
 function getProgrammesBySearchWord(event) {
