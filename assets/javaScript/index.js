@@ -22,7 +22,7 @@ function createHero() {
     let buttonHero = document.createElement('a');
     buttonHero.href = 'search.html';
     buttonHero.className = 'text-large regular space-between button-round button-cta';
-    buttonHero.innerHTML = `<i id="white-icon">${searchIcon}</i> Sök efter program`;
+    buttonHero.innerHTML = `<i id="white-icon" class="centered">${searchIcon}</i> Sök efter program`;
 
     let pin = document.createElement('div');
     pin.classList = 'pin-header';

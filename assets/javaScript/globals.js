@@ -120,7 +120,7 @@ function DOMnav() {
     {
       title: "Jämför",
       href: "compare.html",
-      icon: arrowsIcon,
+      icon: compareIcon,
     },
     {
       title: "Bokmärken",
