@@ -448,12 +448,9 @@ function createProgrammeElements(programmes) {
 
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
-    cardButton.href = "detail.html";
+    cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    cardButton.addEventListener("mouseup", () => {
-      localStorage.setItem("programmeID", obj.id);
-    });
 
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
