@@ -39,14 +39,18 @@ let cities = [];
 let citiesFromCountries = [];
 let countries = [];
 let levels = [];
-let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
+
 let points = 0;
 let sundaysNumber = 0;
 let visa = false;
 let filteredLanguages = [];
+
+
 function updateAllFilterWords() {
   allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 }
+
+let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
 
@@ -422,7 +426,7 @@ function createProgrammeElements(programmes) {
     let cardCity = document.createElement("p");
     cardCity.className = "card-city";
     cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
-    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.innerHTML = locationIcon;
     programmeCardCity.append(cardCity);
 
     let programmeCardLevelAndpoints = document.createElement("div");
@@ -431,14 +435,14 @@ function createProgrammeElements(programmes) {
     let cardLevel = document.createElement("p");
     cardLevel.className = "card-level";
     cardLevel.innerHTML = getLevel(obj.level);
-    levelDiv.innerHTML = bookIcon;
+    levelDiv.innerHTML = lvlIcon;
     levelDiv.append(cardLevel);
     let pointsDiv = document.createElement("div");
     pointsDiv.className = "flex-row";
     let cardPoints = document.createElement("p");
     cardPoints.className = "card-level";
     cardPoints.innerHTML = `Antagningspoäng ${obj.entryGrades[0]}`;
-    pointsDiv.innerHTML = bookIcon;
+    pointsDiv.innerHTML = lvlIcon;
     pointsDiv.append(cardPoints);
     programmeCardLevelAndpoints.append(levelDiv, pointsDiv);
 

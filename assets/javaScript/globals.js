@@ -223,6 +223,7 @@ function showNoProgrammesMessage() {
   div.textContent = messageContent;
   document.querySelector(htmlElement).innerHTML = "";
   render( htmlElement, div );
+}
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
