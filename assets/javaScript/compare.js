@@ -123,6 +123,7 @@ function createNav(index = 0) {
   navBtn.className = "title-small regular space-between";
 
   let program = document.createElement("span");
+  program.className = "programme-name";
   program.id = index;
   addedProgrammes.length ?
   program.textContent = getProgrammesById(addedProgrammes[index]).name :
@@ -385,6 +386,7 @@ function createComparisonSection(programID){
     let section = document.createElement("section");
     let title = document.createElement("h3");
     title.className = "title-default";
+    title.className = "title-xsmall";
     title.textContent = sectionTitle;
     section.append(title);
     type ?

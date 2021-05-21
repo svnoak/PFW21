@@ -684,9 +684,19 @@ figcaption{
   border-radius: var(--border-rounded);
   margin: 0 var(--space-medium);
   padding: var(--space-small);
+
+  white-space: nowrap;
 }
 
+#menu i { display: flex; cursor: pointer;}
 #menu i svg path {stroke: var(--primary);}
+
+#menu > .programme-name {
+  flex-grow: 1;
+  inline-size: 0;
+  overflow: clip;
+  text-align: center;
+}
 
 #comparison {
   display: flex;
