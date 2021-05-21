@@ -137,6 +137,7 @@ function DOMnav() {
     link.className = `column centered`;
 
     let icon = document.createElement("i");
+    icon.className = `centered`;
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.className = `text-small`;
