@@ -7,6 +7,12 @@ function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
 
+function updateView() {
+  window.location.search.length > 0 ? 
+  filterProgramme(DB.PROGRAMMES) : 
+  showNoProgrammesMessage("search");
+}
+
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
@@ -24,14 +30,14 @@ window.addEventListener("load", () => {
         })
       }
   }
-  window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
+  updateView()
 })
 
 let programmes = [];
 let cities = [];
 let countries = [];
 let levels = [];
-let allFilterWords = [programmes, cities, levels];
+let allFilterWords = [programmes, cities, levels, countries];
 let params = [
     {
       id: "ciID",
@@ -74,8 +80,7 @@ function getProgrammesBySearchWord(event) {
         programmes.push(input);
     }
     reloadUrlParams();
-    console.log(window.location.search.length > 0);
-    window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
+    updateView();
     }
   }
 
@@ -170,19 +175,23 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
             case 0:
               index = programmes.findIndex((word) => word == removeWord);
               programmes.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
             case 1:
               index = cities.findIndex((word) => word == removeWord);
               cities.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
             case 2:
               index = levels.findIndex((word) => word == removeWord);
               levels.splice(index, 1);
-              filterProgramme(DB.PROGRAMMES);
+              updateView();
               break;
-
+            case 3:
+              index = countries.findIndex((word) => word == removeWord);
+              countries.splice(index, 1);
+              updateView();
+              break;
             default:
               break;
           }
