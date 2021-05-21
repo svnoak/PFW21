@@ -581,8 +581,8 @@ figcaption{
   color: var(--black);
 }
 
-#white-icon > svg > path {
-  stroke: var(--primary);
+#white-icon > svg  {
+  fill: var(--primary);
 }
 
 .compare-info-section {
