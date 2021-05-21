@@ -26,6 +26,10 @@ function getProgrammesByName(programmeName) {
   return DB.PROGRAMMES.find((obj) => obj.name == programmeName);
 }
 
+function getCountryFromCountryId(countryID) {
+  return DB.CITIES.find((obj) => obj.id == countryID);
+}
+
 function getUniversityFromUniID(universityID) {
   return DB.UNIVERSITIES.find((obj) => obj.id == universityID);
 }
@@ -155,20 +159,22 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav());
+document.body.append(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {
   let wrapper = document.createElement("footer");
+  wrapper.className = `centered`;
   let text = document.createElement("span");
+  text.className = `text-small`;
   text.textContent = `[brand] © 2021`;
   wrapper.append(text);
 
   return wrapper;
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
+function getLanguageFromLangID(languageID) {
+  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -177,8 +183,22 @@ function resetUrlParameter() {
   window.history.replaceState({}, "Title", `${url}`);
 }
 
-function setUrlParameter(string, key) {
-  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
+function setUrlParameter(params) {
+  params.forEach( param => {
+    if (param.array.length > 0) {
+    if ( window.location.search.includes("?") ) {
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+    }
+    else {
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+    }
+  }
+  })
+
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function createProgrammeElements(id ,programmes) {
@@ -233,12 +253,12 @@ function createProgrammeElements(id ,programmes) {
 
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
-    cardButton.href = 'detail.html';
+    cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    cardButton.addEventListener('mouseup', () => {
+    /*cardButton.addEventListener('mouseup', () => {
       localStorage.setItem('programmeID', obj.id);
-    });
+    });*/
 
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";

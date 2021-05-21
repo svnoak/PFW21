@@ -12,8 +12,13 @@ function createHero() {
     titleHero.className = 'title-hero';
     titleHero.textContent = 'Upptäck världen som student.'
 
-    let globeRender = document.createElement('div');
+    let globeRender = document.createElement('video');
     globeRender.className = 'globe-render';
+    globeRender.src = "assets/video/globe.mp4";
+    globeRender.autoplay = true;
+    globeRender.loop = true;
+
+    //<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xxSuTLcA12o?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     let textHero = document.createElement('p');
     textHero.className = 'text-default semi-bold';
@@ -83,7 +88,7 @@ function createCard(country) {
 
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
-    showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIcon}</i>`;
+    showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIconRight}</i>`;
     showProgramsButton.href = 'search.html';
     showProgramsButton.addEventListener('click', () => {
         sessionStorage.setItem('countryId', country.id);
@@ -113,7 +118,7 @@ function createCompareInfo(){
     let button = document.createElement('a');
     button.href = 'comapare.html';
     button.className = 'text-large light space-between button-solid--cream button-square';
-    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIcon}</i>`;
+    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
     buttonContainer.append(button);
 
     let circleContainer = createBackgroundCircle();
