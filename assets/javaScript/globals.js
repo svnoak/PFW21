@@ -1,5 +1,12 @@
 "use strict";
 
+// google-fonts
+let fontStyle = document.createElement('link');
+fontStyle.rel = 'stylesheet';
+fontStyle.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap';
+
+document.head.append(fontStyle);
+
 var searchWords = [];
 
 const RANDOM = {
@@ -17,6 +24,10 @@ function getProgrammesById(id) {
 
 function getProgrammesByName(programmeName) {
   return DB.PROGRAMMES.find((obj) => obj.name == programmeName);
+}
+
+function getCountryFromCountryId(countryID) {
+  return DB.CITIES.find((obj) => obj.id == countryID);
 }
 
 function getUniversityFromUniID(universityID) {
@@ -49,6 +60,54 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
 
+
+// Skapar karusell
+function cardCarousell(array){
+  let wrapper = document.createElement("section");
+  wrapper.className= `card-carousell`;
+
+  let cardWrapper = document.createElement("div");
+  cardWrapper.className = `card-wrapper`;
+  let blobWrapper = document.createElement("div");
+  blobWrapper.className = `blob-wrapper`;
+
+  wrapper.append(cardWrapper, blobWrapper)
+
+  let first = true;
+
+  array.forEach(object =>{
+      let card = document.createElement('section');
+      card.append(createCard(object));
+      card.className = `card`;
+      cardWrapper.append(card);
+
+      let blob = document.createElement("div");
+      blob.className = `blob`;
+      blobWrapper.append(blob);
+
+      if(first){
+          blob.classList.add("active");
+      }
+
+      // let location = card.getBoundingClientRect();
+      cardWrapper.addEventListener("scroll", checkActive)
+
+      function checkActive(){
+          let location = card.getBoundingClientRect();
+
+          if(location.left > 1 && location.left < 250 ){
+              document.querySelector(".active").classList.remove("active");
+              blob.classList.add(`active`);
+          }
+      }
+
+      first = false;
+      
+  })
+
+  return wrapper
+}
+
 // Menu
 function DOMnav() {
   let navItems = [
@@ -75,18 +134,21 @@ function DOMnav() {
   ];
 
   let wrapper = document.createElement("nav");
+  wrapper.className = `space-between`;
 
   navItems.forEach((item) => {
     let link = document.createElement("a");
+    link.className = `column centered`;
 
     let icon = document.createElement("i");
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
+    text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
 
     if (window.location.href.includes(item.href)) {
-      link.className = `active`;
+      link.classList.add('active');
     } else {
       link.setAttribute("href", item.href);
     }
@@ -118,10 +180,182 @@ function resetUrlParameter() {
   window.history.replaceState({}, "Title", `${url}`);
 }
 
-function setUrlParameter(string, key) {
-  window.history.replaceState({}, "Title", `${window.location.href}?${key}=${string}`);
+function setUrlParameter(params) {
+  params.forEach( param => {
+    if (param.array.length > 0) {
+    if ( window.location.search.includes("?") ) {
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+    }
+    else {
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+    }
+  }
+  })
+
 }
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function createProgrammeElements(id ,programmes) {
+  document.getElementById(id).innerHTML = "";
+  programmes.forEach((obj) => {
+    let ResultCard = document.createElement("div");
+    ResultCard.className = "search-result-card";
+
+    let bookmark = document.createElement("div");
+    bookmark.className = `bookmark`;
+    if (parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0) bookmark.classList.add("filled");
+
+    bookmark.setAttribute("programmeID", obj.id);
+    bookmark.innerHTML = bookmarkIcon;
+    bookmark.addEventListener("click", saveBookmarked);
+
+    let programmeImage = document.createElement("div");
+    programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
+    programmeImage.className = "programme-image";
+
+    let programmeCardInfo = document.createElement("div");
+    programmeCardInfo.className = "programme-card-info";
+
+    let programmeCardTitle = document.createElement("h3");
+    programmeCardTitle.innerHTML = obj.name;
+
+    let programmeCardSchool = document.createElement("div");
+    programmeCardSchool.className = "programme-card-school";
+    let cardSchool = document.createElement("p");
+    cardSchool.className = "card-school";
+    cardSchool.innerHTML = getUniversityFromUniID(obj.universityID).name;
+    programmeCardSchool.innerHTML = homeIcon;
+    programmeCardSchool.append(cardSchool);
+
+    let programmeCardCity = document.createElement("div");
+    programmeCardCity.className = "programme-card-city";
+    let cardCity = document.createElement("p");
+    cardCity.className = "card-city";
+    cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
+    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.append(cardCity);
+
+    let programmeCardLevelAndDate = document.createElement("div");
+    let levelDiv = document.createElement("div");
+    levelDiv.className = "flex-row";
+    let cardLevel = document.createElement("p");
+    cardLevel.className = "card-level";
+    cardLevel.innerHTML = getLevel(obj.level);
+    levelDiv.innerHTML = bookIcon;
+    levelDiv.append(cardLevel);
+    programmeCardLevelAndDate.append(levelDiv);
+
+    let cardButtonDiv = document.createElement("div");
+    let cardButton = document.createElement("a");
+    cardButton.href = `detail.html?programmeID=${obj.id}`;
+    cardButton.innerHTML = "Läs mer";
+    cardButton.className = "card-button";
+    /*cardButton.addEventListener('mouseup', () => {
+      localStorage.setItem('programmeID', obj.id);
+    });*/
+
+    cardButtonDiv.append(cardButton);
+    cardButtonDiv.className = "card-button-div";
+
+    programmeCardInfo.append(
+      programmeCardTitle,
+      programmeCardSchool,
+      programmeCardCity,
+      programmeCardLevelAndDate,
+      cardButtonDiv
+    );
+
+    ResultCard.append(programmeImage, bookmark, programmeCardInfo);
+    render(`#${id}`, ResultCard);
+  });
+}
+
+function parseFavoritesFromLS(type /*"id" or "object"*/) {
+  let programmes = [];
+  let programmIDs = localStorage.favoriteProgrammes.length > 0 ? JSON.parse(localStorage.favoriteProgrammes) : [];
+  switch (type) {
+    case "object":
+      programmIDs.forEach( id => programmes.push(getProgrammesById(id)));
+      break;
+  
+    default:
+      programmIDs.forEach( id => programmes.push(id));
+      break;
+  }
+  return programmes;
+}
+
+function saveBookmarked(event) {
+  let id = parseInt(event.target.attributes[1].nodeValue);
+  let target = event.target;
+  let bookmarkIDs = parseFavoritesFromLS();
+  parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ?
+  removeBookmarkFromLS(bookmarkIDs, id, target) :
+  addBookmarksToLS(bookmarkIDs, id, target); 
+}
+
+function addBookmarksToLS(bookmarks, id, target) {
+  target.classList.toggle("filled");
+  bookmarks.push(parseInt(id));
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+}
+
+async function removeBookmarkFromLS(bookmarks, id, target) {
+  if ( window.location.href.includes("favorite") ){
+    if ( await removeBookmark() ){
+      remove(bookmarks, id, target);
+      target.parentElement.remove();
+    }
+}
+  else {
+    remove(bookmarks, id, target);  
+  }
+
+  function remove(bookmarks, id, target) {
+    target.classList.toggle("filled");
+    bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
+    localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+  }
+}
+
+function removeBookmark() {
+  return new Promise( confirm => {
+    swal({
+      title: "Vill du radera favoriten?",
+      icon: "warning",
+      buttons: {
+          cancel: {
+            text: "Nej",
+            value: false,
+            visible: true,
+            className: "",
+            closeModal: true,
+          },
+          confirm: {
+            text: "Ja",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+          }
+      }
+    })
+    .then((value) => {
+      confirm(value);
+});
+  })
+}
+
+function createBackgroundCircle() {
+  let circleContainer = document.createElement('div');
+  let circle = document.createElement('div');
+  circle.className = 'circle';
+  circleContainer.append(circle);
+  circle.style.height = '140vw';
+  circle.style.width = '140vw';
+
+  return circleContainer;
 }

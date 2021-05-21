@@ -23,25 +23,34 @@ SHADOWS
   --black: black;
 
   --gray:rgb(161, 161, 161);
+  --overlay: rgba(0, 0, 0, 0.5);
 
 
 /*--------------*/
 /* TITLE SIZES */
 /*------------*/
 
-    --title-large: 2rem;
-    --title-default: 1.8rem;
-    --title-small: 1.6rem;
-    --title-xsmall: 1.4rem;
+    --title-large: 1.8rem;
+    --title-default: 1.6rem;
+    --title-small: 1.4rem;
+    --title-xsmall: 1.2rem;
+
+
+/*--------------*/
+/* TEXT FONTS */
+/*------------*/
+
+    --title-font: 'Raleway';
+    --text-font: 'Open Sans';
 
 /*--------------*/
 /* TEXT SIZES  */
 /*------------*/
 
   --font-xsmall: 0.6rem;
-  --font-small: 0.8rem;
-  --font-default: 1rem;
-  --font-large: 1.2rem;
+  --font-small: 0.7rem;
+  --font-default: 0.8rem;
+  --font-large: 1rem;
 
 
 /*--------------*/
@@ -66,7 +75,8 @@ SHADOWS
 /*------------*/
 
   --border-round: 50%;
-  --border-squared: 5%;
+  --border-squared: 1em;
+  --border-rounded: 2em;
 
 
 /*--------------*/
