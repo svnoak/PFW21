@@ -9,8 +9,7 @@ render('.index-wrapper',
     createCompareInfo(
         'Beslutsångest?',
         'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.'
-    ),
-    createBackgroundCircle()
+    )
 );
 
 // Skapar HERO med innehåll

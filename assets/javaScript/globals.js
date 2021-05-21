@@ -304,7 +304,7 @@ function createProgrammeElements(id ,programmes) {
   });
 }
 
-function createCompareInfo(title, text, centered = false){
+function createCompareInfo(title, text, centered = false, circleBackground = true){
   let wrapper = document.createElement('section');
   wrapper.className = 'compare-info-section centered';
 
@@ -325,7 +325,14 @@ function createCompareInfo(title, text, centered = false){
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
   buttonContainer.append(button);
 
-  wrapper.append(titleEl, textEl, buttonContainer)
+  console.log(circleBackground)
+  if ( circleBackground ) {
+    let circleContainer = createBackgroundCircle();
+    circleContainer.className = 'c-container bottom';
+    wrapper.append(circleContainer)
+  }
+
+  wrapper.prepend(titleEl, textEl, buttonContainer);
 
   return wrapper;
 }
