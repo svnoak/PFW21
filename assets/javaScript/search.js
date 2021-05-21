@@ -63,24 +63,26 @@ function getProgrammesBySearchWord(event) {
     createPillForSearchWordsOnSearchSite(this.value);
     clearSearchBar();
 
-    if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
+    
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
-    }
-    if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
+    } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
-      let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
+      countries.push(country.name);
+      /*let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
       citiesInCountry.forEach((obj) => {
         cities.push(obj.name.toLocaleLowerCase());
-      });
+      });*/
+    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
+      levels.push(input); 
     }
-    if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
-
+    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+      programmes.push(input);
     filterProgramme(DB.PROGRAMMES);
     reloadUrlParams();
   }
 }
-
+}
 function filterProgramme(array) {
   let passArray = [];
   if (programmes.length > 0) {
