@@ -181,7 +181,9 @@ function resetUrlParameter() {
 }
 
 function setUrlParameter(params) {
+  console.log(params);
   params.forEach( param => {
+    console.log(param.array.length);
     if (param.array.length > 0) {
     if ( window.location.search.includes("?") ) {
       window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
@@ -192,6 +194,10 @@ function setUrlParameter(params) {
   }
   })
 
+}
+
+function showNoProgrammesMessage(site) {
+  return;
 }
 
 function createProgrammeElements(id ,programmes) {

@@ -78,11 +78,12 @@ function getProgrammesBySearchWord(event) {
     }
     else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
       programmes.push(input);
-    filterProgramme(DB.PROGRAMMES);
+    }
+    window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
+    }
     reloadUrlParams();
   }
-}
-}
+
 function filterProgramme(array) {
   let passArray = [];
   if (programmes.length > 0) {
