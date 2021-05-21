@@ -42,8 +42,15 @@ function createHeader() {
   searchBar.type = "list";
   searchBar.placeholder = "Lägg till program att jämföra";
 
+  let searchBarIcon = document.createElement('i');
+  searchBarIcon.innerHTML = searchIcon;
+
   let currentProgrammes = document.createElement("div");
   currentProgrammes.className = "search-words-pills";
+  let currentProgrammesTitle = document.createElement('p');
+  currentProgrammesTitle.className = 'text-default light';
+  currentProgrammesTitle.textContent = 'Dessa program jämförs just nu:';
+  currentProgrammes.append(currentProgrammesTitle);
 
   let programmeList = document.createElement("div");
   programmeList.className = "programme-list";
@@ -103,8 +110,8 @@ function createHeader() {
 
   });
 
-  searchWrapper.append(searchBar)
-  header.append(titleHeader, textHeader, currentProgrammes, searchWrapper);
+  searchWrapper.append(searchBar, searchBarIcon);
+  header.append(titleHeader, textHeader, searchWrapper, currentProgrammes);
 
   return header;
 }
@@ -233,7 +240,7 @@ function getSuggestionsBySearchWord(searchWord) {
 
 // Skapar sökalternativen i programlistan
 function createOptionsInList(programmeName, universityName) {
-  let option = document.createElement("li");
+  let option = document.createElement("div");
   option.className = "option space-between";
   
   let programmeInfo = document.createElement('div');
@@ -247,7 +254,7 @@ function createOptionsInList(programmeName, universityName) {
   university.textContent = universityName;
   
   let addProgramme = document.createElement('i');
-  addProgramme.textContent = '+';
+  addProgramme.innerHTML = plusIcon;
   
   programmeInfo.append(programme, university);
   option.append(programmeInfo, addProgramme);
