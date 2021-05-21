@@ -71,7 +71,7 @@ BUTTONS
 
 /* SPECIAL */
 .title-hero {
-  font-size: 2rem; 
+  font-size: var(); 
   font-family: var(--title-font);
   color: var(--secondary);
   z-index: 10;
@@ -528,17 +528,20 @@ figcaption{
 
 .pin-header {
   position: absolute;
+  z-index: 0;
   top: -2em;
   left: -1em;
 }
 
 .hero {
   position: relative;
+  height: calc( 100vh -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
+
 
   margin: var(--space-medium);
   padding: var(--space-medium);
   background-color: var(--elevated-background);
-  border-radius: 1rem;
+  border-radius: var(--border-squared);
 
   flex-direction: column;
   gap: var(--space-small);

@@ -9,14 +9,14 @@ function createHero() {
     indexHero.className = 'hero centered';
 
     let titleHero = document.createElement('h1');
-    titleHero.className = 'title-hero';
+    titleHero.className = 'title-hero'; // title-large
     titleHero.textContent = 'Upptäck världen som student.'
 
     let globeRender = document.createElement('div');
     globeRender.className = 'globe-render';
 
     let textHero = document.createElement('p');
-    textHero.className = 'text-default semi-bold';
+    textHero.className = 'text-default '; // semi-bold
     textHero.textContent = 'Här kan du hitta spännande program över hela världen. Vi hjälper dig att hitta rätt!';
 
     let buttonHero = document.createElement('a');
