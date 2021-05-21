@@ -89,7 +89,7 @@ function createCard(country) {
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
     showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIconRight}</i>`;
-    showProgramsButton.href = `search.html?coID=${country.name}`;
+    showProgramsButton.href = `search.html?coID=${country.name.toLowerCase()}`;
     countryImg.append(showProgramsButton);
     
     
