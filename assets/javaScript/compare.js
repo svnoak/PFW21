@@ -34,6 +34,9 @@ function createHeader() {
   textHeader.className = 'text-default light'
   textHeader.textContent = "Här kan du jämföra dina favoriter och bestämma vilket program som är rätt för just dig!";
 
+  let searchWrapper = document.createElement('div');
+  searchWrapper.className = 'search-wrapper';
+
   let searchBar = document.createElement("input");
   searchBar.className = 'search-bar text-default';
   searchBar.type = "list";
@@ -44,18 +47,17 @@ function createHeader() {
 
   let programmeList = document.createElement("div");
   programmeList.className = "programme-list";
-  programmeList.style.display = 'none';
 
   let closeProgrammeList = document.createElement('button');
   closeProgrammeList.textContent = 'X';
   closeProgrammeList.addEventListener('click', () => {
-    programmeList.style.display = 'none';
+    programmeList.remove();
   })
 
   let favoritesContainer = document.createElement('div');
   favoritesContainer.className = 'favorites';
 
-  let titleFavorites = document.createElement('p');
+  let titleFavorites = document.createElement('div');
   titleFavorites.className = 'title-favorites text-default bold';
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
@@ -75,14 +77,14 @@ function createHeader() {
   programmeList.append(closeProgrammeList, favoritesContainer, searchResult);
 
   searchBar.addEventListener('click', () => {
-    programmeList.style.display = 'block'; 
+    searchWrapper.append(programmeList);
   });
 
   searchBar.addEventListener("keyup", () => {    
     document.querySelector('.search-result').innerHTML = '';
     
     if(searchBar.value.length > 0) {
-      favoritesContainer.style.display = 'none';
+      favoritesContainer.remove();
       let programmes = getSuggestionsBySearchWord(searchBar.value);
 
       programmes.forEach(programme => {
@@ -96,12 +98,13 @@ function createHeader() {
         searchResult.append(option);
       });
     } else {
-      favoritesContainer.style.display = 'block';
+      programmeList.append(favoritesContainer);
     }
 
   });
 
-  header.append(titleHeader, textHeader, currentProgrammes, searchBar, programmeList);
+  searchWrapper.append(searchBar)
+  header.append(titleHeader, textHeader, currentProgrammes, searchWrapper);
 
   return header;
 }
@@ -230,7 +233,7 @@ function getSuggestionsBySearchWord(searchWord) {
 
 // Skapar sökalternativen i programlistan
 function createOptionsInList(programmeName, universityName) {
-  let option = document.createElement("div");
+  let option = document.createElement("li");
   option.className = "option space-between";
   
   let programmeInfo = document.createElement('div');
@@ -279,7 +282,7 @@ function createPillFromProgrammeId(id) {
     pill.className = "pill";
   
     let pillSearchWord = document.createElement("p");
-    pillSearchWord.className = "pill-search-word";
+    pillSearchWord.className = "pill-search-word text-small";
     pillSearchWord.textContent = programmeName;
   
     let removePillButton = document.createElement("button");
