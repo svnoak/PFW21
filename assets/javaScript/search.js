@@ -59,7 +59,20 @@ window.addEventListener("load", () => {
           if (param.id == key) {
             urlParameters[x].split(",").forEach( p => {
               typeof(param.value) == "object" ? param.value.push(p) : param.value = p;
-              createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
+              switch (key) {
+                case "s":
+                  if (param.value > 0 ) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
+                  break;
+                case "p":
+                  if (param.value > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`); 
+                break;
+                case "v":
+                  if (!param.value) createPillForSearchWordsOnSearchSite(`Inklusive länder som kräver visa`);
+                  break;
+                default:
+                  createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
+                  break;
+              }
             })
           }
         })
