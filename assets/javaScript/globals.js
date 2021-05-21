@@ -180,6 +180,7 @@ function DOMfoot() {
 
 function getLanguageFromLangID(languageID) {
   console.log(languageID);
+  console.log(LANGUAGES.find((language) => language.id == languageID).name);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 

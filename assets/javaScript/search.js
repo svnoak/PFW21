@@ -356,7 +356,7 @@ function filterLanguages(array) {
   if (filteredLanguages.length > 0) {
     filteredLanguages.forEach((searchWord) => {
       array.forEach((obj) => {
-        if (getLanguageFromID(obj.id).toLocaleLowerCase().includes(searchWord)) {
+        if (getLanguageFromLangID(obj.language).toLocaleLowerCase().includes(searchWord)) {
           passArray.push(obj);
         }
       });
