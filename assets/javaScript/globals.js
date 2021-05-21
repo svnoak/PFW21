@@ -134,7 +134,7 @@ function DOMnav() {
     {
       title: "Bokmärken",
       href: "favorites.html",
-      icon: bookmarkIcon,
+      icon: bookmarkIconNav,
     },
   ];
 
