@@ -128,21 +128,21 @@ function createFilterOptions() {
   if (levels.includes("bachelor")) {
     bachelorBtn.classList.add("selected");
   }
-  bachelorBtn.addEventListener("click", addLevelsToFilter);
+  bachelorBtn.addEventListener("click", addKeyToFilter);
   let masterBtn = document.createElement("div");
   masterBtn.setAttribute("id", "master");
   masterBtn.textContent = "Master";
   if (levels.includes("master")) {
     masterBtn.classList.add("selected");
   }
-  masterBtn.addEventListener("click", addLevelsToFilter);
+  masterBtn.addEventListener("click", addKeyToFilter);
   let doctorateBtn = document.createElement("div");
   doctorateBtn.setAttribute("id", "doctorate");
   doctorateBtn.textContent = "Doctorate";
   if (levels.includes("doctorate")) {
     doctorateBtn.classList.add("selected");
   }
-  doctorateBtn.addEventListener("click", addLevelsToFilter);
+  doctorateBtn.addEventListener("click", addKeyToFilter);
 
   levelOptions.append(bachelorBtn, masterBtn, doctorateBtn);
 
@@ -173,28 +173,28 @@ function createFilterOptions() {
   if (filteredLanguages.includes("engelska")) {
     englishDiv.classList.add("selected");
   }
-  englishDiv.addEventListener("click", addLanguagesToFilter);
+  englishDiv.addEventListener("click", addKeyToFilter);
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
   if (filteredLanguages.includes("spanska")) {
     spanishDiv.classList.add("selected");
   }
-  spanishDiv.addEventListener("click", addLanguagesToFilter);
+  spanishDiv.addEventListener("click", addKeyToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
   frenchDiv.textContent = "Franska";
   if (filteredLanguages.includes("franska")) {
     frenchDiv.classList.add("selected");
   }
-  frenchDiv.addEventListener("click", addLanguagesToFilter);
+  frenchDiv.addEventListener("click", addKeyToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
   swedishDiv.textContent = "Svenska";
   if (filteredLanguages.includes("svenska")) {
     swedishDiv.classList.add("selected");
   }
-  swedishDiv.addEventListener("click", addLanguagesToFilter);
+  swedishDiv.addEventListener("click", addKeyToFilter);
   languagesDiv.append(englishDiv, spanishDiv, frenchDiv, swedishDiv);
 
   let visumOption = document.createElement("div");
@@ -270,17 +270,16 @@ function createFilterOptions() {
   document.body.prepend(filter);
 }
 
-function addLevelsToFilter(event) {
-  let targetLevel = event.target.innerHTML;
+function addKeyToFilter(event) {
+  let target = event.target.innerHTML.toLocaleLowerCase();
   event.target.classList.toggle("selected");
-  levels.push(targetLevel);
-  updateView();
-}
-
-function addLanguagesToFilter(event) {
-  let targetLanguage = event.target.innerHTML.toLocaleLowerCase();
-  filteredLanguages.push(targetLanguage);
-  event.target.classList.toggle("selected");
+  if ( !event.target.classList.contains("selected") ) {
+    removeSearchWord(target);
+  }
+  else {
+    let key = event.target.parentElement.id.split("-")[0];
+    key == "level" ? levels.push(target) : filteredLanguages.push(target);
+  }
   updateView();
 }
 
@@ -467,54 +466,56 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
     let removeWord = event.target.previousSibling.innerHTML.toLocaleLowerCase();
-    if (removeWord.includes("antagningspoäng")) {
-      points = 0;
-      filterProgramme(DB.PROGRAMMES);
-    }
-    if (removeWord.includes("soldagar")) {
-      sundaysNumber = 0;
-      filterProgramme(DB.PROGRAMMES);
-    }
-    for (let i = 0; i < allFilterWords.length; i++) {
-      allFilterWords[i].forEach((obj) => {
-        if (obj.toLocaleLowerCase().includes(removeWord)) {
-          let index = 0;
-          switch (i) {
-            case 0:
-              index = programmes.findIndex((word) => word == removeWord);
-              programmes.splice(index, 1);
-              updateView();
-              break;
-            case 1:
-              index = cities.findIndex((word) => word == removeWord);
-              cities.splice(index, 1);
-              updateView();
-              break;
-            case 2:
-              index = levels.findIndex((word) => word == removeWord);
-              levels.splice(index, 1);
-              updateView();
-              break;
-            case 3:
-              index = countries.findIndex((word) => word == removeWord);
-              countries.splice(index, 1);
-              updateView();
-              break;
-            case 4:
-            index = filteredLanguages.findIndex((word) => word == removeWord);
-            console.log(index);
-            console.log(removeWord);
-            filteredLanguages.splice(index, 1);
-            updateView();
-            break;
-            default:
-              break;
-          }
-          reloadUrlParams();
-        }
-      });
-    }
+    removeSearchWord(removeWord);
   });
   pill.append(pillSearchWord, removePillButton);
   render(parentElement, pill);
+}
+
+function removeSearchWord(removeWord) {
+  if (removeWord.includes("antagningspoäng")) {
+    points = 0;
+    filterProgramme(DB.PROGRAMMES);
+  }
+  if (removeWord.includes("soldagar")) {
+    sundaysNumber = 0;
+    filterProgramme(DB.PROGRAMMES);
+  }
+  for (let i = 0; i < allFilterWords.length; i++) {
+    allFilterWords[i].forEach((obj) => {
+      if (obj.toLocaleLowerCase().includes(removeWord)) {
+        let index = 0;
+        switch (i) {
+          case 0:
+            index = programmes.findIndex((word) => word == removeWord);
+            programmes.splice(index, 1);
+            updateView();
+            break;
+          case 1:
+            index = cities.findIndex((word) => word == removeWord);
+            cities.splice(index, 1);
+            updateView();
+            break;
+          case 2:
+            index = levels.findIndex((word) => word == removeWord);
+            levels.splice(index, 1);
+            updateView();
+            break;
+          case 3:
+            index = countries.findIndex((word) => word == removeWord);
+            countries.splice(index, 1);
+            updateView();
+            break;
+          case 4:
+          index = filteredLanguages.findIndex((word) => word == removeWord);
+          filteredLanguages.splice(index, 1);
+          updateView();
+          break;
+          default:
+            break;
+        }
+        reloadUrlParams();
+      }
+    });
+  }
 }
