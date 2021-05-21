@@ -258,7 +258,7 @@ function createFilterOptions() {
   showResultsBtnDiv.setAttribute("id", "show-results");
   let showResultsBtn = document.createElement("button");
   showResultsBtn.setAttribute("id", "show-results-btn");
-  showResultsBtn.textContent = "Visa resultat";
+  showResultsBtn.textContent = `Visa utbildningar`;
   showResultsBtn.addEventListener("click", (event) => {
     document.getElementById("filters").remove();
     showResults(event);
@@ -280,7 +280,7 @@ function addKeyToFilter(event) {
     let key = event.target.parentElement.id.split("-")[0];
     key == "level" ? levels.push(target) : filteredLanguages.push(target);
   }
-  updateView();
+  reloadUrlParams();
 }
 
 function getProgrammesBySearchWord(event) {
@@ -372,6 +372,7 @@ function filterLanguages(array) {
         }
       });
     });
+    console.log(passArray);
     filterPoints(passArray);
   } else {
     filterPoints(array);
@@ -449,7 +450,7 @@ function showResults() {
   if (points > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
   if (visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
 
-  filterProgramme(DB.PROGRAMMES);
+  updateView();
 }
 
 function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#search-words-pills") {
@@ -489,32 +490,32 @@ function removeSearchWord(removeWord) {
           case 0:
             index = programmes.findIndex((word) => word == removeWord);
             programmes.splice(index, 1);
-            updateView();
+            reloadUrlParams();
             break;
           case 1:
             index = cities.findIndex((word) => word == removeWord);
             cities.splice(index, 1);
-            updateView();
+            reloadUrlParams();
             break;
           case 2:
             index = levels.findIndex((word) => word == removeWord);
             levels.splice(index, 1);
-            updateView();
+            reloadUrlParams();
             break;
           case 3:
             index = countries.findIndex((word) => word == removeWord);
             countries.splice(index, 1);
-            updateView();
+            reloadUrlParams();
             break;
           case 4:
           index = filteredLanguages.findIndex((word) => word == removeWord);
           filteredLanguages.splice(index, 1);
-          updateView();
+          reloadUrlParams();
           break;
           default:
             break;
         }
-        reloadUrlParams();
+        updateView();
       }
     });
   }
