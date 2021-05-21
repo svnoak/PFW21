@@ -315,11 +315,27 @@ function filterCity(array) {
         }
       });
     });
+    filterCountry(passArray);
+  } else {
+    filterCountry(array);
+  }
+}
+function filterCountry(array) {
+  let passArray = [];
+  if (countries.length > 0) {
+    countries.forEach((searchWord) => {
+      array.forEach((obj) => {
+        if (getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(searchWord)) {
+          passArray.push(obj);
+        }
+      });
+    });
     filterVisa(passArray);
   } else {
     filterVisa(array);
   }
 }
+
 function filterVisa(array) {
   let passArray = [];
   if (!visa) {
