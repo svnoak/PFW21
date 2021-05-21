@@ -8,6 +8,7 @@ function clearSearchBar() {
 }
 
 function updateView() {
+  reloadUrlParams();
   window.location.search.length > 0 ? 
   filterProgramme(DB.PROGRAMMES) : 
   showNoProgrammesMessage("search");
