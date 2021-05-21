@@ -170,8 +170,8 @@ function DOMfoot() {
   return wrapper;
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
+function getLanguageFromLangID(languageID) {
+  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -192,6 +192,10 @@ function setUrlParameter(params) {
   }
   })
 
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function createProgrammeElements(id ,programmes) {

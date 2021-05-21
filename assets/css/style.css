@@ -77,7 +77,6 @@ BUTTONS
   z-index: 10;
 }
 
-
 /*--------------*/
 /* BUTTONS     */
 /*------------*/
@@ -144,7 +143,7 @@ BUTTONS
 
 #searchbar {
   height: 30px;
-  width: 300px;
+  width: 60vw;
   margin: 20px 0 0 200px;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -236,7 +235,13 @@ BUTTONS
 .filled > svg {
   background-color: red;
 }
-
+.sort-and-filter {
+  margin: 20px 0 0 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60vw;
+}
 svg {
   pointer-events: none;
 }
@@ -245,6 +250,93 @@ svg {
   display: flex;
   justify-content: flex-end;
 }
+
+#filters {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  z-index: 100;
+}
+#close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+#filter-options > div {
+  margin: 30px 0 0 150px;
+}
+#level-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60vw;
+  height: 5vh;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+#level-options > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#level-options > div:nth-child(2) {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+#level-options > div:nth-child(1) {
+  border-radius: 30px 0px 0px 30px;
+}
+#level-options > div:nth-child(3) {
+  border-radius: 0px 30px 30px 0px;
+}
+.selected {
+  background-color: var(--secondary);
+}
+#points-slider-div {
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#points-slider {
+  width: 50vw;
+}
+#sundays-options {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#sundays-options > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#sundays-slider {
+  width: 50vw;
+}
+#language-options {
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#language-options > div {
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#visum-options {
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 
 /* DETAIL PAGE */
 .detail-hero{
@@ -344,7 +436,7 @@ svg {
 }
 
 /* REVIEW CAROUSELL */
-.card-carousell{
+.card-carousell {
   padding-left: var(--space-medium);
   padding-right: var(--space-medium);
 }
@@ -408,24 +500,30 @@ figcaption{
 
 /* REVIEW CAROUSELL */
 
-.card-wrapper{
+.card-wrapper {
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
+  margin-bottom: var(--space-small);
+}
+
+.card-wrapper::webkit-scrollbar {
+  display: none;
   padding-bottom: var(--space-medium);
   padding-top: 5px;
 }
 
-.card{
+.card {
   scroll-snap-align: center;
-
-  min-width: calc( 100vw - ( var(--space-medium) * 2 ) );
-  background-color:#FAFAF9;
-  margin-left: var(--space-medium);
+  min-width: 85vw;
+  background-color: #fafaf9;
+  margin-left: var(--space-small);
+  margin-right: var(--space-small);
   display: grid;
   border-radius: var(--border-squared);
   overflow: hidden;
   box-shadow: var(--shadow);
+  scrollbar-width: none; /* Firefox */
 }
 
 .card-deco{
@@ -438,23 +536,23 @@ figcaption{
   /* border-right: var(--space-medium) solid black; */
 }
 
-.card-alias{
+.card-alias {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card-review{
+.card-review {
   display: grid;
   padding: var(--space-medium);
   padding-bottom: var(--space-small);
 }
-.card-review > p{
+.card-review > p {
   height: 150px;
 }
 
-.card-rating{
-  background-color: #617AB0;
+.card-rating {
+  background-color: #617ab0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -462,25 +560,25 @@ figcaption{
   padding-top: var(--space-small);
 }
 
-.card-rating > *:nth-child(2){
+.card-rating > *:nth-child(2) {
   border-right: 1px solid white;
   border-left: 1px solid white;
 }
 
-.card-rating *{
+.card-rating * {
   color: var(--primary);
-  flex-grow:1;
+  flex-grow: 1;
   display: grid;
   place-content: center;
 }
 
-.blob-wrapper{
+.blob-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.blob{
+.blob {
   height: 10px;
   width: 10px;
   margin: 0px 3px;
@@ -488,9 +586,8 @@ figcaption{
   background-color: var(--gray);
 }
 
-.blob-wrapper .active{
+.blob-wrapper .active {
   background-color: var(--accent);
-
 }
 
 /* INDEX */
