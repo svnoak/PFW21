@@ -2,6 +2,8 @@
 
 let addedProgrammes = [];
 
+localStorage.favoriteProgrammes = "[308,309,310]";
+
 let programmeIDs = JSON.parse(localStorage.favoriteProgrammes);
 let programmes = [];
 programmeIDs.forEach( id => programmes.push(getProgrammesById(id)));
@@ -318,7 +320,7 @@ function removePillFromArray(programmeId) {
 }
 
 function updateComparison() {
-  let comparison = document.querySelector('#comparison');
+  let comparison = document.querySelector('main');
   if(comparison) { comparison.remove(); }
 
   render("body", createAllSections(addedProgrammes));
@@ -473,19 +475,22 @@ function createComparisonSection(programID){
     return value;
   }
 
-
   titles.forEach( title => comparison.append(createSection( titles.indexOf(title) == 2 ? true : false, title, titles.indexOf(title) )));
   return comparison;
 }
 
 function createAllSections(programmes) {
   let section = document.createElement("main");
-  section.id = "comparison";
+  section.id = "comparison--container";
+  let inner = document.createElement("div");
+  inner.id = "comparison";
+
   if (addedProgrammes.length > 0) {
     programmes.forEach( programID => {
-      section.append(createComparisonSection(programID));
+      inner.append(createComparisonSection(programID));
     });
   }
+  section.append(inner);
   return section;
   
 }

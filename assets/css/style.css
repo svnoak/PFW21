@@ -686,11 +686,15 @@ figcaption{
   white-space: nowrap;
 }
 
+#comparison--container {
+  overflow: hidden;
+}
+
 #comparison {
   display: flex;
+  transition: ease-in-out 0.5s;
   position: relative;
   left: 0vw;
-  transition: ease-in-out 0.5s;
 }
 
 .program-list {
