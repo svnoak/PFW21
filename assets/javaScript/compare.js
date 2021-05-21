@@ -47,17 +47,17 @@ function createHeader() {
   let searchBarIcon = document.createElement('i');
   searchBarIcon.innerHTML = searchIcon;
 
-  let currentProgrammes = document.createElement("div");
-  currentProgrammes.className = "search-words-pills";
   let currentProgrammesTitle = document.createElement('p');
   currentProgrammesTitle.className = 'text-default light';
   currentProgrammesTitle.textContent = 'Dessa program jämförs just nu:';
-  currentProgrammes.append(currentProgrammesTitle);
+  let currentProgrammes = document.createElement("div");
+  currentProgrammes.id = "search-words-pills";
 
   let programmeList = document.createElement("div");
   programmeList.className = "programme-list";
 
-  let closeProgrammeList = document.createElement('button');
+  let closeProgrammeList = document.createElement('i');
+  closeProgrammeList.className = 'close-list';
   closeProgrammeList.textContent = 'X';
   closeProgrammeList.addEventListener('click', () => {
     programmeList.remove();
@@ -113,7 +113,7 @@ function createHeader() {
   });
 
   searchWrapper.append(searchBar, searchBarIcon);
-  header.append(titleHeader, textHeader, searchWrapper, currentProgrammes);
+  header.append(titleHeader, textHeader, searchWrapper, currentProgrammesTitle, currentProgrammes);
 
   return header;
 }
@@ -122,7 +122,7 @@ function createHeader() {
 function createNav(index = 0) {
   let navBtn = document.createElement("div");
   navBtn.id = "menu";
-  navBtn.className = "scroll-left title-small regular space-between";
+  navBtn.className = "scroll-left title-xsmall regular space-between";
 
   let program = document.createElement("span");
   program.id = index;
@@ -273,13 +273,10 @@ function addProgrammeToArray(programmeId) {
     addedProgrammes.push(programmeId);
   }
 
-  document.querySelector('.search-words-pills').innerHTML = '';
-  if(addedProgrammes.length <= 5) {
-
-  }
+  document.querySelector('#search-words-pills').innerHTML = '';
 
   addedProgrammes.forEach( id => {
-    render('.search-words-pills', createPillFromProgrammeId(id));
+    render('#search-words-pills', createPillFromProgrammeId(id));
     updateComparison();  
   });
 }
@@ -357,10 +354,11 @@ function createComparisonSection(programID){
 
     comparisonKey.forEach( key => {
       let category = document.createElement("div");
-      category.className = "bold";
+      category.className = "text-default semi-bold";
       category.textContent = key;
 
       let value = document.createElement("div");
+      value.className = "text-default regular";
       value.textContent = getValue(key);
       table.append(category, value);
     });
@@ -373,12 +371,13 @@ function createComparisonSection(programID){
     table.className = "table--list";
 
     let category = document.createElement("div");
-    category.className = "bold";
+    category.className = "text-default semi-bold";
     category.textContent = comparisonKey[0];
     table.append(category);
 
     getValue(comparisonKey[0]).forEach( club => {
       let value = document.createElement("div");
+      value.className = "text-default regular";
       club.name ? value.textContent = club.name : value.textContent = "Club of the nameless";
       table.append(value);
       })
@@ -389,8 +388,7 @@ function createComparisonSection(programID){
   function createSection(type, sectionTitle, index) {
     let section = document.createElement("section");
     let title = document.createElement("h3");
-    title.className = "title-default";
-    title.className = "title-xsmall";
+    title.className = " table-title title-xsmall regular";
     title.textContent = sectionTitle;
     section.append(title);
     type ?

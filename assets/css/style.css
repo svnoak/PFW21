@@ -155,12 +155,10 @@ BUTTONS
   margin: 20px 50px 0 200px;
 }
 #search-words-pills {
-  margin: 20px 0 0 200px;
-  min-height: 30px;
-  width: 500px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  gap: var(--space-small);
 }
 .pill {
   display: flex;
@@ -169,7 +167,8 @@ BUTTONS
   min-width: 70px;
   justify-content: space-between;
   align-items: center;
-  background-color: lightgray;
+  
+  border: 1px solid var(--black);
   border-radius: 10px;
   padding: 10px;
 }
@@ -647,10 +646,17 @@ figcaption{
   max-height: 50vh;
 
   padding: var(--space-small);
+  padding-top: var(--space-medium);
   border-radius: var(--border-squared);
   box-shadow: 0px 0px 10px gray;
   z-index: 10;
   overflow-y: scroll;
+}
+
+.close-list {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }
 
 .title-favorites {
@@ -700,18 +706,49 @@ figcaption{
 .program-list {
   width: 100vw;
   flex-shrink: 0;
+
+  padding: var(--space-medium);
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
 }
 
 .table {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 90vw;
+
+  border: 1px solid var(--gray);
+}
+
+.table-title { margin-bottom: var(--space-small);}
+
+.table > div, .table--list > div {
+  padding: var(--space-small);
 }
 
 .table > div:nth-child(4n),
 .table > div:nth-child(4n-1) {
-  background-color: var(--elevated-background);
+  background-color: var(--gray);
 }
+
+.table--list { 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-small);
+
+  border: 1px solid gray; 
+}
+
+.table--list > div {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--gray);
+}
+.table--list > div:first-child { background-color: var(--gray);}
+.table--list > div:last-child { border-bottom: none;}
 
 body {
   overflow-x: hidden;
