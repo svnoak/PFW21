@@ -154,12 +154,14 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav());
+document.body.append(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {
   let wrapper = document.createElement("footer");
+  wrapper.className = `centered`;
   let text = document.createElement("span");
+  text.className = `text-small`;
   text.textContent = `[brand] © 2021`;
   wrapper.append(text);
 
@@ -183,11 +185,13 @@ function setUrlParameter(string, key) {
 function createProgrammeElements(id ,programmes) {
   document.getElementById(id).innerHTML = "";
   programmes.forEach((obj) => {
-    let searchResultCard = document.createElement("div");
-    searchResultCard.className = "search-result-card";
+    let ResultCard = document.createElement("div");
+    ResultCard.className = "search-result-card";
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
+    if (parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0) bookmark.classList.add("filled");
+
     bookmark.setAttribute("programmeID", obj.id);
     bookmark.innerHTML = bookmarkIcon;
     bookmark.addEventListener("click", saveBookmarked);
@@ -248,25 +252,94 @@ function createProgrammeElements(id ,programmes) {
       cardButtonDiv
     );
 
-    searchResultCard.append(programmeImage, bookmark, programmeCardInfo);
-
-    render(`#${id}`, searchResultCard);
+    ResultCard.append(programmeImage, bookmark, programmeCardInfo);
+    render(`#${id}`, ResultCard);
   });
+}
+
+function parseFavoritesFromLS(type /*"id" or "object"*/) {
+  let programmes = [];
+  let programmIDs = localStorage.favoriteProgrammes.length > 0 ? JSON.parse(localStorage.favoriteProgrammes) : [];
+  switch (type) {
+    case "object":
+      programmIDs.forEach( id => programmes.push(getProgrammesById(id)));
+      break;
+  
+    default:
+      programmIDs.forEach( id => programmes.push(id));
+      break;
+  }
+  return programmes;
 }
 
 function saveBookmarked(event) {
-  console.log(event.target.attributes[1].nodeValue);
+  let id = parseInt(event.target.attributes[1].nodeValue);
   let target = event.target;
-  target.classList.toggle("filled");
-  addBookmarksToLS();
+  let bookmarkIDs = parseFavoritesFromLS();
+  parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ?
+  removeBookmarkFromLS(bookmarkIDs, id, target) :
+  addBookmarksToLS(bookmarkIDs, id, target); 
 }
 
-function addBookmarksToLS() {
-  let bookmarks = document.querySelectorAll(".filled");
-  let bookmarkIDs = [];
-  bookmarks.forEach((obj) => {
-    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
-  });
-  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
-  console.log(bookmarkIDs);
+function addBookmarksToLS(bookmarks, id, target) {
+  target.classList.toggle("filled");
+  bookmarks.push(parseInt(id));
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+}
+
+async function removeBookmarkFromLS(bookmarks, id, target) {
+  if ( window.location.href.includes("favorite") ){
+    if ( await removeBookmark() ){
+      remove(bookmarks, id, target);
+      target.parentElement.remove();
+    }
+}
+  else {
+    remove(bookmarks, id, target);  
+  }
+
+  function remove(bookmarks, id, target) {
+    target.classList.toggle("filled");
+    bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
+    localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
+  }
+}
+
+function removeBookmark() {
+  return new Promise( confirm => {
+    swal({
+      title: "Vill du radera favoriten?",
+      icon: "warning",
+      buttons: {
+          cancel: {
+            text: "Nej",
+            value: false,
+            visible: true,
+            className: "",
+            closeModal: true,
+          },
+          confirm: {
+            text: "Ja",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+          }
+      }
+    })
+    .then((value) => {
+      confirm(value);
+});
+  })
+}
+
+function createBackgroundCircle() {
+  let circleContainer = document.createElement('div');
+  let circle = document.createElement('div');
+  circle.className = 'circle';
+  circleContainer.append(circle);
+  circle.style.height = '140vw';
+  circle.style.width = '140vw';
+
+  return circleContainer;
 }

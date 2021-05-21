@@ -71,7 +71,7 @@ BUTTONS
 
 /* SPECIAL */
 .title-hero {
-  font-size: var(--title-large); 
+  font-size: 2rem; 
   font-family: var(--title-font);
   color: var(--secondary);
   z-index: 10;
@@ -84,18 +84,18 @@ BUTTONS
 
 /* SIZE */
 .button-small {
-  height: 2vh;
-  width: 2vw;
+  height: 4vh;
+  width: 20vw;
 }
 
 .button-medium {
-  height: 4vh;
-  width: 4vw;
+  height: 5vh;
+  width: 40vw;
 }
 
 .button-large {
-  height: 5vh;
-  width: 5vw;
+  height: 6vh;
+  width: 50vw;
 }
 
 /* COLORVARIATIONS */
@@ -129,14 +129,28 @@ BUTTONS
 }
 
 /* SHAPES */
-.button-square {border-radius: var(--border-squared); padding: var(--space-small);}
-.button-round {border-radius: var(--border-round); padding: var(--space-small);}
+.button-square {
+  border-radius: var(--border-squared); 
+  padding: var(--space-small) var(--space-medium);
+}
+.button-round {
+  border-radius: var(--border-rounded); 
+  padding: var(--space-small);
+}
 
 /* SPECIAL */
 .button-cta {
   color: var(--primary);
   background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
   border: 0px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* FOOTER */
+footer{
+  height: 50px;
+  margin-bottom: var(--nav-height);
+  background-color: var(--accent)
 }
 
 /* sökfunktionen */
@@ -494,17 +508,23 @@ figcaption{
 
 /* INDEX */
 
-.background {
+.c-container {
   width: 100vw;
+  overflow-x: hidden;
 
   position: absolute;
-  z-index: -10;
-  top: 0;
+  z-index: -1;
+  top: -7em;
 }
-
-.first-circle { position: relative; top: -40vw; overflow-x: hidden;}
-.second-circle { position: relative; top: 40vw; overflow-x: hidden;}
-.first-circle > svg, .second-circle > svg { width: 140vw; height: 140vw;}
+.circle {
+  position: relative;
+  right: 4em;
+  background-color: var(--secondary);
+  border-radius: var(--border-round);
+}
+.c-container.bottom {
+  top: -20em;
+}
 
 .pin-header {
   position: absolute;
@@ -534,10 +554,11 @@ figcaption{
 }
 
 .brand-info {
-  margin: var(--space-medium);
+  padding: var(--space-medium);
   flex-direction: column;
   gap: var(--space-small);
 
+  background-color: var(--primary);
   color: var(--secondary);
   text-align: center;
 }
@@ -569,12 +590,17 @@ figcaption{
   background-size: cover;
   background-position: center;
 }
+.country-img > a {
+  color: var(--black);
+}
 
 #white-icon > svg > path {
   stroke: var(--primary);
 }
 
 .compare-info-section {
+  position: relative;
+
   padding: var(--space-medium);
 
   flex-direction: column;
@@ -592,6 +618,8 @@ figcaption{
   display: flex;
   justify-content: end;
 }
+.c-button-container > a { color: var(--secondary); }
+.c-button-container svg path { stroke: var(--secondary);}
 
 .table {
   display: grid;
@@ -627,10 +655,12 @@ nav{
   background-color: var(--primary);
   z-index: 10;
   width: 100%;
+  margin-top: var(--space-medium);
 }
 
 nav a {
   flex-basis: 1;
+  height: var(--nav-height);
   flex-grow: 1;
   color: var(--black);
   text-decoration: none;
