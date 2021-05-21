@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
         })
       }
   }
-  filterProgramme(DB.PROGRAMMES);
+  window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
 })
 
 let programmes = [];
@@ -65,23 +65,18 @@ function getProgrammesBySearchWord(event) {
 
     
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-      cities.push(input);
+        cities.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-      let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
-      countries.push(country.name);
-      /*let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
-      citiesInCountry.forEach((obj) => {
-        cities.push(obj.name.toLocaleLowerCase());
-      });*/
+        countries.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
-      levels.push(input); 
-    }
-    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
-      programmes.push(input);
-    }
-    window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
+        levels.push(input); 
+    } else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+        programmes.push(input);
     }
     reloadUrlParams();
+    console.log(window.location.search.length > 0);
+    window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage("search");
+    }
   }
 
 function filterProgramme(array) {
