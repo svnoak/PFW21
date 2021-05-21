@@ -7,16 +7,23 @@ function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
 
-window.addEventListener("load", e => {
-  let urlParameters = window.location.search.split(/\?..ID=|\&..ID=/).slice(1)
-  urlParameters.forEach( array => {
-    params.forEach( param => {
-      array.split(",").forEach( p => {
-        param.array.push(p);
-      } )
-    } )
-    
-  } )
+window.addEventListener("load", () => {
+  let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
+  let key;
+  for( let i = 0; i < urlParameters.length; i++ ) {
+      let x = i+1;
+      key = urlParameters[i];
+      if ( params.find( param => param.id == key ) ) {
+        params.forEach( param => {
+          if (param.id == key) {
+            urlParameters[x].split(",").forEach( p => {
+              param.array.push(p) 
+              createPillForSearchWordsOnSearchSite(p);
+            })
+          }
+        })
+      }
+  }
 })
 
 let programmes = [];
@@ -43,6 +50,11 @@ let params = [
     }
   ]
 
+  function reloadUrlParams() {
+    resetUrlParameter();
+    setUrlParameter(params);
+  }
+
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
@@ -64,8 +76,7 @@ function getProgrammesBySearchWord(event) {
     if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
 
     filterProgramme(DB.PROGRAMMES);
-    resetUrlParameter();
-    setUrlParameter(params);
+    reloadUrlParams();
   }
 }
 
@@ -176,6 +187,7 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
             default:
               break;
           }
+          reloadUrlParams();
         }
       });
     }
