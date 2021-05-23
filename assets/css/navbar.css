@@ -1,0 +1,33 @@
+
+nav{
+    position: fixed;
+    bottom: 0;
+    background-color: var(--primary);
+    z-index: 10;
+    width: 100%;
+    margin-top: var(--space-medium);
+  }
+  
+  nav a {
+    flex-basis: 1;
+    height: var(--nav-height);
+    flex-grow: 1;
+    color: var(--black);
+    text-decoration: none;
+    border-top: 2px solid var(--black);
+    padding: var(--space-small) 0px;
+  }
+  
+  nav .active{
+    border-top: 2px solid var(--secondary);
+  }
+  
+  nav i{
+    height: var(--space-medium);
+    margin-bottom: 5px;
+  }
+  
+  nav i svg{
+    height: 100%;
+    width: 100%;
+  }
