@@ -46,9 +46,11 @@ document.getElementById("filter-btn").addEventListener("click", createFilterOpti
 function createFilterOptions() {
   let filter = document.createElement("div");
   filter.setAttribute("id", "filters");
+  filter.classList.add("centered");
 
   let closeButton = document.createElement("button");
   closeButton.setAttribute("id", "close");
+  closeButton.className = "text-default button-stroke--blue button-round";
   closeButton.textContent = "X";
   closeButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
@@ -57,11 +59,13 @@ function createFilterOptions() {
 
   let filterOptions = document.createElement("div");
   filterOptions.setAttribute("id", "filter-options");
+  filterOptions.classList.add("centered", "column");
 
   let levelOptions = document.createElement("div");
   levelOptions.setAttribute("id", "level-options");
   let bachelorBtn = document.createElement("div");
   bachelorBtn.setAttribute("id", "bachelor");
+  bachelorBtn.className = "text-default";
   bachelorBtn.textContent = "Bachelor";
   if (levels.includes("bachelor")) {
     bachelorBtn.classList.add("selected");
@@ -69,6 +73,7 @@ function createFilterOptions() {
   bachelorBtn.addEventListener("click", addLevelsToFilter);
   let masterBtn = document.createElement("div");
   masterBtn.setAttribute("id", "master");
+  masterBtn.className = "text-default";
   masterBtn.textContent = "Master";
   if (levels.includes("master")) {
     masterBtn.classList.add("selected");
@@ -76,6 +81,7 @@ function createFilterOptions() {
   masterBtn.addEventListener("click", addLevelsToFilter);
   let doctorateBtn = document.createElement("div");
   doctorateBtn.setAttribute("id", "doctorate");
+  doctorateBtn.className = "text-default";
   doctorateBtn.textContent = "Doctorate";
   if (levels.includes("doctorate")) {
     doctorateBtn.classList.add("selected");
@@ -86,10 +92,9 @@ function createFilterOptions() {
 
   let pointsOption = document.createElement("div");
   pointsOption.setAttribute("id", "points-option");
-  pointsOption.innerHTML = `<h4 id="points-title">Antagningspoäng</h4>`;
+  pointsOption.innerHTML = `<h4 id="points-title" class="text-large">Antagningspoäng (1-10): ${points} poäng</h4>`;
   let pointsSliderDiv = document.createElement("div");
   pointsSliderDiv.setAttribute("id", "points-slider-div");
-  pointsSliderDiv.innerHTML = `<p id="points-text">${points}</p>`;
   let pointsSlider = document.createElement("input");
   pointsSlider.setAttribute("id", "points-slider");
   pointsSlider.setAttribute("type", "range");
@@ -99,7 +104,7 @@ function createFilterOptions() {
   pointsSlider.addEventListener("change", () => {
     console.log(document.getElementById("points-slider").value);
     points = document.getElementById("points-slider").value;
-    document.getElementById("points-text").textContent = points;
+    document.getElementById("points-title").textContent = `Antagningspoäng (1-10): ${points} poäng`;
   });
   pointsSliderDiv.prepend(pointsSlider);
   pointsOption.append(pointsSliderDiv);
@@ -108,6 +113,7 @@ function createFilterOptions() {
   languagesDiv.setAttribute("id", "language-options");
   let englishDiv = document.createElement("div");
   englishDiv.setAttribute("id", "english");
+  englishDiv.className = "text-default button-stroke--blue button-round";
   englishDiv.textContent = "Engelska";
   if (filteredLanguages.includes("engelska")) {
     englishDiv.classList.add("selected");
@@ -116,12 +122,14 @@ function createFilterOptions() {
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
+  spanishDiv.className = "text-default button-stroke--blue button-round";
   if (filteredLanguages.includes("spanska")) {
     spanishDiv.classList.add("selected");
   }
   spanishDiv.addEventListener("click", addLanguagesToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
+  frenchDiv.className = "text-default button-stroke--blue button-round";
   frenchDiv.textContent = "Franska";
   if (filteredLanguages.includes("franska")) {
     frenchDiv.classList.add("selected");
@@ -129,6 +137,7 @@ function createFilterOptions() {
   frenchDiv.addEventListener("click", addLanguagesToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
+  swedishDiv.className = "text-default button-stroke--blue button-round";
   swedishDiv.textContent = "Svenska";
   if (filteredLanguages.includes("svenska")) {
     swedishDiv.classList.add("selected");
@@ -139,7 +148,7 @@ function createFilterOptions() {
   let visumOption = document.createElement("div");
   visumOption.setAttribute("id", "visum-options");
   visumOption.innerHTML = `
-                  <div id="visum-text">Visa bara utbildningar som inte kräver Visum</div>`;
+                  <div id="visum-text" class="text-default">Visa bara utbildningar som inte kräver Visum</div>`;
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
@@ -153,10 +162,9 @@ function createFilterOptions() {
 
   let sundays = document.createElement("div");
   sundays.setAttribute("id", "sundays-option");
-  sundays.innerHTML = `<h4 id="sundays-title">Antal Soldagar</h4>`;
+  sundays.innerHTML = `<h4 id="sundays-title" class="text-large">Antal Soldagar: ${sundaysNumber} dagar</h4>`;
   let sundaysDiv = document.createElement("div");
   sundaysDiv.setAttribute("id", "points-slider-div");
-  sundaysDiv.innerHTML = `<p id="sundays-text">${sundaysNumber}</p>`;
   let sundaysSlider = document.createElement("input");
   sundaysSlider.setAttribute("id", "sundays-slider");
   sundaysSlider.setAttribute("type", "range");
@@ -166,7 +174,7 @@ function createFilterOptions() {
   sundaysSlider.addEventListener("change", () => {
     console.log(document.getElementById("sundays-slider").value);
     sundaysNumber = document.getElementById("sundays-slider").value;
-    document.getElementById("sundays-text").textContent = sundaysNumber;
+    document.getElementById("sundays-title").textContent = `Antal Soldagar(0-365): ${sundaysNumber} dagar`;
   });
   sundaysDiv.prepend(sundaysSlider);
   sundays.append(sundaysDiv);
@@ -175,6 +183,7 @@ function createFilterOptions() {
   resetBtnDiv.setAttribute("id", "reset-option");
   let resetBtn = document.createElement("button");
   resetBtn.setAttribute("id", "reset");
+  resetBtn.className = "text-default button-stroke--blue button-round";
   resetBtn.textContent = "Återställ Filter";
   resetBtn.addEventListener("click", () => {
     let resetAllSelected = document.querySelectorAll(".selected");
@@ -188,10 +197,10 @@ function createFilterOptions() {
     visa = false;
     pointsSlider.value = 0;
     points = 0;
-    document.getElementById("points-text").textContent = points;
+    document.getElementById("points-title").textContent = `Antagningspoäng (1-10): ${points} poäng`;
     sundaysSlider.value = 0;
     sundaysNumber = 0;
-    document.getElementById("sundays-text").textContent = sundaysNumber;
+    document.getElementById("sundays-title").textContent = `Antal Soldagar(0-365): ${sundaysNumber} dagar`;
   });
   resetBtnDiv.append(resetBtn);
 
@@ -199,6 +208,7 @@ function createFilterOptions() {
   showResultsBtnDiv.setAttribute("id", "show-results");
   let showResultsBtn = document.createElement("button");
   showResultsBtn.setAttribute("id", "show-results-btn");
+  showResultsBtn.className = "text-large light-color-text";
   showResultsBtn.textContent = "Visa resultat";
   showResultsBtn.addEventListener("click", (event) => {
     document.getElementById("filters").remove();
@@ -531,11 +541,11 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   pill.className = "pill";
 
   let pillSearchWord = document.createElement("p");
-  pillSearchWord.className = "pill-search-word";
+  pillSearchWord.className = "pill-search-word text-small light light-color-text";
   pillSearchWord.textContent = searchWord;
 
   let removePillButton = document.createElement("button");
-  removePillButton.className = "remove-pill";
+  removePillButton.className = "remove-pill text-small light light-color-text";
   removePillButton.textContent = "X";
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
