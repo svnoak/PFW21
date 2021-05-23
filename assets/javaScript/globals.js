@@ -56,6 +56,11 @@ function getProgrammesField(subjectID) {
   return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
 }
 
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find((language) => language.id == languageID).name;
+}
+
 function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
@@ -124,12 +129,12 @@ function DOMnav() {
     {
       title: "Jämför",
       href: "compare.html",
-      icon: arrowsIcon,
+      icon: compareIcon,
     },
     {
       title: "Bokmärken",
       href: "favorites.html",
-      icon: bookmarkIcon,
+      icon: bookmarkIconNav,
     },
   ];
 
@@ -141,6 +146,7 @@ function DOMnav() {
     link.className = `column centered`;
 
     let icon = document.createElement("i");
+    icon.className = `centered`;
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.className = `text-small`;
@@ -172,8 +178,8 @@ function DOMfoot() {
   return wrapper;
 }
 
-function getLanguageFromUniID(universityID) {
-  let languageID = getCountryFromUniID(universityID).languageID;
+function getLanguageFromLangID(languageID) {
+  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -193,7 +199,38 @@ function setUrlParameter(params) {
     }
   }
   })
+}
 
+function showNoProgrammesMessage() {
+  let site = window.location.href.split("/").pop().split(".").slice(0,1)[0];
+  let div = document.createElement("div");
+  div.id = "nothing-here"
+
+  let messageContent; // Vilket meddelande som ska visas
+  let htmlElement; // Vilket element som ska användas för att appenda elementet ange samma som i en querySelector
+  
+  switch (site) {
+    case "search":
+      messageContent = "Du får söka för att få resultat ;)";
+      htmlElement = "#search-results";
+      break;
+  
+    case "favorites":
+      messageContent = "Du har inte laggt till några favoriter :(";
+      htmlElement = "#favorites";
+      break;
+
+    case "compare":
+      messageContent = "Sök på de program du vill jämföra."
+      htmlElement = "#comparison";
+  }
+  div.textContent = messageContent;
+  document.querySelector(htmlElement).innerHTML = "";
+  render( htmlElement, div );
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function createProgrammeElements(id ,programmes) {
@@ -204,10 +241,10 @@ function createProgrammeElements(id ,programmes) {
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
-    if (parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0) bookmark.classList.add("filled");
-
-    bookmark.setAttribute("programmeID", obj.id);
+    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
+    bookmark.innerHTML = bookmarkIconFilled :
     bookmark.innerHTML = bookmarkIcon;
+    bookmark.setAttribute("programmeID", obj.id);
     bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
@@ -233,7 +270,7 @@ function createProgrammeElements(id ,programmes) {
     let cardCity = document.createElement("p");
     cardCity.className = "card-city";
     cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
-    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.innerHTML = locationIcon;
     programmeCardCity.append(cardCity);
 
     let programmeCardLevelAndDate = document.createElement("div");
@@ -242,7 +279,7 @@ function createProgrammeElements(id ,programmes) {
     let cardLevel = document.createElement("p");
     cardLevel.className = "card-level";
     cardLevel.innerHTML = getLevel(obj.level);
-    levelDiv.innerHTML = bookIcon;
+    levelDiv.innerHTML = lvlIcon;
     levelDiv.append(cardLevel);
     programmeCardLevelAndDate.append(levelDiv);
 
@@ -251,10 +288,6 @@ function createProgrammeElements(id ,programmes) {
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    /*cardButton.addEventListener('mouseup', () => {
-      localStorage.setItem('programmeID', obj.id);
-    });*/
-
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
 
@@ -296,7 +329,7 @@ function saveBookmarked(event) {
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
-  target.classList.toggle("filled");
+  target.innerHTML = bookmarkIconFilled;
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
@@ -313,7 +346,7 @@ async function removeBookmarkFromLS(bookmarks, id, target) {
   }
 
   function remove(bookmarks, id, target) {
-    target.classList.toggle("filled");
+    target.innerHTML = bookmarkIcon;
     bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
     localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
   }
