@@ -414,12 +414,13 @@ figcaption{
 /* REVIEW CAROUSELL */
 /* override the screen margin */
 .card-carousell{
+  padding: var(--space-medium) 0px;
   width: 100vw;
   position: relative;
   right:  var(--space-medium);
 }
 
-.card-wrapper, .blob-wrapper, .detail-body{
+.card-wrapper, .blob-wrapper, .detail-body, .index-wrapper{
   padding-left: var(--space-medium);
   padding-right: var(--space-medium);
 }
@@ -542,8 +543,8 @@ figcaption{
   position: relative;
   height: calc( 100vh -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
 
-
-  margin: var(--space-medium);
+  margin-top: var(--space-medium);
+  margin-bottom: var(--space-medium);
   padding: var(--space-medium);
   background-color: var(--elevated-background);
   border-radius: var(--border-squared);
@@ -566,7 +567,7 @@ figcaption{
   flex-direction: column;
   gap: var(--space-small);
 
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   color: var(--secondary);
   text-align: center;
 }
