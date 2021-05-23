@@ -64,7 +64,8 @@ BUTTONS
 .text-xsmall {font-size: var(--font-xsmall); font-family: var(--text-font);}
 p, span, div{
   font-family: var(--text-font);
-  font-size: var(--font-default)
+  font-size: var(--font-default);
+  line-height: 1.5rem;
 }
 
 
