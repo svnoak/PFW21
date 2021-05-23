@@ -12,7 +12,10 @@ function createHero() {
     titleHero.className = 'title-hero'; // title-large
     titleHero.textContent = 'Upptäck världen som student.'
 
+    let globeWrapper = document.createElement("div");
+    globeWrapper.className = 'globe-wrapper';
     let globeRender = document.createElement('video');
+    globeWrapper.append(globeRender);
     globeRender.className = 'globe-render';
     globeRender.src = "assets/video/globe.mp4";
     globeRender.autoplay = true;
@@ -36,7 +39,7 @@ function createHero() {
     let circleContainer = createBackgroundCircle();
     circleContainer.className = 'c-container top';
 
-    indexHero.append(circleContainer, pin, titleHero, globeRender, textHero, buttonHero);
+    indexHero.append(circleContainer, pin, titleHero, globeWrapper, textHero, buttonHero);
     
     return indexHero;
 }
