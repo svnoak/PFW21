@@ -62,12 +62,19 @@ BUTTONS
 .text-default {font-size: var(--font-default); font-family: var(--text-font);}
 .text-small {font-size: var(--font-small); font-family: var(--text-font);}
 .text-xsmall {font-size: var(--font-xsmall); font-family: var(--text-font);}
+p, span, div{
+  font-family: var(--text-font);
+  font-size: var(--font-default);
+  line-height: 1.5rem;
+}
+
 
 /* WEIGHTS */
 .bold {font-weight: 700;}
 .semi-bold { font-weight: 600;}
 .regular {font-weight: 400;}
 .light {font-weight: 300;}
+.italic{font-style: italic;}
 
 /* SPECIAL */
 .title-hero {
@@ -144,13 +151,6 @@ BUTTONS
   background: linear-gradient(90deg, #6D8D6A 14.87%, #A5C7A2 102.56%);
   border: 0px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
-}
-
-/* FOOTER */
-footer{
-  height: 50px;
-  margin-bottom: var(--nav-height);
-  background-color: var(--accent)
 }
 
 /* sökfunktionen */
@@ -261,7 +261,7 @@ svg {
 
 /* DETAIL PAGE */
 .detail-hero{
-  height: 100vh;
+  height: calc( 100vh - var(--nav-height) );
   display: grid;
   grid-template-rows: 1fr 20%;
 }
@@ -320,16 +320,12 @@ svg {
 
 .detail-stats{
   background-color: var(--accent);
-  padding: var(--space-medium) 0 var(--space-large);
+  padding-top: var(--space-large);
+  padding-bottom: var(--space-xlarge);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-medium);
-}
 
-.detail-stats > div{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   color: white;
 }
 
@@ -340,11 +336,6 @@ svg {
   padding-top: var(--space-medium);
 }
 
-/* big number */
-.detail-stats > div > span:first-child{
-  padding-bottom: var(--space-small);
-  font-size: var(--title-default);
-}
 
 
 .detail-title {
@@ -355,21 +346,20 @@ svg {
   padding-top: var(--space-small);
   padding-bottom: var(--space-small);
 }
-
-/* REVIEW CAROUSELL */
-.card-carousell{
-  padding-left: var(--space-medium);
-  padding-right: var(--space-medium);
-}
 .bg-image{
   width: 100%;
   height: 100%;
 }
 
 .detail-school > section {
-  padding: var(--space-medium) 0px 0px;
+  padding-top: var(--space-medium);
 } 
-.detail-school > section > div{
+
+.detail-school-sections h3:nth-child(2){
+  padding-top: var(--space-small);
+}
+
+.detail-school sections > div{
   margin-bottom: 5px;
 } 
 .detail-city{
@@ -383,6 +373,8 @@ svg {
 /* header img with title wrapper */
 .detail-city .intro > div{
   position: relative;
+  width: 100vw;
+  right: var(--space-medium);
   height: 35vh;
   margin-bottom: var(--space-medium);
 }
@@ -392,6 +384,7 @@ svg {
   height: 100%;
   width: 100%;
   background-color: var(--overlay);
+  padding-left: var(--space-medium);
 }
 
 .detail-weather-city{
@@ -415,11 +408,21 @@ svg {
 }
 
 figcaption{
-  font-size: var(--font-small);
-  font-style: italic;
+  padding: 5px 0px var(--space-medium);
 }
 
 /* REVIEW CAROUSELL */
+/* override the screen margin */
+.card-carousell{
+  width: 100vw;
+  position: relative;
+  right:  var(--space-medium);
+}
+
+.card-wrapper, .blob-wrapper, .detail-body{
+  padding-left: var(--space-medium);
+  padding-right: var(--space-medium);
+}
 
 .card-wrapper{
   display: flex;
@@ -427,6 +430,9 @@ figcaption{
   scroll-snap-type: both mandatory;
   padding-bottom: var(--space-medium);
   padding-top: 5px;
+
+  width: calc (auto + var(--space-large));
+  
 }
 
 .card{
@@ -496,14 +502,13 @@ figcaption{
 .blob{
   height: 10px;
   width: 10px;
-  margin: 0px 3px;
+  margin: 0px 3px 3px;
   border-radius: var(--border-round);
   background-color: var(--gray);
 }
 
 .blob-wrapper .active{
   background-color: var(--accent);
-
 }
 
 /* INDEX */
@@ -649,38 +654,4 @@ figcaption{
 
 body {
   overflow-x: hidden;
-}
-
-/* Navigation */
-nav{
-  position: fixed;
-  bottom: 0;
-  background-color: var(--primary);
-  z-index: 10;
-  width: 100%;
-  margin-top: var(--space-medium);
-}
-
-nav a {
-  flex-basis: 1;
-  height: var(--nav-height);
-  flex-grow: 1;
-  color: var(--black);
-  text-decoration: none;
-  border-top: 2px solid var(--black);
-  padding: var(--space-small) 0px;
-}
-
-nav .active{
-  border-top: 2px solid var(--secondary);
-}
-
-nav i{
-  height: var(--space-medium);
-  margin-bottom: 5px;
-}
-
-nav i svg{
-  height: 100%;
-  width: 100%;
 }
