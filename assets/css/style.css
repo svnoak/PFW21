@@ -407,6 +407,10 @@ svg {
   color: white;
 }
 
+figcaption{
+  padding: 5px 0px var(--space-medium);
+}
+
 /* REVIEW CAROUSELL */
 /* override the screen margin */
 .card-carousell{

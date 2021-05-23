@@ -322,7 +322,7 @@ function createDiagram() {
     let figure = document.createElement("figure");
 
     let figcaption = document.createElement("figcaption");
-    figcaption.className = `text-small italic`;
+    figcaption.className = `text-default italic`;
     if ( programCities.length === 1){
         figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
     } else {
