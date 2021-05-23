@@ -182,6 +182,7 @@ BUTTONS
 #search-results {
   width: 100vw;
   min-height: 500px;
+  margin-bottom: 80px;
 }
 
 #search-words-pills {
@@ -271,7 +272,7 @@ BUTTONS
 .sort-and-filter {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100vw;
 }
 svg {
