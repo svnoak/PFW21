@@ -9,10 +9,13 @@ function createHero() {
     indexHero.className = 'hero centered';
 
     let titleHero = document.createElement('h1');
-    titleHero.className = 'title-hero';
+    titleHero.className = 'title-hero'; // title-large
     titleHero.textContent = 'Upptäck världen som student.'
 
+    let globeWrapper = document.createElement("div");
+    globeWrapper.className = 'globe-wrapper';
     let globeRender = document.createElement('video');
+    globeWrapper.append(globeRender);
     globeRender.className = 'globe-render';
     globeRender.src = "assets/video/globe.mp4";
     globeRender.autoplay = true;
@@ -21,7 +24,7 @@ function createHero() {
     //<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xxSuTLcA12o?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     let textHero = document.createElement('p');
-    textHero.className = 'text-default semi-bold';
+    textHero.className = 'text-default '; // semi-bold
     textHero.textContent = 'Här kan du hitta spännande program över hela världen. Vi hjälper dig att hitta rätt!';
 
     let buttonHero = document.createElement('a');
@@ -36,7 +39,7 @@ function createHero() {
     let circleContainer = createBackgroundCircle();
     circleContainer.className = 'c-container top';
 
-    indexHero.append(circleContainer, pin, titleHero, globeRender, textHero, buttonHero);
+    indexHero.append(circleContainer, pin, titleHero, globeWrapper, textHero, buttonHero);
     
     return indexHero;
 }
