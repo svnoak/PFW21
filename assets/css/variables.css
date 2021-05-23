@@ -16,14 +16,14 @@ SHADOWS
 /* COLORS      */
 /*------------*/
 
-  --primary: white;
+  --primary: #FAFAF9;
   --secondary: #6D8E6A;
   --accent: #617AB0;
-  --elevated-background: #FAFAF9;
-  --black: black;
+  --elevated-background: #F1F1F1;
+  --black: #373734;
 
-  --gray:rgb(161, 161, 161);
-  --overlay: rgba(0, 0, 0, 0.5);
+  --gray:#848481;
+  --overlay: #3737348e;
 
 
 /*--------------*/
@@ -31,9 +31,9 @@ SHADOWS
 /*------------*/
 
     --title-large: 1.8rem;
-    --title-default: 1.6rem;
-    --title-small: 1.4rem;
-    --title-xsmall: 1.2rem;
+    --title-default: 1.4rem;
+    --title-small: 1.2rem;
+    --title-xsmall: 1rem;
 
 
 /*--------------*/
@@ -47,10 +47,10 @@ SHADOWS
 /* TEXT SIZES  */
 /*------------*/
 
-  --font-xsmall: 0.4rem;
-  --font-small: 0.6rem;
-  --font-default: 0.8rem;
-  --font-large: 1rem;
+  --font-xsmall: 0.6rem;
+  --font-small: 0.8rem;
+  --font-default: 1rem;
+  --font-large: 1.6rem;
 
 
 /*--------------*/
@@ -60,6 +60,7 @@ SHADOWS
   --space-small: 10px;
   --space-medium: 17.5px;
   --space-large: 35px;
+  --space-xlarge: 45px;
 
   --nav-height: 60px;
   
@@ -83,5 +84,5 @@ SHADOWS
 /*--------------*/
 /* SHADOWS     */
 /*------------*/
-  --shadow: 0px 0px 2px var(--black);
+  --shadow: 0px 0px 5px var(--overlay);
 }

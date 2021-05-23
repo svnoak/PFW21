@@ -74,7 +74,7 @@ function makeHero(){
 
 function makeProgrammeStats(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-stats`;
+    wrapper.className = `detail-stats detail-body`;
 
     const information = [
         ["Antagningspoäng", detailedProgram.entryGrades[0]],
@@ -85,6 +85,7 @@ function makeProgrammeStats(){
 
     information.forEach( info => {
         let container = document.createElement("div");
+        container.className = `centered column`;
         let number = document.createElement("span");
         number.textContent = info[1];
         number.className = `text-large`;
@@ -100,17 +101,17 @@ function makeProgrammeStats(){
 
 function makeSchoolInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-school detail-body`;
 
     // outer divs
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
-    title.className = `detail-title title-default detail-body`;
+    title.className = `detail-title title-default`;
   
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
     let schoolInfo = document.createElement("section");
-    schoolInfo.className = `detail-body detail-school`;
+    schoolInfo.className = `detail-school-sections`;
     schoolInfo.append(createClubSection())
 
     wrapper.append(title, cardCarousell(reviews), schoolInfo)
@@ -136,13 +137,13 @@ function createClubSection(){
     schoolClubs.forEach( club => {
         let container = document.createElement("div");
         let name = document.createElement("div");
-        name.className = `bold`;
         name.textContent = club.name ? 
         club.name : 
         `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
-
+        
         let members = document.createElement("span");
         members.textContent = `${club.memberCount} medlemmar`;
+        members.style.fontStyle = `italic`;
 
         container.append(name, members)
         wrapper.append(container)
@@ -265,7 +266,7 @@ function cardCarousell(array){
 
 function makeCityInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-city`;
+    wrapper.className = `detail-city detail-body`;
 
     let head = document.createElement("div");
     head.className = `intro`;
@@ -273,12 +274,11 @@ function makeCityInfo(){
     // head child
     let titleWrap = document.createElement("div");
     let paragraph = document.createElement("p");
-    paragraph.className = `detail-body`;
     paragraph.textContent = detailedProgramCity.text;
     head.append(titleWrap, paragraph)
 
     let title = document.createElement("h2");
-    title.className = `detail-title title-default detail-body`;    
+    title.className = `detail-title title-default`;    
     title.textContent = `Om ${detailedProgramCity.name}`;
     titleWrap.append(cityImage(1), title)   
     
@@ -358,7 +358,7 @@ function createDiagram() {
 
 function makeWeatherInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
+
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -385,4 +385,4 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+document.body.prepend(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
