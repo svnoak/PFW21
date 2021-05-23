@@ -142,8 +142,8 @@ function createClubSection(){
         `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
         
         let members = document.createElement("span");
+        members.className = `italic`;
         members.textContent = `${club.memberCount} medlemmar`;
-        members.style.fontStyle = `italic`;
 
         container.append(name, members)
         wrapper.append(container)
@@ -184,7 +184,7 @@ function createReviewCard(reviewObject){
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = `card-deco title-large`;
+    deco.className = `card-deco text-large`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
@@ -206,7 +206,7 @@ function createReviewCard(reviewObject){
         let container = document.createElement("div");
 
         let star = document.createElement("span");
-        star.className = `title-small`;
+        star.className = `text-large`;
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
         category.className = `light`;
@@ -228,7 +228,7 @@ function cardCarousell(array){
     let blobWrapper = document.createElement("div");
     blobWrapper.className = `blob-wrapper`;
 
-    wrapper.append(cardWrapper, blobWrapper)
+    wrapper.append(cardWrapper, blobWrapper);
 
     let first = true;
 
@@ -322,6 +322,7 @@ function createDiagram() {
     let figure = document.createElement("figure");
 
     let figcaption = document.createElement("figcaption");
+    figcaption.className = `text-small italic`;
     if ( programCities.length === 1){
         figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
     } else {

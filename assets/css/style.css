@@ -73,6 +73,7 @@ p, span, div{
 .semi-bold { font-weight: 600;}
 .regular {font-weight: 400;}
 .light {font-weight: 300;}
+.italic{font-style: italic;}
 
 /* SPECIAL */
 .title-hero {
@@ -378,6 +379,8 @@ svg {
 /* header img with title wrapper */
 .detail-city .intro > div{
   position: relative;
+  width: 100vw;
+  right: var(--space-medium);
   height: 35vh;
   margin-bottom: var(--space-medium);
 }
@@ -387,6 +390,7 @@ svg {
   height: 100%;
   width: 100%;
   background-color: var(--overlay);
+  padding-left: var(--space-medium);
 }
 
 .detail-weather-city{
@@ -409,11 +413,6 @@ svg {
   color: white;
 }
 
-figcaption{
-  font-size: var(--font-small);
-  font-style: italic;
-}
-
 /* REVIEW CAROUSELL */
 /* override the screen margin */
 .card-carousell{
@@ -433,6 +432,8 @@ figcaption{
   scroll-snap-type: both mandatory;
   padding-bottom: var(--space-medium);
   padding-top: 5px;
+
+  width: calc (auto + var(--space-large));
   
 }
 
