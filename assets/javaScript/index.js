@@ -1,7 +1,16 @@
 "use strict";
 
 // render('body', createBackground());
-render('.index-wrapper', createHero(), createBrandInfo(), makeAd(), cardCarousell(DB.COUNTRIES), createCompareInfo());
+render('.index-wrapper', 
+    createHero(), 
+    createBrandInfo(), 
+    createAdSpace(), 
+    cardCarousell(DB.COUNTRIES), 
+    createCompareInfo(
+        'Beslutsångest?',
+        'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.'
+    )
+);
 
 // Skapar HERO med innehåll
 function createHero() {
@@ -91,34 +100,6 @@ function createCard(country) {
     
     wrapper.append(header, countryImg); 
     
-    return wrapper;
-}
-
-function createCompareInfo(){
-    let wrapper = document.createElement('section');
-    wrapper.className = 'compare-info-section centered';
-
-    let title = document.createElement('h2');
-    title.className = 'title-default regular'
-    title.textContent = 'Beslutsångest?';
-
-    let text = document.createElement('p');
-    text.className = 'text-default regular';
-    text.textContent = 'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.';
-
-    let buttonContainer = document.createElement('div');
-    buttonContainer.className = 'c-button-container';
-    let button = document.createElement('a');
-    button.href = 'compare.html';
-    button.className = 'text-large light space-between button-solid--cream button-square';
-    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
-    buttonContainer.append(button);
-
-    let circleContainer = createBackgroundCircle();
-    circleContainer.className = 'c-container bottom';
-
-    wrapper.append(title, text, buttonContainer, circleContainer)
-
     return wrapper;
 }
 
