@@ -8,7 +8,7 @@ let levels = [];
 
 let points = 0;
 let sundaysNumber = 0;
-let visa;
+let visa = true;
 let filteredLanguages = [];
 
 let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
@@ -77,7 +77,7 @@ window.addEventListener("load", () => {
                   }
                 break;
                 case "v":
-                  if (param.value == "true") {
+                  if (param.value == "false") {
                     createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
                     visa = param.value;
                   }
@@ -227,7 +227,7 @@ function createFilterOptions() {
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
-  if (visa == "true") {
+  if (visa == "false") {
     visumInput.checked = true;
   }
   visumInput.addEventListener("change", () => {
@@ -474,7 +474,7 @@ function showResults() {
   });
   if (sundaysNumber > 0) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
   if (points > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
-  if (visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
+  if (!visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
 
   updateView();
 }
@@ -507,7 +507,7 @@ function removeSearchWord(removeWord) {
     reloadUrlParams();
   }
   if (removeWord.includes("visa")) {
-    visa = false;
+    visa = true;
     filterProgramme(DB.PROGRAMMES);
     updateParams("v", visa);
     reloadUrlParams();
