@@ -381,4 +381,7 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-document.body.prepend(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+let main = document.createElement("main");
+main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
+
+render("body", main)

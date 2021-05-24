@@ -64,7 +64,7 @@ function getLanguageFromUniID(universityID) {
 }
 
 function render(parentElement, ...element) {
-  document.querySelector(parentElement).append(...element);
+  document.querySelector(parentElement).prepend(...element);
 }
 
 
