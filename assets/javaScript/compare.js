@@ -1,9 +1,6 @@
 "use strict";
 
 let addedProgrammes = [];
-
-localStorage.favoriteProgrammes = "[308,309,310]";
-
 let programmeIDs = JSON.parse(localStorage.favoriteProgrammes);
 let programmes = [];
 programmeIDs.forEach( id => programmes.push(getProgrammesById(id)));
@@ -45,6 +42,7 @@ function createHeader() {
   searchBar.placeholder = "Lägg till program att jämföra";
 
   let searchBarIcon = document.createElement('i');
+  searchBarIcon.className = 'centered';
   searchBarIcon.innerHTML = searchIcon;
 
   let currentProgrammesTitle = document.createElement('p');
@@ -58,7 +56,7 @@ function createHeader() {
 
   let closeProgrammeList = document.createElement('i');
   closeProgrammeList.className = 'close-list';
-  closeProgrammeList.textContent = 'X';
+  closeProgrammeList.innerHTML = closeIcon;
   closeProgrammeList.addEventListener('click', () => {
     programmeList.remove();
   })
@@ -67,16 +65,17 @@ function createHeader() {
   favoritesContainer.className = 'favorites';
 
   let titleFavorites = document.createElement('div');
-  titleFavorites.className = 'title-favorites text-default bold';
+  titleFavorites.className = 'title-favorites text-large bold';
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
 
   favorites.forEach(favorite => { 
     let option = createOptionsInList(favorite.programme, favorite.university);
     titleFavorites.after(option);
-    
+
     option.addEventListener('click', () => {
       addProgrammeToArray(favorite.id);
+      option.classList.toggle('chosen');
     });
   });
 
@@ -99,8 +98,13 @@ function createHeader() {
       programmes.forEach(programme => {
         let university = getUniversityFromUniID(programme.universityID);
         let option = createOptionsInList(programme.name, university.name);
+
+        if(addedProgrammes.includes(programme.id)) {
+          option.classList.add('chosen');
+        }
   
         option.addEventListener('click', () => {
+          option.classList.toggle('chosen');
           addProgrammeToArray(programme.id);
         });
   

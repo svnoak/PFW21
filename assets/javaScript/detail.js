@@ -69,7 +69,7 @@ function makeHero(){
 
 function makeProgrammeStats(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-stats`;
+    wrapper.className = `detail-stats detail-body`;
 
     const information = [
         ["Antagningspoäng", detailedProgram.entryGrades[0]],
@@ -80,6 +80,7 @@ function makeProgrammeStats(){
 
     information.forEach( info => {
         let container = document.createElement("div");
+        container.className = `centered column`;
         let number = document.createElement("span");
         number.textContent = info[1];
         number.className = `text-large`;
@@ -95,17 +96,17 @@ function makeProgrammeStats(){
 
 function makeSchoolInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = ``;
+    wrapper.className = `detail-school detail-body`;
 
     // outer divs
     let title = document.createElement("h2");
     title.textContent = "Om Utbildningen";
-    title.className = `detail-title title-default detail-body`;
+    title.className = `detail-title title-default`;
   
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
     console.log(reviews)
     let schoolInfo = document.createElement("section");
-    schoolInfo.className = `detail-body detail-school`;
+    schoolInfo.className = `detail-school-sections`;
     schoolInfo.append(createClubSection())
 
     wrapper.append(title, cardCarousell(reviews), schoolInfo)
@@ -131,12 +132,12 @@ function createClubSection(){
     schoolClubs.forEach( club => {
         let container = document.createElement("div");
         let name = document.createElement("div");
-        name.className = `bold`;
         name.textContent = club.name ? 
         club.name : 
         `Skolklubben för ${getUniversityFromUniID(club.universityID).name}`;
-
+        
         let members = document.createElement("span");
+        members.className = `italic`;
         members.textContent = `${club.memberCount} medlemmar`;
 
         container.append(name, members)
@@ -178,7 +179,7 @@ function createReviewCard(reviewObject){
     // review content
     let deco = document.createElement("span");
     deco.textContent = `"`;
-    deco.className = `card-deco title-large`;
+    deco.className = `card-deco text-large`;
     let comment = document.createElement("p");
     comment.textContent = reviewObject.text;
     let whoWhen = document.createElement("div");
@@ -200,7 +201,7 @@ function createReviewCard(reviewObject){
         let container = document.createElement("div");
 
         let star = document.createElement("span");
-        star.className = `title-small`;
+        star.className = `text-large`;
         star.textContent = `${Object.values(reviewObject.stars)[i]} / 5`;
         let category = document.createElement("span");
         category.className = `light`;
@@ -222,7 +223,7 @@ function cardCarousell(array){
     let blobWrapper = document.createElement("div");
     blobWrapper.className = `blob-wrapper`;
 
-    wrapper.append(cardWrapper, blobWrapper)
+    wrapper.append(cardWrapper, blobWrapper);
 
     let first = true;
 
@@ -260,7 +261,7 @@ function cardCarousell(array){
 
 function makeCityInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-city`;
+    wrapper.className = `detail-city detail-body`;
 
     let head = document.createElement("div");
     head.className = `intro`;
@@ -268,12 +269,11 @@ function makeCityInfo(){
     // head child
     let titleWrap = document.createElement("div");
     let paragraph = document.createElement("p");
-    paragraph.className = `detail-body`;
     paragraph.textContent = detailedProgramCity.text;
     head.append(titleWrap, paragraph)
 
     let title = document.createElement("h2");
-    title.className = `detail-title title-default detail-body`;    
+    title.className = `detail-title title-default`;    
     title.textContent = `Om ${detailedProgramCity.name}`;
     titleWrap.append(cityImage(1), title)   
     
@@ -317,6 +317,7 @@ function createDiagram() {
     let figure = document.createElement("figure");
 
     let figcaption = document.createElement("figcaption");
+    figcaption.className = `text-default italic`;
     if ( programCities.length === 1){
         figcaption.textContent = `${detailedProgramCity.name} är den enda staden där du kan studera ${detailedProgram.name}`;
     } else {
@@ -353,7 +354,7 @@ function createDiagram() {
 
 function makeWeatherInfo(){
     let wrapper = document.createElement("section");
-    wrapper.className = `detail-body`;
+
 
     let title = document.createElement("h3");
     title.className = `detail-sub title-small`;
@@ -380,4 +381,7 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-document.body.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo());
+let main = document.createElement("main");
+main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
+
+render("body", main)

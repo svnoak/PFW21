@@ -1,5 +1,7 @@
 "use strict";
 
+if ( !localStorage.favoriteProgrammes ) localStorage.favoriteProgrammes = "[]";
+
 // google-fonts
 let fontStyle = document.createElement('link');
 fontStyle.rel = 'stylesheet';
@@ -17,6 +19,10 @@ const RANDOM = {
     return a[this.rInt(a.length)];
   },
 };
+
+document.addEventListener('DOMContentLoaded', function(event) {
+  document.querySelector('body').style.opacity = 1
+})
 
 function getProgrammesById(id) {
   return DB.PROGRAMMES.find((obj) => obj.id == id);
@@ -62,7 +68,7 @@ function getLanguageFromUniID(universityID) {
 }
 
 function render(parentElement, ...element) {
-  document.querySelector(parentElement).append(...element);
+  document.querySelector(parentElement).prepend(...element);
 }
 
 
@@ -179,7 +185,6 @@ function DOMfoot() {
 }
 
 function getLanguageFromLangID(languageID) {
-  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -190,12 +195,18 @@ function resetUrlParameter() {
 
 function setUrlParameter(params) {
   params.forEach( param => {
-    if (param.array.length > 0) {
+    let condition = false;
+    if (typeof(param.value) == "object")  {
+      condition = param.value.length > 0;
+    } else {
+        condition = param.value != null;
+      }
+    if ( condition ) {
     if ( window.location.search.includes("?") ) {
-      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.value}`);
     }
     else {
-      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.value}`);
     }
   }
   })
@@ -422,4 +433,37 @@ function createBackgroundCircle() {
   circle.style.width = '140vw';
 
   return circleContainer;
+}
+
+function makeAd(size = "random") {
+  //creates random
+  let ads = [
+    'annons_horizontell.jpg',
+    'annons_kvadratisk.jpg'
+  ];
+  let chosen = ads[RANDOM.rInt(ads.length)];
+
+  // if want specific size
+  if(size !== "random"){
+    if(size[1] == "k"){
+      chosen = ads.find(ad => ad.includes(size));
+    } else {
+      chosen = ads.find(ad => ad.includes(size));
+    }
+  }
+
+  let wrapper = document.createElement("div");
+  wrapper.className = `ad ad-random`;
+  if(chosen.includes("horiz")){
+    wrapper.className = `ad ad-hori`;
+  } else if (chosen.includes("kvad")){
+    wrapper.className = `ad ad-kvad`;
+  }
+  let text = document.createElement("div");
+  text.textContent = `Detta är en annons`;
+  let ad = document.createElement("img");
+  wrapper.append(text, ad)
+  ad.setAttribute('src', `assets/ads/${chosen}`)
+
+  return wrapper
 }
