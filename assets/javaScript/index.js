@@ -4,7 +4,7 @@
 render('.index-wrapper', 
     createHero(), 
     createBrandInfo(), 
-    createAdSpace(), 
+    makeAd(),
     cardCarousell(DB.COUNTRIES), 
     createCompareInfo(
         'Beslutsångest?',
