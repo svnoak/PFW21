@@ -410,17 +410,18 @@ function makeAd(size = "random") {
     }
   }
 
-  let adWrap = document.createElement("div");
-  adWrap.className = `ad-random`;
+  let wrapper = document.createElement("div");
+  wrapper.className = `ad ad-random`;
   if(chosen.includes("horiz")){
-    adWrap.className = `ad-hori`;
+    wrapper.className = `ad ad-hori`;
   } else if (chosen.includes("kvad")){
-    adWrap.className = `ad-kvad`;
+    wrapper.className = `ad ad-kvad`;
   }
+  let text = document.createElement("div");
+  text.textContent = `Detta är en annons`;
   let ad = document.createElement("img");
+  wrapper.append(text, ad)
   ad.setAttribute('src', `assets/ads/${chosen}`)
 
-  return adWrap
+  return wrapper
 }
-
-document.body.prepend(makeAd());

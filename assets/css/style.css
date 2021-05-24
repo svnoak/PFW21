@@ -445,6 +445,9 @@ svg {
   padding-left: var(--space-medium);
   padding-right: var(--space-medium);
 }
+.card-wrapper{
+  padding: var(--space-small) 0px;
+}
 .bg-image{
   width: 100%;
   height: 100%;
@@ -897,3 +900,29 @@ body {
   overflow-x: hidden;
 }
 
+/* ADS */
+.ad{
+  padding: 0;
+  position: relative;
+  right: var(--space-medium);
+  width: 100vw;
+}
+.ad div{
+  background-color: var(--elevated-background);
+  padding: 3px var(--space-medium);
+}
+
+.ad img{
+  background-color: var(--elevated-background);
+}
+
+.ad-hori img{
+  width: 100%;
+  padding-bottom: var(--space-small);
+}
+
+.ad-kvad img{
+ padding: 0px var(--space-medium) var(--space-medium);
+ background-color: var(--elevated-background);
+ width: 100%;
+}
