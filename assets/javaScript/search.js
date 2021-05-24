@@ -286,7 +286,6 @@ function addKeyToFilter(event) {
     let key = event.target.parentElement.id.split("-")[0];
     key == "level" ? levels.push(target) : filteredLanguages.push(target);
   }
-  reloadUrlParams();
 }
 
 function getProgrammesBySearchWord(event) {
