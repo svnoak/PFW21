@@ -155,6 +155,9 @@ function changeNavName(trigger){
   let programNameContainer = document.querySelector("#menu > span");
   if(addedProgrammes.length > 0) {
     addedProgrammes.forEach( id => {
+      console.log(trigger);
+      console.log("getProgrammesByID", getProgrammesById(id).name);
+      console.log("PROGRAME NAME CONTAINER", programNameContainer.textContent);
       getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;
     });
     switch (trigger) {
@@ -176,7 +179,6 @@ function changeNavName(trigger){
         index = 0;
         break;
     }
-
     programNameContainer.textContent = getProgrammesById(addedProgrammes[index]).name;
     programNameContainer.id = index;
   }
@@ -280,9 +282,9 @@ function addProgrammeToArray(programmeId) {
   document.querySelector('#search-words-pills').innerHTML = '';
 
   addedProgrammes.forEach( id => {
-    render('#search-words-pills', createPillFromProgrammeId(id));
-    updateComparison();  
+    render('#search-words-pills', createPillFromProgrammeId(id));  
   });
+  updateComparison();
 }
 
 // Skapar pillrerna med sökorden
@@ -291,6 +293,7 @@ function createPillFromProgrammeId(id) {
 
     let pill = document.createElement("div");
     pill.className = "pill";
+    pill.id = id;
   
     let pillSearchWord = document.createElement("p");
     pillSearchWord.className = "pill-search-word text-small";
