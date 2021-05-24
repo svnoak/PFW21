@@ -629,11 +629,11 @@ figcaption{
 
   position: absolute;
   z-index: -1;
-  top: -11em;
+  top: -13em;
 }
 .circle {
   position: relative;
-  right: 4em;
+  right: 7em;
   background-color: var(--secondary);
   border-radius: var(--border-round);
 }
@@ -648,6 +648,10 @@ figcaption{
   left: -1em;
 
   display: none;
+}
+
+.index-wrapper {
+  overflow: hidden;
 }
 
 .hero {
