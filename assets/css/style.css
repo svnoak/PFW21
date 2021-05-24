@@ -78,8 +78,9 @@ p, span, div{
 
 /* SPECIAL */
 .title-hero {
-  font-size: var(); 
+  font-size: var(--title-large); 
   font-family: var(--title-font);
+  line-height: 1.6rem;
   color: var(--secondary);
   z-index: 10;
 }
