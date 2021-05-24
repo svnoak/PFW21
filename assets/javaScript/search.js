@@ -62,7 +62,10 @@ window.addEventListener("load", () => {
         params.forEach( param => {
           if (param.id == key) {
             urlParameters[x].split(",").forEach( p => {
+              console.log(typeof(param.value), param.value, p);
               typeof(param.value) == "object" ? param.value.push(p) : param.value = p;
+              console.log(param.value);
+              console.log(key);
               switch (key) {
                 case "s":
                   if (param.value > 0 ) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
@@ -71,7 +74,8 @@ window.addEventListener("load", () => {
                   if (param.value > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`); 
                 break;
                 case "v":
-                  if (!param.value) createPillForSearchWordsOnSearchSite(`Inklusive länder som kräver visa`);
+                  console.log(param.value == "true");
+                  if (param.value == "true") createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
                   break;
                 default:
                   createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
