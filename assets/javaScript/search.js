@@ -55,6 +55,22 @@ function updateParams(id, value) {
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
+  for (let i = 0; i < urlParameters.length; i++) {
+    let x = i + 1;
+    key = urlParameters[i];
+    if (params.find((param) => param.id == key)) {
+      params.forEach((param) => {
+        if (param.id == key) {
+          urlParameters[x].split(",").forEach((p) => {
+            param.array.push(p);
+            createPillForSearchWordsOnSearchSite(p);
+          });
+        }
+      });
+    }
+  }
+  filterProgramme(DB.PROGRAMMES);
+});
   for( let i = 0; i < urlParameters.length; i++ ) {
       let x = i+1;
       key = urlParameters[i];
@@ -121,9 +137,11 @@ function updateAllFilterWords() {
 function createFilterOptions() {
   let filter = document.createElement("div");
   filter.setAttribute("id", "filters");
+  filter.classList.add("centered");
 
   let closeButton = document.createElement("button");
   closeButton.setAttribute("id", "close");
+  closeButton.className = "text-default button-stroke--blue button-round";
   closeButton.textContent = "X";
   closeButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
@@ -132,11 +150,13 @@ function createFilterOptions() {
 
   let filterOptions = document.createElement("div");
   filterOptions.setAttribute("id", "filter-options");
+  filterOptions.classList.add("centered", "column");
 
   let levelOptions = document.createElement("div");
   levelOptions.setAttribute("id", "level-options");
   let bachelorBtn = document.createElement("div");
   bachelorBtn.setAttribute("id", "bachelor");
+  bachelorBtn.className = "text-default";
   bachelorBtn.textContent = "Bachelor";
   if (levels.includes("bachelor")) {
     bachelorBtn.classList.add("selected");
@@ -144,6 +164,7 @@ function createFilterOptions() {
   bachelorBtn.addEventListener("click", addKeyToFilter);
   let masterBtn = document.createElement("div");
   masterBtn.setAttribute("id", "master");
+  masterBtn.className = "text-default";
   masterBtn.textContent = "Master";
   if (levels.includes("master")) {
     masterBtn.classList.add("selected");
@@ -151,6 +172,7 @@ function createFilterOptions() {
   masterBtn.addEventListener("click", addKeyToFilter);
   let doctorateBtn = document.createElement("div");
   doctorateBtn.setAttribute("id", "doctorate");
+  doctorateBtn.className = "text-default";
   doctorateBtn.textContent = "Doctorate";
   if (levels.includes("doctorate")) {
     doctorateBtn.classList.add("selected");
@@ -161,10 +183,9 @@ function createFilterOptions() {
 
   let pointsOption = document.createElement("div");
   pointsOption.setAttribute("id", "points-option");
-  pointsOption.innerHTML = `<h4 id="points-title">Antagningspoäng</h4>`;
+  pointsOption.innerHTML = `<h4 id="points-title" class="text-large">Antagningspoäng (1-10): ${points} poäng</h4>`;
   let pointsSliderDiv = document.createElement("div");
   pointsSliderDiv.setAttribute("id", "points-slider-div");
-  pointsSliderDiv.innerHTML = `<p id="points-text">${points}</p>`;
   let pointsSlider = document.createElement("input");
   pointsSlider.setAttribute("id", "points-slider");
   pointsSlider.setAttribute("type", "range");
@@ -173,7 +194,7 @@ function createFilterOptions() {
   pointsSlider.value = points;
   pointsSlider.addEventListener("change", () => {
     points = document.getElementById("points-slider").value;
-    document.getElementById("points-text").textContent = points;
+    document.getElementById("points-title").textContent = `Antagningspoäng (1-10): ${points} poäng`;
     updateParams("p", points);
   });
   pointsSliderDiv.prepend(pointsSlider);
@@ -183,6 +204,7 @@ function createFilterOptions() {
   languagesDiv.setAttribute("id", "language-options");
   let englishDiv = document.createElement("div");
   englishDiv.setAttribute("id", "english");
+  englishDiv.className = "text-default button-stroke--blue button-round";
   englishDiv.textContent = "Engelska";
   if (filteredLanguages.includes("english")) {
     englishDiv.classList.add("selected");
@@ -191,12 +213,14 @@ function createFilterOptions() {
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
+  spanishDiv.className = "text-default button-stroke--blue button-round";
   if (filteredLanguages.includes("spanish")) {
     spanishDiv.classList.add("selected");
   }
   spanishDiv.addEventListener("click", addKeyToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
+  frenchDiv.className = "text-default button-stroke--blue button-round";
   frenchDiv.textContent = "Franska";
   if (filteredLanguages.includes("french")) {
     frenchDiv.classList.add("selected");
@@ -204,6 +228,7 @@ function createFilterOptions() {
   frenchDiv.addEventListener("click", addKeyToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
+  swedishDiv.className = "text-default button-stroke--blue button-round";
   swedishDiv.textContent = "Svenska";
   if (filteredLanguages.includes("swedish")) {
     swedishDiv.classList.add("selected");
@@ -214,7 +239,7 @@ function createFilterOptions() {
   let visumOption = document.createElement("div");
   visumOption.setAttribute("id", "visum-options");
   visumOption.innerHTML = `
-                  <div id="visum-text">Visa bara utbildningar som inte kräver Visum</div>`;
+                  <div id="visum-text" class="text-default">Visa bara utbildningar som inte kräver Visum</div>`;
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
@@ -229,10 +254,9 @@ function createFilterOptions() {
 
   let sundays = document.createElement("div");
   sundays.setAttribute("id", "sundays-option");
-  sundays.innerHTML = `<h4 id="sundays-title">Antal Soldagar</h4>`;
+  sundays.innerHTML = `<h4 id="sundays-title" class="text-large">Antal Soldagar: ${sundaysNumber} dagar</h4>`;
   let sundaysDiv = document.createElement("div");
   sundaysDiv.setAttribute("id", "points-slider-div");
-  sundaysDiv.innerHTML = `<p id="sundays-text">${sundaysNumber}</p>`;
   let sundaysSlider = document.createElement("input");
   sundaysSlider.setAttribute("id", "sundays-slider");
   sundaysSlider.setAttribute("type", "range");
@@ -241,8 +265,8 @@ function createFilterOptions() {
   sundaysSlider.value = sundaysNumber;
   sundaysSlider.addEventListener("change", () => {
     sundaysNumber = document.getElementById("sundays-slider").value;
+    document.getElementById("sundays-title").textContent = `Antal Soldagar(0-365): ${sundaysNumber} dagar`;
     updateParams("s", sundaysNumber);
-    document.getElementById("sundays-text").textContent = sundaysNumber;
   });
   sundaysDiv.prepend(sundaysSlider);
   sundays.append(sundaysDiv);
@@ -251,6 +275,7 @@ function createFilterOptions() {
   resetBtnDiv.setAttribute("id", "reset-option");
   let resetBtn = document.createElement("button");
   resetBtn.setAttribute("id", "reset");
+  resetBtn.className = "text-default button-stroke--blue button-round";
   resetBtn.textContent = "Återställ Filter";
   resetBtn.addEventListener("click", () => {
     let resetAllSelected = document.querySelectorAll(".selected");
@@ -262,10 +287,10 @@ function createFilterOptions() {
     visumInput.checked = false;
     pointsSlider.value = 0;
     points = 0;
-    document.getElementById("points-text").textContent = points;
+    document.getElementById("points-title").textContent = `Antagningspoäng (1-10): ${points} poäng`;
     sundaysSlider.value = 0;
     sundaysNumber = 0;
-    document.getElementById("sundays-text").textContent = sundaysNumber;
+    document.getElementById("sundays-title").textContent = `Antal Soldagar(0-365): ${sundaysNumber} dagar`;
   });
   resetBtnDiv.append(resetBtn);
 
@@ -273,6 +298,7 @@ function createFilterOptions() {
   showResultsBtnDiv.setAttribute("id", "show-results");
   let showResultsBtn = document.createElement("button");
   showResultsBtn.setAttribute("id", "show-results-btn");
+  showResultsBtn.className = "text-large light-color-text";
   showResultsBtn.textContent = `Visa utbildningar`;
   showResultsBtn.addEventListener("click", (event) => {
     document.getElementById("filters").remove();
@@ -428,6 +454,109 @@ function filterLevels(array) {
   }
 }
 
+function createProgrammeElements(programmes) {
+  document.getElementById("search-results").innerHTML = "";
+  programmes.forEach((obj) => {
+    let searchResultCard = document.createElement("div");
+    searchResultCard.className = "search-result-card";
+
+    let bookmark = document.createElement("div");
+    bookmark.className = `bookmark`;
+    bookmark.setAttribute("programmeID", obj.id);
+    bookmark.innerHTML = bookmarkIcon;
+    let savedBookmarks = JSON.parse(localStorage.getItem("favoriteProgrammes"));
+    if (savedBookmarks.length > 0) {
+      if (savedBookmarks.includes(obj.id)) {
+        bookmark.classList.add("filled");
+      }
+    }
+    bookmark.addEventListener("click", saveBookmarked);
+
+    let programmeImage = document.createElement("div");
+    programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
+    programmeImage.className = "programme-image";
+
+    let programmeCardInfo = document.createElement("div");
+    programmeCardInfo.className = "programme-card-info";
+
+    let programmeCardTitle = document.createElement("h3");
+    programmeCardTitle.innerHTML = obj.name;
+    programmeCardTitle.className = "text-default bold";
+
+    let programmeCardSchool = document.createElement("div");
+    programmeCardSchool.className = "programme-card-school";
+    let cardSchool = document.createElement("p");
+    cardSchool.className = "card-school text-small light";
+    cardSchool.innerHTML = getUniversityFromUniID(obj.universityID).name;
+    programmeCardSchool.innerHTML = homeIcon;
+    programmeCardSchool.append(cardSchool);
+
+    let programmeCardCity = document.createElement("div");
+    programmeCardCity.className = "programme-card-city";
+    let cardCity = document.createElement("p");
+    cardCity.className = "card-city text-small light";
+    cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
+    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.append(cardCity);
+
+    let programmeCardLevelAndpoints = document.createElement("div");
+    let levelDiv = document.createElement("div");
+    levelDiv.className = "flex-row";
+    let cardLevel = document.createElement("p");
+    cardLevel.className = "card-level text-small light";
+    cardLevel.innerHTML = getLevel(obj.level);
+    levelDiv.innerHTML = bookIcon;
+    levelDiv.append(cardLevel);
+    let pointsDiv = document.createElement("div");
+    pointsDiv.className = "flex-row";
+    let cardPoints = document.createElement("p");
+    cardPoints.className = "card-level text-small light";
+    cardPoints.innerHTML = `Antagningspoäng ${obj.entryGrades[0]}`;
+    pointsDiv.innerHTML = bookIcon;
+    pointsDiv.append(cardPoints);
+    programmeCardLevelAndpoints.append(levelDiv, pointsDiv);
+
+    let cardButtonDiv = document.createElement("div");
+    let cardButton = document.createElement("a");
+    cardButton.href = "detail.html";
+    cardButton.innerHTML = "Läs mer >";
+    cardButton.className = "card-button text-default light";
+    cardButton.addEventListener("mouseup", () => {
+      localStorage.setItem("programmeID", obj.id);
+    });
+
+    cardButtonDiv.append(cardButton);
+    cardButtonDiv.className = "card-button-div";
+
+    programmeCardInfo.append(
+      programmeCardTitle,
+      programmeCardSchool,
+      programmeCardCity,
+      programmeCardLevelAndpoints,
+      cardButtonDiv
+    );
+
+    searchResultCard.append(programmeImage, bookmark, programmeCardInfo);
+
+    render("#search-results", searchResultCard);
+  });
+}
+function saveBookmarked(event) {
+  console.log(event.target.attributes[1].nodeValue);
+  let target = event.target;
+  target.classList.toggle("filled");
+  addBookmarksToLS();
+}
+function addBookmarksToLS() {
+  let bookmarks = document.querySelectorAll(".filled");
+  let bookmarkIDs = [];
+  bookmarks.forEach((obj) => {
+    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
+  });
+  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
+  console.log(bookmarkIDs);
+}
+
 function sortSearchResult(programmes) {
   let sortBy = document.getElementById("sort-by").value;
   let order = document.getElementById("order").value;
@@ -474,11 +603,11 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   pill.className = "pill";
 
   let pillSearchWord = document.createElement("p");
-  pillSearchWord.className = "pill-search-word";
+  pillSearchWord.className = "pill-search-word text-small light light-color-text";
   pillSearchWord.textContent = searchWord;
 
   let removePillButton = document.createElement("button");
-  removePillButton.className = "remove-pill";
+  removePillButton.className = "remove-pill text-small light light-color-text";
   removePillButton.textContent = "X";
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
