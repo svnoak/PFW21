@@ -910,6 +910,8 @@ body {
 
 /* FAVORITES */
 
+#favourites { min-height: 60vh;}
+
 /* Dialog-ruta */
 .swal-modal {
   background-color: var(--primary);
