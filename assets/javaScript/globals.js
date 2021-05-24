@@ -170,7 +170,7 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav(), DOMfoot());
+document.body.prepend(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {

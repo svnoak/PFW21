@@ -847,6 +847,7 @@ figcaption{
 }
 
 #comparison--container {
+  min-height: 55vh;
   overflow: hidden;
 }
 

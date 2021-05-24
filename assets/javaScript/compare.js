@@ -15,7 +15,7 @@ let favorites = programmes.map( programme => {
   }
 });
 
-render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
+render("body", createHeader(), createNav(), tableContainer());
 let main = document.getElementById("comparison");
 
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
@@ -321,10 +321,11 @@ function removePillFromArray(programmeId) {
 }
 
 function updateComparison() {
-  let comparison = document.querySelector('main');
-  if(comparison) { comparison.remove(); }
+  let comparison = document.querySelector("#comparison--container");
+  if(comparison) { comparison.innerHTML = ""; }
 
-  render("body", createAllSections(addedProgrammes));
+  render("#comparison--container", createAllSections(addedProgrammes));
+  
   addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
   if ( main.style.left.split("vw")[0] < parseInt(`-${addedProgrammes.length-1}00`) ) {
     main.style.left = `-${addedProgrammes.length-1}00vw`;
@@ -481,9 +482,20 @@ function createComparisonSection(programID){
   return comparison;
 }
 
-function createAllSections(programmes) {
+function tableContainer() {
   let section = document.createElement("main");
   section.id = "comparison--container";
+
+  let inner = document.createElement("div");
+  inner.id = "comparison";
+
+  section.append(inner);
+  
+  return section;
+}
+
+
+function createAllSections(programmes) {
   let inner = document.createElement("div");
   inner.id = "comparison";
 
@@ -492,8 +504,8 @@ function createAllSections(programmes) {
       inner.append(createComparisonSection(programID));
     });
   }
-  section.append(inner);
-  return section;
+  render("#comparison--container", inner);
+  return inner;
   
 }
 
