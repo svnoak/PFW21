@@ -862,27 +862,27 @@ figcaption{
   grid-template-columns: repeat(2, 1fr);
   width: 90vw;
 
-  border: 1px solid var(--gray);
+  padding-left: 1px;
 }
 
 .table-title { margin-bottom: var(--space-small);}
 
 .table > div, .table--list > div {
   padding: var(--space-small);
+  border: 1px solid var(--gray);
+  margin-left: -1px;
+  margin-top: -1px;
 }
 
 .table > div:nth-child(4n),
 .table > div:nth-child(4n-1) {
-  background-color: var(--gray);
+  background-color: var(--elevated-background);
 }
 
 .table--list { 
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: var(--space-small);
-
-  border: 1px solid gray; 
 }
 
 .table--list > div {
@@ -890,8 +890,7 @@ figcaption{
   align-items: center;
   border-bottom: 1px solid var(--gray);
 }
-.table--list > div:first-child { background-color: var(--gray);}
-.table--list > div:last-child { border-bottom: none;}
+.table--list > div:first-child { background-color: var(--elevated-background);}
 
 body {
   overflow-x: hidden;
