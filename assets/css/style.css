@@ -813,6 +813,8 @@ figcaption{
   padding: var(--space-small) 0;
 }
 .option:last-child { border-bottom: none;}
+.option i { transition: rotate 0.5s;}
+.option.chosen > i {rotate: 45deg;}
 
 #menu {
   color: var(--primary);

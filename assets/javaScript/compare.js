@@ -55,7 +55,7 @@ function createHeader() {
 
   let closeProgrammeList = document.createElement('i');
   closeProgrammeList.className = 'close-list';
-  closeProgrammeList.textContent = 'X';
+  closeProgrammeList.textContent = 'X'; // ska ändras till X-ikon
   closeProgrammeList.addEventListener('click', () => {
     programmeList.remove();
   })
@@ -71,8 +71,14 @@ function createHeader() {
   favorites.forEach(favorite => { 
     let option = createOptionsInList(favorite.programme, favorite.university);
     titleFavorites.after(option);
+
+    // if(addedProgrammes.includes(favorite.id)) {
+    //   document.querySelector('.option > i').style.rotate = '45deg';
+    // }
+    
     
     option.addEventListener('click', () => {
+      option.classList.toggle('chosen');
       addProgrammeToArray(favorite.id);
     });
   });
@@ -98,6 +104,7 @@ function createHeader() {
         let option = createOptionsInList(programme.name, university.name);
   
         option.addEventListener('click', () => {
+          option.classList.toggle('chosen');
           addProgrammeToArray(programme.id);
         });
   
@@ -254,6 +261,7 @@ function createOptionsInList(programmeName, universityName) {
   university.textContent = universityName;
   
   let addProgramme = document.createElement('i');
+  addProgramme.className = 'centered';
   addProgramme.innerHTML = plusIcon;
   
   programmeInfo.append(programme, university);
