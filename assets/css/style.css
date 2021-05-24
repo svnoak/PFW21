@@ -259,21 +259,20 @@ p, span, div{
 .flex-row > p {
   margin-left: 7px;
 }
+
 .bookmark {
   position: absolute;
   top: -3px;
   left: 85%;
 }
 
-.filled > svg {
-  background-color: red;
-}
 .sort-and-filter {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 100vw;
 }
+
 svg {
   pointer-events: none;
 }
@@ -722,8 +721,8 @@ figcaption{
   z-index: -1;
 }
 #searchsite-circle {
-  top: -50%;
-  right: 0;
+  top: -25%;
+  right: -10%;
 }
 .c-container.bottom {
   top: -20em;
