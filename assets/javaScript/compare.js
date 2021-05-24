@@ -56,7 +56,7 @@ function createHeader() {
 
   let closeProgrammeList = document.createElement('i');
   closeProgrammeList.className = 'close-list';
-  closeProgrammeList.textContent = 'X'; // ska ändras till X-ikon
+  closeProgrammeList.innerHTML = closeIcon;
   closeProgrammeList.addEventListener('click', () => {
     programmeList.remove();
   })

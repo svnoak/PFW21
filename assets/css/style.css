@@ -788,6 +788,7 @@ figcaption{
   max-height: 50vh;
 
   padding: var(--space-small);
+  padding-top: 27px;
   border-radius: var(--border-squared);
   box-shadow: 0px 0px 10px gray;
   z-index: 10;
@@ -796,9 +797,16 @@ figcaption{
 
 .close-list {
   position: fixed;
-  right: 35px;
+  right: 29px;
+  width: 20px;
+  height: 20px;
+  margin-top: -25px;
+
+  background-color: var(--primary);
+
   cursor: pointer;
 }
+.close-list > svg { width: 100%; }
 
 .title-favorites {
   background-color: var(--elevated-background);
