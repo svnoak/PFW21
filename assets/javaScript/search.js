@@ -445,16 +445,16 @@ function sortSearchResult(programmes) {
   let sortBy = document.getElementById("sort-by").value;
   let order = document.getElementById("order").value;
   if (sortBy == "letters" && order == "fall") {
-    programmes.sort((a, b) => (a.name > b.name ? -1 : 1));
+    programmes.sort((a, b) => (a.name > b.name ? 1 : -1));
   }
   if (sortBy == "letters" && order == "rise") {
-    programmes.sort((a, b) => (a.name < b.name ? -1 : 1));
+    programmes.sort((a, b) => (a.name < b.name ? 1 : -1));
   }
   if (sortBy == "points" && order == "rise") {
-    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
   }
   if (sortBy == "points" && order == "fall") {
-    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
   }
   createProgrammeElements("search-results", programmes);
 }
