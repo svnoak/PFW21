@@ -77,12 +77,16 @@ function cardCarousell(array){
   let wrapper = document.createElement("section");
   wrapper.className= `card-carousell`;
 
+  let cardWrapperWrap = document.createElement("div");
+  cardWrapperWrap.className =`hide-carousel-scroll`;
+
   let cardWrapper = document.createElement("div");
   cardWrapper.className = `card-wrapper`;
   let blobWrapper = document.createElement("div");
   blobWrapper.className = `blob-wrapper`;
 
-  wrapper.append(cardWrapper, blobWrapper)
+  cardWrapperWrap.append(cardWrapper)
+  wrapper.append(cardWrapperWrap, blobWrapper)
 
   let first = true;
 
@@ -117,6 +121,12 @@ function cardCarousell(array){
   })
 
   return wrapper
+}
+
+function registerCardHeight(){
+  // get height of cardwrapper
+  let height = document.querySelector(".card-wrapper").clientHeight;
+  document.documentElement.style.setProperty("--carousel-height", height+"px")
 }
 
 // Menu

@@ -16,6 +16,13 @@ const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.univers
 const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
 const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
+let main = document.createElement("main");
+main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
+render("body", main)
+
+registerCardHeight()
+
+
 function makeHero(){
     let wrapper = document.createElement("section");
     wrapper.className = `detail-hero`;
@@ -214,50 +221,50 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
-function cardCarousell(array){
-    let wrapper = document.createElement("section");
-    wrapper.className= `card-carousell`;
+// function cardCarousell(array){
+//     let wrapper = document.createElement("section");
+//     wrapper.className= `card-carousell`;
 
-    let cardWrapper = document.createElement("div");
-    cardWrapper.className = `card-wrapper`;
-    let blobWrapper = document.createElement("div");
-    blobWrapper.className = `blob-wrapper`;
+//     let cardWrapper = document.createElement("div");
+//     cardWrapper.className = `card-wrapper`;
+//     let blobWrapper = document.createElement("div");
+//     blobWrapper.className = `blob-wrapper`;
 
-    wrapper.append(cardWrapper, blobWrapper);
+//     wrapper.append(cardWrapper, blobWrapper);
 
-    let first = true;
+//     let first = true;
 
-    array.forEach(object =>{
-        let card = createReviewCard(object);
-        card.className = `card`;
-        cardWrapper.append(card);
+//     array.forEach(object =>{
+//         let card = createReviewCard(object);
+//         card.className = `card`;
+//         cardWrapper.append(card);
 
-        let blob = document.createElement("div");
-        blob.className = `blob`;
-        blobWrapper.append(blob);
+//         let blob = document.createElement("div");
+//         blob.className = `blob`;
+//         blobWrapper.append(blob);
 
-        if(first){
-            blob.classList.add("active");
-        }
+//         if(first){
+//             blob.classList.add("active");
+//         }
 
-        // let location = card.getBoundingClientRect();
-        cardWrapper.addEventListener("scroll", checkActive)
+//         // let location = card.getBoundingClientRect();
+//         cardWrapper.addEventListener("scroll", checkActive)
 
-        function checkActive(){
-            let location = card.getBoundingClientRect();
+//         function checkActive(){
+//             let location = card.getBoundingClientRect();
 
-            if(location.left > 1 && location.left < 250 ){
-                document.querySelector(".active").classList.remove("active");
-                blob.classList.add(`active`);
-            }
-        }
+//             if(location.left > 1 && location.left < 250 ){
+//                 document.querySelector(".active").classList.remove("active");
+//                 blob.classList.add(`active`);
+//             }
+//         }
 
-        first = false;
+//         first = false;
         
-    })
+//     })
 
-    return wrapper
-}
+//     return wrapper
+// }
 
 function makeCityInfo(){
     let wrapper = document.createElement("section");
@@ -381,7 +388,3 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-let main = document.createElement("main");
-main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
-
-render("body", main)

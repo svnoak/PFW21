@@ -12,6 +12,8 @@ render('.index-wrapper',
     )
 );
 
+registerCardHeight()
+
 // Skapar HERO med innehåll
 function createHero() {
     let indexHero = document.createElement('div');
@@ -71,6 +73,8 @@ function createBrandInfo() {
 
 // Skapar DOM-element för alla länder
 function createCard(country) {
+    let section = document.createElement("section");
+
     let wrapper = document.createElement('div');
     wrapper.className = 'countryElement';
 
@@ -99,8 +103,9 @@ function createCard(country) {
     
     
     wrapper.append(header, countryImg); 
-    
-    return wrapper;
+    section.append(wrapper);
+
+    return section;
 }
 
 function createBackgroundCircle() {
