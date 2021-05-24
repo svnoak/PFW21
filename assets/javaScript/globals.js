@@ -247,6 +247,92 @@ function capitalizeFirstLetter(string) {
 function createProgrammeElements(id ,programmes) {
   document.getElementById(id).innerHTML = "";
   programmes.forEach((obj) => {
+    let searchResultCard = document.createElement("div");
+    searchResultCard.className = "search-result-card";
+
+    let bookmark = document.createElement("div");
+    bookmark.className = `bookmark`;
+    bookmark.setAttribute("programmeID", obj.id);
+    bookmark.innerHTML = bookmarkIcon;
+    let savedBookmarks = JSON.parse(localStorage.getItem("favoriteProgrammes"));
+    if (savedBookmarks.length > 0) {
+      if (savedBookmarks.includes(obj.id)) {
+        bookmark.classList.add("filled");
+      }
+    }
+    bookmark.addEventListener("click", saveBookmarked);
+
+    let programmeImage = document.createElement("div");
+    programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
+    programmeImage.className = "programme-image";
+
+    let programmeCardInfo = document.createElement("div");
+    programmeCardInfo.className = "programme-card-info";
+
+    let programmeCardTitle = document.createElement("h3");
+    programmeCardTitle.innerHTML = obj.name;
+    programmeCardTitle.className = "text-default bold";
+
+    let programmeCardSchool = document.createElement("div");
+    programmeCardSchool.className = "programme-card-school";
+    let cardSchool = document.createElement("p");
+    cardSchool.className = "card-school text-small light";
+    cardSchool.innerHTML = getUniversityFromUniID(obj.universityID).name;
+    programmeCardSchool.innerHTML = homeIcon;
+    programmeCardSchool.append(cardSchool);
+
+    let programmeCardCity = document.createElement("div");
+    programmeCardCity.className = "programme-card-city";
+    let cardCity = document.createElement("p");
+    cardCity.className = "card-city text-small light";
+    cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
+    programmeCardCity.innerHTML = locationIcon;
+    programmeCardCity.append(cardCity);
+
+    let programmeCardLevelAndpoints = document.createElement("div");
+    let levelDiv = document.createElement("div");
+    levelDiv.className = "flex-row";
+    let cardLevel = document.createElement("p");
+    cardLevel.className = "card-level text-small light";
+    cardLevel.innerHTML = getLevel(obj.level);
+    levelDiv.innerHTML = lvlIcon;
+    levelDiv.append(cardLevel);
+    let pointsDiv = document.createElement("div");
+    pointsDiv.className = "flex-row";
+    let cardPoints = document.createElement("p");
+    cardPoints.className = "card-level text-small light";
+    cardPoints.innerHTML = `Antagningspoäng ${obj.entryGrades[0]}`;
+    pointsDiv.innerHTML = lvlIcon;
+    pointsDiv.append(cardPoints);
+    programmeCardLevelAndpoints.append(levelDiv, pointsDiv);
+
+    let cardButtonDiv = document.createElement("div");
+    let cardButton = document.createElement("a");
+    cardButton.href = `detail.html?programmeID=${obj.id}`;
+    cardButton.innerHTML = "Läs mer >";
+    cardButton.className = "card-button text-default light";
+
+    cardButtonDiv.append(cardButton);
+    cardButtonDiv.className = "card-button-div";
+
+    programmeCardInfo.append(
+      programmeCardTitle,
+      programmeCardSchool,
+      programmeCardCity,
+      programmeCardLevelAndpoints,
+      cardButtonDiv
+    );
+
+    searchResultCard.append(programmeImage, bookmark, programmeCardInfo);
+
+    render(`#${id}`, searchResultCard);
+  });
+}
+
+/*
+function createProgrammeElements(id ,programmes) {
+  document.getElementById(id).innerHTML = "";
+  programmes.forEach((obj) => {
     let ResultCard = document.createElement("div");
     ResultCard.className = "search-result-card";
 
@@ -313,7 +399,7 @@ function createProgrammeElements(id ,programmes) {
     ResultCard.append(programmeImage, bookmark, programmeCardInfo);
     render(`#${id}`, ResultCard);
   });
-}
+}*/
 
 function createCompareInfo(title, text, centered = false, circleBackground = true){
   let wrapper = document.createElement('section');
