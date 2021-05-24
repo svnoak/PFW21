@@ -2,29 +2,19 @@
 
 let addedProgrammes = [];
 
-// exempel-data för att testa funktionen för favoriter
-let favorites = [
-  {
-    programme: "Engineering and Sustainability",
-    university: "Escuela de Estudios Superiores de Cordoba",
-    id: 1,
-  },
-  {
-    programme: "Engineering and Sustainability",
-    university: "Escuela de Estudios Superiores de Cordoba",
-    id: 4
-  },
-  {
-    programme: "Engineering and Sustainability",
-    university:"Escuela de Estudios Superiores de Cordoba",
-    id: 3,
-  },
-  {
-    programme: "Engineering and Sustainability",
-    university: "Escuela de Estudios Superiores de Cordoba",
-    id: 2,
+let programmeIDs = JSON.parse(localStorage.favoriteProgrammes);
+let programmes = [];
+programmeIDs.forEach( id => programmes.push(getProgrammesById(id)));
+
+let favorites = programmes.map( programme => {
+  let university = getUniversityFromUniID(programme.universityID);
+
+  return {
+    programme: programme.name,
+    university: university.name,
+    id: programme.id
   }
-];
+});
 
 render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
 
@@ -315,7 +305,7 @@ function removePillFromArray(programmeId) {
 
 function updateComparison() {
   main.innerHTML = "";
-  render("main", createAllSections(addedProgrammes));
+  render("body", createAllSections(addedProgrammes));
   addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
   if ( main.style.left.split("vw")[0] < parseInt(`-${addedProgrammes.length-1}00`) ) {
     main.style.left = `-${addedProgrammes.length-1}00vw`;

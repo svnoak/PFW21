@@ -7,6 +7,26 @@ function clearSearchBar() {
   document.getElementById("searchbar").value = "";
 }
 
+window.addEventListener("load", () => {
+  let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
+  let key;
+  for( let i = 0; i < urlParameters.length; i++ ) {
+      let x = i+1;
+      key = urlParameters[i];
+      if ( params.find( param => param.id == key ) ) {
+        params.forEach( param => {
+          if (param.id == key) {
+            urlParameters[x].split(",").forEach( p => {
+              param.array.push(p) 
+              createPillForSearchWordsOnSearchSite(p);
+            })
+          }
+        })
+      }
+  }
+  filterProgramme(DB.PROGRAMMES);
+})
+
 let programmes = [];
 let cities = [];
 let citiesFromCountries = [];
@@ -214,31 +234,56 @@ function addLanguagesToFilter(event) {
   }
 }
 
+let params = [
+    {
+      id: "ciID",
+      array: cities
+    },
+    {
+      id: "coID",
+      array: countries
+    },
+    {
+      id: "liID",
+      array: levels
+    },
+    {
+      id: "piID",
+      array: programmes
+    }
+  ]
+
+  function reloadUrlParams() {
+    resetUrlParameter();
+    setUrlParameter(params);
+  }
+
+
 function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
     searchWords.push(input);
     createPillForSearchWordsOnSearchSite(this.value);
     clearSearchBar();
-
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       cities.push(input);
-    }
-    if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
+    } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
       let country = DB.COUNTRIES.find((obj) => obj.name.toLocaleLowerCase().includes(input));
       countries.push(country.name);
       let citiesInCountry = DB.CITIES.filter((obj) => obj.countryID === country.id);
-      citiesInCountry.forEach((obj) => {
-        cities.push(obj.name.toLocaleLowerCase());
-      });
+    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
+      levels.push(input); 
     }
     if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) levels.push(input);
     if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) programmes.push(input);
+    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+      programmes.push(input);
 
     filterProgramme(DB.PROGRAMMES);
+    reloadUrlParams();
   }
 }
-
+}
 function filterProgramme(array) {
   let passArray = [];
   if (programmes.length > 0) {
@@ -527,6 +572,7 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
             default:
               break;
           }
+          reloadUrlParams();
         }
       });
     }
