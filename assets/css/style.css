@@ -354,7 +354,7 @@ svg {
 
 /* DETAIL PAGE */
 .detail-hero{
-  height: calc( 100vh - var(--nav-height) );
+  height: calc( var(--hero-height) - var(--nav-height) );
   display: grid;
   grid-template-rows: 1fr 20%;
 }
@@ -648,7 +648,7 @@ figcaption{
 
 .hero {
   position: relative;
-  height: calc( 100vh -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
+  height: calc( var(--hero-height) -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
 
   margin-top: var(--space-medium);
   margin-bottom: var(--space-medium);

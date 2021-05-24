@@ -67,7 +67,6 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).append(...element);
 }
 
-
 // Skapar karusell
 function cardCarousell(array){
   let wrapper = document.createElement("section");
@@ -392,3 +391,6 @@ function createBackgroundCircle() {
 
   return circleContainer;
 }
+
+// get 100vh for mobile
+document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
