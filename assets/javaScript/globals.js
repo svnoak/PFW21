@@ -1,5 +1,7 @@
 "use strict";
 
+if ( !localStorage.favoriteProgrammes ) localStorage.favoriteProgrammes = "[]";
+
 // google-fonts
 let fontStyle = document.createElement('link');
 fontStyle.rel = 'stylesheet';
@@ -17,6 +19,10 @@ const RANDOM = {
     return a[this.rInt(a.length)];
   },
 };
+
+document.addEventListener('DOMContentLoaded', function(event) {
+  document.querySelector('body').style.opacity = 1
+})
 
 function getProgrammesById(id) {
   return DB.PROGRAMMES.find((obj) => obj.id == id);
@@ -56,8 +62,13 @@ function getProgrammesField(subjectID) {
   return DB.FIELDS.find((obj) => obj.id == subjectID).name.toLocaleLowerCase();
 }
 
+function getLanguageFromUniID(universityID) {
+  let languageID = getCountryFromUniID(universityID).languageID;
+  return LANGUAGES.find((language) => language.id == languageID).name;
+}
+
 function render(parentElement, ...element) {
-  document.querySelector(parentElement).append(...element);
+  document.querySelector(parentElement).prepend(...element);
 }
 
 
@@ -124,12 +135,12 @@ function DOMnav() {
     {
       title: "Jämför",
       href: "compare.html",
-      icon: arrowsIcon,
+      icon: compareIcon,
     },
     {
       title: "Bokmärken",
       href: "favorites.html",
-      icon: bookmarkIcon,
+      icon: bookmarkIconNav,
     },
   ];
 
@@ -141,6 +152,7 @@ function DOMnav() {
     link.className = `column centered`;
 
     let icon = document.createElement("i");
+    icon.className = `centered`;
     icon.innerHTML = item.icon;
     let text = document.createElement("span");
     text.className = `text-small`;
@@ -158,12 +170,14 @@ function DOMnav() {
   return wrapper;
 }
 
-document.body.append(DOMnav());
+document.body.append(DOMnav(), DOMfoot());
 
 // footer
 function DOMfoot() {
   let wrapper = document.createElement("footer");
+  wrapper.className = `centered`;
   let text = document.createElement("span");
+  text.className = `text-small`;
   text.textContent = `[brand] © 2021`;
   wrapper.append(text);
 
@@ -171,7 +185,6 @@ function DOMfoot() {
 }
 
 function getLanguageFromLangID(languageID) {
-  console.log(languageID);
   return LANGUAGES.find((language) => language.id == languageID).name;
 }
 
@@ -182,16 +195,49 @@ function resetUrlParameter() {
 
 function setUrlParameter(params) {
   params.forEach( param => {
-    if (param.array.length > 0) {
+    let condition = false;
+    if (typeof(param.value) == "object")  {
+      condition = param.value.length > 0;
+    } else {
+        condition = param.value != null;
+      }
+    if ( condition ) {
     if ( window.location.search.includes("?") ) {
-      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.value}`);
     }
     else {
-      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.array}`);
+      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.value}`);
     }
   }
   })
+}
 
+function showNoProgrammesMessage() {
+  let site = window.location.href.split("/").pop().split(".").slice(0,1)[0];
+  let div = document.createElement("div");
+  div.id = "nothing-here"
+
+  let messageContent; // Vilket meddelande som ska visas
+  let htmlElement; // Vilket element som ska användas för att appenda elementet ange samma som i en querySelector
+  
+  switch (site) {
+    case "search":
+      messageContent = "Du får söka för att få resultat ;)";
+      htmlElement = "#search-results";
+      break;
+  
+    case "favorites":
+      messageContent = "Du har inte laggt till några favoriter :(";
+      htmlElement = "#favorites";
+      break;
+
+    case "compare":
+      messageContent = "Sök på de program du vill jämföra."
+      htmlElement = "#comparison";
+  }
+  div.textContent = messageContent;
+  document.querySelector(htmlElement).innerHTML = "";
+  render( htmlElement, div );
 }
 
 function capitalizeFirstLetter(string) {
@@ -206,10 +252,10 @@ function createProgrammeElements(id ,programmes) {
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
-    if (parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0) bookmark.classList.add("filled");
-
-    bookmark.setAttribute("programmeID", obj.id);
+    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
+    bookmark.innerHTML = bookmarkIconFilled :
     bookmark.innerHTML = bookmarkIcon;
+    bookmark.setAttribute("programmeID", obj.id);
     bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
@@ -235,7 +281,7 @@ function createProgrammeElements(id ,programmes) {
     let cardCity = document.createElement("p");
     cardCity.className = "card-city";
     cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
-    programmeCardCity.innerHTML = pinIcon;
+    programmeCardCity.innerHTML = locationIcon;
     programmeCardCity.append(cardCity);
 
     let programmeCardLevelAndDate = document.createElement("div");
@@ -244,7 +290,7 @@ function createProgrammeElements(id ,programmes) {
     let cardLevel = document.createElement("p");
     cardLevel.className = "card-level";
     cardLevel.innerHTML = getLevel(obj.level);
-    levelDiv.innerHTML = bookIcon;
+    levelDiv.innerHTML = lvlIcon;
     levelDiv.append(cardLevel);
     programmeCardLevelAndDate.append(levelDiv);
 
@@ -253,10 +299,6 @@ function createProgrammeElements(id ,programmes) {
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer";
     cardButton.className = "card-button";
-    /*cardButton.addEventListener('mouseup', () => {
-      localStorage.setItem('programmeID', obj.id);
-    });*/
-
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
 
@@ -271,6 +313,39 @@ function createProgrammeElements(id ,programmes) {
     ResultCard.append(programmeImage, bookmark, programmeCardInfo);
     render(`#${id}`, ResultCard);
   });
+}
+
+function createCompareInfo(title, text, centered = false, circleBackground = true){
+  let wrapper = document.createElement('section');
+  wrapper.className = 'compare-info-section centered';
+
+  let titleEl = document.createElement('h2');
+  titleEl.className = 'title-default regular'
+  titleEl.textContent = title;
+
+  let textEl = document.createElement('p');
+  textEl.className = 'text-default regular';
+  textEl.textContent = text;
+
+  let buttonContainer = document.createElement('div');
+  buttonContainer.className = 'c-button-container';
+  if (centered) buttonContainer.classList.add("centered");
+  let button = document.createElement('a');
+  button.href = 'compare.html';
+  button.className = 'text-default light space-between button-solid--cream button-square';
+  button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
+  buttonContainer.append(button);
+
+  console.log(circleBackground)
+  if ( circleBackground ) {
+    let circleContainer = createBackgroundCircle();
+    circleContainer.className = 'c-container bottom';
+    wrapper.append(circleContainer)
+  }
+
+  wrapper.prepend(titleEl, textEl, buttonContainer);
+
+  return wrapper;
 }
 
 function parseFavoritesFromLS(type /*"id" or "object"*/) {
@@ -298,7 +373,7 @@ function saveBookmarked(event) {
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
-  target.classList.toggle("filled");
+  target.innerHTML = bookmarkIconFilled;
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
 }
@@ -315,7 +390,7 @@ async function removeBookmarkFromLS(bookmarks, id, target) {
   }
 
   function remove(bookmarks, id, target) {
-    target.classList.toggle("filled");
+    target.innerHTML = bookmarkIcon;
     bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
     localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
   }
@@ -358,4 +433,37 @@ function createBackgroundCircle() {
   circle.style.width = '140vw';
 
   return circleContainer;
+}
+
+function makeAd(size = "random") {
+  //creates random
+  let ads = [
+    'annons_horizontell.jpg',
+    'annons_kvadratisk.jpg'
+  ];
+  let chosen = ads[RANDOM.rInt(ads.length)];
+
+  // if want specific size
+  if(size !== "random"){
+    if(size[1] == "k"){
+      chosen = ads.find(ad => ad.includes(size));
+    } else {
+      chosen = ads.find(ad => ad.includes(size));
+    }
+  }
+
+  let wrapper = document.createElement("div");
+  wrapper.className = `ad ad-random`;
+  if(chosen.includes("horiz")){
+    wrapper.className = `ad ad-hori`;
+  } else if (chosen.includes("kvad")){
+    wrapper.className = `ad ad-kvad`;
+  }
+  let text = document.createElement("div");
+  text.textContent = `Detta är en annons`;
+  let ad = document.createElement("img");
+  wrapper.append(text, ad)
+  ad.setAttribute('src', `assets/ads/${chosen}`)
+
+  return wrapper
 }

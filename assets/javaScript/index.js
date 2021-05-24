@@ -1,7 +1,16 @@
 "use strict";
 
 // render('body', createBackground());
-render('.index-wrapper', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES), createCompareInfo());
+render('.index-wrapper', 
+    createHero(), 
+    createBrandInfo(), 
+    makeAd(),
+    cardCarousell(DB.COUNTRIES), 
+    createCompareInfo(
+        'Beslutsångest?',
+        'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.'
+    )
+);
 
 // Skapar HERO med innehåll
 function createHero() {
@@ -9,10 +18,13 @@ function createHero() {
     indexHero.className = 'hero centered';
 
     let titleHero = document.createElement('h1');
-    titleHero.className = 'title-hero';
+    titleHero.className = 'title-hero'; // title-large
     titleHero.textContent = 'Upptäck världen som student.'
 
+    let globeWrapper = document.createElement("div");
+    globeWrapper.className = 'globe-wrapper';
     let globeRender = document.createElement('video');
+    globeWrapper.append(globeRender);
     globeRender.className = 'globe-render';
     globeRender.src = "assets/video/globe.mp4";
     globeRender.autoplay = true;
@@ -21,13 +33,13 @@ function createHero() {
     //<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xxSuTLcA12o?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     let textHero = document.createElement('p');
-    textHero.className = 'text-default semi-bold';
+    textHero.className = 'text-default '; // semi-bold
     textHero.textContent = 'Här kan du hitta spännande program över hela världen. Vi hjälper dig att hitta rätt!';
 
     let buttonHero = document.createElement('a');
     buttonHero.href = 'search.html';
     buttonHero.className = 'text-large regular space-between button-round button-cta';
-    buttonHero.innerHTML = `<i id="white-icon">${searchIcon}</i> Sök efter program`;
+    buttonHero.innerHTML = `<i id="white-icon" class="centered">${searchIcon}</i> Sök efter program`;
 
     let pin = document.createElement('div');
     pin.classList = 'pin-header';
@@ -36,7 +48,7 @@ function createHero() {
     let circleContainer = createBackgroundCircle();
     circleContainer.className = 'c-container top';
 
-    indexHero.append(circleContainer, pin, titleHero, globeRender, textHero, buttonHero);
+    indexHero.append(circleContainer, pin, titleHero, globeWrapper, textHero, buttonHero);
     
     return indexHero;
 }
@@ -55,13 +67,6 @@ function createBrandInfo() {
 
     brandInfo.append(title, text);
     return brandInfo;
-}
-
-function createAdSpace() {
-    let adSpace = document.createElement('div');
-    adSpace.className = 'ad-space';
-
-    return adSpace;
 }
 
 // Skapar DOM-element för alla länder
@@ -89,43 +94,12 @@ function createCard(country) {
     let showProgramsButton = document.createElement('a');
     showProgramsButton.className = 'text-large semi-bold space-between button-solid--cream button-square';
     showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIconRight}</i>`;
-    showProgramsButton.href = 'search.html';
-    showProgramsButton.addEventListener('click', () => {
-        sessionStorage.setItem('countryId', country.id);
-    });
+    showProgramsButton.href = `search.html?coID=${country.name.toLowerCase()}`;
     countryImg.append(showProgramsButton);
     
     
     wrapper.append(header, countryImg); 
     
-    return wrapper;
-}
-
-function createCompareInfo(){
-    let wrapper = document.createElement('section');
-    wrapper.className = 'compare-info-section centered';
-
-    let title = document.createElement('h2');
-    title.className = 'title-default regular'
-    title.textContent = 'Beslutsångest?';
-
-    let text = document.createElement('p');
-    text.className = 'text-default regular';
-    text.textContent = 'Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra.';
-
-    let buttonContainer = document.createElement('div');
-    buttonContainer.className = 'c-button-container';
-    let button = document.createElement('a');
-    button.href = 'comapare.html';
-    button.className = 'text-large light space-between button-solid--cream button-square';
-    button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
-    buttonContainer.append(button);
-
-    let circleContainer = createBackgroundCircle();
-    circleContainer.className = 'c-container bottom';
-
-    wrapper.append(title, text, buttonContainer, circleContainer)
-
     return wrapper;
 }
 

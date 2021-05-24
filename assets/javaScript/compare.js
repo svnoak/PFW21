@@ -1,9 +1,6 @@
 "use strict";
 
 let addedProgrammes = [];
-
-localStorage.favoriteProgrammes = "[308,309,310]";
-
 let programmeIDs = JSON.parse(localStorage.favoriteProgrammes);
 let programmes = [];
 programmeIDs.forEach( id => programmes.push(getProgrammesById(id)));
@@ -18,7 +15,7 @@ let favorites = programmes.map( programme => {
   }
 });
 
-render("body", createHeader(), createNav(), createAllSections(addedProgrammes));
+render("body", createHeader(), createNav(), tableContainer());
 let main = document.getElementById("comparison");
 
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
@@ -45,6 +42,7 @@ function createHeader() {
   searchBar.placeholder = "Lägg till program att jämföra";
 
   let searchBarIcon = document.createElement('i');
+  searchBarIcon.className = 'centered';
   searchBarIcon.innerHTML = searchIcon;
 
   let currentProgrammesTitle = document.createElement('p');
@@ -58,7 +56,7 @@ function createHeader() {
 
   let closeProgrammeList = document.createElement('i');
   closeProgrammeList.className = 'close-list';
-  closeProgrammeList.textContent = 'X';
+  closeProgrammeList.innerHTML = closeIcon;
   closeProgrammeList.addEventListener('click', () => {
     programmeList.remove();
   })
@@ -67,16 +65,17 @@ function createHeader() {
   favoritesContainer.className = 'favorites';
 
   let titleFavorites = document.createElement('div');
-  titleFavorites.className = 'title-favorites text-default bold';
+  titleFavorites.className = 'title-favorites text-large bold';
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
 
   favorites.forEach(favorite => { 
     let option = createOptionsInList(favorite.programme, favorite.university);
     titleFavorites.after(option);
-    
+
     option.addEventListener('click', () => {
       addProgrammeToArray(favorite.id);
+      option.classList.toggle('chosen');
     });
   });
 
@@ -99,8 +98,13 @@ function createHeader() {
       programmes.forEach(programme => {
         let university = getUniversityFromUniID(programme.universityID);
         let option = createOptionsInList(programme.name, university.name);
+
+        if(addedProgrammes.includes(programme.id)) {
+          option.classList.add('chosen');
+        }
   
         option.addEventListener('click', () => {
+          option.classList.toggle('chosen');
           addProgrammeToArray(programme.id);
         });
   
@@ -144,15 +148,13 @@ function createNav(index = 0) {
   return navBtn;
 };
 
+let index = 0;
 
 //Changes the name of the nav depending on what action is taken
 function changeNavName(trigger){
-  let index = 0;
+
   let programNameContainer = document.querySelector("#menu > span");
-  if(addedProgrammes.length > 0) {
-    addedProgrammes.forEach( id => {
-      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;
-    });
+  if( addedProgrammes.length > 0) {
     switch (trigger) {
       case "next":
         index = index + 1;
@@ -195,8 +197,7 @@ function setIndex(key, index) {
       break;
 
     case "target":
-      main.style.left ? index = parseInt(main.style.left.split("vw")[0])/-100 : index = index;
-      if (index >= addedProgrammes.length) index = addedProgrammes.length-1;
+      index = 0;
       break;
   }
   return index;
@@ -317,10 +318,11 @@ function removePillFromArray(programmeId) {
 }
 
 function updateComparison() {
-  let comparison = document.querySelector('main');
-  if(comparison) { comparison.remove(); }
+  let comparison = document.querySelector("#comparison--container");
+  if(comparison) { comparison.innerHTML = ""; }
 
-  render("body", createAllSections(addedProgrammes));
+  render("#comparison--container", createAllSections(addedProgrammes));
+  
   addedProgrammes.length == 0 ? changeNavName("default") : changeNavName("target");
   if ( main.style.left.split("vw")[0] < parseInt(`-${addedProgrammes.length-1}00`) ) {
     main.style.left = `-${addedProgrammes.length-1}00vw`;
@@ -477,9 +479,20 @@ function createComparisonSection(programID){
   return comparison;
 }
 
-function createAllSections(programmes) {
+function tableContainer() {
   let section = document.createElement("main");
   section.id = "comparison--container";
+
+  let inner = document.createElement("div");
+  inner.id = "comparison";
+
+  section.append(inner);
+  
+  return section;
+}
+
+
+function createAllSections(programmes) {
   let inner = document.createElement("div");
   inner.id = "comparison";
 
@@ -488,8 +501,8 @@ function createAllSections(programmes) {
       inner.append(createComparisonSection(programID));
     });
   }
-  section.append(inner);
-  return section;
+  render("#comparison--container", inner);
+  return inner;
   
 }
 
