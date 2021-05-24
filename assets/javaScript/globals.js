@@ -252,14 +252,10 @@ function createProgrammeElements(id ,programmes) {
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
-    bookmark.setAttribute("programmeID", obj.id);
+    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
+    bookmark.innerHTML = bookmarkIconFilled :
     bookmark.innerHTML = bookmarkIcon;
-    let savedBookmarks = JSON.parse(localStorage.getItem("favoriteProgrammes"));
-    if (savedBookmarks.length > 0) {
-      if (savedBookmarks.includes(obj.id)) {
-        bookmark.classList.add("filled");
-      }
-    }
+    bookmark.setAttribute("programmeID", obj.id);
     bookmark.addEventListener("click", saveBookmarked);
 
     let programmeImage = document.createElement("div");
@@ -453,12 +449,14 @@ function saveBookmarked(event) {
   let id = parseInt(event.target.attributes[1].nodeValue);
   let target = event.target;
   let bookmarkIDs = parseFavoritesFromLS();
+  console.log(id);
   parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ?
   removeBookmarkFromLS(bookmarkIDs, id, target) :
   addBookmarksToLS(bookmarkIDs, id, target); 
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
+  console.log(target);
   target.innerHTML = bookmarkIconFilled;
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));

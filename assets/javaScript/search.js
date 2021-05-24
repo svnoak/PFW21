@@ -438,22 +438,6 @@ function filterLevels(array) {
   }
 }
 
-function saveBookmarked(event) {
-  console.log(event.target.attributes[1].nodeValue);
-  let target = event.target;
-  target.classList.toggle("filled");
-  addBookmarksToLS();
-}
-function addBookmarksToLS() {
-  let bookmarks = document.querySelectorAll(".filled");
-  let bookmarkIDs = [];
-  bookmarks.forEach((obj) => {
-    bookmarkIDs.push(parseInt(obj.attributes[1].nodeValue));
-  });
-  localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarkIDs));
-  console.log(bookmarkIDs);
-}
-
 function sortSearchResult(programmes) {
   let sortBy = document.getElementById("sort-by").value;
   let order = document.getElementById("order").value;
