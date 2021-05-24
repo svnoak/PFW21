@@ -21,6 +21,11 @@ BUTTONS
     -CALL-TO-ACTION (CTA)
 */
 
+body { 
+  opacity: 0;
+  transition: opacity .5s;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -866,6 +871,7 @@ body {
 
 /* Navigation */
 nav{
+  opacity: 1;
   position: fixed;
   bottom: 0;
   background-color: var(--primary);

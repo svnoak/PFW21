@@ -18,6 +18,19 @@ const RANDOM = {
   },
 };
 
+window.transitionToPage = function(href) {
+  document.querySelector("nav").style.opacity = 1;
+  document.querySelector('body').style.opacity = 0;
+  
+  setTimeout(function() { 
+      window.location.href = href
+  }, 500)
+}
+
+document.addEventListener('DOMContentLoaded', function(event) {
+  document.querySelector('body').style.opacity = 1
+})
+
 function getProgrammesById(id) {
   return DB.PROGRAMMES.find((obj) => obj.id == id);
 }
