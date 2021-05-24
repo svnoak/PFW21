@@ -1,7 +1,7 @@
 "use strict";
 
 // render('body', createBackground());
-render('.index-wrapper', createHero(), createBrandInfo(), createAdSpace(), cardCarousell(DB.COUNTRIES), createCompareInfo());
+render('.index-wrapper', createHero(), createBrandInfo(), makeAd(), cardCarousell(DB.COUNTRIES), createCompareInfo());
 
 // Skapar HERO med innehåll
 function createHero() {
@@ -58,13 +58,6 @@ function createBrandInfo() {
 
     brandInfo.append(title, text);
     return brandInfo;
-}
-
-function createAdSpace() {
-    let adSpace = document.createElement('div');
-    adSpace.className = 'ad-space';
-
-    return adSpace;
 }
 
 // Skapar DOM-element för alla länder

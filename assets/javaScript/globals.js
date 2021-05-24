@@ -392,3 +392,36 @@ function createBackgroundCircle() {
 
   return circleContainer;
 }
+
+function makeAd(size = "random") {
+  //creates random
+  let ads = [
+    'annons_horizontell.jpg',
+    'annons_kvadratisk.jpg'
+  ];
+  let chosen = ads[RANDOM.rInt(ads.length)];
+
+  // if want specific size
+  if(size !== "random"){
+    if(size[1] == "k"){
+      chosen = ads.find(ad => ad.includes(size));
+    } else {
+      chosen = ads.find(ad => ad.includes(size));
+    }
+  }
+
+  let wrapper = document.createElement("div");
+  wrapper.className = `ad ad-random`;
+  if(chosen.includes("horiz")){
+    wrapper.className = `ad ad-hori`;
+  } else if (chosen.includes("kvad")){
+    wrapper.className = `ad ad-kvad`;
+  }
+  let text = document.createElement("div");
+  text.textContent = `Detta är en annons`;
+  let ad = document.createElement("img");
+  wrapper.append(text, ad)
+  ad.setAttribute('src', `assets/ads/${chosen}`)
+
+  return wrapper
+}
