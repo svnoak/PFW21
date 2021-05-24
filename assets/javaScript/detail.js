@@ -111,12 +111,17 @@ function makeSchoolInfo(){
     title.className = `detail-title title-default`;
   
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
-    console.log(reviews)
+    let reviewWrapper = document.createElement("div");
+    if (reviews.length > 0){
+        reviewWrapper.append(cardCarousell(reviews, "rev"))
+    }
+
     let schoolInfo = document.createElement("section");
     schoolInfo.className = `detail-school-sections`;
-    schoolInfo.append(createClubSection())
+    schoolInfo.append(createClubSection());
 
-    wrapper.append(title, cardCarousell(reviews, "rev"), schoolInfo)
+
+    wrapper.append(title, reviewWrapper, schoolInfo)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -240,9 +245,12 @@ function makeCityInfo(){
     titleWrap.append(cityImage(1), title)   
     
     let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
-
+    let reviewWrapper = document.createElement("div");
+    if(reviews.length > 0){
+        reviewWrapper.append(cardCarousell(reviews, "rev"))
+    }
     //also review cards
-    wrapper.append(head, cardCarousell(reviews, "rev"), makeWeatherInfo())
+    wrapper.append(head, reviewWrapper, makeWeatherInfo())
 
     return wrapper
 
