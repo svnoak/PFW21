@@ -116,7 +116,7 @@ function makeSchoolInfo(){
     schoolInfo.className = `detail-school-sections`;
     schoolInfo.append(createClubSection())
 
-    wrapper.append(title, cardCarousell(reviews), schoolInfo)
+    wrapper.append(title, cardCarousell(reviews, "rev"), schoolInfo)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -221,51 +221,6 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
-// function cardCarousell(array){
-//     let wrapper = document.createElement("section");
-//     wrapper.className= `card-carousell`;
-
-//     let cardWrapper = document.createElement("div");
-//     cardWrapper.className = `card-wrapper`;
-//     let blobWrapper = document.createElement("div");
-//     blobWrapper.className = `blob-wrapper`;
-
-//     wrapper.append(cardWrapper, blobWrapper);
-
-//     let first = true;
-
-//     array.forEach(object =>{
-//         let card = createReviewCard(object);
-//         card.className = `card`;
-//         cardWrapper.append(card);
-
-//         let blob = document.createElement("div");
-//         blob.className = `blob`;
-//         blobWrapper.append(blob);
-
-//         if(first){
-//             blob.classList.add("active");
-//         }
-
-//         // let location = card.getBoundingClientRect();
-//         cardWrapper.addEventListener("scroll", checkActive)
-
-//         function checkActive(){
-//             let location = card.getBoundingClientRect();
-
-//             if(location.left > 1 && location.left < 250 ){
-//                 document.querySelector(".active").classList.remove("active");
-//                 blob.classList.add(`active`);
-//             }
-//         }
-
-//         first = false;
-        
-//     })
-
-//     return wrapper
-// }
-
 function makeCityInfo(){
     let wrapper = document.createElement("section");
     wrapper.className = `detail-city detail-body`;
@@ -287,7 +242,7 @@ function makeCityInfo(){
     let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
 
     //also review cards
-    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
+    wrapper.append(head, cardCarousell(reviews, "rev"), makeWeatherInfo())
 
     return wrapper
 

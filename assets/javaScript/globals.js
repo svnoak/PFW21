@@ -73,7 +73,7 @@ function render(parentElement, ...element) {
 
 
 // Skapar karusell
-function cardCarousell(array){
+function cardCarousell(array, carType = "country"){
   let wrapper = document.createElement("section");
   wrapper.className= `card-carousell`;
 
@@ -90,11 +90,18 @@ function cardCarousell(array){
 
   let first = true;
 
-  array.forEach(object =>{
-      let card = document.createElement('section');
-      card.append(createCard(object));
-      card.className = `card`;
-      cardWrapper.append(card);
+  array.forEach(object =>{  
+    let card;
+    if( carType == "country"){
+      card = createCard(object)
+      console.log(card)
+    } else{
+      card = createReviewCard(object)
+    }
+
+    card.className = `card`;
+    cardWrapper.append(card);
+      
 
       let blob = document.createElement("div");
       blob.className = `blob`;
