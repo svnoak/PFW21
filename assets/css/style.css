@@ -788,7 +788,6 @@ figcaption{
   max-height: 50vh;
 
   padding: var(--space-small);
-  padding-top: var(--space-medium);
   border-radius: var(--border-squared);
   box-shadow: 0px 0px 10px gray;
   z-index: 10;
@@ -796,8 +795,8 @@ figcaption{
 }
 
 .close-list {
-  position: absolute;
-  right: 10px;
+  position: fixed;
+  right: 35px;
   cursor: pointer;
 }
 
