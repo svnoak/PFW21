@@ -648,13 +648,12 @@ figcaption{
 
 .hero {
   position: relative;
-  height: calc( 100vh -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
 
   margin-top: var(--space-medium);
   margin-bottom: var(--space-medium);
   padding: var(--space-medium);
   background-color: var(--elevated-background);
-  border-radius: var(--border-squared);
+  border-radius: var(--border-rounded);
 
   flex-direction: column;
   gap: var(--space-medium);
