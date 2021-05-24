@@ -69,15 +69,22 @@ function createHeader() {
   titleFavorites.textContent = 'Favoriter';
   favoritesContainer.append(titleFavorites);
 
-  favorites.forEach(favorite => { 
-    let option = createOptionsInList(favorite.programme, favorite.university);
-    titleFavorites.after(option);
-
-    option.addEventListener('click', () => {
-      addProgrammeToArray(favorite.id);
-      option.classList.toggle('chosen');
+  if(favorites == "") {
+    let noFavorites = document.createElement('p');
+    noFavorites.textContent = "Du har inga favoriter! Lägg till en favorit genom att trycka på bokmärket när du söker efter program.";
+    favoritesContainer.append(noFavorites);
+  } else {
+    favorites.forEach(favorite => { 
+      let option = createOptionsInList(favorite.programme, favorite.university);
+      titleFavorites.after(option);
+  
+      option.addEventListener('click', () => {
+        addProgrammeToArray(favorite.id);
+        option.classList.toggle('chosen');
+      });
     });
-  });
+  }
+
 
   let searchResult = document.createElement('div');
   searchResult.className = 'search-result';
