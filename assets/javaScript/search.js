@@ -8,7 +8,7 @@ let levels = [];
 
 let points = 0;
 let sundaysNumber = 0;
-let visa;
+let visa = true;
 let filteredLanguages = [];
 
 let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
@@ -62,7 +62,10 @@ window.addEventListener("load", () => {
         params.forEach( param => {
           if (param.id == key) {
             urlParameters[x].split(",").forEach( p => {
-              typeof(param.value) == "object" ? param.value.push(p) : param.value = p;
+              if (typeof(param.value) == "object" ) {
+                p.includes("%20") ? p = p.replace("%20"," ") : false ;
+                param.value.push(p);
+              } else { param.value = p };
               switch (key) {
                 case "s":
                   if (param.value > 0 ) {
@@ -77,7 +80,7 @@ window.addEventListener("load", () => {
                   }
                 break;
                 case "v":
-                  if (param.value == "true") {
+                  if (param.value == "false") {
                     createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
                     visa = param.value;
                   }
@@ -227,7 +230,7 @@ function createFilterOptions() {
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
-  if (visa == "true") {
+  if (visa == "false") {
     visumInput.checked = true;
   }
   visumInput.addEventListener("change", () => {
@@ -442,16 +445,16 @@ function sortSearchResult(programmes) {
   let sortBy = document.getElementById("sort-by").value;
   let order = document.getElementById("order").value;
   if (sortBy == "letters" && order == "fall") {
-    programmes.sort((a, b) => (a.name > b.name ? -1 : 1));
+    programmes.sort((a, b) => (a.name > b.name ? 1 : -1));
   }
   if (sortBy == "letters" && order == "rise") {
-    programmes.sort((a, b) => (a.name < b.name ? -1 : 1));
+    programmes.sort((a, b) => (a.name < b.name ? 1 : -1));
   }
   if (sortBy == "points" && order == "rise") {
-    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
   }
   if (sortBy == "points" && order == "fall") {
-    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? 1 : -1));
+    programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
   }
   createProgrammeElements("search-results", programmes);
 }
@@ -474,7 +477,7 @@ function showResults() {
   });
   if (sundaysNumber > 0) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
   if (points > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
-  if (visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
+  if (!visa) createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
 
   updateView();
 }
@@ -507,7 +510,7 @@ function removeSearchWord(removeWord) {
     reloadUrlParams();
   }
   if (removeWord.includes("visa")) {
-    visa = false;
+    visa = true;
     filterProgramme(DB.PROGRAMMES);
     updateParams("v", visa);
     reloadUrlParams();
