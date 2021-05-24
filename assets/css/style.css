@@ -721,8 +721,8 @@ figcaption{
   z-index: -1;
 }
 #searchsite-circle {
-  top: -50%;
-  right: 0;
+  top: -25%;
+  right: -10%;
 }
 .c-container.bottom {
   top: -20em;
