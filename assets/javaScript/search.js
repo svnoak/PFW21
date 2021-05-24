@@ -48,6 +48,10 @@ let params = [
   }
 ]
 
+function updateParams(id, value) {
+  params.forEach( param => param.id == id ? param.value = value : false );
+}
+
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
@@ -161,6 +165,7 @@ function createFilterOptions() {
   pointsSlider.addEventListener("change", () => {
     points = document.getElementById("points-slider").value;
     document.getElementById("points-text").textContent = points;
+    updateParams("p", points);
   });
   pointsSliderDiv.prepend(pointsSlider);
   pointsOption.append(pointsSliderDiv);
@@ -170,28 +175,28 @@ function createFilterOptions() {
   let englishDiv = document.createElement("div");
   englishDiv.setAttribute("id", "english");
   englishDiv.textContent = "Engelska";
-  if (filteredLanguages.includes("engelska")) {
+  if (filteredLanguages.includes("english")) {
     englishDiv.classList.add("selected");
   }
   englishDiv.addEventListener("click", addKeyToFilter);
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
-  if (filteredLanguages.includes("spanska")) {
+  if (filteredLanguages.includes("english")) {
     spanishDiv.classList.add("selected");
   }
   spanishDiv.addEventListener("click", addKeyToFilter);
   let frenchDiv = document.createElement("div");
   frenchDiv.setAttribute("id", "french");
   frenchDiv.textContent = "Franska";
-  if (filteredLanguages.includes("franska")) {
+  if (filteredLanguages.includes("french")) {
     frenchDiv.classList.add("selected");
   }
   frenchDiv.addEventListener("click", addKeyToFilter);
   let swedishDiv = document.createElement("div");
   swedishDiv.setAttribute("id", "swedish");
   swedishDiv.textContent = "Svenska";
-  if (filteredLanguages.includes("svenska")) {
+  if (filteredLanguages.includes("swedish")) {
     swedishDiv.classList.add("selected");
   }
   swedishDiv.addEventListener("click", addKeyToFilter);
@@ -208,7 +213,8 @@ function createFilterOptions() {
     visumInput.checked = true;
   }
   visumInput.addEventListener("change", () => {
-    visa ? (visa = false) : (visa = true);
+    visa ? visa = false : visa = true;
+    updateParams("v", visa);
   });
   visumOption.prepend(visumInput);
 
@@ -226,6 +232,7 @@ function createFilterOptions() {
   sundaysSlider.value = sundaysNumber;
   sundaysSlider.addEventListener("change", () => {
     sundaysNumber = document.getElementById("sundays-slider").value;
+    updateParams("s", sundaysNumber);
     document.getElementById("sundays-text").textContent = sundaysNumber;
   });
   sundaysDiv.prepend(sundaysSlider);
@@ -244,7 +251,6 @@ function createFilterOptions() {
       obj.classList.remove("selected");
     });
     visumInput.checked = false;
-    visa = false;
     pointsSlider.value = 0;
     points = 0;
     document.getElementById("points-text").textContent = points;
@@ -271,7 +277,7 @@ function createFilterOptions() {
 }
 
 function addKeyToFilter(event) {
-  let target = event.target.innerHTML.toLocaleLowerCase();
+  let target = event.target.id;
   event.target.classList.toggle("selected");
   if ( !event.target.classList.contains("selected") ) {
     removeSearchWord(target);
@@ -287,7 +293,7 @@ function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
     searchWords.push(input);
-    createPillForSearchWordsOnSearchSite(this.value);
+    createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(this.value));
     clearSearchBar();
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
         cities.push(input);
@@ -295,7 +301,10 @@ function getProgrammesBySearchWord(event) {
         countries.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
         levels.push(input); 
-    } else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+    }  else if (DB.PROGRAMMES.some((obj) => getLanguageFromLangID(obj.language).toLocaleLowerCase().includes(input))) {
+      filteredLanguages.push(input);
+  }
+    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
         programmes.push(input);
     }
     updateView();
@@ -477,10 +486,20 @@ function removeSearchWord(removeWord) {
   if (removeWord.includes("antagningspoäng")) {
     points = 0;
     filterProgramme(DB.PROGRAMMES);
+    updateParams("p", points);
+    reloadUrlParams();
+  }
+  if (removeWord.includes("visa")) {
+    visa = false;
+    filterProgramme(DB.PROGRAMMES);
+    updateParams("v", visa);
+    reloadUrlParams();
   }
   if (removeWord.includes("soldagar")) {
     sundaysNumber = 0;
+    updateParams("s", sundaysNumber);
     filterProgramme(DB.PROGRAMMES);
+    reloadUrlParams();
   }
   for (let i = 0; i < allFilterWords.length; i++) {
     allFilterWords[i].forEach((obj) => {
