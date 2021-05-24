@@ -8,7 +8,7 @@ let levels = [];
 
 let points = 0;
 let sundaysNumber = 0;
-let visa = false;
+let visa;
 let filteredLanguages = [];
 
 let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
@@ -62,20 +62,25 @@ window.addEventListener("load", () => {
         params.forEach( param => {
           if (param.id == key) {
             urlParameters[x].split(",").forEach( p => {
-              console.log(typeof(param.value), param.value, p);
               typeof(param.value) == "object" ? param.value.push(p) : param.value = p;
-              console.log(param.value);
-              console.log(key);
               switch (key) {
                 case "s":
-                  if (param.value > 0 ) createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
+                  if (param.value > 0 ) {
+                    createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
+                    sundaysNumber = param.value;
+                  }
                   break;
                 case "p":
-                  if (param.value > 0) createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`); 
+                  if (param.value > 0) {
+                    createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
+                    points = param.value;
+                  }
                 break;
                 case "v":
-                  console.log(param.value == "true");
-                  if (param.value == "true") createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
+                  if (param.value == "true") {
+                    createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
+                    visa = param.value;
+                  }
                   break;
                 default:
                   createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
@@ -186,7 +191,7 @@ function createFilterOptions() {
   let spanishDiv = document.createElement("div");
   spanishDiv.setAttribute("id", "spanish");
   spanishDiv.textContent = "Spanska";
-  if (filteredLanguages.includes("english")) {
+  if (filteredLanguages.includes("spanish")) {
     spanishDiv.classList.add("selected");
   }
   spanishDiv.addEventListener("click", addKeyToFilter);
@@ -213,7 +218,7 @@ function createFilterOptions() {
   let visumInput = document.createElement("input");
   visumInput.setAttribute("type", "checkbox");
   visumInput.setAttribute("id", "visum-checkbox");
-  if (visa) {
+  if (visa == "true") {
     visumInput.checked = true;
   }
   visumInput.addEventListener("change", () => {
@@ -384,7 +389,6 @@ function filterLanguages(array) {
         }
       });
     });
-    console.log(passArray);
     filterPoints(passArray);
   } else {
     filterPoints(array);
