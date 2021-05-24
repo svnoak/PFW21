@@ -400,7 +400,7 @@ function removeBookmark() {
   return new Promise( confirm => {
     swal({
       title: "Vill du radera favoriten?",
-      icon: "warning",
+      // icon: "warning",
       buttons: {
           cancel: {
             text: "Nej",

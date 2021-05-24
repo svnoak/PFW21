@@ -908,6 +908,30 @@ body {
   overflow-x: hidden;
 }
 
+/* FAVORITES */
+
+/* Dialog-ruta */
+.swal-modal {
+  background-color: var(--primary);
+  border-radius: var(--border-squared);
+}
+
+.swal-title {
+  font: 500 var(--title-small) var(--title-font);
+  color: var(--black);
+}
+
+.swal-footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.swal-button--confirm, .swal-button--cancel {font: 600 var(--font-default) var(--text-font);}
+
+.swal-button.swal-button--confirm {
+  background-color: var(--secondary);
+}
+
 /* ADS */
 .ad{
   padding: 0;
