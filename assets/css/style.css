@@ -651,7 +651,7 @@ figcaption{
 
   margin-top: var(--space-medium);
   margin-bottom: var(--space-medium);
-  padding: var(--space-medium);
+  padding: var(--space-large);
   background-color: var(--elevated-background);
   border-radius: var(--border-rounded);
 
