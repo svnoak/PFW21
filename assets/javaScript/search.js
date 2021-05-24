@@ -101,6 +101,13 @@ clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
 
+
+
+let circleContainer = createBackgroundCircle();
+circleContainer.className = 'c-container bottom';
+render("body", circleContainer);
+
+
 function reloadUrlParams() {
   resetUrlParameter();
   setUrlParameter(params);
