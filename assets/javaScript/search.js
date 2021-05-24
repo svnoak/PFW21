@@ -62,7 +62,10 @@ window.addEventListener("load", () => {
         params.forEach( param => {
           if (param.id == key) {
             urlParameters[x].split(",").forEach( p => {
-              typeof(param.value) == "object" ? param.value.push(p) : param.value = p;
+              if (typeof(param.value) == "object" ) {
+                p.includes("%20") ? p = p.replace("%20"," ") : false ;
+                param.value.push(p);
+              } else { param.value = p };
               switch (key) {
                 case "s":
                   if (param.value > 0 ) {
