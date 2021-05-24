@@ -53,7 +53,7 @@ function getProgrammesField(subjectID) {
 }
 
 function render(parentElement, ...element) {
-  document.querySelector(parentElement).append(...element);
+  document.querySelector(parentElement).prepend(...element);
 }
 
 
