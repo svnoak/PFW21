@@ -148,15 +148,19 @@ function createNav(index = 0) {
   return navBtn;
 };
 
+let index = 0;
 
 //Changes the name of the nav depending on what action is taken
 function changeNavName(trigger){
-  let index = 0;
+
+// FIXA SÅ ATT DET FINNS EN COUNTER SOM HÅLLER KOLL PÅ INDEX?
   let programNameContainer = document.querySelector("#menu > span");
-  if(addedProgrammes.length > 0) {
-    addedProgrammes.forEach( id => {
-      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;
-    });
+  if( addedProgrammes.length > 0) {
+    console.log(index);
+    console.log(trigger);
+    /*addedProgrammes.forEach( id => {
+      getProgrammesById(id).name == programNameContainer.textContent ? index = addedProgrammes.indexOf(id) : index;  
+    });*/
     switch (trigger) {
       case "next":
         index = index + 1;
@@ -198,9 +202,15 @@ function setIndex(key, index) {
       index >= addedProgrammes.length ? index = 0 : index;
       break;
 
+    case "remove":
+      index = 0;
+      break;
+
     case "target":
-      main.style.left ? index = parseInt(main.style.left.split("vw")[0])/-100 : index = index;
-      if (index >= addedProgrammes.length) index = addedProgrammes.length-1;
+      /*main.style.left ? index = parseInt(main.style.left.split("vw")[0])/-100 : index = index;
+      console.log(index);
+      if (index >= addedProgrammes.length) index = addedProgrammes.length-1;*/
+      index = 0;
       break;
   }
   return index;
