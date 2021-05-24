@@ -66,13 +66,13 @@ window.addEventListener("load", () => {
               switch (key) {
                 case "s":
                   if (param.value > 0 ) {
-                    createPillForSearchWordsOnSearchSite(`Antal soldagar: ${sundaysNumber}`);
+                    createPillForSearchWordsOnSearchSite(`Antal soldagar: ${param.value}`);
                     sundaysNumber = param.value;
                   }
                   break;
                 case "p":
                   if (param.value > 0) {
-                    createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${points}`);
+                    createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${param.value}`);
                     points = param.value;
                   }
                 break;
