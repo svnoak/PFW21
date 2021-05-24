@@ -23,8 +23,7 @@ nav{
   }
   
   nav i{
-    height: var(--space-medium);
-    margin-bottom: 5px;
+    height: calc( var(--space-medium) + 3px );
   }
   
   nav i svg{
