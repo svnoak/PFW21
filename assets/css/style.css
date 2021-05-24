@@ -586,7 +586,7 @@ figcaption{
 }
 
 .card-rating {
-  background-color: #617ab0;
+  background-color: var(--accent);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -617,7 +617,7 @@ figcaption{
   width: 10px;
   margin: 0px 3px 3px;
   border-radius: var(--border-round);
-  background-color: var(--gray);
+  background-color: var(--primary);
 }
 
 .blob-wrapper .active {
