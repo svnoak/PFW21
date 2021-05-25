@@ -321,8 +321,10 @@ function getProgrammesBySearchWord(event) {
   if (event.keyCode == 13 && this.value.length > 0) {
     let input = this.value.toLocaleLowerCase();
     searchWords.push(input);
-    createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(this.value));
-    clearSearchBar();
+    let inc = [];
+    inc = allFilterWords.filter( array => array.includes(input) )
+    if (inc.length == 0) {
+      createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(this.value));    
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
         cities.push(input);
     } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
@@ -336,6 +338,8 @@ function getProgrammesBySearchWord(event) {
         programmes.push(input);
     }
     updateView();
+  }
+    clearSearchBar();
     }
   }
 
