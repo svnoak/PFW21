@@ -2,7 +2,7 @@
 
 // render('body', createBackground());
 render(
-  ".index-wrapper",
+  "#main",
   createHero(),
   createBrandInfo(),
   makeAd(),

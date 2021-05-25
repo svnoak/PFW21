@@ -729,7 +729,7 @@ figcaption{
   display: none;
 }
 
-.index-wrapper {
+#main {
 	overflow: hidden;
   width: 100vw;
   padding: 0;

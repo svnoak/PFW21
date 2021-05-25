@@ -105,7 +105,7 @@ document.getElementById("filter-btn").addEventListener("click", createFilterOpti
 
 let circleContainer = createBackgroundCircle();
 circleContainer.className = 'c-container bottom';
-render(".index-wrapper", circleContainer);
+render("#main", circleContainer);
 
 
 function reloadUrlParams() {
