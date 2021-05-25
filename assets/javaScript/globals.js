@@ -426,7 +426,9 @@ async function removeBookmarkFromLS(bookmarks, id, target) {
   if ( window.location.href.includes("favorite") ){
     if ( await removeBookmark() ){
       remove(bookmarks, id, target);
-      target.parentElement.remove();
+      target.parentElement.style.opacity = 0;
+      setTimeout( () => { target.parentElement.remove() }, 400 )
+      
     }
 }
   else {
