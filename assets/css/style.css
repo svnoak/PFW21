@@ -362,7 +362,7 @@ svg {
   padding: 10px;
 }
 #close > svg {
-  rotate: 45deg;
+  transform: rotate(45deg);
 }
 #filter-options {
   flex-grow: 1;
@@ -1064,7 +1064,7 @@ figcaption {
   transition: rotate 0.5s;
 }
 .option.chosen > i {
-  rotate: 45deg;
+  transform: rotate(45deg);
 }
 
 #menu {
