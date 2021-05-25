@@ -700,6 +700,8 @@ figcaption {
   right: var(--space-medium);
 }
 
+.index .card-carousell{right:0}
+
 .card-wrapper,
 .blob-wrapper,
 .detail-body,
