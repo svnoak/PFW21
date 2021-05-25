@@ -37,8 +37,6 @@ function createHero() {
   globeRender.loop = true;
   globeRender.playsInline = true;
 
-  //<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xxSuTLcA12o?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
   let textHero = document.createElement("p");
   textHero.className = "text-default "; // semi-bold
   textHero.textContent = "Här kan du hitta spännande program över hela världen. Vi hjälper dig att hitta rätt!";
