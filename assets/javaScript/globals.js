@@ -2,12 +2,19 @@
 
 if ( !localStorage.favoriteProgrammes ) localStorage.favoriteProgrammes = "[]";
 
+// HEAD
+
+let favIcon = document.createElement('link');
+favIcon.rel = "shortcut icon";
+favIcon.type = "image/png";
+favIcon.href = "favicon.ico";
+
 // google-fonts
 let fontStyle = document.createElement('link');
 fontStyle.rel = 'stylesheet';
 fontStyle.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap';
 
-document.head.append(fontStyle);
+document.head.append(favIcon, fontStyle);
 
 var searchWords = [];
 
