@@ -5,9 +5,9 @@ render(
   ".index-wrapper",
   createHero(),
   createBrandInfo(),
-  makeAd(),
+  makeAd("h"),
   cardCarousell(DB.COUNTRIES),
-  makeAd(),
+  makeAd("k"),
   createCompareInfo(
     "Beslutsångest?",
     "Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra."

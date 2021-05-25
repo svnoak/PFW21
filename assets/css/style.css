@@ -1028,6 +1028,7 @@ body {
 .ad div{
   background-color: var(--elevated-background);
   padding: 3px var(--space-medium);
+  box-shadow: 0px -2px 5px -2px var(--overlay);
 }
 
 .ad img{
