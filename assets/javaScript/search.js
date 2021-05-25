@@ -304,6 +304,7 @@ function createFilterOptions() {
   showResultsBtn.textContent = `Visa utbildningar`;
   showResultsBtn.addEventListener("click", (event) => {
     document.getElementById("filters").remove();
+    document.body.classList.remove('noScroll');
     showResults(event);
   });
   showResultsBtnDiv.append(showResultsBtn);

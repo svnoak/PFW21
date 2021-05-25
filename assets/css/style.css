@@ -346,7 +346,7 @@ svg {
 
 #filters {
   position: absolute;
-  height: 100vh;
+  height: calc( var(--hero-height) - var(--nav-height);
   width: 100vw;
   background-color: white;
   z-index: 100;
