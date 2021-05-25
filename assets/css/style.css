@@ -723,6 +723,8 @@ figcaption {
   right: var(--space-medium);
 }
 
+.index .card-carousell{right:0}
+
 .card-wrapper,
 .blob-wrapper,
 .detail-body,
@@ -742,7 +744,7 @@ figcaption {
 
 .hide-carousel-scroll {
   overflow: hidden;
-  /*height: calc(var(--carousel-height) - var(--space-medium));*/
+  height: calc(var(--carousel-height) - var(--space-medium));
 }
 
 .card {
