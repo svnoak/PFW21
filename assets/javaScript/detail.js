@@ -260,6 +260,7 @@ function makeCityInfo(){
 
 function cityImage(x){
     let cityImage = document.createElement("div");
+    console.log(detailedProgram);
     cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
     cityImage.className = `bg-image`;
 
