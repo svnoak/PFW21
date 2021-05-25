@@ -19,6 +19,7 @@ const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
 const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
 let main = document.createElement("main");
+main.id = "main";
 main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
 render("body", main)
 
@@ -261,7 +262,7 @@ function makeCityInfo(){
 function cityImage(x){
     let cityImage = document.createElement("div");
     if (detailedProgramCity.imagesBig.length < 2) x = 0;
-    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
+    cityImage.style.backgroundImage = `url( assets/images/${detailedProgramCity.imagesBig[x]} )`;
     cityImage.className = `bg-image`;
 
     return cityImage
@@ -311,7 +312,7 @@ function createDiagram() {
         barWrapper.className = `detail-weather-bar`;
 
         let bar = document.createElement("div");
-        bar.style.width = `${(city.sun / 365) * 100}%`;
+        bar.style.width = "0px";
 
         let sunNum = document.createElement("span");
         sunNum.textContent = `${city.sun}`;
@@ -320,7 +321,6 @@ function createDiagram() {
 
         wrapper.append(cityName, barWrapper)
     })  
-
 
     return figure
 }
@@ -353,4 +353,18 @@ function makeWeatherInfo(){
 
     return wrapper
 }
+
+window.addEventListener("scroll", () =>{
+    let bounding = document.querySelector("figure").getBoundingClientRect();
+    let viewport = window.innerHeight;
+    let bars = document.querySelectorAll(".detail-weather-bar");
+
+    if(bounding.top <= viewport){
+        bars.forEach(bar => {
+            bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
+        })
+    } else {
+        console.log("not in view")
+    }
+})
 

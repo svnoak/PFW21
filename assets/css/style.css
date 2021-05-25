@@ -581,6 +581,8 @@ svg {
   text-align: right;
   padding: 5px var(--space-small) 5px 5px;
   color: white;
+  border-radius: 0px var(--border-squared) var(--border-squared) 0px;
+  transition: width 1s;
 }
 
 figcaption{
@@ -665,8 +667,8 @@ figcaption{
 }
 
 .card-rating > *:nth-child(2) {
-  border-right: 1px solid white;
-  border-left: 1px solid white;
+  border-right: 1px solid var(--primary);
+  border-left: 1px solid var(--primary);
 }
 
 .card-rating * {
@@ -687,7 +689,7 @@ figcaption{
   width: 10px;
   margin: 0px 3px 3px;
   border-radius: var(--border-round);
-  background-color: var(--primary);
+  background-color: var(--black);
 }
 
 .blob-wrapper .active {
@@ -728,9 +730,14 @@ figcaption{
   display: none;
 }
 
-.index-wrapper {
-  overflow: hidden;
+#main {
+	overflow: hidden;
+  width: 100vw;
+  padding: 0;
+  opacity: 0;
+  transition: opacity .5s;
 }
+
 
 .hero {
   position: relative;
