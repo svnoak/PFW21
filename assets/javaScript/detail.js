@@ -364,7 +364,6 @@ window.addEventListener("scroll", () =>{
             bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
         })
     } else {
-        console.log("not in view")
     }
 })
 

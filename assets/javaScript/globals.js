@@ -21,19 +21,8 @@ const RANDOM = {
 };
 
 document.addEventListener('DOMContentLoaded', function(event) {
-  document.querySelector('#main').style.opacity = 1
+  document.querySelector('body').style.opacity = 1
 })
-
-window.transitionToPage = function(href) {
-  document.querySelector("nav").style.opacity = 1;
-  document.querySelector('#main').style.opacity = 0;
-  
-  setTimeout(function() { 
-      window.location.href = href
-  }, 500)
-}
-
-
 
 function getProgrammesById(id) {
   return DB.PROGRAMMES.find((obj) => obj.id == id);
@@ -186,10 +175,12 @@ function DOMnav() {
     text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
-    link.addEventListener( "click", () => transitionToPage(item.href) );
 
-    if (window.location.href.includes(item.href)) link.classList.add('active');
-
+    if (window.location.href.includes(item.href)) {
+      link.classList.add('active');
+    } else {
+      link.setAttribute("href", item.href);
+    }
     wrapper.append(link);
   });
 
@@ -331,8 +322,7 @@ function createProgrammeElements(id ,programmes) {
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
     cardButton.href = `detail.html?programmeID=${obj.id}`;
-    cardButton.innerHTML = `Läs mer >`;
-    cardButton.addEventListener( "click", () => transitionToPage(`detail.html?programmeID=${obj.id}`));
+    cardButton.innerHTML = "Läs mer >";
     cardButton.className = "card-button text-default light";
 
     cardButtonDiv.append(cardButton);
@@ -351,78 +341,6 @@ function createProgrammeElements(id ,programmes) {
     render(`#${id}`, searchResultCard);
   });
 }
-
-/*
-function createProgrammeElements(id ,programmes) {
-  document.getElementById(id).innerHTML = "";
-  programmes.forEach((obj) => {
-    let ResultCard = document.createElement("div");
-    ResultCard.className = "search-result-card";
-
-    let bookmark = document.createElement("div");
-    bookmark.className = `bookmark`;
-    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
-    bookmark.innerHTML = bookmarkIconFilled :
-    bookmark.innerHTML = bookmarkIcon;
-    bookmark.setAttribute("programmeID", obj.id);
-    bookmark.addEventListener("click", saveBookmarked);
-
-    let programmeImage = document.createElement("div");
-    programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
-    programmeImage.className = "programme-image";
-
-    let programmeCardInfo = document.createElement("div");
-    programmeCardInfo.className = "programme-card-info";
-
-    let programmeCardTitle = document.createElement("h3");
-    programmeCardTitle.innerHTML = obj.name;
-
-    let programmeCardSchool = document.createElement("div");
-    programmeCardSchool.className = "programme-card-school";
-    let cardSchool = document.createElement("p");
-    cardSchool.className = "card-school";
-    cardSchool.innerHTML = getUniversityFromUniID(obj.universityID).name;
-    programmeCardSchool.innerHTML = homeIcon;
-    programmeCardSchool.append(cardSchool);
-
-    let programmeCardCity = document.createElement("div");
-    programmeCardCity.className = "programme-card-city";
-    let cardCity = document.createElement("p");
-    cardCity.className = "card-city";
-    cardCity.innerHTML = `${getCityFromUniID(obj.universityID).name}, ${getCountryFromUniID(obj.universityID).name}`;
-    programmeCardCity.innerHTML = locationIcon;
-    programmeCardCity.append(cardCity);
-
-    let programmeCardLevelAndDate = document.createElement("div");
-    let levelDiv = document.createElement("div");
-    levelDiv.className = "flex-row";
-    let cardLevel = document.createElement("p");
-    cardLevel.className = "card-level";
-    cardLevel.innerHTML = getLevel(obj.level);
-    levelDiv.innerHTML = lvlIcon;
-    levelDiv.append(cardLevel);
-    programmeCardLevelAndDate.append(levelDiv);
-
-    let cardButtonDiv = document.createElement("div");
-    let cardButton = document.createElement("a");
-    cardButton.href = `detail.html?programmeID=${obj.id}`;
-    cardButton.innerHTML = "Läs mer";
-    cardButton.className = "card-button";
-    cardButtonDiv.append(cardButton);
-    cardButtonDiv.className = "card-button-div";
-
-    programmeCardInfo.append(
-      programmeCardTitle,
-      programmeCardSchool,
-      programmeCardCity,
-      programmeCardLevelAndDate,
-      cardButtonDiv
-    );
-
-    ResultCard.append(programmeImage, bookmark, programmeCardInfo);
-    render(`#${id}`, ResultCard);
-  });
-}*/
 
 function createCompareInfo(title, text, centered = false, circleBackground = true){
   let wrapper = document.createElement('section');
@@ -444,7 +362,6 @@ function createCompareInfo(title, text, centered = false, circleBackground = tru
   button.className = 'text-default light space-between button-solid--cream button-square';
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
   buttonContainer.append(button);
-  button.addEventListener( "click", () => transitionToPage(`compare.html`));
 
   console.log(circleBackground)
   if ( circleBackground ) {
@@ -575,7 +492,7 @@ function makeAd(size = "random") {
   text.textContent = `Detta är en annons`;
   let ad = document.createElement("img");
   wrapper.append(text, ad)
-  ad.setAttribute('src', `assets/ads/${chosen}`)
+  ad.setAttribute('src', `assets/image-ads/${chosen}`)
 
   return wrapper
 }

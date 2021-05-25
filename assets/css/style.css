@@ -608,6 +608,7 @@ figcaption{
 /* override the screen margin */
 .card-carousell{
   padding-top: var(--space-medium);
+  padding-bottom: var(--space-medium);
   width: 100vw;
   position: relative;
   right:  var(--space-medium);
@@ -743,14 +744,9 @@ figcaption{
   display: none;
 }
 
-#main {
-	overflow: hidden;
-  width: 100vw;
-  padding: 0;
-  opacity: 0;
-  transition: opacity .5s;
+.index-wrapper {
+  overflow: hidden;
 }
-
 
 .hero {
   position: relative;
@@ -1048,6 +1044,7 @@ body {
 .ad div{
   background-color: var(--elevated-background);
   padding: 3px var(--space-medium);
+  box-shadow: 0px -2px 5px -2px var(--overlay);
 }
 
 .ad img{
