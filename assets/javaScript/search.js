@@ -340,6 +340,9 @@ function getProgrammesBySearchWord(event) {
   }
 
 function filterProgramme(array) {
+  let filterExists = allFilterWords.filter( a => a.length > 0 ).length;
+  filterExists > 0 ? filterExists = true : filterExists = false;
+  if ( filterExists || points > 0 || visa == false || sundaysNumber > 0 ) {
   let passArray = [];
   if (programmes.length > 0) {
     programmes.forEach((searchWord) => {
@@ -353,6 +356,7 @@ function filterProgramme(array) {
   } else {
     filterCity(array);
   }
+}
 }
 function filterCity(array) {
   let passArray = [];
