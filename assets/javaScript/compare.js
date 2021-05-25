@@ -79,10 +79,10 @@ function createHeader() {
   });
 
   searchBar.addEventListener("keyup", () => {    
-    if(searchBar.value.length > 0) { 
-      programmeList.append(createSearchResults(searchBar.value));
-    } else if(searchBar.value.length < 1){
+    if(searchBar.value.length < 1) { 
       programmeList.append(createFavorites());
+    } else {
+      programmeList.append(createSearchResults(searchBar.value));
     }
   });
 
@@ -94,6 +94,10 @@ function createHeader() {
 
 
 function createFavorites() {
+  if(document.querySelector('.favorites')){
+    document.querySelector('.favorites').remove();
+  }
+
   if(document.querySelector('.search-result')) {
     document.querySelector('.search-result').remove();
   }
@@ -126,7 +130,11 @@ function createFavorites() {
   return favoritesContainer;
 }
 
-function createSearchResults(searchValue, parentElement) {
+function createSearchResults(searchValue) {
+  if(document.querySelector('.search-result')) {
+    document.querySelector('.search-result').remove();
+  }
+
   if(document.querySelector('.favorites')){
     document.querySelector('.favorites').remove();
   }
