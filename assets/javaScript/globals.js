@@ -524,3 +524,5 @@ function makeAd(size = "random") {
 
   return wrapper;
 }
+// get 100vh for mobile
+document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
