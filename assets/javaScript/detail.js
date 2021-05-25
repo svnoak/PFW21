@@ -123,8 +123,10 @@ function makeSchoolInfo(){
     schoolInfo.className = `detail-school-sections`;
     schoolInfo.append(createClubSection());
 
+    let circle = createBackgroundCircle();
+    circle.className = `detail-circle-container`;
 
-    wrapper.append(title, reviewWrapper, schoolInfo)
+    wrapper.append(title, reviewWrapper, schoolInfo, circle)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -252,8 +254,11 @@ function makeCityInfo(){
     if(reviews.length > 0){
         reviewWrapper.append(cardCarousell(reviews, "rev"))
     }
-    //also review cards
-    wrapper.append(head, reviewWrapper, makeWeatherInfo())
+
+    let circle = createBackgroundCircle();
+    circle.className = `detail-circle-container`;
+
+    wrapper.append(head, reviewWrapper, makeWeatherInfo(), circle)
 
     return wrapper
 
@@ -327,6 +332,7 @@ function createDiagram() {
 
 function makeWeatherInfo(){
     let wrapper = document.createElement("section");
+    wrapper.className = `detail-weather`;
 
 
     let title = document.createElement("h3");
