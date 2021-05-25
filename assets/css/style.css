@@ -594,6 +594,7 @@ figcaption{
 /* override the screen margin */
 .card-carousell{
   padding-top: var(--space-medium);
+  padding-bottom: var(--space-medium);
   width: 100vw;
   position: relative;
   right:  var(--space-medium);
@@ -1034,6 +1035,7 @@ body {
 .ad div{
   background-color: var(--elevated-background);
   padding: 3px var(--space-medium);
+  box-shadow: 0px -2px 5px -2px var(--overlay);
 }
 
 .ad img{

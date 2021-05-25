@@ -5,12 +5,14 @@ render(
   "#main",
   createHero(),
   createBrandInfo(),
-  makeAd(),
+  makeAd("h"),
   cardCarousell(DB.COUNTRIES),
+  makeAd("k"),
   createCompareInfo(
     "Beslutsångest?",
     "Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra."
-  )
+  ),
+  makeAd()
 );
 
 document.querySelector("#main").style.padding = "3%";
