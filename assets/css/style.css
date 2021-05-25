@@ -664,8 +664,8 @@ figcaption{
 }
 
 .card-rating > *:nth-child(2) {
-  border-right: 1px solid white;
-  border-left: 1px solid white;
+  border-right: 1px solid var(--primary);
+  border-left: 1px solid var(--primary);
 }
 
 .card-rating * {
@@ -686,7 +686,7 @@ figcaption{
   width: 10px;
   margin: 0px 3px 3px;
   border-radius: var(--border-round);
-  background-color: var(--primary);
+  background-color: var(--black);
 }
 
 .blob-wrapper .active {
