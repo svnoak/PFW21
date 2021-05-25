@@ -290,7 +290,7 @@ function createOptionsInList(programmeName, universityName, programmeID) {
 
   let option = document.createElement("div");
   option.className = "option space-between";
-  option.id = `p${programmeId}`;
+  option.id = `p${programmeID}`;
   
   let programmeInfo = document.createElement('div');
   
