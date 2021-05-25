@@ -4,6 +4,8 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const pID = parseInt(urlParams.get("programmeID"));
 
+document.querySelector("title").textContent = getProgrammeFromProgramID(pID).name;
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
