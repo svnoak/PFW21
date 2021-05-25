@@ -350,7 +350,7 @@ svg {
 
 #filters {
   position: absolute;
-  height: calc( var(--hero-height) - var(--nav-height);
+  height: calc( var(--hero-height) - var(--nav-height) );
   width: 100vw;
   background-color: white;
   z-index: 100;
