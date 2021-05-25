@@ -77,13 +77,13 @@ Ni kan exempelvis inte basera appen på att Madrid har i detta exempel två
 universitet.
 
 
-*/
+
 
 setTimeout(() => {
   // Inne i en setTimeout Så att konstanten DB deklareras
   // innan vi loggar den.
   console.log(DB);
-}, 1);
+}, 1);*/
 
 const COUNTRIES = [
   {
