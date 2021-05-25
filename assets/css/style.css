@@ -265,7 +265,7 @@ div {
   background: #fafaf9;
   box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.15);
   opacity: 1;
-  transition: ease-in-out .3s;
+  transition: ease-in-out 0.3s;
 }
 .programme-image {
   background-position: top;
@@ -1163,27 +1163,31 @@ body {
 }
 
 /* ADS */
-.ad{
+.ad {
+  margin-top: var(--space-medium);
   padding-top: 3px;
   padding-bottom: var(--space-small);
   position: relative;
-  width: 100vw;
+  width: 90vw;
   box-shadow: 0px -2px 5px -2px var(--overlay);
   background-color: var(--elevated-background);
+  border-radius: 10px;
 }
-.ad > div:nth-child(1){
+.ad > div:nth-child(1) {
   padding-left: var(--space-medium);
 }
 
-.ad-hori img{width: 100%;}
+.ad-hori img {
+  width: 100%;
+}
 
-.ad-kvad .wrapper{ 
-  max-width: 100vw; 
+.ad-kvad .wrapper {
+  max-width: 100vw;
   gap: var(--space-small);
   padding: 0px var(--space-medium);
 }
 
-.ad-kvad .wrapper img{
+.ad-kvad .wrapper img {
   flex-grow: 1;
   width: 20%;
   border-radius: var(--border-squared);

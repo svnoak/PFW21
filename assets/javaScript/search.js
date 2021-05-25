@@ -13,6 +13,8 @@ let filteredLanguages = [];
 
 let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 
+let numberOfAds = 3;
+
 let params = [
   {
     id: "ciID",
@@ -54,8 +56,10 @@ function updateParams(id, value) {
 
 window.addEventListener("load", () => {
   window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
+  reloadUrlParams();
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
+
   for (let i = 0; i < urlParameters.length; i++) {
     let x = i + 1;
     key = urlParameters[i];
@@ -470,7 +474,7 @@ function sortSearchResult(programmes) {
   if (sortBy == "points" && order == "fall") {
     programmes.sort((a, b) => (a.entryGrades[0] < b.entryGrades[0] ? -1 : 1));
   }
-  createProgrammeElements("search-results", programmes);
+  addAdsToResults(programmes);
 }
 document.getElementById("sort-by").addEventListener("change", () => {
   filterProgramme(DB.PROGRAMMES);
@@ -478,6 +482,15 @@ document.getElementById("sort-by").addEventListener("change", () => {
 document.getElementById("order").addEventListener("change", () => {
   filterProgramme(DB.PROGRAMMES);
 });
+
+function addAdsToResults(programmes) {
+  for (let i = 0; i < numberOfAds; i++) {
+    programmes.splice(RANDOM.rInt(programmes.length, 3), 0, makeAd());
+  }
+
+  console.log(programmes);
+  createProgrammeElements("search-results", programmes);
+}
 
 function showResults() {
   updateAllFilterWords();
