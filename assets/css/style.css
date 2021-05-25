@@ -511,8 +511,8 @@ svg {
 }
 
 /* DETAIL PAGE */
-.detail-hero {
-  height: calc(100vh - var(--nav-height));
+.detail-hero{
+  height: calc( var(--hero-height) - var(--nav-height) );
   display: grid;
   grid-template-rows: 1fr 20%;
 }
