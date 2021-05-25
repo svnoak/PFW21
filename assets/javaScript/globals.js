@@ -336,7 +336,8 @@ function createProgrammeElements(id ,programmes) {
     let cardButtonDiv = document.createElement("div");
     let cardButton = document.createElement("a");
     cardButton.href = `detail.html?programmeID=${obj.id}`;
-    cardButton.innerHTML = "Läs mer >";
+    cardButton.innerHTML = `Läs mer >`;
+    cardButton.addEventListener( "click", () => transitionToPage(`detail.html?programmeID=${obj.id}`));
     cardButton.className = "card-button text-default light";
 
     cardButtonDiv.append(cardButton);
