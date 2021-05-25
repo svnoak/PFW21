@@ -7,10 +7,12 @@ render(
   createBrandInfo(),
   makeAd(),
   cardCarousell(DB.COUNTRIES),
+  makeAd(),
   createCompareInfo(
     "Beslutsångest?",
     "Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra."
-  )
+  ),
+  makeAd()
 );
 
 registerCardHeight();
