@@ -13,7 +13,7 @@ render(
   )
 );
 
-document.querySelector(".index-wrapper").style.padding = "3%";
+document.querySelector("#main").style.padding = "3%";
 
 registerCardHeight();
 
