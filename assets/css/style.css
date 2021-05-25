@@ -592,6 +592,7 @@ figcaption{
 /* override the screen margin */
 .card-carousell{
   padding-top: var(--space-medium);
+  padding-bottom: var(--space-medium);
   width: 100vw;
   position: relative;
   right:  var(--space-medium);
