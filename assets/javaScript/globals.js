@@ -480,6 +480,10 @@ function createBackgroundCircle() {
   return circleContainer;
 }
 
+
+// get 100vh for mobile
+document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
+
 function makeAd(size = "random") {
   //creates random
   let ads = ["annons_horizontell.jpg", "annons_kvadratisk.jpg"];
@@ -526,3 +530,4 @@ function makeAd(size = "random") {
 }
 // get 100vh for mobile
 document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
+
