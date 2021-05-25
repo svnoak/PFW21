@@ -199,7 +199,7 @@ p, span, div{
 
   background-color: var(--primary);
 
-  border: 1px solid var(--gray);
+  border: 1px solid var(--black);
   border-radius:var(--border-rounded);
   padding: 0 var(--space-small);
 
@@ -220,7 +220,7 @@ p, span, div{
 
 .remove-pill svg{
   height: 100%;
-  fill: var(--gray);
+  fill: var(--black);
 }
 .search-result-card {
   width: 90%;
