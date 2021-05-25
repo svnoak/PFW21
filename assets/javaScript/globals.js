@@ -527,4 +527,4 @@ function makeAd(size = "random") {
   }
 
   return wrapper;
-
+}
