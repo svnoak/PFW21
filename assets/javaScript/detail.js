@@ -311,7 +311,7 @@ function createDiagram() {
         barWrapper.className = `detail-weather-bar`;
 
         let bar = document.createElement("div");
-        bar.style.width = `${(city.sun / 365) * 100}%`;
+        bar.style.width = "0px";
 
         let sunNum = document.createElement("span");
         sunNum.textContent = `${city.sun}`;
@@ -320,7 +320,6 @@ function createDiagram() {
 
         wrapper.append(cityName, barWrapper)
     })  
-
 
     return figure
 }
@@ -353,4 +352,18 @@ function makeWeatherInfo(){
 
     return wrapper
 }
+
+window.addEventListener("scroll", () =>{
+    let bounding = document.querySelector("figure").getBoundingClientRect();
+    let viewport = window.innerHeight;
+    let bars = document.querySelectorAll(".detail-weather-bar");
+
+    if(bounding.top <= viewport){
+        bars.forEach(bar => {
+            bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
+        })
+    } else {
+        console.log("not in view")
+    }
+})
 
