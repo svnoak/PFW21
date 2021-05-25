@@ -357,9 +357,7 @@ window.addEventListener("scroll", () =>{
 
     if(bounding.top <= viewport){
         bars.forEach(bar => {
-            setTimeout( () => {
-                bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`
-            },1000 )
+            bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
         })
     } else {
         console.log("not in view")

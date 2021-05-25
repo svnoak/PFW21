@@ -582,6 +582,7 @@ svg {
   padding: 5px var(--space-small) 5px 5px;
   color: white;
   border-radius: 0px var(--border-squared) var(--border-squared) 0px;
+  transition: width 1s;
 }
 
 figcaption{
