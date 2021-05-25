@@ -74,8 +74,8 @@ function createHeader() {
     noFavorites.textContent = "Du har inga favoriter! Lägg till en favorit genom att trycka på bokmärket när du söker efter program.";
     favoritesContainer.append(noFavorites);
   } else {
-    favorites.forEach(favorite => { 
-      let option = createOptionsInList(favorite.programme, favorite.university);
+    favorites.forEach(favorite => {
+      let option = createOptionsInList(favorite.programme, favorite.university, favorite.id);
       titleFavorites.after(option);
   
       option.addEventListener('click', () => {
@@ -104,11 +104,9 @@ function createHeader() {
 
       programmes.forEach(programme => {
         let university = getUniversityFromUniID(programme.universityID);
-        let option = createOptionsInList(programme.name, university.name);
+        let option = createOptionsInList(programme.name, university.name, programme.id);
 
-        if(addedProgrammes.includes(programme.id)) {
-          option.classList.add('chosen');
-        }
+        addedProgrammes.includes(programme.id) ? option.classList.add('chosen') : option.classList.remove("chosen");
   
         option.addEventListener('click', () => {
           option.classList.toggle('chosen');
@@ -250,9 +248,11 @@ function getSuggestionsBySearchWord(searchWord) {
 }
 
 // Skapar sökalternativen i programlistan
-function createOptionsInList(programmeName, universityName) {
+function createOptionsInList(programmeName, universityName, programmeId) {
   let option = document.createElement("div");
   option.className = "option space-between";
+  //addedProgrammes.includes(programmeId) ? option.classList.add("chosen") : option.classList.remove("chosen");
+  option.id = `p${programmeId}`;
   
   let programmeInfo = document.createElement('div');
   
@@ -315,12 +315,12 @@ function createPillFromProgrammeId(id) {
 
 // Tar bort pillrerna
 function removePillFromArray(programmeId) {
-
     for (let i = 0; i < addedProgrammes.length; i++) {
         if (addedProgrammes[i] === programmeId) {
             addedProgrammes.splice(i, 1);
         }
     }
+    document.getElementById(`p${programmeId}`).classList.remove("chosen");
     updateComparison();
 }
 
