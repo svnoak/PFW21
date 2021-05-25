@@ -53,6 +53,7 @@ function updateParams(id, value) {
 }
 
 window.addEventListener("load", () => {
+  window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
   for (let i = 0; i < urlParameters.length; i++) {
@@ -110,6 +111,7 @@ render("#main", circleContainer);
 function reloadUrlParams() {
   resetUrlParameter();
   setUrlParameter(params);
+  sessionStorage.setItem("search", window.location.search);
 }
 
 function updateView() {
