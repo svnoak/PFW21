@@ -4,6 +4,8 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const pID = parseInt(urlParams.get("programmeID"));
 
+document.querySelector("title").textContent = getProgrammeFromProgramID(pID).name;
+
 // add to global?
 function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
@@ -258,6 +260,7 @@ function makeCityInfo(){
 
 function cityImage(x){
     let cityImage = document.createElement("div");
+    if (detailedProgramCity.imagesBig.length < 2) x = 0;
     cityImage.style.backgroundImage = `url( assets/images/${detailedProgramCity.imagesBig[x]} )`;
     cityImage.className = `bg-image`;
 
@@ -308,7 +311,7 @@ function createDiagram() {
         barWrapper.className = `detail-weather-bar`;
 
         let bar = document.createElement("div");
-        bar.style.width = `${(city.sun / 365) * 100}%`;
+        bar.style.width = "0px";
 
         let sunNum = document.createElement("span");
         sunNum.textContent = `${city.sun}`;
@@ -317,7 +320,6 @@ function createDiagram() {
 
         wrapper.append(cityName, barWrapper)
     })  
-
 
     return figure
 }
@@ -350,4 +352,18 @@ function makeWeatherInfo(){
 
     return wrapper
 }
+
+window.addEventListener("scroll", () =>{
+    let bounding = document.querySelector("figure").getBoundingClientRect();
+    let viewport = window.innerHeight;
+    let bars = document.querySelectorAll(".detail-weather-bar");
+
+    if(bounding.top <= viewport){
+        bars.forEach(bar => {
+            bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
+        })
+    } else {
+        console.log("not in view")
+    }
+})
 

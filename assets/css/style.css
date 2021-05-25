@@ -581,6 +581,8 @@ svg {
   text-align: right;
   padding: 5px var(--space-small) 5px 5px;
   color: white;
+  border-radius: 0px var(--border-squared) var(--border-squared) 0px;
+  transition: width 1s;
 }
 
 figcaption{
@@ -664,8 +666,8 @@ figcaption{
 }
 
 .card-rating > *:nth-child(2) {
-  border-right: 1px solid white;
-  border-left: 1px solid white;
+  border-right: 1px solid var(--primary);
+  border-left: 1px solid var(--primary);
 }
 
 .card-rating * {
@@ -686,7 +688,7 @@ figcaption{
   width: 10px;
   margin: 0px 3px 3px;
   border-radius: var(--border-round);
-  background-color: var(--primary);
+  background-color: var(--black);
 }
 
 .blob-wrapper .active {
@@ -758,8 +760,7 @@ figcaption{
 }
 
 .globe-render {
-  width: 130% ;
-  height: 130% ;
+  height: 100% ;
 }
 
 .brand-info {
@@ -877,7 +878,6 @@ figcaption{
   max-height: 50vh;
 
   padding: var(--space-small);
-  padding-top: 27px;
   border-radius: var(--border-squared);
   box-shadow: 0px 0px 10px gray;
   z-index: 10;
@@ -885,19 +885,6 @@ figcaption{
 
   transition: max-height .5s;
 }
-
-.close-list {
-  position: fixed;
-  right: 29px;
-  width: 20px;
-  height: 20px;
-  margin-top: -25px;
-
-  background-color: var(--primary);
-
-  cursor: pointer;
-}
-.close-list > svg { width: 100%; }
 
 .title-favorites {
   background-color: var(--elevated-background);
