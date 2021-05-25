@@ -55,6 +55,53 @@ function createHeader() {
   programmeList.className = "programme-list";
   programmeList.style.maxHeight = "0px";
 
+  searchBar.addEventListener('click', event => {
+    if(searchBar.value.length < 1) { 
+      programmeList.append(createFavorites());
+    } else {
+      programmeList.append(createSearchResults(searchBar.value));
+    }
+
+    searchWrapper.append(programmeList);
+    setTimeout( () => {
+      programmeList.style.maxHeight = "50vh";
+    }, 10);
+    event.stopPropagation();
+
+    document.body.addEventListener('click', () => {
+      programmeList.style.maxHeight = "0px";
+      setTimeout( () => {
+        programmeList.remove();
+        programmeList.innerHTML = "";
+      }, 400);
+      
+    })
+  });
+
+  searchBar.addEventListener("keyup", () => {    
+    if(searchBar.value.length < 1) { 
+      programmeList.append(createFavorites());
+    } else {
+      programmeList.append(createSearchResults(searchBar.value));
+    }
+  });
+
+  searchWrapper.append(searchBar, searchBarIcon);
+  header.append(titleHeader, textHeader, searchWrapper, currentProgrammesTitle, currentProgrammes);
+
+  return header;
+}
+
+
+function createFavorites() {
+  if(document.querySelector('.favorites')){
+    document.querySelector('.favorites').remove();
+  }
+
+  if(document.querySelector('.search-result')) {
+    document.querySelector('.search-result').remove();
+  }
+
   let favoritesContainer = document.createElement('div');
   favoritesContainer.className = 'favorites';
 
@@ -68,7 +115,8 @@ function createHeader() {
     noFavorites.textContent = "Du har inga favoriter! Lägg till en favorit genom att trycka på bokmärket när du söker efter program.";
     favoritesContainer.append(noFavorites);
   } else {
-    favorites.forEach(favorite => {
+    favorites.forEach(favorite => { 
+
       let option = createOptionsInList(favorite.programme, favorite.university, favorite.id);
       titleFavorites.after(option);
   
@@ -80,56 +128,41 @@ function createHeader() {
     });
   }
 
+  return favoritesContainer;
+}
+
+function createSearchResults(searchValue) {
+  if(document.querySelector('.search-result')) {
+    document.querySelector('.search-result').remove();
+  }
+
+  if(document.querySelector('.favorites')){
+    document.querySelector('.favorites').remove();
+  }
 
   let searchResult = document.createElement('div');
   searchResult.className = 'search-result';
-    
-  programmeList.append( favoritesContainer, searchResult);
 
-  searchBar.addEventListener('click', event => {
-    searchWrapper.append(programmeList);
-    setTimeout( () => {
-      programmeList.style.maxHeight = "50vh";
-    }, 10);
-    event.stopPropagation();
+  let programmes = getSuggestionsBySearchWord(searchValue);
 
-    document.body.addEventListener('click', () => {
-      programmeList.style.maxHeight = "0px";
-      setTimeout( () => {
-        programmeList.remove();
-      }, 400);
-    })
-  });
+  programmes.forEach(programme => {
+    let university = getUniversityFromUniID(programme.universityID);
+    let option = createOptionsInList(programme.name, university.name, programme.id);
 
-  searchBar.addEventListener("keyup", () => {    
-    document.querySelector('.search-result').innerHTML = '';
-    
-    if(searchBar.value.length > 0) {
-      favoritesContainer.remove();
-      let programmes = getSuggestionsBySearchWord(searchBar.value);
-
-      programmes.forEach(programme => {
-        let university = getUniversityFromUniID(programme.universityID);
-        let option = createOptionsInList(programme.name, university.name, programme.id);
-  
-        option.addEventListener('click', event => {
-          option.classList.toggle('chosen');
-          addProgrammeToArray(programme.id);
-          event.stopPropagation();
-        });
-  
-        searchResult.append(option);
-      });
-    } else {
-      programmeList.append(favoritesContainer);
+    if(addedProgrammes.includes(programme.id)) {
+      option.classList.add('chosen');
     }
 
+    option.addEventListener('click', event => {
+      option.classList.toggle('chosen');
+      addProgrammeToArray(programme.id);
+      event.stopPropagation();
+    });
+
+    searchResult.append(option);
   });
-
-  searchWrapper.append(searchBar, searchBarIcon);
-  header.append(titleHeader, textHeader, searchWrapper, currentProgrammesTitle, currentProgrammes);
-
-  return header;
+  
+  return searchResult;
 }
 
 //Creates the nav with the name and arrows of each program
@@ -253,7 +286,8 @@ function getSuggestionsBySearchWord(searchWord) {
 }
 
 // Skapar sökalternativen i programlistan
-function createOptionsInList(programmeName, universityName, programmeId) {
+function createOptionsInList(programmeName, universityName, programmeID) {
+
   let option = document.createElement("div");
   option.className = "option space-between";
   option.id = `p${programmeId}`;
@@ -270,6 +304,10 @@ function createOptionsInList(programmeName, universityName, programmeId) {
   
   let addProgramme = document.createElement('i');
   addProgramme.innerHTML = plusIcon;
+  
+  if(addedProgrammes.includes(programmeID)) {
+    option.classList.add('chosen');
+  }
   
   programmeInfo.append(programme, university);
   option.append(programmeInfo, addProgramme);
