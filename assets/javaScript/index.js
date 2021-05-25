@@ -13,6 +13,8 @@ render(
   )
 );
 
+document.querySelector(".index-wrapper").style.padding = "3%";
+
 registerCardHeight();
 
 // Skapar HERO med innehåll

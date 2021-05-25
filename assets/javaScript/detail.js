@@ -261,7 +261,7 @@ function makeCityInfo(){
 function cityImage(x){
     let cityImage = document.createElement("div");
     if (detailedProgramCity.imagesBig.length < 2) x = 0;
-    cityImage.style.backgroundImage = `url( assets/images/${detailedProgramCity.imagesBig[x]} )`;
+    cityImage.style.backgroundImage = `url( assets/Images/${detailedProgramCity.imagesBig[x]} )`;
     cityImage.className = `bg-image`;
 
     return cityImage

@@ -730,7 +730,9 @@ figcaption{
 }
 
 .index-wrapper {
-  overflow: hidden;
+	overflow: hidden;
+  width: 100vw;
+  padding: 0;
 }
 
 .hero {
