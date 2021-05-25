@@ -16,97 +16,96 @@ let allFilterWords = [programmes, cities, levels, countries, filteredLanguages];
 let params = [
   {
     id: "ciID",
-    value: cities
+    value: cities,
   },
   {
     id: "coID",
-    value: countries
+    value: countries,
   },
   {
     id: "liID",
-    value: levels
+    value: levels,
   },
   {
     id: "piID",
-    value: programmes
+    value: programmes,
   },
   {
     id: "laID",
-    value: filteredLanguages
+    value: filteredLanguages,
   },
   {
     id: "p",
-    value: points
+    value: points,
   },
   {
     id: "v",
-    value: visa
+    value: visa,
   },
   {
     id: "s",
-    value: sundaysNumber
-  }
-]
+    value: sundaysNumber,
+  },
+];
 
 function updateParams(id, value) {
-  params.forEach( param => param.id == id ? param.value = value : false );
+  params.forEach((param) => (param.id == id ? (param.value = value) : false));
 }
 
 window.addEventListener("load", () => {
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
-  for( let i = 0; i < urlParameters.length; i++ ) {
-      let x = i+1;
-      key = urlParameters[i];
-      if ( params.find( param => param.id == key ) ) {
-        params.forEach( param => {
-          if (param.id == key) {
-            urlParameters[x].split(",").forEach( p => {
-              if (typeof(param.value) == "object" ) {
-                p.includes("%20") ? p = p.replace("%20"," ") : false ;
-                param.value.push(p);
-              } else { param.value = p };
-              switch (key) {
-                case "s":
-                  if (param.value > 0 ) {
-                    createPillForSearchWordsOnSearchSite(`Antal soldagar: ${param.value}`);
-                    sundaysNumber = param.value;
-                  }
-                  break;
-                case "p":
-                  if (param.value > 0) {
-                    createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${param.value}`);
-                    points = param.value;
-                  }
+  for (let i = 0; i < urlParameters.length; i++) {
+    let x = i + 1;
+    key = urlParameters[i];
+    if (params.find((param) => param.id == key)) {
+      params.forEach((param) => {
+        if (param.id == key) {
+          urlParameters[x].split(",").forEach((p) => {
+            if (typeof param.value == "object") {
+              p.includes("%20") ? (p = p.replace("%20", " ")) : false;
+              param.value.push(p);
+            } else {
+              param.value = p;
+            }
+            switch (key) {
+              case "s":
+                if (param.value > 0) {
+                  createPillForSearchWordsOnSearchSite(`Antal soldagar: ${param.value}`);
+                  sundaysNumber = param.value;
+                }
                 break;
-                case "v":
-                  if (param.value == "false") {
-                    createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
-                    visa = param.value;
-                  }
-                  break;
-                default:
-                  createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
-                  break;
-              }
-            })
-          }
-        })
-      }
+              case "p":
+                if (param.value > 0) {
+                  createPillForSearchWordsOnSearchSite(`Antagningspoäng: ${param.value}`);
+                  points = param.value;
+                }
+                break;
+              case "v":
+                if (param.value == "false") {
+                  createPillForSearchWordsOnSearchSite(`Kräver inte visa`);
+                  visa = param.value;
+                }
+                break;
+              default:
+                createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(p));
+                break;
+            }
+          });
+        }
+      });
+    }
   }
-  updateView()
+  updateView();
 });
 
 clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
 document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
 
-
-
 let circleContainer = createBackgroundCircle();
-circleContainer.className = 'c-container bottom';
+circleContainer.className = "c-container bottom";
 render("body", circleContainer);
-
 
 function reloadUrlParams() {
   resetUrlParameter();
@@ -115,9 +114,7 @@ function reloadUrlParams() {
 
 function updateView() {
   reloadUrlParams();
-  window.location.search.length > 0 ?
-  filterProgramme(DB.PROGRAMMES) :
-  showNoProgrammesMessage();
+  window.location.search.length > 0 ? filterProgramme(DB.PROGRAMMES) : showNoProgrammesMessage();
 }
 
 function clearSearchBar() {
@@ -241,14 +238,14 @@ function createFilterOptions() {
     visumInput.checked = true;
   }
   visumInput.addEventListener("change", () => {
-    visa ? visa = false : visa = true;
+    visa ? (visa = false) : (visa = true);
     updateParams("v", visa);
   });
   visumOption.prepend(visumInput);
 
   let sundays = document.createElement("div");
   sundays.setAttribute("id", "sundays-option");
-  sundays.innerHTML = `<h4 id="sundays-title" class="text-large">Antal Soldagar: ${sundaysNumber} dagar</h4>`;
+  sundays.innerHTML = `<h4 id="sundays-title" class="text-large">Antal Soldagar (0-365): ${sundaysNumber} dagar</h4>`;
   let sundaysDiv = document.createElement("div");
   sundaysDiv.setAttribute("id", "points-slider-div");
   let sundaysSlider = document.createElement("input");
@@ -308,10 +305,9 @@ function createFilterOptions() {
 function addKeyToFilter(event) {
   let target = event.target.id;
   event.target.classList.toggle("selected");
-  if ( !event.target.classList.contains("selected") ) {
+  if (!event.target.classList.contains("selected")) {
     removeSearchWord(target);
-  }
-  else {
+  } else {
     let key = event.target.parentElement.id.split("-")[0];
     key == "level" ? levels.push(target) : filteredLanguages.push(target);
   }
@@ -324,20 +320,21 @@ function getProgrammesBySearchWord(event) {
     createPillForSearchWordsOnSearchSite(capitalizeFirstLetter(this.value));
     clearSearchBar();
     if (DB.PROGRAMMES.some((obj) => getCityFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-        cities.push(input);
-    } else if (DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))) {
-        countries.push(input);
-    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) { 
-        levels.push(input); 
-    }  else if (DB.PROGRAMMES.some((obj) => getLanguageFromLangID(obj.language).toLocaleLowerCase().includes(input))) {
+      cities.push(input);
+    } else if (
+      DB.PROGRAMMES.some((obj) => getCountryFromUniID(obj.universityID).name.toLocaleLowerCase().includes(input))
+    ) {
+      countries.push(input);
+    } else if (DB.PROGRAMMES.some((obj) => getLevel(obj.level).toLocaleLowerCase().includes(input))) {
+      levels.push(input);
+    } else if (DB.PROGRAMMES.some((obj) => getLanguageFromLangID(obj.language).toLocaleLowerCase().includes(input))) {
       filteredLanguages.push(input);
-  }
-    else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
-        programmes.push(input);
+    } else if (DB.PROGRAMMES.some((obj) => obj.name.toLocaleLowerCase().includes(input))) {
+      programmes.push(input);
     }
     updateView();
-    }
   }
+}
 
 function filterProgramme(array) {
   let passArray = [];
@@ -554,10 +551,10 @@ function removeSearchWord(removeWord) {
             reloadUrlParams();
             break;
           case 4:
-          index = filteredLanguages.findIndex((word) => word == removeWord);
-          filteredLanguages.splice(index, 1);
-          reloadUrlParams();
-          break;
+            index = filteredLanguages.findIndex((word) => word == removeWord);
+            filteredLanguages.splice(index, 1);
+            reloadUrlParams();
+            break;
           default:
             break;
         }

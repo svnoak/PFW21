@@ -281,7 +281,7 @@ function createProgrammeElements(id, programmes) {
 
     let programmeCardTitle = document.createElement("h3");
     programmeCardTitle.innerHTML = obj.name;
-    programmeCardTitle.className = "text-default bold";
+    programmeCardTitle.className = "text-default bold break-text";
 
     let programmeCardSchool = document.createElement("div");
     programmeCardSchool.className = "programme-card-school";
@@ -320,7 +320,7 @@ function createProgrammeElements(id, programmes) {
     let cardButton = document.createElement("a");
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer >";
-    cardButton.className = "card-button text-large bold";
+    cardButton.className = "card-button text-default bold";
 
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";

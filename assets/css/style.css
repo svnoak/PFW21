@@ -189,6 +189,16 @@ div {
   padding-right: var(--space-large);
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
 }
+.break-text {
+  -ms-word-break: break-word;
+  word-break: break-word;
+  width: 57%;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 
 /* sökfunktionen */
 .light-color-text {
@@ -743,7 +753,7 @@ figcaption {
   right: -10%;
 }
 .c-container.bottom {
-  top: -20em;
+  top: -8em;
 }
 
 .pin-header {
