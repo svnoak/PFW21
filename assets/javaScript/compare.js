@@ -53,12 +53,16 @@ function createHeader() {
 
   let programmeList = document.createElement("div");
   programmeList.className = "programme-list";
+  programmeList.style.maxHeight = "0px";
 
   let closeProgrammeList = document.createElement('i');
   closeProgrammeList.className = 'close-list';
   closeProgrammeList.innerHTML = closeIcon;
   closeProgrammeList.addEventListener('click', () => {
-    programmeList.remove();
+    programmeList.style.maxHeight = "0px";
+    setTimeout( () => {
+      programmeList.remove();
+    }, 400);
   })
 
   let favoritesContainer = document.createElement('div');
@@ -93,6 +97,9 @@ function createHeader() {
 
   searchBar.addEventListener('click', () => {
     searchWrapper.append(programmeList);
+    setTimeout( () => {
+      programmeList.style.maxHeight = "50vh";
+    }, 10);
   });
 
   searchBar.addEventListener("keyup", () => {    
