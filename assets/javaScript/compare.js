@@ -55,16 +55,6 @@ function createHeader() {
   programmeList.className = "programme-list";
   programmeList.style.maxHeight = "0px";
 
-  let closeProgrammeList = document.createElement('i');
-  closeProgrammeList.className = 'close-list';
-  closeProgrammeList.innerHTML = closeIcon;
-  closeProgrammeList.addEventListener('click', () => {
-    programmeList.style.maxHeight = "0px";
-    setTimeout( () => {
-      programmeList.remove();
-    }, 400);
-  })
-
   let favoritesContainer = document.createElement('div');
   favoritesContainer.className = 'favorites';
 
@@ -82,9 +72,10 @@ function createHeader() {
       let option = createOptionsInList(favorite.programme, favorite.university, favorite.id);
       titleFavorites.after(option);
   
-      option.addEventListener('click', () => {
+      option.addEventListener('click', event => {
         addProgrammeToArray(favorite.id);
         option.classList.toggle('chosen');
+        event.stopPropagation();
       });
     });
   }
@@ -93,13 +84,21 @@ function createHeader() {
   let searchResult = document.createElement('div');
   searchResult.className = 'search-result';
     
-  programmeList.append(closeProgrammeList, favoritesContainer, searchResult);
+  programmeList.append( favoritesContainer, searchResult);
 
-  searchBar.addEventListener('click', () => {
+  searchBar.addEventListener('click', event => {
     searchWrapper.append(programmeList);
     setTimeout( () => {
       programmeList.style.maxHeight = "50vh";
     }, 10);
+    event.stopPropagation();
+
+    document.body.addEventListener('click', () => {
+      programmeList.style.maxHeight = "0px";
+      setTimeout( () => {
+        programmeList.remove();
+      }, 400);
+    })
   });
 
   searchBar.addEventListener("keyup", () => {    
@@ -117,9 +116,10 @@ function createHeader() {
           option.classList.add('chosen');
         }
   
-        option.addEventListener('click', () => {
+        option.addEventListener('click', event => {
           option.classList.toggle('chosen');
           addProgrammeToArray(programme.id);
+          event.stopPropagation();
         });
   
         searchResult.append(option);
