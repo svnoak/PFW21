@@ -368,6 +368,7 @@ function createCompareInfo(title, text, centered = false, circleBackground = tru
   button.href = 'compare.html';
   button.className = 'text-default light space-between button-solid--cream button-square';
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
+  button.addEventListener( "click", () => transitionToPage('compare.html'));
   buttonContainer.append(button);
 
   console.log(circleBackground)
