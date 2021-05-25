@@ -201,7 +201,7 @@ function DOMfoot() {
   wrapper.className = `centered`;
   let text = document.createElement("span");
   text.className = `text-small`;
-  text.textContent = `[brand] © 2021`;
+  text.textContent = `Orchid International © 2021`;
   wrapper.append(text);
 
   return wrapper;
