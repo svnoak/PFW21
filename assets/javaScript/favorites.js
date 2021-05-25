@@ -1,7 +1,7 @@
 "use strict";
 
 render(
-  "#main", 
+  "header", 
   createCompareInfo(
     'Favoriter',
     'Här kan du se de program du sparat som favoriter. Om du vill jämföra några av programmen kan du gå vidare med knappen nedanför:',

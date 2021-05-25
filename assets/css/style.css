@@ -730,14 +730,9 @@ figcaption{
   display: none;
 }
 
-#main {
-	overflow: hidden;
-  width: 100vw;
-  padding: 0;
-  opacity: 0;
-  transition: opacity .5s;
+.index-wrapper {
+  overflow: hidden;
 }
-
 
 .hero {
   position: relative;

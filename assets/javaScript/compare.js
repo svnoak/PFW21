@@ -15,7 +15,7 @@ let favorites = programmes.map( programme => {
   }
 });
 
-render("#main", createHeader(), createNav(), tableContainer());
+render("body", createHeader(), createNav(), tableContainer());
 let main = document.getElementById("comparison");
 
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
