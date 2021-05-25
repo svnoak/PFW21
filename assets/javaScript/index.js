@@ -2,7 +2,7 @@
 
 // render('body', createBackground());
 render(
-  ".index-wrapper",
+  "#main",
   createHero(),
   createBrandInfo(),
   makeAd(),
@@ -12,6 +12,8 @@ render(
     "Med jämförverktyget får du en snabb överblick av kurser och kan enkelt ställa dina favoriter mot varandra."
   )
 );
+
+document.querySelector("#main").style.padding = "3%";
 
 registerCardHeight();
 
@@ -101,6 +103,7 @@ function createCard(country) {
   showProgramsButton.className = "text-large semi-bold space-between button-solid--cream button-square";
   showProgramsButton.innerHTML = `<p>Visa program</p> <i class="trailing-icon centered">${trailingIconRight}</i>`;
   showProgramsButton.href = `search.html?coID=${country.name.toLowerCase()}`;
+  showProgramsButton.addEventListener( "click", () => transitionToPage(`compare.html`));
   countryImg.append(showProgramsButton);
 
   wrapper.append(header, countryImg);
