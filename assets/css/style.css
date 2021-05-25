@@ -1166,6 +1166,7 @@ body {
 /* ADS */
 .ad {
   margin-top: var(--space-medium);
+
   padding-top: 3px;
   padding-bottom: var(--space-small);
   position: relative;
