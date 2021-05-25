@@ -15,7 +15,7 @@ render(
   makeAd()
 );
 
-document.querySelector("#main").style.padding = "3%";
+document.querySelector("#main").style.padding = "3% 3% 0px 3%";
 
 registerCardHeight();
 
