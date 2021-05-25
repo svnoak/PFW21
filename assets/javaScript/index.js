@@ -36,6 +36,7 @@ function createHero() {
   globeRender.src = "assets/video/globe_final.mp4";
   globeRender.autoplay = true;
   globeRender.loop = true;
+  globeRender.playsInline = true;
 
   //<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xxSuTLcA12o?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
