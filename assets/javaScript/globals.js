@@ -188,13 +188,8 @@ function DOMnav() {
     link.append(icon, text);
     link.addEventListener( "click", () => transitionToPage(item.href) );
 
-    if (window.location.href.includes(item.href)) {
-      link.classList.add('active');
-    } else {
-      
-      //console.log("new link?");
-      //link.setAttribute("href", item.href);
-    }
+    if (window.location.href.includes(item.href)) link.classList.add('active');
+
     wrapper.append(link);
   });
 
