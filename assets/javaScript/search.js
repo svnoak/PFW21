@@ -55,10 +55,7 @@ function updateParams(id, value) {
 }
 
 window.addEventListener("load", () => {
-  if (sessionStorage.search)
-    window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
-  window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
-  reloadUrlParams();
+  if (sessionStorage.search && !window.location.search) window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
 
@@ -108,7 +105,10 @@ window.addEventListener("load", () => {
 
 clearSearchBar();
 document.getElementById("searchbar").addEventListener("keyup", getProgrammesBySearchWord);
-document.getElementById("filter-btn").addEventListener("click", createFilterOptions);
+document.getElementById("filter-btn").addEventListener("click", () => {
+  document.body.className = 'noScroll';
+  createFilterOptions();
+});
 
 let circleContainer = createBackgroundCircle();
 circleContainer.className = "c-container bottom";
@@ -136,14 +136,14 @@ function updateAllFilterWords() {
 function createFilterOptions() {
   let filter = document.createElement("div");
   filter.setAttribute("id", "filters");
-  filter.classList.add("centered");
+  filter.className = "centered column";
 
-  let closeButton = document.createElement("button");
+  let closeButton = document.createElement("i");
   closeButton.setAttribute("id", "close");
-  closeButton.className = "text-default button-stroke--blue button-round";
-  closeButton.textContent = "X";
+  closeButton.innerHTML = plusIcon;
   closeButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
+    document.body.classList.remove('noScroll');
     showResults(event);
   });
 
@@ -295,7 +295,7 @@ function createFilterOptions() {
 
   let showResultsBtnDiv = document.createElement("div");
   showResultsBtnDiv.setAttribute("id", "show-results");
-  let showResultsBtn = document.createElement("button");
+  let showResultsBtn = document.createElement("div");
   showResultsBtn.setAttribute("id", "show-results-btn");
   showResultsBtn.className = "text-large light-color-text";
   showResultsBtn.textContent = `Visa utbildningar`;
@@ -490,7 +490,6 @@ function addAdsToResults(programmes) {
     programmes.splice(RANDOM.rInt(programmes.length, 3), 0, makeAd());
   }
 
-  console.log(programmes);
   createProgrammeElements("search-results", programmes);
 }
 
