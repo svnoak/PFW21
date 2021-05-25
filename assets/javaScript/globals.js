@@ -108,11 +108,10 @@ function cardCarousell(array, carType = "country") {
 
   array.forEach((object) => {
     let card;
-    if (carType == "country") {
-      card = createCard(object);
-      console.log(card);
-    } else {
-      card = createReviewCard(object);
+    if( carType == "country"){
+      card = createCard(object)
+    } else{
+      card = createReviewCard(object)
     }
 
     card.className = `card`;
@@ -492,16 +491,31 @@ function makeAd(size = "random") {
 
   let wrapper = document.createElement("div");
   wrapper.className = `ad ad-random`;
-  if (chosen.includes("horiz")) {
-    wrapper.className = `ad ad-hori`;
-  } else if (chosen.includes("kvad")) {
-    wrapper.className = `ad ad-kvad`;
-  }
+  
   let text = document.createElement("div");
   text.textContent = `Detta är en annons`;
-  let ad = document.createElement("img");
-  wrapper.append(text, ad);
-  ad.setAttribute("src", `assets/image-ads/${chosen}`);
+  let adWrap = document.createElement("div");
+  
+  if(chosen.includes("horiz")){
+    wrapper.className = `ad ad-hori`;
+    createImage()
+  } else if (chosen.includes("kvad")){
+    wrapper.className = `ad ad-kvad`;
+    adWrap.className = "space-between wrapper";
+    for (let i = 0; i < 3; i++) {
+      createImage()
+    }
+    
+    text.textContent = "Detta är annonser";
+  }
 
-  return wrapper;
+  wrapper.append(text, adWrap)
+  
+  function createImage(){
+    let ad = document.createElement("img");
+    ad.setAttribute('src', `assets/image-ads/${chosen}`)
+    adWrap.append(ad)
+  }
+
+  return wrapper
 }
