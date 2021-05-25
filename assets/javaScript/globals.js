@@ -287,6 +287,7 @@ function createProgrammeElements(id, programmes) {
 
     let programmeImage = document.createElement("div");
     programmeImage.style.backgroundImage = `url(assets/images/${getCityImgFromUniID(obj.universityID)})`;
+    programmeImage.setAttribute("loading", "lazy");
     programmeImage.className = "programme-image";
 
     let programmeCardInfo = document.createElement("div");
