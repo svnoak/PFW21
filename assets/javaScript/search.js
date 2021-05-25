@@ -490,7 +490,6 @@ function addAdsToResults(programmes) {
     programmes.splice(RANDOM.rInt(programmes.length, 3), 0, makeAd());
   }
 
-  console.log(programmes);
   createProgrammeElements("search-results", programmes);
 }
 
