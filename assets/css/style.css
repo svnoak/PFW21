@@ -190,7 +190,6 @@ p, span, div{
   gap: var(--space-small);
 
   width: calc(100% + calc(2 * var(--space-medium)));
-  height: 25px;
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -204,6 +203,7 @@ p, span, div{
 .pill {
   display: flex;
   flex-direction: row;
+  gap: var(--space-small);
 
   justify-content: space-between;
   align-items: center;
@@ -214,13 +214,7 @@ p, span, div{
   border-radius:var(--border-rounded);
   padding: 0 var(--space-small);
 
-  white-space: nowrap;
-
   box-shadow: 0px 1px 3px -1px var(--overlay);
-}
-
-.pill-search-word{
-  padding-right: var(--space-small);
 }
 
 .remove-pill {
