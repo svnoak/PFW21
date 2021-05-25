@@ -111,8 +111,6 @@ function createHeader() {
       programmes.forEach(programme => {
         let university = getUniversityFromUniID(programme.universityID);
         let option = createOptionsInList(programme.name, university.name, programme.id);
-
-        addedProgrammes.includes(programme.id) ? option.classList.add('chosen') : option.classList.remove("chosen");
   
         option.addEventListener('click', event => {
           option.classList.toggle('chosen');
@@ -258,7 +256,6 @@ function getSuggestionsBySearchWord(searchWord) {
 function createOptionsInList(programmeName, universityName, programmeId) {
   let option = document.createElement("div");
   option.className = "option space-between";
-  //addedProgrammes.includes(programmeId) ? option.classList.add("chosen") : option.classList.remove("chosen");
   option.id = `p${programmeId}`;
   
   let programmeInfo = document.createElement('div');
@@ -327,7 +324,6 @@ function removePillFromArray(programmeId) {
             addedProgrammes.splice(i, 1);
         }
     }
-    document.getElementById(`p${programmeId}`).classList.remove("chosen");
     updateComparison();
 }
 
