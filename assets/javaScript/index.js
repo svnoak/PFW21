@@ -66,12 +66,12 @@ function createBrandInfo() {
 
   let title = document.createElement("h2");
   title.className = "title-default regular";
-  title.textContent = "VILKA ÄR [BRAND]?";
+  title.textContent = "VILKA ÄR OI?";
 
   let text = document.createElement("p");
   text.className = "text-default light";
   text.textContent =
-    "[Brand] erbjuder en lättanvänd sökmotor för dig som vill eller funderar på att studera utomlands. Filtrera utefter dina behov och jämför dina favoriter.";
+    "Orchid International erbjuder en lättanvänd sökmotor för dig som vill eller funderar på att studera utomlands. Filtrera utefter dina behov och jämför dina favoriter.";
 
   brandInfo.append(title, text);
   return brandInfo;
