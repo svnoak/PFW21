@@ -92,7 +92,7 @@ function createCard(country) {
     header.append(countryName, countryInfo);
 
     let countryImg = document.createElement('div');
-    countryImg.style.backgroundImage = `url(assets/images/${country.imagesNormal[1]})`;
+    countryImg.style.backgroundImage = `url(assets/Images/${country.imagesNormal[1]})`;
     countryImg.className = 'country-img';
 
     let showProgramsButton = document.createElement('a');
