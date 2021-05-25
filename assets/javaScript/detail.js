@@ -25,6 +25,7 @@ render("body", main)
 
 registerCardHeight()
 
+document.querySelector("#main").style.display = "block";
 
 function makeHero(){
     let wrapper = document.createElement("section");
