@@ -1,18 +1,19 @@
 "use strict";
 
-if ( !localStorage.favoriteProgrammes ) localStorage.favoriteProgrammes = "[]";
+if (!localStorage.favoriteProgrammes) localStorage.favoriteProgrammes = "[]";
 
 // HEAD
 
-let favIcon = document.createElement('link');
+let favIcon = document.createElement("link");
 favIcon.rel = "shortcut icon";
 favIcon.type = "image/png";
 favIcon.href = "favicon.ico";
 
 // google-fonts
-let fontStyle = document.createElement('link');
-fontStyle.rel = 'stylesheet';
-fontStyle.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap';
+let fontStyle = document.createElement("link");
+fontStyle.rel = "stylesheet";
+fontStyle.href =
+  "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@100;200;300;400;500&display=swap";
 
 document.head.append(favIcon, fontStyle);
 
@@ -27,18 +28,18 @@ const RANDOM = {
   },
 };
 
-window.transitionToPage = function(href) {
+window.transitionToPage = function (href) {
   document.querySelector("nav").style.opacity = 1;
-  document.querySelector('#main').style.opacity = 0;
-  
-  setTimeout(function() { 
-      window.location.href = href
-  }, 500)
-}
+  document.querySelector("#main").style.opacity = 0;
 
-document.addEventListener('DOMContentLoaded', function(event) {
-  document.querySelector('#main').style.opacity = 1
-})
+  setTimeout(function () {
+    window.location.href = href;
+  }, 500);
+};
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  document.querySelector("#main").style.opacity = 1;
+});
 
 function getProgrammesById(id) {
   return DB.PROGRAMMES.find((obj) => obj.id == id);
@@ -87,69 +88,66 @@ function render(parentElement, ...element) {
   document.querySelector(parentElement).prepend(...element);
 }
 
-
 // Skapar karusell
-function cardCarousell(array, carType = "country"){
+function cardCarousell(array, carType = "country") {
   let wrapper = document.createElement("section");
-  wrapper.className= `card-carousell`;
+  wrapper.className = `card-carousell`;
 
   let cardWrapperWrap = document.createElement("div");
-  cardWrapperWrap.className =`hide-carousel-scroll`;
+  cardWrapperWrap.className = `hide-carousel-scroll`;
 
   let cardWrapper = document.createElement("div");
   cardWrapper.className = `card-wrapper`;
   let blobWrapper = document.createElement("div");
   blobWrapper.className = `blob-wrapper`;
 
-  cardWrapperWrap.append(cardWrapper)
-  wrapper.append(cardWrapperWrap, blobWrapper)
+  cardWrapperWrap.append(cardWrapper);
+  wrapper.append(cardWrapperWrap, blobWrapper);
 
   let first = true;
 
-  array.forEach(object =>{  
+  array.forEach((object) => {
     let card;
-    if( carType == "country"){
-      card = createCard(object)
-      console.log(card)
-    } else{
-      card = createReviewCard(object)
+    if (carType == "country") {
+      card = createCard(object);
+      console.log(card);
+    } else {
+      card = createReviewCard(object);
     }
 
     card.className = `card`;
     cardWrapper.append(card);
-      
 
-      let blob = document.createElement("div");
-      blob.className = `blob`;
-      blobWrapper.append(blob);
+    let blob = document.createElement("div");
+    blob.className = `blob`;
+    blobWrapper.append(blob);
 
-      if(first){
-          blob.classList.add("active");
+    if (first) {
+      blob.classList.add("active");
+    }
+
+    // let location = card.getBoundingClientRect();
+    cardWrapper.addEventListener("scroll", checkActive);
+
+    function checkActive() {
+      let location = card.getBoundingClientRect();
+
+      if (location.left > 1 && location.left < 250) {
+        document.querySelector(".active").classList.remove("active");
+        blob.classList.add(`active`);
       }
+    }
 
-      // let location = card.getBoundingClientRect();
-      cardWrapper.addEventListener("scroll", checkActive)
+    first = false;
+  });
 
-      function checkActive(){
-          let location = card.getBoundingClientRect();
-
-          if(location.left > 1 && location.left < 250 ){
-              document.querySelector(".active").classList.remove("active");
-              blob.classList.add(`active`);
-          }
-      }
-
-      first = false;
-      
-  })
-
-  return wrapper
+  return wrapper;
 }
 
-function registerCardHeight(){
+function registerCardHeight() {
   // get height of cardwrapper
   let height = document.querySelector(".card-wrapper").clientHeight;
-  document.documentElement.style.setProperty("--carousel-height", height+"px")
+  document.documentElement.style.setProperty("--carousel-height", height + "px");
 }
 
 // Menu
@@ -191,9 +189,9 @@ function DOMnav() {
     text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
-    link.addEventListener( "click", () => transitionToPage(item.href));
+    link.addEventListener("click", () => transitionToPage(item.href));
 
-    if (window.location.href.includes(item.href)) link.classList.add('active');
+    if (window.location.href.includes(item.href)) link.classList.add("active");
     wrapper.append(link);
   });
 
@@ -224,57 +222,56 @@ function resetUrlParameter() {
 }
 
 function setUrlParameter(params) {
-  params.forEach( param => {
+  params.forEach((param) => {
     let condition = false;
-    if (typeof(param.value) == "object")  {
+    if (typeof param.value == "object") {
       condition = param.value.length > 0;
     } else {
-        condition = param.value != null;
+      condition = param.value != null;
+    }
+    if (condition) {
+      if (window.location.search.includes("?")) {
+        window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.value}`);
+      } else {
+        window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.value}`);
       }
-    if ( condition ) {
-    if ( window.location.search.includes("?") ) {
-      window.history.replaceState({}, "Title", `${window.location.href}&${param.id}=${param.value}`);
     }
-    else {
-      window.history.replaceState({}, "Title", `${window.location.href}?${param.id}=${param.value}`);
-    }
-  }
-  })
+  });
 }
 
 function showNoProgrammesMessage() {
-  let site = window.location.href.split("/").pop().split(".").slice(0,1)[0];
+  let site = window.location.href.split("/").pop().split(".").slice(0, 1)[0];
   let div = document.createElement("div");
-  div.id = "nothing-here"
+  div.id = "nothing-here";
 
   let messageContent; // Vilket meddelande som ska visas
   let htmlElement; // Vilket element som ska användas för att appenda elementet ange samma som i en querySelector
-  
+
   switch (site) {
     case "search":
       messageContent = "Du får söka för att få resultat ;)";
       htmlElement = "#search-results";
       break;
-  
+
     case "favorites":
       messageContent = "Du har inte laggt till några favoriter :(";
       htmlElement = "#favorites";
       break;
 
     case "compare":
-      messageContent = "Sök på de program du vill jämföra."
+      messageContent = "Sök på de program du vill jämföra.";
       htmlElement = "#comparison";
   }
   div.textContent = messageContent;
   document.querySelector(htmlElement).innerHTML = "";
-  render( htmlElement, div );
+  render(htmlElement, div);
 }
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function createProgrammeElements(id ,programmes) {
+function createProgrammeElements(id, programmes) {
   document.getElementById(id).innerHTML = "";
   programmes.forEach((obj) => {
     let searchResultCard = document.createElement("div");
@@ -282,9 +279,9 @@ function createProgrammeElements(id ,programmes) {
 
     let bookmark = document.createElement("div");
     bookmark.className = `bookmark`;
-    parseFavoritesFromLS().find(fav => parseInt(fav) == parseInt(obj.id)) >= 0 ?
-    bookmark.innerHTML = bookmarkIconFilled :
-    bookmark.innerHTML = bookmarkIcon;
+    parseFavoritesFromLS().find((fav) => parseInt(fav) == parseInt(obj.id)) >= 0
+      ? (bookmark.innerHTML = bookmarkIconFilled)
+      : (bookmark.innerHTML = bookmarkIcon);
     bookmark.setAttribute("programmeID", obj.id);
     bookmark.addEventListener("click", saveBookmarked);
 
@@ -297,7 +294,7 @@ function createProgrammeElements(id ,programmes) {
 
     let programmeCardTitle = document.createElement("h3");
     programmeCardTitle.innerHTML = obj.name;
-    programmeCardTitle.className = "text-default bold";
+    programmeCardTitle.className = "text-default bold break-text";
 
     let programmeCardSchool = document.createElement("div");
     programmeCardSchool.className = "programme-card-school";
@@ -336,8 +333,8 @@ function createProgrammeElements(id ,programmes) {
     let cardButton = document.createElement("a");
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer >";
-    cardButton.className = "card-button text-default light";
-    cardButton.addEventListener( "click", () => transitionToPage(`detail.html?programmeID=${obj.id}`));
+    cardButton.addEventListener("click", () => transitionToPage(`detail.html?programmeID=${obj.id}`));
+    cardButton.className = "card-button text-default bold";
 
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
@@ -356,33 +353,33 @@ function createProgrammeElements(id ,programmes) {
   });
 }
 
-function createCompareInfo(title, text, centered = false, circleBackground = true){
-  let wrapper = document.createElement('section');
-  wrapper.className = 'compare-info-section centered';
+function createCompareInfo(title, text, centered = false, circleBackground = true) {
+  let wrapper = document.createElement("section");
+  wrapper.className = "compare-info-section centered";
 
-  let titleEl = document.createElement('h2');
-  titleEl.className = 'title-default regular'
+  let titleEl = document.createElement("h2");
+  titleEl.className = "title-default regular";
   titleEl.textContent = title;
 
-  let textEl = document.createElement('p');
-  textEl.className = 'text-default regular';
+  let textEl = document.createElement("p");
+  textEl.className = "text-default regular";
   textEl.textContent = text;
 
-  let buttonContainer = document.createElement('div');
-  buttonContainer.className = 'c-button-container';
+  let buttonContainer = document.createElement("div");
+  buttonContainer.className = "c-button-container";
   if (centered) buttonContainer.classList.add("centered");
-  let button = document.createElement('a');
-  button.href = 'compare.html';
-  button.className = 'text-default light space-between button-solid--cream button-square';
+  let button = document.createElement("a");
+  button.href = "compare.html";
+  button.className = "text-default light space-between button-solid--cream button-square";
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
-  button.addEventListener( "click", () => transitionToPage('compare.html'));
+  button.addEventListener("click", () => transitionToPage("compare.html"));
   buttonContainer.append(button);
 
-  console.log(circleBackground)
-  if ( circleBackground ) {
+  console.log(circleBackground);
+  if (circleBackground) {
     let circleContainer = createBackgroundCircle();
-    circleContainer.className = 'c-container bottom';
-    wrapper.append(circleContainer)
+    circleContainer.className = "c-container bottom";
+    wrapper.append(circleContainer);
   }
 
   wrapper.prepend(titleEl, textEl, buttonContainer);
@@ -395,11 +392,11 @@ function parseFavoritesFromLS(type /*"id" or "object"*/) {
   let programmIDs = localStorage.favoriteProgrammes.length > 0 ? JSON.parse(localStorage.favoriteProgrammes) : [];
   switch (type) {
     case "object":
-      programmIDs.forEach( id => programmes.push(getProgrammesById(id)));
+      programmIDs.forEach((id) => programmes.push(getProgrammesById(id)));
       break;
-  
+
     default:
-      programmIDs.forEach( id => programmes.push(id));
+      programmIDs.forEach((id) => programmes.push(id));
       break;
   }
   return programmes;
@@ -410,9 +407,9 @@ function saveBookmarked(event) {
   let target = event.target;
   let bookmarkIDs = parseFavoritesFromLS();
   console.log(id);
-  parseFavoritesFromLS().find(fav => fav == id ) || parseFavoritesFromLS().find(fav => fav == id ) == 0 ?
-  removeBookmarkFromLS(bookmarkIDs, id, target) :
-  addBookmarksToLS(bookmarkIDs, id, target); 
+  parseFavoritesFromLS().find((fav) => fav == id) || parseFavoritesFromLS().find((fav) => fav == id) == 0
+    ? removeBookmarkFromLS(bookmarkIDs, id, target)
+    : addBookmarksToLS(bookmarkIDs, id, target);
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
@@ -423,91 +420,86 @@ function addBookmarksToLS(bookmarks, id, target) {
 }
 
 async function removeBookmarkFromLS(bookmarks, id, target) {
-  if ( window.location.href.includes("favorite") ){
-    if ( await removeBookmark() ){
+  if (window.location.href.includes("favorite")) {
+    if (await removeBookmark()) {
       remove(bookmarks, id, target);
       target.parentElement.remove();
     }
-}
-  else {
-    remove(bookmarks, id, target);  
+  } else {
+    remove(bookmarks, id, target);
   }
 
   function remove(bookmarks, id, target) {
     target.innerHTML = bookmarkIcon;
-    bookmarks = bookmarks.filter( mark => parseInt(mark) != id );
+    bookmarks = bookmarks.filter((mark) => parseInt(mark) != id);
     localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
   }
 }
 
 function removeBookmark() {
-  return new Promise( confirm => {
+  return new Promise((confirm) => {
     swal({
       title: "Vill du radera favoriten?",
       // icon: "warning",
       buttons: {
-          cancel: {
-            text: "Nej",
-            value: false,
-            visible: true,
-            className: "",
-            closeModal: true,
-          },
-          confirm: {
-            text: "Ja",
-            value: true,
-            visible: true,
-            className: "",
-            closeModal: true
-          }
-      }
-    })
-    .then((value) => {
+        cancel: {
+          text: "Nej",
+          value: false,
+          visible: true,
+          className: "",
+          closeModal: true,
+        },
+        confirm: {
+          text: "Ja",
+          value: true,
+          visible: true,
+          className: "",
+          closeModal: true,
+        },
+      },
+    }).then((value) => {
       confirm(value);
-});
-  })
+    });
+  });
 }
 
 function createBackgroundCircle() {
-  let circleContainer = document.createElement('div');
-  let circle = document.createElement('div');
-  circle.className = 'circle';
+  let circleContainer = document.createElement("div");
+  let circle = document.createElement("div");
+  circle.className = "circle";
   circleContainer.append(circle);
-  circle.style.height = '140vw';
-  circle.style.width = '140vw';
+  circle.style.height = "140vw";
+  circle.style.width = "140vw";
 
   return circleContainer;
 }
 
 function makeAd(size = "random") {
   //creates random
-  let ads = [
-    'annons_horizontell.jpg',
-    'annons_kvadratisk.jpg'
-  ];
+  let ads = ["annons_horizontell.jpg", "annons_kvadratisk.jpg"];
   let chosen = ads[RANDOM.rInt(ads.length)];
 
   // if want specific size
-  if(size !== "random"){
-    if(size[1] == "k"){
-      chosen = ads.find(ad => ad.includes(size));
+  if (size !== "random") {
+    if (size[1] == "k") {
+      chosen = ads.find((ad) => ad.includes(size));
     } else {
-      chosen = ads.find(ad => ad.includes(size));
+      chosen = ads.find((ad) => ad.includes(size));
     }
   }
 
   let wrapper = document.createElement("div");
   wrapper.className = `ad ad-random`;
-  if(chosen.includes("horiz")){
+  if (chosen.includes("horiz")) {
     wrapper.className = `ad ad-hori`;
-  } else if (chosen.includes("kvad")){
+  } else if (chosen.includes("kvad")) {
     wrapper.className = `ad ad-kvad`;
   }
   let text = document.createElement("div");
   text.textContent = `Detta är en annons`;
   let ad = document.createElement("img");
-  wrapper.append(text, ad)
-  ad.setAttribute('src', `assets/image-ads/${chosen}`)
+  wrapper.append(text, ad);
+  ad.setAttribute("src", `assets/image-ads/${chosen}`);
 
-  return wrapper
+  return wrapper;
 }
