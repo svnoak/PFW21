@@ -344,7 +344,7 @@ function createPillFromProgrammeId(id) {
   
     let removePillButton = document.createElement("button");
     removePillButton.className = "remove-pill";
-    removePillButton.textContent = "X";
+    removePillButton.innerHTML = removeIcon;
     removePillButton.addEventListener("click", (event) => {
       event.target.parentElement.remove();
       removePillFromArray(id);
