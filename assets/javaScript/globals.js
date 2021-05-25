@@ -564,7 +564,7 @@ function makeAd(size = "random") {
   text.textContent = `Detta är en annons`;
   let ad = document.createElement("img");
   wrapper.append(text, ad)
-  ad.setAttribute('src', `public_html/assets/ads/${chosen}`)
+  ad.setAttribute('src', `assets/ads/${chosen}`)
 
   return wrapper
 }
