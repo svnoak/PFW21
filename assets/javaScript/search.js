@@ -53,7 +53,7 @@ function updateParams(id, value) {
 }
 
 window.addEventListener("load", () => {
-  window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
+  if (sessionStorage.search) window.history.replaceState({}, "Title", `${window.location.href}${sessionStorage.search}`);
   let urlParameters = window.location.search.split(/\?|=|\&/).slice(1);
   let key;
   for (let i = 0; i < urlParameters.length; i++) {
