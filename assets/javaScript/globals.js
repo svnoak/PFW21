@@ -378,7 +378,6 @@ function createCompareInfo(title, text, centered = false, circleBackground = tru
   button.addEventListener("click", () => transitionToPage("compare.html"));
   buttonContainer.append(button);
 
-  console.log(circleBackground);
   if (circleBackground) {
     let circleContainer = createBackgroundCircle();
     circleContainer.className = "c-container bottom";
@@ -409,14 +408,12 @@ function saveBookmarked(event) {
   let id = parseInt(event.target.attributes[1].nodeValue);
   let target = event.target;
   let bookmarkIDs = parseFavoritesFromLS();
-  console.log(id);
   parseFavoritesFromLS().find((fav) => fav == id) || parseFavoritesFromLS().find((fav) => fav == id) == 0
     ? removeBookmarkFromLS(bookmarkIDs, id, target)
     : addBookmarksToLS(bookmarkIDs, id, target);
 }
 
 function addBookmarksToLS(bookmarks, id, target) {
-  console.log(target);
   target.innerHTML = bookmarkIconFilled;
   bookmarks.push(parseInt(id));
   localStorage.setItem("favoriteProgrammes", JSON.stringify(bookmarks));
@@ -484,6 +481,7 @@ function createBackgroundCircle() {
 // get 100vh for mobile
 document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
 
+
 function makeAd(size = "random") {
   //creates random
   let ads = ["annons_horizontell.jpg", "annons_kvadratisk.jpg"];
@@ -528,6 +526,6 @@ function makeAd(size = "random") {
 
   return wrapper;
 }
+
 // get 100vh for mobile
 document.documentElement.style.setProperty('--hero-height', `${window.innerHeight}px`);
-

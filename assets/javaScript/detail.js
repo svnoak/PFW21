@@ -11,8 +11,6 @@ function getProgrammeFromProgramID(programID){
     return DB.PROGRAMMES.find( program => programID === program.id );
 }
 
-//let pID = DB.PROGRAMMES[160].id; // Simulate extraction from URL 
-
 const detailedProgram = getProgrammeFromProgramID(pID);
 const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.universityID);
 const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
@@ -370,7 +368,6 @@ window.addEventListener("scroll", () =>{
         bars.forEach(bar => {
             bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
         })
-    } else {
     }
 })
 

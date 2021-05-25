@@ -254,6 +254,10 @@ div {
   box-shadow: 0px 1px 3px -1px var(--overlay);
 }
 
+.pill-search-word {
+  white-space: nowrap;
+}
+
 .remove-pill {
   border: none;
   width: 16px;
@@ -723,6 +727,8 @@ figcaption {
   right: var(--space-medium);
 }
 
+.index .card-carousell{right:0}
+
 .card-wrapper,
 .blob-wrapper,
 .detail-body,
@@ -742,7 +748,7 @@ figcaption {
 
 .hide-carousel-scroll {
   overflow: hidden;
-  /*height: calc(var(--carousel-height) - var(--space-medium));*/
+  height: calc(var(--carousel-height) - var(--space-medium));
 }
 
 .card {
