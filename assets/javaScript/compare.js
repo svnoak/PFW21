@@ -15,7 +15,7 @@ let favorites = programmes.map( programme => {
   }
 });
 
-render("body", createHeader(), createNav(), tableContainer());
+render("#main", createHeader(), createNav(), tableContainer());
 let main = document.getElementById("comparison");
 
 document.querySelectorAll(".switch").forEach( arrow => arrow.addEventListener("click", function () {switchProgram(this.id)}) );
@@ -116,6 +116,7 @@ function createFavorites() {
     favoritesContainer.append(noFavorites);
   } else {
     favorites.forEach(favorite => { 
+
       let option = createOptionsInList(favorite.programme, favorite.university, favorite.id);
       titleFavorites.after(option);
   
@@ -286,8 +287,10 @@ function getSuggestionsBySearchWord(searchWord) {
 
 // Skapar sökalternativen i programlistan
 function createOptionsInList(programmeName, universityName, programmeID) {
+
   let option = document.createElement("div");
   option.className = "option space-between";
+  option.id = `p${programmeId}`;
   
   let programmeInfo = document.createElement('div');
   
@@ -354,7 +357,6 @@ function createPillFromProgrammeId(id) {
 
 // Tar bort pillrerna
 function removePillFromArray(programmeId) {
-
     for (let i = 0; i < addedProgrammes.length; i++) {
         if (addedProgrammes[i] === programmeId) {
             addedProgrammes.splice(i, 1);
