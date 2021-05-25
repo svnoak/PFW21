@@ -19,6 +19,7 @@ const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
 const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
 let main = document.createElement("main");
+main.id = "main";
 main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
 render("body", main)
 
@@ -363,7 +364,6 @@ window.addEventListener("scroll", () =>{
             bar.firstChild.style.width = `${(bar.firstChild.firstChild.textContent / 365) * 100}%`;
         })
     } else {
-        console.log("not in view")
     }
 })
 

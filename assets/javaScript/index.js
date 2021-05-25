@@ -2,7 +2,7 @@
 
 // render('body', createBackground());
 render(
-  ".index-wrapper",
+  "#main",
   createHero(),
   createBrandInfo(),
   makeAd("h"),
@@ -14,6 +14,8 @@ render(
   ),
   makeAd()
 );
+
+document.querySelector("#main").style.padding = "3%";
 
 registerCardHeight();
 
