@@ -219,14 +219,25 @@ div {
 
 #search-words-pills {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  justify-content: flex-start;
   gap: var(--space-small);
+
+  width: calc(100% + calc(2 * var(--space-medium)));
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  position: relative;
+  padding: 0 10px;
+}
+.pill::-webkit-scrollbar {
+  display: none;
 }
 .pill {
   display: flex;
   flex-direction: row;
-  min-width: 70px;
+  gap: var(--space-small);
+
   justify-content: space-between;
   align-items: center;
 
@@ -237,10 +248,6 @@ div {
   padding: 0 var(--space-small);
 
   box-shadow: 0px 1px 3px -1px var(--overlay);
-}
-
-.pill-search-word {
-  padding-right: var(--space-small);
 }
 
 .remove-pill {
@@ -956,6 +963,8 @@ figcaption {
   color: var(--black);
   gap: var(--space-small);
   padding: var(--space-medium);
+
+  width: 100%;
 }
 .compare-header > h1,
 .compare-header > p {
