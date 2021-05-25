@@ -20,17 +20,8 @@ const RANDOM = {
   },
 };
 
-window.transitionToPage = function(href) {
-  document.querySelector("nav").style.opacity = 1;
-  document.querySelector('#main').style.opacity = 0;
-  
-  setTimeout(function() { 
-      window.location.href = href
-  }, 500)
-}
-
 document.addEventListener('DOMContentLoaded', function(event) {
-  document.querySelector('#main').style.opacity = 1
+  document.querySelector('body').style.opacity = 1
 })
 
 function getProgrammesById(id) {
@@ -184,9 +175,12 @@ function DOMnav() {
     text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
-    link.addEventListener( "click", () => transitionToPage(item.href));
 
-    if (window.location.href.includes(item.href)) link.classList.add('active');
+    if (window.location.href.includes(item.href)) {
+      link.classList.add('active');
+    } else {
+      link.setAttribute("href", item.href);
+    }
     wrapper.append(link);
   });
 
@@ -330,7 +324,6 @@ function createProgrammeElements(id ,programmes) {
     cardButton.href = `detail.html?programmeID=${obj.id}`;
     cardButton.innerHTML = "Läs mer >";
     cardButton.className = "card-button text-default light";
-    cardButton.addEventListener( "click", () => transitionToPage(`detail.html?programmeID=${obj.id}`));
 
     cardButtonDiv.append(cardButton);
     cardButtonDiv.className = "card-button-div";
@@ -368,7 +361,6 @@ function createCompareInfo(title, text, centered = false, circleBackground = tru
   button.href = 'compare.html';
   button.className = 'text-default light space-between button-solid--cream button-square';
   button.innerHTML = `<p>Jämför program</p><i class="centered">${trailingIconRight}</i>`;
-  button.addEventListener( "click", () => transitionToPage('compare.html'));
   buttonContainer.append(button);
 
   console.log(circleBackground)
