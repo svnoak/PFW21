@@ -648,7 +648,6 @@ figcaption{
 
 .hero {
   position: relative;
-  height: calc( var(--hero-height) -  ( var(--nav-height) +  ( var(--space-medium) * 2) ));
 
   margin-top: var(--space-medium);
   margin-bottom: var(--space-medium);
