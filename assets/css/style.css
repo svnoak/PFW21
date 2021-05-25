@@ -169,7 +169,7 @@ p, span, div{
 
 /* sökfunktionen */
 .light-color-text {
-  color: var(--elevated-background);
+  color: var(--primary);
 }
 .transparent {
   background-color: var(--elevated-background);
@@ -193,20 +193,34 @@ p, span, div{
 .pill {
   display: flex;
   flex-direction: row;
-  height: 20px;
   min-width: 70px;
   justify-content: space-between;
   align-items: center;
 
-  border: 1px solid var(--elevated-background);
-  border-radius: 10px;
-  padding: 10px;
+  background-color: var(--primary);
+
+  border: 1px solid var(--gray);
+  border-radius:var(--border-rounded);
+  padding: 0 var(--space-small);
+
+  box-shadow: 0px 1px 3px -1px var(--overlay);
 }
+
+.pill-search-word{
+  padding-right: var(--space-small);
+}
+
 .remove-pill {
   border: none;
+  width: 16px;
+  height: 16px;
   background-color: transparent;
-  width: 20px;
   cursor: pointer;
+}
+
+.remove-pill svg{
+  height: 100%;
+  fill: var(--gray);
 }
 .search-result-card {
   width: 90%;

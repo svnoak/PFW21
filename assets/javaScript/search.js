@@ -494,12 +494,12 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
   pill.className = "pill";
 
   let pillSearchWord = document.createElement("p");
-  pillSearchWord.className = "pill-search-word text-small light light-color-text";
+  pillSearchWord.className = "pill-search-word text-small";
   pillSearchWord.textContent = searchWord;
 
   let removePillButton = document.createElement("button");
-  removePillButton.className = "remove-pill text-small light light-color-text";
-  removePillButton.textContent = "X";
+  removePillButton.className = "remove-pill text-small bold";
+  removePillButton.innerHTML = removeIcon;
   removePillButton.addEventListener("click", (event) => {
     event.target.parentElement.remove();
     let removeWord = event.target.previousSibling.innerHTML.toLocaleLowerCase();
