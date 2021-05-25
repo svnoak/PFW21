@@ -961,7 +961,6 @@ figcaption{
 .table {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 90vw;
 
   padding-left: 1px;
 }
