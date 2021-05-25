@@ -184,12 +184,9 @@ function DOMnav() {
     text.className = `text-small`;
     text.textContent = item.title;
     link.append(icon, text);
+    link.addEventListener( "click", () => transitionToPage(item.href));
 
-    if (window.location.href.includes(item.href)) {
-      link.classList.add('active');
-    } else {
-      link.setAttribute("href", item.href);
-    }
+    if (window.location.href.includes(item.href)) link.classList.add('active');
     wrapper.append(link);
   });
 
