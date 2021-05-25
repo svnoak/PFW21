@@ -73,24 +73,35 @@ function render(parentElement, ...element) {
 
 
 // Skapar karusell
-function cardCarousell(array){
+function cardCarousell(array, carType = "country"){
   let wrapper = document.createElement("section");
   wrapper.className= `card-carousell`;
+
+  let cardWrapperWrap = document.createElement("div");
+  cardWrapperWrap.className =`hide-carousel-scroll`;
 
   let cardWrapper = document.createElement("div");
   cardWrapper.className = `card-wrapper`;
   let blobWrapper = document.createElement("div");
   blobWrapper.className = `blob-wrapper`;
 
-  wrapper.append(cardWrapper, blobWrapper)
+  cardWrapperWrap.append(cardWrapper)
+  wrapper.append(cardWrapperWrap, blobWrapper)
 
   let first = true;
 
-  array.forEach(object =>{
-      let card = document.createElement('section');
-      card.append(createCard(object));
-      card.className = `card`;
-      cardWrapper.append(card);
+  array.forEach(object =>{  
+    let card;
+    if( carType == "country"){
+      card = createCard(object)
+      console.log(card)
+    } else{
+      card = createReviewCard(object)
+    }
+
+    card.className = `card`;
+    cardWrapper.append(card);
+      
 
       let blob = document.createElement("div");
       blob.className = `blob`;
@@ -117,6 +128,12 @@ function cardCarousell(array){
   })
 
   return wrapper
+}
+
+function registerCardHeight(){
+  // get height of cardwrapper
+  let height = document.querySelector(".card-wrapper").clientHeight;
+  document.documentElement.style.setProperty("--carousel-height", height+"px")
 }
 
 // Menu

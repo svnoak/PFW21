@@ -522,15 +522,6 @@ svg {
   padding-bottom: var(--space-small);
 }
 
-/* REVIEW CAROUSELL */
-.card-carousell {
-  padding-left: var(--space-medium);
-  padding-right: var(--space-medium);
-}
-
-.card-wrapper{
-  padding: var(--space-small) 0px;
-}
 .bg-image{
   width: 100%;
   height: 100%;
@@ -597,9 +588,10 @@ figcaption{
 }
 
 /* REVIEW CAROUSELL */
+
 /* override the screen margin */
 .card-carousell{
-  padding: var(--space-medium) 0px;
+  padding-top: var(--space-medium);
   width: 100vw;
   position: relative;
   right:  var(--space-medium);
@@ -615,15 +607,13 @@ figcaption{
   overflow-x: scroll;
   scroll-snap-type: both mandatory;
   margin-bottom: var(--space-small);
+  padding-top: var(--space-small);
+  padding-bottom: var(--space-large);
 }
 
-.card-wrapper::webkit-scrollbar {
-  display: none;
-  padding-bottom: var(--space-medium);
-  padding-top: 5px;
-
-  width: calc (auto + var(--space-large));
-  
+.hide-carousel-scroll{
+  overflow: hidden;
+  height: calc( var(--carousel-height) - var(--space-medium) );
 }
 
 .card {

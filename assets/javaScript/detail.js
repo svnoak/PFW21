@@ -16,6 +16,13 @@ const detailedProgramUniversity = getUniversityFromUniID(detailedProgram.univers
 const detailedProgramCity = getCityFromUniID(detailedProgram.universityID);
 const detailedProgramCountry = getCountryFromUniID(detailedProgram.universityID)
 
+let main = document.createElement("main");
+main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
+render("body", main)
+
+registerCardHeight()
+
+
 function makeHero(){
     let wrapper = document.createElement("section");
     wrapper.className = `detail-hero`;
@@ -104,12 +111,17 @@ function makeSchoolInfo(){
     title.className = `detail-title title-default`;
   
     let reviews = DB.COMMENTS_PROGRAMME.filter(comment => comment.programmeID === detailedProgram.id);
-    console.log(reviews)
+    let reviewWrapper = document.createElement("div");
+    if (reviews.length > 0){
+        reviewWrapper.append(cardCarousell(reviews, "rev"))
+    }
+
     let schoolInfo = document.createElement("section");
     schoolInfo.className = `detail-school-sections`;
-    schoolInfo.append(createClubSection())
+    schoolInfo.append(createClubSection());
 
-    wrapper.append(title, cardCarousell(reviews), schoolInfo)
+
+    wrapper.append(title, reviewWrapper, schoolInfo)
     
     let otherUniversities = DB.PROGRAMMES.filter( program => program.name === detailedProgram.name)
     if (otherUniversities.length > 1){
@@ -214,51 +226,6 @@ function createReviewCard(reviewObject){
     return wrapper
 }
 
-function cardCarousell(array){
-    let wrapper = document.createElement("section");
-    wrapper.className= `card-carousell`;
-
-    let cardWrapper = document.createElement("div");
-    cardWrapper.className = `card-wrapper`;
-    let blobWrapper = document.createElement("div");
-    blobWrapper.className = `blob-wrapper`;
-
-    wrapper.append(cardWrapper, blobWrapper);
-
-    let first = true;
-
-    array.forEach(object =>{
-        let card = createReviewCard(object);
-        card.className = `card`;
-        cardWrapper.append(card);
-
-        let blob = document.createElement("div");
-        blob.className = `blob`;
-        blobWrapper.append(blob);
-
-        if(first){
-            blob.classList.add("active");
-        }
-
-        // let location = card.getBoundingClientRect();
-        cardWrapper.addEventListener("scroll", checkActive)
-
-        function checkActive(){
-            let location = card.getBoundingClientRect();
-
-            if(location.left > 1 && location.left < 250 ){
-                document.querySelector(".active").classList.remove("active");
-                blob.classList.add(`active`);
-            }
-        }
-
-        first = false;
-        
-    })
-
-    return wrapper
-}
-
 function makeCityInfo(){
     let wrapper = document.createElement("section");
     wrapper.className = `detail-city detail-body`;
@@ -278,9 +245,12 @@ function makeCityInfo(){
     titleWrap.append(cityImage(1), title)   
     
     let reviews = DB.COMMENTS_CITY.filter(comment => comment.cityID === detailedProgramCity.id)
-
+    let reviewWrapper = document.createElement("div");
+    if(reviews.length > 0){
+        reviewWrapper.append(cardCarousell(reviews, "rev"))
+    }
     //also review cards
-    wrapper.append(head, cardCarousell(reviews), makeWeatherInfo())
+    wrapper.append(head, reviewWrapper, makeWeatherInfo())
 
     return wrapper
 
@@ -381,7 +351,3 @@ function makeWeatherInfo(){
     return wrapper
 }
 
-let main = document.createElement("main");
-main.append(makeHero(), makeProgrammeStats(), makeSchoolInfo(), makeCityInfo())
-
-render("body", main)
