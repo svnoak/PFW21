@@ -278,8 +278,21 @@ function createFilterOptions() {
   resetBtn.textContent = "Återställ Filter";
   resetBtn.addEventListener("click", () => {
     let resetAllSelected = document.querySelectorAll(".selected");
+    params.forEach( param => {
+      if (typeof(param.value) == "object" ) {
+        param.value = [];
+      } else {
+        if (param.key == "p") param.value = 0;
+        if (param.key == "v") param.value = true;
+        if (param.key == "s") param.value = 0;
+      }
+    } );
     levels = [];
     filteredLanguages = [];
+    countries = [];
+    cities = [];
+    programmes = [];
+    visa = true;
     resetAllSelected.forEach((obj) => {
       obj.classList.remove("selected");
     });
@@ -290,6 +303,9 @@ function createFilterOptions() {
     sundaysSlider.value = 0;
     sundaysNumber = 0;
     document.getElementById("sundays-title").textContent = `Antal Soldagar(0-365): ${sundaysNumber} dagar`;
+    sessionStorage.setItem("search", "");
+    resetUrlParameter();
+
   });
   resetBtnDiv.append(resetBtn);
 
