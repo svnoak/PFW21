@@ -350,7 +350,7 @@ svg {
 
 #filters {
   position: absolute;
-  height: 100vh;
+  height: calc( var(--hero-height) - var(--nav-height) );
   width: 100vw;
   background-color: white;
   z-index: 100;
@@ -362,7 +362,7 @@ svg {
   padding: 10px;
 }
 #close > svg {
-  rotate: 45deg;
+  transform: rotate(45deg);
 }
 #filter-options {
   flex-grow: 1;
@@ -871,6 +871,7 @@ figcaption {
   padding: 0;
   transition: ease-in-out 0.5s;
   width: 100vw;
+  min-height: calc( var(--hero-height) - ( var(--nav-height) * 2 ) ) ;
 }
 
 .hero {
@@ -1060,10 +1061,10 @@ figcaption {
   border-bottom: none;
 }
 .option i {
-  transition: rotate 0.5s;
+  transition: transform 0.5s;
 }
 .option.chosen > i {
-  rotate: 45deg;
+  transform: rotate(45deg);
 }
 
 #menu {
@@ -1092,8 +1093,8 @@ figcaption {
 }
 
 #comparison--container {
-  min-height: 55vh;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 #comparison {
@@ -1157,7 +1158,7 @@ figcaption {
 /* FAVORITES */
 
 #favourites {
-  min-height: 60vh;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
