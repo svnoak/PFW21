@@ -550,21 +550,19 @@ function createPillForSearchWordsOnSearchSite(searchWord, parentElement = "#sear
 function removeSearchWord(removeWord) {
   if (removeWord.includes("antagningspoäng")) {
     points = 0;
-    filterProgramme(DB.PROGRAMMES);
     updateParams("p", points);
     reloadUrlParams();
+    updateView();
   }
   if (removeWord.includes("visa")) {
     visa = true;
-    filterProgramme(DB.PROGRAMMES);
     updateParams("v", visa);
-    reloadUrlParams();
+    updateView();
   }
   if (removeWord.includes("soldagar")) {
     sundaysNumber = 0;
     updateParams("s", sundaysNumber);
-    filterProgramme(DB.PROGRAMMES);
-    reloadUrlParams();
+    updateView();
   }
   for (let i = 0; i < allFilterWords.length; i++) {
     allFilterWords[i].forEach((obj) => {
